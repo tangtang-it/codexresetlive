@@ -227,7 +227,8 @@ def build_lang_items(current):
     out = []
     for code, d, name, loc, url in LANGS:
         cls = "lang-item on" if code == current else "lang-item"
-        out.append(f'<a class="{cls}" href="{url}" hreflang="{code}"><span>{name}</span><code>{code}</code></a>')
+        rel_path = f"/{d}/" if d else "/"
+        out.append(f'<a class="{cls}" href="{rel_path}" hreflang="{code}"><span>{name}</span><code>{code}</code></a>')
     return "".join(out)
 
 def build_hreflang(current_url):
@@ -293,7 +294,8 @@ for code, d, name, loc, canon in LANGS:
         "__LANG__":code,"__TITLE__":esc(title),"__DESC__":esc(desc),"__CANONICAL__":canon,
         "__HREFLANG__":build_hreflang(canon),"__LOCALE__":loc,
         "__SCHEMA__":json.dumps(schema,ensure_ascii=False,indent=2),
-        "__BRAND_SUB__":esc(t["brand_sub"]),"__LIVE__":esc(t["live"]),
+        "__BRAND_SUB__":esc(t["brand_sub"]),
+        "__HOME_PATH__":(f"/{d}/" if d else "/"),"__LIVE__":esc(t["live"]),
         "__LANG_LABEL__":esc(t["lang_label"]),"__LANG_NAME__":esc(name),
         "__LANG_ITEMS__":build_lang_items(code),
         "__BADGE__":esc(t["badge"]),
