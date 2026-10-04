@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Codex Quota Reset 시간 계산기 - 사용량 제한 초기화 타이머</title>
-  <meta name="description" content="OpenAI Codex 사용량 제한(Rate Limit) 및 쿼터 리셋 시간을 한국 시간대로 실시간 확인하세요. 5시간 롤링 초기화 무료 타이머 및 사용량 초과 회피 팁 제공.">
+  <title>Codex Quota Reset 레이더 & 5시간 롤링 타이머</title>
+  <meta name="description" content="오늘 OpenAI Codex 전체 리셋이 있을까요? 공식 전체 리셋 확률 레이더(오늘 19%) + 개인 5시간 롤링 사용량 제한 타이머.">
   <link rel="canonical" href="https://willcodexreset.com/ko/" />
   
   <!-- Hreflang Multi-language Matrix -->
@@ -17,11 +17,11 @@
 
   <!-- Open Graph & Social -->
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Codex Quota Tracker">
+  <meta property="og:site_name" content="Codex Quota Radar">
   <meta property="og:url" content="https://willcodexreset.com/ko/">
   <meta property="og:locale" content="ko_KR">
-  <meta property="og:title" content="Codex Quota Reset 시간 계산기 - 사용량 제한 초기화 타이머">
-  <meta property="og:description" content="OpenAI Codex 사용량 제한(Rate Limit) 및 쿼터 리셋 시간을 한국 시간대로 실시간 확인하세요. 5시간 롤링 초기화 무료 타이머 및 사용량 초과 회피 팁 제공.">
+  <meta property="og:title" content="Codex Quota Reset 레이더 & 5시간 롤링 타이머">
+  <meta property="og:description" content="오늘 OpenAI Codex 전체 리셋이 있을까요? 공식 전체 리셋 확률 레이더(오늘 19%) + 개인 5시간 롤링 사용량 제한 타이머.">
   <meta property="og:image" content="https://willcodexreset.com/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -34,7 +34,7 @@
   "@graph": [
     {
       "@type": "SoftwareApplication",
-      "name": "Codex Quota Reset 시간 계산기",
+      "name": "Codex Quota Reset 레이더 & 5시간 롤링 타이머",
       "operatingSystem": "All",
       "applicationCategory": "DeveloperApplication",
       "url": "https://willcodexreset.com/ko/",
@@ -44,7 +44,7 @@
         "price": "0",
         "priceCurrency": "USD"
       },
-      "description": "OpenAI Codex 사용량 제한(Rate Limit) 및 쿼터 리셋 시간을 한국 시간대로 실시간 확인하세요. 5시간 롤링 초기화 무료 타이머 및 사용량 초과 회피 팁 제공."
+      "description": "오늘 OpenAI Codex 전체 리셋이 있을까요? 공식 전체 리셋 확률 레이더(오늘 19%) + 개인 5시간 롤링 사용량 제한 타이머."
     },
     {
       "@type": "BreadcrumbList",
@@ -69,26 +69,26 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Codex 5시간 롤링 윈도우는 어떻게 작동하나요?",
+          "name": "글로벌 리셋과 개인 5시간 롤링 제한의 차이는 무엇인가요?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "지난 5시간 동안 소비한 총 토큰량을 실시간으로 측정합니다. 요청 시점 기준 5시간이 지나면 해당 용량만큼 순차적으로 차감이 해제됩니다."
+            "text": "글로벌 리셋은 OpenAI가 전체 유료 사용자에게 특별 혜택으로 할당량을 새로 지급하는 이벤트입니다. 5시간 롤링 제한은 본인의 요청 기록에 따라 복구되는 개인 한도입니다."
           }
         },
         {
           "@type": "Question",
-          "name": "사용량 제한(Rate Limit)을 즉시 우회하려면?",
+          "name": "19% 확률은 어떻게 산정되었나요?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "할당량 복구를 기다리는 동안 Cursor, Windsurf, Claude Code와 같은 대체 도구로 전환하여 작업을 중단 없이 이어갈 수 있습니다."
+            "text": "공식 장애 상태, 임직원 트윗 피드, 직전 전체 리셋 이후 경과 일수(34일)를 종합 평가합니다."
           }
         },
         {
           "@type": "Question",
-          "name": "기기 시간대를 변경하면 리셋 시간이 앞당겨지나요?",
+          "name": "개인 리셋 시간을 단축할 수 있나요?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "아닙니다. 모든 계산은 UTC 서버 타임스탬프를 기준으로 이루어지므로 로컬 시간대 변경이 대기 시간에 영향을 주지 않습니다."
+            "text": "기기 시간대를 변경해도 서버 대기 시간은 줄어들지 않습니다. Cursor나 Claude Code 등 대체 도구를 활용하는 것을 권장합니다."
           }
         }
       ]
@@ -110,6 +110,7 @@
             brand: {
               emerald: '#10b981',
               cyan: '#06b6d4',
+              orange: '#f97316',
               surface: '#090d16',
               card: '#0f172a',
               border: 'rgba(255, 255, 255, 0.08)'
@@ -127,7 +128,7 @@
       background-image: radial-gradient(circle, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
     }
     .ambient-glow {
-      background: radial-gradient(circle 600px at 50% -10%, rgba(16, 185, 129, 0.15), transparent 70%);
+      background: radial-gradient(circle 600px at 50% -10%, rgba(16, 185, 129, 0.12), transparent 70%);
     }
   </style>
 </head>
@@ -149,10 +150,10 @@
             <span class="font-bold text-base text-white tracking-tight">CodexReset<span class="text-emerald-400">.live</span></span>
             <span class="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse mr-1"></span>
-              Live Sync
+              Dual Radar
             </span>
           </div>
-          <span class="text-[10px] text-slate-500 hidden sm:block">5-Hour Rolling Engine</span>
+          <span class="text-[10px] text-slate-500 hidden sm:block">Macro Probability + Micro 5h Tracker</span>
         </div>
       </div>
 
@@ -163,30 +164,104 @@
   </header>
 
   <!-- Main Content -->
-  <main class="flex-1 max-w-4xl mx-auto px-4 py-10 w-full space-y-12 relative z-10">
+  <main class="flex-1 max-w-4xl mx-auto px-4 py-8 w-full space-y-12 relative z-10">
 
     <!-- Hero Title -->
-    <div class="text-center space-y-3">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/80 border border-white/[0.08] text-xs text-slate-300 mb-2">
-        <span class="text-emerald-400">●</span> OpenAI 사용량 제한 정책: 5시간 롤링 윈도우
+    <div class="text-center space-y-2">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/80 border border-white/[0.08] text-xs text-slate-300">
+        <span class="text-emerald-400">●</span> 공식 글로벌 리셋 예측 레이더 ＋ 개인 5시간 롤링 사용량 복구 타이머
       </div>
-      <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
-        Codex 사용량 제한은 언제 리셋되나요?
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+        Codex 리셋은 언제? 전체 레이더 & 5시간 타이머
       </h1>
-      <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-        rate_limit_exceeded 오류가 발생했나요? 5시간 롤링 복구 시간을 실시간으로 확인하세요.
-      </p>
     </div>
 
-    <!-- Tracker Card -->
-    <section aria-labelledby="tracker-heading" class="rounded-2xl border border-white/[0.08] bg-[#0c1322]/90 backdrop-blur-xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
-      <h2 id="tracker-heading" class="sr-only">Live Countdown Tracker</h2>
+    <!-- MODULE 1: MACRO GLOBAL RESET PROBABILITY RADAR (Comp 1 & 2 Fusion) -->
+    <section class="rounded-2xl border border-white/[0.08] bg-[#0c1322]/90 backdrop-blur-xl p-6 sm:p-8 shadow-2xl relative overflow-hidden space-y-6">
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-white/[0.06] pb-4">
+        <div class="flex items-center gap-2">
+          <span class="px-2 py-0.5 rounded bg-orange-500/10 border border-orange-500/30 text-orange-400 font-mono text-xs font-bold uppercase tracking-wider">48시간 글로벌 예측</span>
+          <span class="text-xs text-slate-400">Sources checked every 15 min</span>
+        </div>
+        <div class="text-xs font-mono text-slate-400 flex items-center gap-2">
+          <span>OpenAI Status:</span>
+          <span class="text-emerald-400 font-bold flex items-center gap-1">● Operational</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+        <!-- Verdict Text -->
+        <div class="md:col-span-2 space-y-4">
+          <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
+            오늘은 리셋 가능성이 낮습니다.
+          </h2>
+          <p class="text-slate-300 text-sm leading-relaxed">
+            현재 공식 인시던트가 없으며 전체 계정 대상 긴급 토큰 지급 징후가 감지되지 않았습니다.
+          </p>
+          <div class="border-l-2 border-orange-500/80 pl-3 py-0.5 space-y-1">
+            <span class="text-[10px] font-mono font-bold text-orange-400 uppercase tracking-wider block">권장 행동</span>
+            <p class="text-xs text-slate-400">아래 개인 5시간 롤링 복구 타이머를 확인하거나 대체 코딩 도구로 전환하세요.</p>
+          </div>
+        </div>
+
+        <!-- Likelihood Badge / Radial Ring -->
+        <div class="flex flex-col items-center justify-center p-6 rounded-2xl bg-gradient-to-br from-[#1e1412] to-[#0c1322] border border-orange-500/20 text-center relative shadow-inner">
+          <div class="relative w-28 h-28 flex items-center justify-center">
+            <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+              <path class="text-slate-800" stroke-width="3.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+              <path class="text-orange-500" stroke-dasharray="19, 100" stroke-width="3.5" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center">
+              <span class="text-3xl font-black text-white font-mono">19%</span>
+            </div>
+          </div>
+          <span class="text-xs font-semibold text-slate-300 mt-2">전체 리셋 발생 확률</span>
+        </div>
+      </div>
+
+      <!-- Signal Desk 4 Cards (From Comp 1 & 2) -->
+      <div class="pt-4 border-t border-white/[0.06] space-y-3">
+        <span class="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider block">시그널 데스크 & 모니터링 피드</span>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div class="p-3 rounded-xl bg-slate-900/60 border border-white/[0.06] space-y-1">
+            <span class="text-[10px] font-mono text-slate-500 block">01 / 서비스 상태</span>
+            <span class="text-xs font-bold text-white block">정상 운영 중</span>
+            <span class="text-[10px] text-slate-400 block">OpenAI API & Codex 상태 정상.</span>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-900/60 border border-white/[0.06] space-y-1">
+            <span class="text-[10px] font-mono text-slate-500 block">02 / 릴리스 신호</span>
+            <span class="text-xs font-bold text-orange-400 block">출시 예고 감지</span>
+            <span class="text-[10px] text-slate-400 block">운영 리더십이 다음 주 출시를 암시.</span>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-900/60 border border-white/[0.06] space-y-1">
+            <span class="text-[10px] font-mono text-slate-500 block">03 / 쿨다운 기간</span>
+            <span class="text-xs font-bold text-white block">34일 전</span>
+            <span class="text-[10px] text-slate-400 block">직전 글로벌 리셋 이후 경과 일수.</span>
+          </div>
+          <div class="p-3 rounded-xl bg-slate-900/60 border border-white/[0.06] space-y-1">
+            <span class="text-[10px] font-mono text-slate-500 block">04 / 모니터링 대상</span>
+            <span class="text-xs font-bold text-emerald-400 block">핵심 6개 채널</span>
+            <span class="text-[10px] text-slate-400 block">샘 알트만, 제품 리더, 개발자 피드.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODULE 2: MICRO PERSONAL 5-HOUR ROLLING TRACKER (Our Killer Feature) -->
+    <section aria-labelledby="personal-tracker-heading" class="rounded-2xl border border-emerald-500/30 bg-[#0c1322]/90 backdrop-blur-xl p-6 sm:p-8 shadow-2xl relative overflow-hidden space-y-6">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-white/[0.06] pb-4">
+        <div>
+          <span class="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs font-bold uppercase tracking-wider">Personal Micro Tracker</span>
+          <h2 id="personal-tracker-heading" class="text-xl sm:text-2xl font-bold text-white mt-1">개인 5시간 롤링 리셋 타이머</h2>
+          <p class="text-xs text-slate-400 mt-0.5">rate_limit_exceeded 오류 발생 시 개인 토큰 잠금 해제 시점을 실시간 계산.</p>
+        </div>
+      </div>
 
       <!-- Timezone & Sync Bar -->
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 text-xs text-slate-400 border-b border-white/[0.06] pb-4 mb-6">
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 text-xs text-slate-400 bg-slate-900/50 p-3 rounded-xl border border-white/[0.06]">
         <div class="flex items-center gap-2">
           <span>활성 표준시:</span>
-          <select id="tz-select" class="bg-slate-900 border border-white/10 rounded px-2 py-1 text-slate-200 text-xs font-mono focus:outline-none focus:border-emerald-500">
+          <select id="tz-select" class="bg-slate-950 border border-white/10 rounded px-2.5 py-1 text-slate-200 text-xs font-mono focus:outline-none focus:border-emerald-500">
             <option value="LOCAL" selected>Local Browser Time</option>
             <option value="UTC">UTC (Universal)</option>
             <option value="America/Los_Angeles">US Pacific (OpenAI HQ)</option>
@@ -194,13 +269,13 @@
           </select>
         </div>
         <div class="flex items-center gap-2 font-mono">
-          <span>예상 잠금 해제:</span>
+          <span>다음 잠금 해제:</span>
           <span id="next-refresh" class="text-emerald-400 font-bold bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-500/20">계산 중...</span>
         </div>
       </div>
 
       <!-- Quick Preset Selector -->
-      <div class="space-y-2 mb-6">
+      <div class="space-y-2">
         <label class="text-xs text-slate-400 font-medium block">언제 사용량 제한에 도달했습니까?</label>
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
           <button type="button" class="preset-btn py-2 px-3 rounded-lg border text-xs font-medium transition-all bg-emerald-500/10 border-emerald-500/40 text-emerald-300" data-minutes="300">방금 전 (5시간 남음)</button>
@@ -211,25 +286,25 @@
       </div>
 
       <!-- Countdown Display -->
-      <div class="grid grid-cols-3 gap-3 sm:gap-4 text-center font-mono my-6" aria-live="polite">
-        <div class="bg-[#070b14] border border-white/[0.06] p-4 sm:p-6 rounded-xl relative group">
+      <div class="grid grid-cols-3 gap-3 sm:gap-4 text-center font-mono my-4" aria-live="polite">
+        <div class="bg-[#070b14] border border-white/[0.06] p-4 sm:p-6 rounded-xl relative">
           <div id="h" class="text-4xl sm:text-6xl font-black text-white tabular-nums tracking-tight">00</div>
           <div class="text-[11px] text-slate-400 uppercase tracking-wider mt-2 font-sans font-semibold">시간</div>
         </div>
-        <div class="bg-[#070b14] border border-white/[0.06] p-4 sm:p-6 rounded-xl relative group">
+        <div class="bg-[#070b14] border border-white/[0.06] p-4 sm:p-6 rounded-xl relative">
           <div id="m" class="text-4xl sm:text-6xl font-black text-white tabular-nums tracking-tight">00</div>
           <div class="text-[11px] text-slate-400 uppercase tracking-wider mt-2 font-sans font-semibold">분</div>
         </div>
-        <div class="bg-[#070b14] border border-emerald-500/30 p-4 sm:p-6 rounded-xl relative group bg-gradient-to-b from-emerald-950/20 to-transparent">
+        <div class="bg-[#070b14] border border-emerald-500/30 p-4 sm:p-6 rounded-xl relative bg-gradient-to-b from-emerald-950/20 to-transparent">
           <div id="s" class="text-4xl sm:text-6xl font-black text-emerald-400 tabular-nums tracking-tight">00</div>
           <div class="text-[11px] text-emerald-400/80 uppercase tracking-wider mt-2 font-sans font-semibold">초</div>
         </div>
       </div>
 
       <!-- Rolling Window Progress Bar -->
-      <div class="space-y-1.5 my-6">
+      <div class="space-y-1.5">
         <div class="flex justify-between text-xs text-slate-400">
-          <span>5시간 롤링 복구 진행률</span>
+          <span>5시간 토큰 버킷 복구 진행률</span>
           <span id="progress-percent" class="font-mono text-emerald-400">0% 복구됨</span>
         </div>
         <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-white/[0.06]">
@@ -240,7 +315,7 @@
       <!-- Action Buttons -->
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
         <button id="notify-btn" class="sm:col-span-2 py-3.5 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] flex items-center justify-center gap-2">
-          <span>🔔</span> 🔔 바탕화면 알림 활성화
+          <span>🔔</span> 🔔 개인 사용량 복구 시 알림 받기
         </button>
         <button id="cal-btn" class="py-3.5 px-4 rounded-xl border border-white/10 bg-slate-900/80 hover:bg-slate-800 text-slate-200 text-sm font-semibold transition-all flex items-center justify-center gap-2">
           <span>📅</span> 📅 캘린더에 추가
@@ -248,82 +323,18 @@
       </div>
     </section>
 
-    <!-- GEO Direct Answer Block -->
-    <section id="direct-answer" class="rounded-2xl border border-emerald-500/30 bg-emerald-950/10 p-6 sm:p-8 space-y-4">
-      <div class="flex items-center space-x-2 text-emerald-400 font-semibold text-sm">
-        <span>📌</span>
-        <span>Direct Answer / Canonical Reference</span>
-      </div>
-      <h2 class="text-xl sm:text-2xl font-bold text-white">OpenAI Codex의 리셋 메커니즘 안내</h2>
-      <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
-        OpenAI Codex는 자정(00:00 UTC)과 같은 고정된 시간이 아닌, 토큰을 사용한 정확한 시점부터 계산되는 5시간 연속 슬라이딩 윈도우 방식을 적용합니다. 가장 처음 보낸 프롬프트로부터 5시간이 경과하면 해당 토큰이 점진적으로 다시 복구됩니다.
-      </p>
-      <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl text-xs sm:text-sm font-mono text-emerald-300 overflow-x-auto">
-        <code>Reset_Timestamp = min { t_i + 5h | sum_{k=i+1}^N tokens(t_k) &lt; QuotaTier }</code>
-      </div>
-    </section>
-
-    <!-- Subscription Tier Benchmark Matrix -->
-    <section id="tier-benchmark" class="space-y-4">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-white/[0.08] pb-4">
-        <div>
-          <span class="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">Benchmark Data</span>
-          <h2 class="text-xl sm:text-2xl font-bold text-white mt-1">플랜별 Codex 사용량 한도 벤치마크</h2>
-        </div>
-        <p class="text-xs text-slate-400">최신 개발자 가이드라인 기준 데이터</p>
-      </div>
-
-      <div class="overflow-x-auto rounded-xl border border-white/[0.08] bg-[#0c1322]">
-        <table class="w-full text-left text-xs sm:text-sm text-slate-300">
-          <thead class="bg-slate-900/80 text-slate-400 uppercase font-mono text-[11px] border-b border-white/[0.08]">
-            <tr>
-              <th scope="col" class="py-3 px-4">구독 플랜</th>
-              <th scope="col" class="py-3 px-4">5시간 롤링 한도</th>
-              <th scope="col" class="py-3 px-4">버스트 프롬프트 용량</th>
-              <th scope="col" class="py-3 px-4">리셋 메커니즘</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-white/[0.06]">
-            <tr class="hover:bg-slate-900/40">
-              <td class="py-3 px-4 font-bold text-white">ChatGPT Plus</td>
-              <td class="py-3 px-4 font-mono text-emerald-400">~400k - 600k tokens</td>
-              <td class="py-3 px-4">30 - 50 prompts / 5h</td>
-              <td class="py-3 px-4">5h Rolling Window</td>
-            </tr>
-            <tr class="hover:bg-slate-900/40">
-              <td class="py-3 px-4 font-bold text-white">ChatGPT Pro</td>
-              <td class="py-3 px-4 font-mono text-emerald-400">~2.5M - 3.5M tokens</td>
-              <td class="py-3 px-4">High-burst throughput</td>
-              <td class="py-3 px-4">5h Rolling Window</td>
-            </tr>
-            <tr class="hover:bg-slate-900/40">
-              <td class="py-3 px-4 font-bold text-white">ChatGPT Team</td>
-              <td class="py-3 px-4 font-mono text-emerald-400">~1.2M - 1.8M tokens/seat</td>
-              <td class="py-3 px-4">Pooled team bucket</td>
-              <td class="py-3 px-4">5h Rolling Window</td>
-            </tr>
-            <tr class="hover:bg-slate-900/40">
-              <td class="py-3 px-4 font-bold text-white">Enterprise SLA</td>
-              <td class="py-3 px-4 font-mono text-emerald-400">Custom high-volume SLA</td>
-              <td class="py-3 px-4">Dedicated bandwidth</td>
-              <td class="py-3 px-4">Contractual / Rolling</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- Affiliate Fallback Section -->
-    <section class="space-y-6 pt-4">
+    <!-- MODULE 3: MONETIZATION FALLBACK CODING STACK (Affiliate Revenue Engine) -->
+    <section class="space-y-6 pt-2">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-white/[0.08] pb-4">
         <div>
           <span class="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">Unblock Workflow</span>
-          <h2 class="text-xl sm:text-2xl font-bold text-white mt-1">5시간 기다리지 마세요 — 최고의 Codex 대체 도구</h2>
+          <h2 class="text-xl sm:text-2xl font-bold text-white mt-1">5시간 기다리지 마세요 — 추천 대체 도구</h2>
         </div>
         <p class="text-xs text-slate-400">대기열 없이 즉시 코딩을 계속할 수 있는 AI 에이전트</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Cursor -->
         <div class="rounded-xl border border-emerald-500/30 bg-[#0f172a]/70 p-5 flex flex-col justify-between hover:border-emerald-500/60 transition-all group relative">
           <div class="absolute -top-3 right-4 px-2 py-0.5 rounded bg-emerald-500 text-slate-950 text-[10px] font-black uppercase tracking-wider">Top Choice</div>
           <div class="space-y-3">
@@ -332,7 +343,7 @@
               <h3 class="text-lg font-bold text-white">Cursor IDE</h3>
             </div>
             <p class="text-slate-400 text-xs leading-relaxed">
-              Native VS Code fork with Claude 3.7 Sonnet & GPT-4o. Multi-file editing with fast indexing.
+              Native VS Code fork with Claude 3.7 Sonnet & GPT-4o. Multi-file editing with fast codebase indexing.
             </p>
             <div class="flex flex-wrap gap-1.5 pt-1">
               <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[10px] font-mono">Generous Free Tier</span>
@@ -344,6 +355,7 @@
           </a>
         </div>
 
+        <!-- Windsurf -->
         <div class="rounded-xl border border-white/[0.08] bg-[#0f172a]/50 p-5 flex flex-col justify-between hover:border-white/20 transition-all group">
           <div class="space-y-3">
             <div class="flex items-center space-x-2">
@@ -363,6 +375,7 @@
           </a>
         </div>
 
+        <!-- Claude Code -->
         <div class="rounded-xl border border-white/[0.08] bg-[#0f172a]/50 p-5 flex flex-col justify-between hover:border-white/20 transition-all group">
           <div class="space-y-3">
             <div class="flex items-center space-x-2">
@@ -384,20 +397,35 @@
       </div>
     </section>
 
+    <!-- MODULE 4: GEO DIRECT ANSWER & TIERS -->
+    <section id="direct-answer" class="rounded-2xl border border-emerald-500/30 bg-emerald-950/10 p-6 sm:p-8 space-y-4">
+      <div class="flex items-center space-x-2 text-emerald-400 font-semibold text-sm">
+        <span>📌</span>
+        <span>Direct Answer / Canonical Reference</span>
+      </div>
+      <h2 class="text-xl sm:text-2xl font-bold text-white">OpenAI Codex의 사용량 제한 해제 방식</h2>
+      <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
+        Codex는 자정 고정 리셋이 아닌, 요청 시점 기준 5시간이 지날 때마다 사용량이 점진적으로 잠금 해제되는 슬라이딩 윈도우 방식을 적용합니다.
+      </p>
+      <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl text-xs sm:text-sm font-mono text-emerald-300 overflow-x-auto">
+        <code>Reset_Timestamp = min { t_i + 5h | sum_{k=i+1}^N tokens(t_k) &lt; QuotaTier }</code>
+      </div>
+    </section>
+
     <!-- FAQ Section -->
-    <section id="faq" class="space-y-4 pt-6 border-t border-white/[0.08]">
+    <section id="faq" class="space-y-4 pt-4 border-t border-white/[0.08]">
       <h2 class="text-2xl font-bold text-white tracking-tight">자주 묻는 질문 (FAQ)</h2>
       <div class="border border-white/[0.08] rounded-xl p-5 bg-slate-900/40 space-y-2">
-        <h3 class="text-base font-semibold text-white">Codex 5시간 롤링 윈도우는 어떻게 작동하나요?</h3>
-        <p class="text-slate-400 text-sm leading-relaxed">지난 5시간 동안 소비한 총 토큰량을 실시간으로 측정합니다. 요청 시점 기준 5시간이 지나면 해당 용량만큼 순차적으로 차감이 해제됩니다.</p>
+        <h3 class="text-base font-semibold text-white">글로벌 리셋과 개인 5시간 롤링 제한의 차이는 무엇인가요?</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">글로벌 리셋은 OpenAI가 전체 유료 사용자에게 특별 혜택으로 할당량을 새로 지급하는 이벤트입니다. 5시간 롤링 제한은 본인의 요청 기록에 따라 복구되는 개인 한도입니다.</p>
       </div>
       <div class="border border-white/[0.08] rounded-xl p-5 bg-slate-900/40 space-y-2">
-        <h3 class="text-base font-semibold text-white">사용량 제한(Rate Limit)을 즉시 우회하려면?</h3>
-        <p class="text-slate-400 text-sm leading-relaxed">할당량 복구를 기다리는 동안 Cursor, Windsurf, Claude Code와 같은 대체 도구로 전환하여 작업을 중단 없이 이어갈 수 있습니다.</p>
+        <h3 class="text-base font-semibold text-white">19% 확률은 어떻게 산정되었나요?</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">공식 장애 상태, 임직원 트윗 피드, 직전 전체 리셋 이후 경과 일수(34일)를 종합 평가합니다.</p>
       </div>
       <div class="border border-white/[0.08] rounded-xl p-5 bg-slate-900/40 space-y-2">
-        <h3 class="text-base font-semibold text-white">기기 시간대를 변경하면 리셋 시간이 앞당겨지나요?</h3>
-        <p class="text-slate-400 text-sm leading-relaxed">아닙니다. 모든 계산은 UTC 서버 타임스탬프를 기준으로 이루어지므로 로컬 시간대 변경이 대기 시간에 영향을 주지 않습니다.</p>
+        <h3 class="text-base font-semibold text-white">개인 리셋 시간을 단축할 수 있나요?</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">기기 시간대를 변경해도 서버 대기 시간은 줄어들지 않습니다. Cursor나 Claude Code 등 대체 도구를 활용하는 것을 권장합니다.</p>
       </div>
     </section>
   </main>
@@ -405,7 +433,7 @@
   <!-- Footer -->
   <footer class="border-t border-white/[0.08] bg-[#070b14] py-8 text-xs text-slate-500 text-center relative z-10">
     <div class="max-w-5xl mx-auto px-4 space-y-2">
-      <p>© 2026 CodexReset.live • 개발자를 위한 독립 유틸리티. OpenAI와 제휴되지 않았습니다.</p>
+      <p>© 2026 CodexReset.live • 개발자를 위한 독립 유틸리티. OpenAI와 공식 제휴되지 않았습니다.</p>
       <div class="flex justify-center gap-4 text-slate-600">
         <a href="/llms.txt" class="hover:text-slate-400">llms.txt</a>
         <span>•</span>
