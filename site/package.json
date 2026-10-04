@@ -1,0 +1,9 @@
+{
+  "name": "codex-quota-reset-tracker",
+  "version": "1.0.0",
+  "description": "Real-time OpenAI Codex rate limit countdown, local reset schedule, and 5-hour rolling window calculator.",
+  "scripts": {
+    "start": "npx serve .",
+    "deploy": "wrangler pages deploy . --project-name codex-quota-reset"
+  }
+}

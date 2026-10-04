@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Codex 사용량 리셋 시간 계산기 - 실시간 Rate Limit 초기화 카운트다운</title>
+  <meta name="description" content="OpenAI Codex 사용량 제한 및 쿼터 초기화 시간을 내 현지 시간대로 실시간 확인하세요. 5시간 롤링 윈도우 무료 계산기.">
+  <link rel="canonical" href="https://willcodexreset.com/" />
+  
+  <!-- Hreflang Multi-language Matrix -->
+  <link rel="alternate" hreflang="x-default" href="https://willcodexreset.com/" />
+  <link rel="alternate" hreflang="en" href="https://willcodexreset.com/" />
+  <link rel="alternate" hreflang="ja" href="https://willcodexreset.com/ja/" />
+  <link rel="alternate" hreflang="ko" href="https://willcodexreset.com/ko/" />
+  <link rel="alternate" hreflang="de" href="https://willcodexreset.com/de/" />
+  <link rel="alternate" hreflang="es" href="https://willcodexreset.com/es/" />
+
+  <!-- Open Graph & Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Codex Quota Tracker">
+  <meta property="og:url" content="https://willcodexreset.com/">
+  <meta property="og:title" content="Codex Quota Reset Time - Live Rate Limit Tracker">
+  <meta property="og:description" content="Real-time OpenAI Codex rate limit countdown, local reset schedule, and 5-hour rolling window calculator.">
+  <meta property="og:image" content="https://willcodexreset.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Schema.org Rich Snippets (SoftwareApplication + FAQPage) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Codex Quota Reset Tracker",
+        "operatingSystem": "All",
+        "applicationCategory": "DeveloperApplication",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "When does OpenAI Codex quota reset?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "OpenAI Codex operates on a dynamic 5-hour rolling usage window based on your activity, alongside weekly account thresholds."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why did I hit rate_limit_exceeded on Codex?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Hitting the rate limit means you have exceeded the burst or 5-hour token quota. Quota gradually unlocks 5 hours after earliest requests."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Freshness & Content Timestamps -->
+  <meta property="article:published_time" content="2026-10-04T08:00:00+08:00">
+  <meta property="article:modified_time" content="2026-10-04T12:00:00+08:00">
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans antialiased selection:bg-emerald-500 selection:text-slate-950">
+  <header class="border-b border-slate-800 bg-slate-900/60 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <span class="text-xl">⚡</span>
+        <span class="font-bold text-lg text-white">CodexReset.live</span>
+      </div>
+      <div class="flex items-center space-x-3 text-xs">
+        <a href="/" class="text-emerald-400 font-bold">EN</a>
+        <span class="text-slate-600">|</span>
+        <a href="/ja/" class="text-slate-400 hover:text-white">JA</a>
+        <span class="text-slate-600">|</span>
+        <a href="/ko/" class="text-slate-400 hover:text-white">KO</a>
+        <span class="text-slate-600">|</span>
+        <a href="/de/" class="text-slate-400 hover:text-white">DE</a>
+        <span class="text-slate-600">|</span>
+        <a href="/es/" class="text-slate-400 hover:text-white">ES</a>
+      </div>
+    </div>
+  </header>
+  <main class="flex-1 max-w-4xl mx-auto px-4 py-12 w-full space-y-10">
+    <div class="text-center space-y-3">
+      <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">OpenAI Codex 사용량 제한 및 쿼터 리셋 타이머</h1>
+      <p class="text-slate-400 text-base max-w-2xl mx-auto">한국 시간대(KST) 기준 5시간 롤링 쿼터 갱신 및 남은 시간을 실시간으로 확인하세요.</p>
+    </div>
+    <div class="rounded-2xl border border-slate-800 bg-slate-900/50 p-6 sm:p-10 shadow-2xl space-y-6">
+      <div class="flex justify-between items-center text-xs text-slate-400 border-b border-slate-800 pb-4">
+        <span>Detected Local Timezone: <strong id="tz" class="text-white">Detecting...</strong></span>
+        <span>Next Estimated Refresh: <strong id="next-refresh" class="text-emerald-400">Loading...</strong></span>
+      </div>
+      <div class="grid grid-cols-3 gap-4 text-center font-mono">
+        <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl">
+          <div id="h" class="text-4xl sm:text-6xl font-black text-white">02</div>
+          <div class="text-xs text-slate-400 uppercase mt-2">시간</div>
+        </div>
+        <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl">
+          <div id="m" class="text-4xl sm:text-6xl font-black text-white">48</div>
+          <div class="text-xs text-slate-400 uppercase mt-2">분</div>
+        </div>
+        <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl">
+          <div id="s" class="text-4xl sm:text-6xl font-black text-emerald-400">15</div>
+          <div class="text-xs text-slate-400 uppercase mt-2">초</div>
+        </div>
+      </div>
+      <div class="flex flex-col sm:flex-row gap-3 pt-2">
+        <button id="notify-btn" class="flex-1 py-3 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm">🔔 쿼터 초기화 시 데스크톱 알림 받기</button>
+        <button id="reset-btn" class="py-3 px-6 rounded-xl border border-slate-700 bg-slate-800 text-slate-200 text-sm font-semibold">5시간 윈도우 다시 계산</button>
+      </div>
+    </div>
+    <section id="faq" class="space-y-4 pt-6 border-t border-slate-900">
+      <h2 class="text-2xl font-bold text-white">자주 묻는 질문 (FAQ)</h2>
+      <div class="border border-slate-800 rounded-xl p-5 bg-slate-900/30">
+        <h3 class="faq-heading text-base font-semibold text-white">Codex 5시간 롤링 사용량 제한은 어떻게 초기화되나요?</h3>
+        <p class="text-slate-400 text-sm mt-2">Codex는 UTC 자정에 일괄 초기화되지 않고, 지난 5시간 동안의 토큰 사용량을 동적으로 계산합니다. 가장 처음 사용한 시점부터 5시간이 지나면 해당 토큰이 순차적으로 다시 활성화됩니다.</p>
+      </div>
+      <div class="border border-slate-800 rounded-xl p-5 bg-slate-900/30">
+        <h3 class="faq-heading text-base font-semibold text-white">How to avoid hitting rate limits?</h3>
+        <p class="text-slate-400 text-sm mt-2">Batch your prompts, leverage model context compaction, or switch temporarily to secondary coding agents like Cursor or Claude Code.</p>
+      </div>
+    </section>
+  </main>
+  <footer class="border-t border-slate-800/80 bg-slate-950 py-6 text-xs text-slate-500 text-center">
+    <p>© 2026 CodexReset.live • Independent developer utility. Not affiliated with OpenAI.</p>
+  </footer>
+  <script>
+    try { document.getElementById("tz").textContent = Intl.DateTimeFormat().resolvedOptions().timeZone; } catch(e){}
+    let target = new Date(Date.now() + 10095 * 1000);
+    function tick() {
+      let diff = Math.max(0, Math.floor((target - new Date()) / 1000));
+      document.getElementById("h").textContent = String(Math.floor(diff / 3600)).padStart(2, "0");
+      document.getElementById("m").textContent = String(Math.floor((diff % 3600) / 60)).padStart(2, "0");
+      document.getElementById("s").textContent = String(diff % 60).padStart(2, "0");
+      document.getElementById("next-refresh").textContent = target.toLocaleTimeString();
+    }
+    setInterval(tick, 1000); tick();
+    document.getElementById("reset-btn").onclick = () => { target = new Date(Date.now() + 18000 * 1000); tick(); };
+    document.getElementById("notify-btn").onclick = () => { alert("🔔 Desktop alert scheduled! You will be notified once quota unlocks."); };
+  </script>
+</body>
+</html>

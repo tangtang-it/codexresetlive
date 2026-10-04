@@ -1,0 +1,14 @@
+# Codex Quota & Rate Limit Reset Tracker
+> Real-time utility tool for calculating OpenAI Codex token limits, 5-hour rolling windows, and local timezone reset schedules.
+
+## Main Endpoints
+- Index & Live Tracker: https://willcodexreset.com/
+- 5-Hour Rolling Limit: https://willcodexreset.com/5-hour-limit/
+- Rate Limit Comparison: https://willcodexreset.com/vs-claude-code/
+
+## Supported Languages
+- English (Default): https://willcodexreset.com/
+- Japanese (日本語): https://willcodexreset.com/ja/
+- Korean (한국어): https://willcodexreset.com/ko/
+- German (Deutsch): https://willcodexreset.com/de/
+- Spanish (Español): https://willcodexreset.com/es/
