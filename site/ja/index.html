@@ -115,6 +115,9 @@ a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 .wrap{width:100%;max-width:1160px;margin:0 auto;padding:0 20px}
 .num{font-family:var(--mono);font-variant-numeric:tabular-nums;font-feature-settings:"tnum"}
+.ico{display:inline-block;width:15px;height:15px;stroke-width:2;vertical-align:-2px;flex-shrink:0}
+.tool-ic{width:36px;height:36px;border-radius:var(--r-lg);background:var(--canvas);border:1px solid var(--hairline);
+display:flex;align-items:center;justify-content:center;color:var(--primary)}
 
 /* ---------- Header ---------- */
 .hdr{position:sticky;top:0;z-index:60;background:rgba(11,14,17,.92);backdrop-filter:blur(12px);
@@ -435,7 +438,7 @@ h1{font-size:36px}
 <div style="display:flex;align-items:center;gap:14px">
 <span class="live-pill"><span class="dot"></span>ライブ</span>
 <div class="lang">
-<button class="lang-btn" id="langBtn" aria-label="言語">🌐 <span>日本語</span>
+<button class="lang-btn" id="langBtn" aria-label="言語"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg> <span>日本語</span>
 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
 </button>
 <div class="lang-panel" id="langPanel">
@@ -555,15 +558,15 @@ h1{font-size:36px}
 <!-- Alert Strip (Multichannel & Social Proof) -->
 <div class="alert-strip">
 <div class="alert-info">
-<div class="alert-title">🔔 リセット予測通知を受け取る</div>
+<div class="alert-title" style="display:flex;align-items:center;gap:7px"><svg class="ico" style="color:var(--primary)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/><path d="M4 2C2.8 3.7 2 5.7 2 8"/><path d="M22 8c0-2.3-.8-4.3-2-6"/></svg> <span>リセット予測通知を受け取る</span></div>
 <div class="alert-desc">48時間以内のリセット確率が80%を超えるか、公式確認された際に通知。</div>
 </div>
 <div class="alert-actions">
 <input type="email" id="alertEmail" class="alert-input" placeholder="you@developer.com">
 <button class="btn btn-primary" id="alertSubBtn" style="height:36px;padding:0 16px;font-size:12px">通知登録</button>
 <div class="channel-pills">
-<button class="ch-btn" id="tgBtn"><span>✈️</span> Telegram</button>
-<button class="ch-btn" id="wxBtn"><span>💬</span> WeChat</button>
+<button class="ch-btn" id="tgBtn"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg> <span>Telegram</span></button>
+<button class="ch-btn" id="wxBtn"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> <span>WeChat</span></button>
 <span style="font-size:11px;font-family:var(--mono);color:var(--primary);display:inline-flex;align-items:center;padding:0 6px">購読者 70,760人+</span>
 </div>
 </div>
@@ -611,7 +614,7 @@ h1{font-size:36px}
 </div>
 <div class="move-list">
 <div class="move-item">
-  <div class="move-icon">⚡</div>
+  <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
   <div class="move-body">
     <div class="move-head">
       <span class="move-tag">Direct Usage Reset</span>
@@ -620,7 +623,7 @@ h1{font-size:36px}
     <div class="move-text">Confirmed public reset propagated to all ChatGPT Work &amp; Codex users.</div>
   </div>
 </div><div class="move-item">
-  <div class="move-icon">⚡</div>
+  <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
   <div class="move-body">
     <div class="move-head">
       <span class="move-tag">Global Reset Announcement</span>
@@ -629,7 +632,7 @@ h1{font-size:36px}
     <div class="move-text">Tibo announced global reset following Sol load mitigation.</div>
   </div>
 </div><div class="move-item">
-  <div class="move-icon">⚡</div>
+  <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
   <div class="move-body">
     <div class="move-head">
       <span class="move-tag">Banked Credit Top-up</span>
@@ -638,7 +641,7 @@ h1{font-size:36px}
     <div class="move-text">One banked reset credited to Plus, Pro and Business subscribers.</div>
   </div>
 </div><div class="move-item">
-  <div class="move-icon">⚡</div>
+  <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
   <div class="move-body">
     <div class="move-head">
       <span class="move-tag">Weekend Reset Propagated</span>
@@ -647,7 +650,7 @@ h1{font-size:36px}
     <div class="move-text">Confirmed hard reset landed before weekend development rush.</div>
   </div>
 </div><div class="move-item">
-  <div class="move-icon">⚡</div>
+  <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
   <div class="move-body">
     <div class="move-head">
       <span class="move-tag">GPT-6 Sol/Luna Release</span>
@@ -850,7 +853,7 @@ h1{font-size:36px}
 
 <div class="cal-grid-card">
 <div class="cal-top">
-<div class="cal-title"><span>📅</span> <span>October 2026</span></div>
+<div class="cal-title"><svg class="ico" style="color:var(--primary);width:17px;height:17px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg> <span>October 2026</span></div>
 <div class="cal-legend">
 <span class="leg-item"><span class="leg-dot leg-reg"></span> <span>Regular Hard Reset</span></span>
 <span class="leg-item"><span class="leg-dot leg-bnk"></span> <span>Banked Reset</span></span>
@@ -955,8 +958,8 @@ h1{font-size:36px}
 <div class="prog-t"><span>5時間ローリング回復</span><span id="progPct" class="num" style="color:var(--primary)">0% 回復済み</span></div>
 <div class="prog-bg"><div class="prog-fill" id="progFill"></div></div>
 <div class="calc-actions">
-<button class="btn btn-primary" id="notifyBtn">🔔 解除時に通知する</button>
-<button class="btn btn-ghost" id="calBtn">📅 カレンダーに追加</button>
+<button class="btn btn-primary" id="notifyBtn"><svg class="ico" style="color:var(--on-primary);width:16px;height:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg> <span>解除時に通知する</span></button>
+<button class="btn btn-ghost" id="calBtn"><svg class="ico" style="color:var(--primary);width:16px;height:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 13V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><line x1="19" x2="19" y1="16" y2="22"/><line x1="16" x2="22" y1="19" y2="19"/></svg> <span>カレンダーに追加</span></button>
 </div>
 </div>
 </section>
@@ -982,7 +985,7 @@ h1{font-size:36px}
 <div class="tool feat">
 <span class="tool-flag">Top</span>
 <div>
-<div class="tool-h"><span class="tool-ic">🖱️</span><span class="tool-n">Cursor IDE</span></div>
+<div class="tool-h"><span class="tool-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="m3 3 7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/><path d="m13 13 6 6"/></svg></span><span class="tool-n">Cursor IDE</span></div>
 <p class="tool-d">マルチファイルのエージェント編集と高速インデックスを備えた VS Code フォーク。</p>
 <div class="tool-tags"><span class="tag">Free tier</span><span class="tag">Multi-file</span><span class="tag">Fast index</span></div>
 </div>
@@ -990,7 +993,7 @@ h1{font-size:36px}
 </div>
 <div class="tool">
 <div>
-<div class="tool-h"><span class="tool-ic">🏄</span><span class="tool-n">Windsurf</span></div>
+<div class="tool-h"><span class="tool-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2"/><path d="M9.6 4.6A2 2 0 1 1 11 8H2"/><path d="M12.6 19.4A2 2 0 1 0 14 16H2"/></svg></span><span class="tool-n">Windsurf</span></div>
 <p class="tool-d">Cascade によるエージェント IDE。無料枠でも独立したクォータを持ちます。</p>
 <div class="tool-tags"><span class="tag">Cascade</span><span class="tag">Free tier</span></div>
 </div>
@@ -998,7 +1001,7 @@ h1{font-size:36px}
 </div>
 <div class="tool">
 <div>
-<div class="tool-h"><span class="tool-ic">⚡</span><span class="tool-n">Claude Code</span></div>
+<div class="tool-h"><span class="tool-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px"><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></svg></span><span class="tool-n">Claude Code</span></div>
 <p class="tool-d">Anthropic 公式のターミナルエージェント。CLI 上で直接動作します。</p>
 <div class="tool-tags"><span class="tag">Terminal</span><span class="tag">Agentic</span></div>
 </div>
@@ -1029,7 +1032,7 @@ h1{font-size:36px}
 </div>
 </footer>
 
-<div id="toast"><span id="toastI">✅</span><span id="toastM"></span></div>
+<div id="toast"><span id="toastI" style="display:flex;align-items:center"></span><span id="toastM"></span></div>
 
 <script>
 (function(){
@@ -1039,8 +1042,17 @@ h1{font-size:36px}
   document.addEventListener('click',function(e){if(!lp.contains(e.target)&&!lb.contains(e.target)){lp.classList.remove('open');lb.classList.remove('open');}});
 
   // Toast
-  function toast(m,i){var t=document.getElementById('toast');
-    document.getElementById('toastM').textContent=m;document.getElementById('toastI').textContent=i||'✅';
+  function getToastIco(k){
+    if(k==='warn'||k==='alert') return '<svg viewBox="0 0 24 24" fill="none" stroke="#f6465d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';
+    if(k==='clock') return '<svg viewBox="0 0 24 24" fill="none" stroke="#FCD535" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
+    if(k==='bell') return '<svg viewBox="0 0 24 24" fill="none" stroke="#FCD535" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>';
+    if(k==='plane') return '<svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>';
+    if(k==='chat') return '<svg viewBox="0 0 24 24" fill="none" stroke="#0ecb81" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>';
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="#0ecb81" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><polyline points="20 6 9 17 4 12"/></svg>';
+  }
+  function toast(m,k){var t=document.getElementById('toast');
+    document.getElementById('toastM').textContent=m;
+    document.getElementById('toastI').innerHTML=getToastIco(k);
     t.classList.add('on');setTimeout(function(){t.classList.remove('on');},2800);}
 
   // Gauge animation
@@ -1102,14 +1114,14 @@ h1{font-size:36px}
     if(diff===0&&!window.__n){
       window.__n=true;
       try{ if('Notification' in window&&Notification.permission==='granted'){
-        new Notification('⚡ Codex Quota Unlocked',{body:'Your 5-hour rolling window has reopened.'}); } }catch(e){}
+        new Notification('Codex Quota Unlocked',{body:'Your 5-hour rolling window has reopened.'}); } }catch(e){}
     }
   }
   window.__n=false; setInterval(tick,1000); tick();
 
   var tzSel=document.getElementById('tzSel');
   if(tzSel) tzSel.addEventListener('change',function(e){
-    tz=e.target.value;tick();toast('タイムゾーン: '+e.target.options[e.target.selectedIndex].text,'🕒');});
+    tz=e.target.value;tick();toast('タイムゾーン: '+e.target.options[e.target.selectedIndex].text,'clock');});
   
   document.querySelectorAll('.preset').forEach(function(b){
     b.addEventListener('click',function(){
@@ -1117,18 +1129,18 @@ h1{font-size:36px}
       b.classList.add('on');
       var m=parseInt(b.getAttribute('data-min'),10);
       target=new Date(Date.now()+m*60*1000);window.__n=false;tick();
-      toast(m+' 分の枠が有効','⚡');
+      toast(m+' 分の枠が有効','check');
     });
   });
 
   var nb=document.getElementById('notifyBtn');
   if(nb) nb.addEventListener('click',async function(){
-    if(!('Notification' in window)){toast('このブラウザは通知に対応していません','⚠️');return;}
-    if(Notification.permission==='granted'){toast('通知はすでに有効です','🔔');}
+    if(!('Notification' in window)){toast('このブラウザは通知に対応していません','warn');return;}
+    if(Notification.permission==='granted'){toast('通知はすでに有効です','bell');}
     else if(Notification.permission!=='denied'){
       var p=await Notification.requestPermission();
-      if(p==='granted')toast('クォータ解除の通知を設定しました','🔔');
-    } else {toast('このブラウザでは通知がブロックされています','⚠️');}
+      if(p==='granted')toast('クォータ解除の通知を設定しました','bell');
+    } else {toast('このブラウザでは通知がブロックされています','warn');}
   });
 
   var cb=document.getElementById('calBtn');
@@ -1136,20 +1148,20 @@ h1{font-size:36px}
     var s=target.toISOString().replace(/-|:|\.\d\d\d/g,'');
     var e2=new Date(target.getTime()+15*60000).toISOString().replace(/-|:|\.\d\d\d/g,'');
     window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text='+
-      encodeURIComponent('⚡ Codex Quota Reset')+'&dates='+s+'/'+e2+
+      encodeURIComponent('Codex Quota Reset')+'&dates='+s+'/'+e2+
       '&details='+encodeURIComponent('Your 5-hour rolling limit window on OpenAI Codex has unlocked.'),'_blank');
   });
 
   // Channel buttons
   var tg=document.getElementById('tgBtn');
-  if(tg) tg.addEventListener('click',function(){toast('Telegram Bot alerts coming soon!','✈️');});
+  if(tg) tg.addEventListener('click',function(){toast('Telegram Bot alerts coming soon!','plane');});
   var wx=document.getElementById('wxBtn');
-  if(wx) wx.addEventListener('click',function(){toast('WeChat notification channel active!','💬');});
+  if(wx) wx.addEventListener('click',function(){toast('WeChat notification channel active!','chat');});
   var sub=document.getElementById('alertSubBtn');
   if(sub) sub.addEventListener('click',function(){
     var em=document.getElementById('alertEmail');
-    if(em&&em.value.indexOf('@')>0){toast('Subscribed successfully! You will be notified on reset.','🎉');em.value='';}
-    else{toast('Please enter a valid email address.','⚠️');}
+    if(em&&em.value.indexOf('@')>0){toast('Subscribed successfully! You will be notified on reset.','check');em.value='';}
+    else{toast('Please enter a valid email address.','warn');}
   });
 })();
 </script>

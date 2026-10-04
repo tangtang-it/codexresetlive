@@ -106,7 +106,7 @@ moves = [
 move_items = []
 for m_time, m_tag, m_desc, m_pts in moves:
     move_items.append(f'''<div class="move-item">
-  <div class="move-icon">⚡</div>
+  <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
   <div class="move-body">
     <div class="move-head">
       <span class="move-tag">{esc(m_tag)}</span>
