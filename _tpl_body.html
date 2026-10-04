@@ -1,0 +1,335 @@
+<body>
+<header class="hdr">
+<div class="wrap hdr-in">
+<a class="brand" href="__CANONICAL__">
+<span class="brand-mark">⚡</span>
+<span class="brand-txt">
+<span class="brand-name">CodexReset<span style="color:var(--primary)">.live</span></span>
+<span class="brand-sub">__BRAND_SUB__</span>
+</span>
+</a>
+<div style="display:flex;align-items:center;gap:14px">
+<span class="live-pill" style="display:none" id="livep"><span class="dot"></span>__LIVE__</span>
+<span class="live-pill" id="livep2"><span class="dot"></span>__LIVE__</span>
+<div class="lang">
+<button class="lang-btn" id="langBtn" aria-label="__LANG_LABEL__">🌐 <span>__LANG_NAME__</span>
+<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
+</button>
+<div class="lang-panel" id="langPanel">
+<div class="lang-head"><span>__LANG_LABEL__</span><span>__LOCALE_COUNT__</span></div>
+<div class="lang-grid">__LANG_ITEMS__</div>
+</div>
+</div>
+</div>
+</div>
+</header>
+
+<main>
+<div class="wrap">
+
+<section class="hero">
+<div class="hero-grid">
+<div>
+<span class="eyebrow"><span class="dot"></span>__BADGE__</span>
+<h1>__H1_A__<br><em>__H1_B__</em></h1>
+<p class="hero-p">__HERO_P__</p>
+<div class="verdict">
+<span class="verdict-ic">✓</span>
+<div>
+<div class="verdict-b">__VERDICT_B__</div>
+<div class="verdict-s">__VERDICT_S__</div>
+</div>
+</div>
+<div class="cta-row">
+<a class="btn btn-primary" href="__LAST_URL__" target="_blank" rel="noopener nofollow">__CTA_1__</a>
+<a class="btn btn-ghost" href="#evidence">__CTA_2__</a>
+</div>
+</div>
+
+<div class="gauge-card">
+<div class="gauge-top">
+<span class="gauge-lbl">__GAUGE_LBL__</span>
+<span class="gauge-tag">__GAUGE_TAG__</span>
+</div>
+<div class="gauge-wrap">
+<div class="gauge-flare"></div>
+<svg viewBox="0 0 200 200">
+<circle class="gauge-track" cx="100" cy="100" r="86"/>
+<circle class="gauge-arc" id="gaugeArc" cx="100" cy="100" r="86"
+stroke-dasharray="540.35" stroke-dashoffset="540.35"/>
+</svg>
+<div class="gauge-center">
+<div class="gauge-num"><span id="gaugeNum">0</span><span>%</span></div>
+<div class="gauge-cap">__GAUGE_CAP__</div>
+</div>
+</div>
+<div class="gauge-foot">
+<span>__GF_1__ <b class="num">__LAST_DATE__</b></span>
+<span>__GF_2__ <b class="num">__DAYS_SINCE__</b></span>
+</div>
+</div>
+</div>
+</section>
+
+<div class="stats">
+<div class="stat"><div class="stat-l">__ST_1_L__</div><div class="stat-v y num">__ST_1_V__</div><div class="stat-s">__ST_1_S__</div></div>
+<div class="stat"><div class="stat-l">__ST_2_L__</div><div class="stat-v num">__ST_2_V__</div><div class="stat-s">__ST_2_S__</div></div>
+<div class="stat"><div class="stat-l">__ST_3_L__</div><div class="stat-v up num">__ST_3_V__</div><div class="stat-s">__ST_3_S__</div></div>
+<div class="stat"><div class="stat-l">__ST_4_L__</div><div class="stat-v num">__ST_4_V__</div><div class="stat-s">__ST_4_S__</div></div>
+</div>
+
+<section id="frequency">
+<div class="sec-h">
+<span class="sec-kick">01 — __CHART_KICK__</span>
+<h2 class="sec-t">__CHART_T__</h2>
+<p class="sec-s">__CHART_S__</p>
+</div>
+<div class="chart">
+<div class="chart-bars">__CHART_BARS__</div>
+<div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);border-top:1px solid var(--hairline);padding-top:10px">
+<span>__CHART_FOOT_L__</span><span class="num">__CHART_FOOT_R__</span>
+</div>
+</div>
+</section>
+
+<section id="evidence">
+<div class="sec-h">
+<span class="sec-kick">02 — __RAIL_KICK__</span>
+<h2 class="sec-t">__RAIL_T__</h2>
+<p class="sec-s">__RAIL_S__</p>
+</div>
+<div class="rail">__RAIL_ITEMS__</div>
+</section>
+
+<section id="history">
+<div class="sec-h">
+<span class="sec-kick">03 — __HIST_KICK__</span>
+<h2 class="sec-t">__HIST_T__</h2>
+<p class="sec-s">__HIST_S__</p>
+</div>
+<div class="hist">__HIST_ITEMS__</div>
+</section>
+
+<section id="calculator">
+<div class="sec-h">
+<span class="sec-kick">04 — __CALC_KICK__</span>
+<h2 class="sec-t">__CALC_T__</h2>
+<p class="sec-s">__CALC_S__</p>
+</div>
+<div class="calc">
+<div class="calc-bar">
+<div style="display:flex;align-items:center;gap:8px">
+<span>__TZ_L__</span>
+<select id="tzSel">
+<option value="LOCAL" selected>__TZ_LOCAL__</option>
+<option value="UTC">UTC</option>
+<option value="America/Los_Angeles">US Pacific (OpenAI HQ)</option>
+<option value="America/New_York">US Eastern</option>
+<option value="Europe/London">Europe/London</option>
+<option value="Asia/Shanghai">Asia/Shanghai</option>
+<option value="Asia/Tokyo">Asia/Tokyo</option>
+<option value="Asia/Seoul">Asia/Seoul</option>
+</select>
+</div>
+<div style="display:flex;align-items:center;gap:8px">
+<span>__UNLOCK_L__</span>
+<span id="unlockAt" class="num" style="color:var(--primary);font-weight:700">__CALCULATING__</span>
+</div>
+</div>
+<div style="font-size:12px;color:var(--muted);margin-bottom:9px;font-weight:500">__PRESET_L__</div>
+<div class="presets">
+<button class="preset on" data-min="300">__P1__</button>
+<button class="preset" data-min="240">__P2__</button>
+<button class="preset" data-min="180">__P3__</button>
+<button class="preset" data-min="120">__P4__</button>
+</div>
+<div class="clock">
+<div class="clock-c"><div class="clock-v num" id="ch">00</div><div class="clock-l">__U_H__</div></div>
+<div class="clock-c"><div class="clock-v num" id="cm">00</div><div class="clock-l">__U_M__</div></div>
+<div class="clock-c hot"><div class="clock-v num" id="cs">00</div><div class="clock-l">__U_S__</div></div>
+</div>
+<div class="prog-t"><span>__PROG_L__</span><span id="progPct" class="num" style="color:var(--primary)">0% __RECOVERED__</span></div>
+<div class="prog-bg"><div class="prog-fill" id="progFill"></div></div>
+<div class="calc-actions">
+<button class="btn btn-primary" id="notifyBtn">🔔 __NOTIFY__</button>
+<button class="btn btn-ghost" id="calBtn">📅 __CAL__</button>
+</div>
+</div>
+</section>
+
+<section id="tools">
+<div class="sec-h">
+<span class="sec-kick">05 — __TOOLS_KICK__</span>
+<h2 class="sec-t">__TOOLS_T__</h2>
+<p class="sec-s">__TOOLS_S__</p>
+</div>
+<div class="tools">
+<div class="tool feat">
+<span class="tool-flag">Top</span>
+<div>
+<div class="tool-h"><span class="tool-ic">🖱️</span><span class="tool-n">Cursor IDE</span></div>
+<p class="tool-d">__TOOL1_D__</p>
+<div class="tool-tags"><span class="tag">Free tier</span><span class="tag">Multi-file</span><span class="tag">Fast index</span></div>
+</div>
+<a class="tool-a" href="https://cursor.com/?ref=codexreset" target="_blank" rel="noopener nofollow">__TOOL1_A__</a>
+</div>
+<div class="tool">
+<div>
+<div class="tool-h"><span class="tool-ic">🏄</span><span class="tool-n">Windsurf</span></div>
+<p class="tool-d">__TOOL2_D__</p>
+<div class="tool-tags"><span class="tag">Cascade</span><span class="tag">Free tier</span></div>
+</div>
+<a class="tool-a" href="https://codeium.com/windsurf?ref=codexreset" target="_blank" rel="noopener nofollow">__TOOL2_A__</a>
+</div>
+<div class="tool">
+<div>
+<div class="tool-h"><span class="tool-ic">⚡</span><span class="tool-n">Claude Code</span></div>
+<p class="tool-d">__TOOL3_D__</p>
+<div class="tool-tags"><span class="tag">Terminal</span><span class="tag">Agentic</span></div>
+</div>
+<a class="tool-a" href="https://claude.ai/code?ref=codexreset" target="_blank" rel="noopener nofollow">__TOOL3_A__</a>
+</div>
+</div>
+</section>
+
+<section id="faq">
+<div class="sec-h">
+<span class="sec-kick">06 — FAQ</span>
+<h2 class="sec-t">__FAQ_T__</h2>
+</div>
+<div class="faq">__FAQ_ITEMS__</div>
+</section>
+
+</div>
+</main>
+
+<footer>
+<div class="wrap foot-in">
+<div class="foot-links">
+<a href="/llms.txt">llms.txt</a><a href="/llms-full.txt">llms-full.txt</a><a href="/sitemap.xml">sitemap.xml</a>
+</div>
+<p class="foot-c">© 2026 CodexReset.live — __FOOT__</p>
+<p class="foot-c" style="font-size:10px">__FOOT_SRC__</p>
+</div>
+</footer>
+
+<div id="toast"><span id="toastI">✅</span><span id="toastM"></span></div>
+
+<script>
+(function(){
+  /* ---------- Language dropdown ---------- */
+  var lb=document.getElementById('langBtn'),lp=document.getElementById('langPanel');
+  lb.addEventListener('click',function(e){e.stopPropagation();
+    lp.classList.toggle('open');lb.classList.toggle('open');});
+  document.addEventListener('click',function(e){
+    if(!lp.contains(e.target)&&!lb.contains(e.target)){lp.classList.remove('open');lb.classList.remove('open');}});
+
+  /* ---------- Animated probability gauge ---------- */
+  var TARGET=__PROB_NUM__, TARGET_OFFSET=540.35*(1-TARGET/100);
+  var arc=document.getElementById('gaugeArc'),numEl=document.getElementById('gaugeNum');
+  var shown=false;
+  function animateGauge(){
+    if(shown)return; shown=true;
+    arc.style.strokeDashoffset=TARGET_OFFSET;
+    var t0=null,dur=1700;
+    function step(ts){
+      if(t0===null)t0=ts;
+      var p=Math.min(1,(ts-t0)/dur);
+      var e=1-Math.pow(1-p,4);
+      numEl.textContent=Math.round(TARGET*e);
+      if(p<1)requestAnimationFrame(step);
+      else numEl.textContent=TARGET;
+    }
+    requestAnimationFrame(step);
+  }
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(en,ob){
+      en.forEach(function(x){if(x.isIntersecting){animateGauge();ob.disconnect();}});
+    },{threshold:.25}).observe(document.querySelector('.gauge-card'));
+  } else { animateGauge(); }
+  setTimeout(animateGauge,900);
+
+  /* ---------- Animated bars ---------- */
+  function animateBars(){
+    document.querySelectorAll('.bar').forEach(function(b,i){
+      var h=b.getAttribute('data-h');
+      setTimeout(function(){ b.style.height=h+'%'; }, 90+i*45);
+    });
+  }
+  if('IntersectionObserver' in window){
+    var bc=document.querySelector('.chart-bars');
+    if(bc)new IntersectionObserver(function(en,ob){
+      en.forEach(function(x){if(x.isIntersecting){animateBars();ob.disconnect();}});
+    },{threshold:.2}).observe(bc);
+  } else { animateBars(); }
+
+  /* ---------- Local time conversion for posts ---------- */
+  var fmt;
+  try{ fmt=new Intl.DateTimeFormat(undefined,{weekday:'short',month:'short',day:'numeric',year:'numeric',hour:'2-digit',minute:'2-digit',timeZoneName:'short'}); }
+  catch(e){ fmt=null; }
+  if(fmt){
+    document.querySelectorAll('[data-utc]').forEach(function(el){
+      var d=new Date(el.getAttribute('data-utc'));
+      if(!isNaN(d)) el.textContent=fmt.format(d);
+    });
+  }
+
+  /* ---------- Personal 5h calculator ---------- */
+  var TOTAL=18000, target=new Date(Date.now()+TOTAL*1000), tz='LOCAL';
+  var ch=document.getElementById('ch'),cm=document.getElementById('cm'),cs=document.getElementById('cs');
+  var ua=document.getElementById('unlockAt'),pf=document.getElementById('progFill'),pp=document.getElementById('progPct');
+  var REC='__RECOVERED__';
+  function toast(m,i){var t=document.getElementById('toast');
+    document.getElementById('toastM').textContent=m;document.getElementById('toastI').textContent=i||'✅';
+    t.classList.add('on');setTimeout(function(){t.classList.remove('on');},2800);}
+  function fmtT(d){
+    try{
+      if(tz==='LOCAL')return d.toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'});
+      return d.toLocaleTimeString('en-US',{timeZone:tz,hour:'2-digit',minute:'2-digit'})+' '+tz.split('/').pop();
+    }catch(e){return d.toLocaleTimeString();}
+  }
+  function tick(){
+    var diff=Math.max(0,Math.floor((target-new Date())/1000));
+    ch.textContent=String(Math.floor(diff/3600)).padStart(2,'0');
+    cm.textContent=String(Math.floor((diff%3600)/60)).padStart(2,'0');
+    cs.textContent=String(diff%60).padStart(2,'0');
+    ua.textContent=fmtT(target);
+    var pct=Math.min(100,Math.max(0,Math.round((TOTAL-diff)/TOTAL*100)));
+    pf.style.width=pct+'%'; pp.textContent=pct+'% '+REC;
+    if(diff===0&&!window.__n){
+      window.__n=true;
+      try{ if('Notification' in window&&Notification.permission==='granted'){
+        new Notification('⚡ Codex Quota Unlocked',{body:'Your 5-hour rolling window has reopened.'}); } }catch(e){}
+    }
+  }
+  window.__n=false; setInterval(tick,1000); tick();
+  document.getElementById('tzSel').addEventListener('change',function(e){
+    tz=e.target.value;tick();toast('__TZ_TOAST__ '+e.target.options[e.target.selectedIndex].text,'🕒');});
+  document.querySelectorAll('.preset').forEach(function(b){
+    b.addEventListener('click',function(){
+      document.querySelectorAll('.preset').forEach(function(x){x.classList.remove('on');});
+      b.classList.add('on');
+      var m=parseInt(b.getAttribute('data-min'),10);
+      target=new Date(Date.now()+m*60*1000);window.__n=false;tick();
+      toast(m+' __MIN_TOAST__','⚡');
+    });
+  });
+  document.getElementById('notifyBtn').addEventListener('click',async function(){
+    if(!('Notification' in window)){toast('__NO_NOTIF__','⚠️');return;}
+    if(Notification.permission==='granted'){toast('__NOTIF_ON__','🔔');}
+    else if(Notification.permission!=='denied'){
+      var p=await Notification.requestPermission();
+      if(p==='granted')toast('__NOTIF_SET__','🔔');
+    } else {toast('__NOTIF_BLOCK__','⚠️');}
+  });
+  document.getElementById('calBtn').addEventListener('click',function(){
+    var s=target.toISOString().replace(/-|:|\.\d\d\d/g,'');
+    var e2=new Date(target.getTime()+15*60000).toISOString().replace(/-|:|\.\d\d\d/g,'');
+    window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text='+
+      encodeURIComponent('⚡ Codex Quota Reset')+'&dates='+s+'/'+e2+
+      '&details='+encodeURIComponent('Your 5-hour rolling limit window on OpenAI Codex has unlocked.'),'_blank');
+  });
+})();
+</script>
+</body>
+</html>
