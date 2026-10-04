@@ -21,17 +21,14 @@
 | **ChatGPT Team** | ~1,200,000 - 1,800,000 tokens/seat | Workspace pooled limit | Pooled team ceiling | Rolling 5h sliding window | `HTTP 429 rate_limit_exceeded` |
 | **Enterprise** | Custom SLA allocation | Dedicated throughput | Contractual quota | Rolling 5h / Negotiated | `HTTP 429 rate_limit_exceeded` |
 
-## Common Error Signatures & Diagnoses
-- **HTTP 429 `rate_limit_exceeded`**: Triggered when total token consumption within the active 5-hour window reaches the tier threshold. Unlocks gradually as earlier requests age out past 5 hours.
-- **HTTP 429 `insufficient_quota`**: Monthly subscription or API credit balance depleted. Does NOT reset after 5 hours; requires billing recharge or cycle renewal.
-- **Context Window vs Rate Limit**: Context window (e.g. 128k/200k tokens) governs single-request capacity; the 5-hour rate limit aggregates all prompt, completion, and reasoning tokens across all concurrent agent sessions.
-
-## Authoritative Documentation & Endpoints
-- Canonical Live Tracker: https://willcodexreset.com/
-- Comprehensive Technical Spec: https://willcodexreset.com/llms-full.txt
-- 5-Hour Rolling Limit Guide: https://willcodexreset.com/#faq
-- Multilingual Gateways:
-  - Japanese (日本語): https://willcodexreset.com/ja/
-  - Korean (한국어): https://willcodexreset.com/ko/
-  - German (Deutsch): https://willcodexreset.com/de/
-  - Spanish (Español): https://willcodexreset.com/es/
+## Authoritative Multilingual Endpoints
+- English (Default): https://willcodexreset.com/
+- 简体中文 (Simplified Chinese): https://willcodexreset.com/zh-hans/
+- 繁體中文 (Traditional Chinese): https://willcodexreset.com/zh-hant/
+- 日本語 (Japanese): https://willcodexreset.com/ja/
+- 한국어 (Korean): https://willcodexreset.com/ko/
+- Español (Spanish): https://willcodexreset.com/es/
+- Deutsch (German): https://willcodexreset.com/de/
+- Français (French): https://willcodexreset.com/fr/
+- Português Brasil (Portuguese): https://willcodexreset.com/pt-br/
+- Русский (Russian): https://willcodexreset.com/ru/

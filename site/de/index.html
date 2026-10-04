@@ -7,13 +7,18 @@
   <meta name="description" content="Wird OpenAI Codex heute zurückgesetzt? Globales Reset-Radar (19% heute) + persönlicher 5-Stunden Rate-Limit Countdown.">
   <link rel="canonical" href="https://willcodexreset.com/de/" />
   
-  <!-- Hreflang Multi-language Matrix -->
+  <!-- Hreflang Multi-language Matrix (10 Languages) -->
   <link rel="alternate" hreflang="x-default" href="https://willcodexreset.com/" />
   <link rel="alternate" hreflang="en" href="https://willcodexreset.com/" />
+  <link rel="alternate" hreflang="zh-hans" href="https://willcodexreset.com/zh-hans/" />
+  <link rel="alternate" hreflang="zh-hant" href="https://willcodexreset.com/zh-hant/" />
   <link rel="alternate" hreflang="ja" href="https://willcodexreset.com/ja/" />
   <link rel="alternate" hreflang="ko" href="https://willcodexreset.com/ko/" />
-  <link rel="alternate" hreflang="de" href="https://willcodexreset.com/de/" />
   <link rel="alternate" hreflang="es" href="https://willcodexreset.com/es/" />
+  <link rel="alternate" hreflang="de" href="https://willcodexreset.com/de/" />
+  <link rel="alternate" hreflang="fr" href="https://willcodexreset.com/fr/" />
+  <link rel="alternate" hreflang="pt-br" href="https://willcodexreset.com/pt-br/" />
+  <link rel="alternate" hreflang="ru" href="https://willcodexreset.com/ru/" />
 
   <!-- Open Graph & Social -->
   <meta property="og:type" content="website">
@@ -58,7 +63,7 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "DE",
+          "name": "Deutsch",
           "item": "https://willcodexreset.com/de/"
         }
       ]
@@ -147,18 +152,46 @@
         </div>
         <div class="flex flex-col">
           <div class="flex items-center space-x-2">
-            <span class="font-bold text-base text-white tracking-tight">CodexReset<span class="text-emerald-400">.live</span></span>
+            <a href="https://willcodexreset.com/de/" class="font-bold text-base text-white tracking-tight hover:text-emerald-400 transition-colors">CodexReset<span class="text-emerald-400">.live</span></a>
             <span class="hidden sm:inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse mr-1"></span>
-              Dual Radar
+              Live Sync
             </span>
           </div>
           <span class="text-[10px] text-slate-500 hidden sm:block">Macro Probability + Micro 5h Tracker</span>
         </div>
       </div>
 
-      <nav aria-label="Language" class="flex items-center space-x-2 text-xs font-mono bg-slate-900/60 border border-white/[0.06] px-2.5 py-1.5 rounded-lg">
-        <a href="/" class="text-slate-400 hover:text-white px-1">EN</a> <span class="text-slate-700">/</span> <a href="/ja/" class="text-slate-400 hover:text-white px-1">JA</a> <span class="text-slate-700">/</span> <a href="/ko/" class="text-slate-400 hover:text-white px-1">KO</a> <span class="text-slate-700">/</span> <a href="/de/" class="text-emerald-400 font-bold px-1">DE</a> <span class="text-slate-700">/</span> <a href="/es/" class="text-slate-400 hover:text-white px-1">ES</a>
+      <!-- Language Dropdown -->
+      <nav aria-label="Language Selector">
+        <div class="relative inline-block text-left" id="lang-dropdown-wrapper">
+      <button type="button" id="lang-menu-btn" class="inline-flex items-center gap-2 rounded-xl bg-slate-900/80 border border-white/[0.08] px-3 py-1.5 text-xs font-medium text-slate-200 hover:border-emerald-500/50 hover:text-white transition-all shadow-sm">
+        <span class="text-sm">🌐</span>
+        <span class="font-sans">Deutsch</span>
+        <svg class="w-3.5 h-3.5 text-slate-400 transition-transform duration-200" id="lang-menu-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+        </svg>
+      </button>
+
+      <div id="lang-menu-panel" class="hidden absolute right-0 mt-2 w-64 sm:w-80 rounded-2xl bg-[#0c1322] border border-white/[0.1] shadow-2xl p-2 z-50 backdrop-blur-xl">
+        <div class="px-3 py-2 border-b border-white/[0.06] mb-1.5 flex items-center justify-between">
+          <span class="text-[11px] font-mono text-slate-400 font-bold uppercase tracking-wider">Select Language / 语言</span>
+          <span class="text-[10px] text-emerald-400 font-mono">10 Locales</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-1 max-h-72 overflow-y-auto">
+          <a href="https://willcodexreset.com/" hreflang="en" class="px-3 py-2 rounded-lg text-xs font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-800/40 flex items-center justify-between"><span>English</span><span class="text-[10px] font-mono text-slate-500 uppercase">en</span></a>
+          <a href="https://willcodexreset.com/zh-hans/" hreflang="zh-hans" class="px-3 py-2 rounded-lg text-xs font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-800/40 flex items-center justify-between"><span>简体中文</span><span class="text-[10px] font-mono text-slate-500 uppercase">zh-hans</span></a>
+          <a href="https://willcodexreset.com/zh-hant/" hreflang="zh-hant" class="px-3 py-2 rounded-lg text-xs font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-800/40 flex items-center justify-between"><span>繁體中文</span><span class="text-[10px] font-mono text-slate-500 uppercase">zh-hant</span></a>
+          <a href="https://willcodexreset.com/ja/" hreflang="ja" class="px-3 py-2 rounded-lg text-xs font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-800/40 flex items-center justify-between"><span>日本語</span><span class="text-[10px] font-mono text-slate-500 uppercase">ja</span></a>
+          <a href="https://willcodexreset.com/ko/" hreflang="ko" class="px-3 py-2 rounded-lg text-xs font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-800/40 flex items-center justify-between"><span>한국어</span><span class="text-[10px] font-mono text-slate-500 uppercase">ko</span></a>
+          <a href="https://willcodexreset.com/es/" hreflang="es" class="px-3 py-2 rounded-lg text-xs font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-800/40 flex items-center justify-between"><span>Español</span><span class="text-[10px] font-mono text-slate-500 uppercase">es</span></a>
+          <a href="https://willcodexreset.com/de/" hreflang="de" class="px-3 py-2 rounded-lg text-xs font-medium transition-all text-emerald-400 font-bold bg-slate-800/80 flex items-center justify-between"><span>Deutsch</span><span class="text-[10px] font-mono text-slate-500 uppercase">de</span></a>
+          <a href="https://willcodexreset.com/fr/" hreflang="fr" class="px-3 py-2 rounded-lg text-xs font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-800/40 flex items-center justify-between"><span>Français</span><span class="text-[10px] font-mono text-slate-500 uppercase">fr</span></a>
+          <a href="https://willcodexreset.com/pt-br/" hreflang="pt-br" class="px-3 py-2 rounded-lg text-xs font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-800/40 flex items-center justify-between"><span>Português (Brasil)</span><span class="text-[10px] font-mono text-slate-500 uppercase">pt-br</span></a>
+          <a href="https://willcodexreset.com/ru/" hreflang="ru" class="px-3 py-2 rounded-lg text-xs font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-800/40 flex items-center justify-between"><span>Русский</span><span class="text-[10px] font-mono text-slate-500 uppercase">ru</span></a>
+        </div>
+      </div>
+    </div>
       </nav>
     </div>
   </header>
@@ -451,6 +484,31 @@
   </div>
 
   <script>
+    // Dropdown toggle logic
+    const langBtn = document.getElementById("lang-menu-btn");
+    const langPanel = document.getElementById("lang-menu-panel");
+    const langArrow = document.getElementById("lang-menu-arrow");
+
+    langBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const isHidden = langPanel.classList.contains("hidden");
+      if (isHidden) {
+        langPanel.classList.remove("hidden");
+        langArrow.classList.add("rotate-180");
+      } else {
+        langPanel.classList.add("hidden");
+        langArrow.classList.remove("rotate-180");
+      }
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!langPanel.contains(e.target) && !langBtn.contains(e.target)) {
+        langPanel.classList.add("hidden");
+        langArrow.classList.remove("rotate-180");
+      }
+    });
+
+    // Countdown & State Management
     const TOTAL_WINDOW_SECONDS = 5 * 3600;
     let remainingSeconds = TOTAL_WINDOW_SECONDS;
     let targetDate = new Date(Date.now() + remainingSeconds * 1000);
