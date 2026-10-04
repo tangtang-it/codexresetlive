@@ -19,21 +19,28 @@ recent_gaps = gaps[-14:]
 avg_recent = round(sum(recent_gaps)/len(recent_gaps), 1)
 avg_all = round(sum(gaps)/len(gaps), 1)
 
-# Probability model: base on recency vs typical cadence
-# If days_since_last < avg_recent => lower prob; plus weekly ceiling
-ratio = days_since / avg_recent if avg_recent else 1
-prob = max(3, min(62, round(ratio * 22 - 4, 0)))
-# data freshness confidence
+# Four-factor smooth probability model aligned with willcodexreset.com standard
+# 1. Base baseline (preserves space for consecutive/double resets)
+baseline = 12
+
+# 2. Cooldown vs overdue factor
+if days_since <= 2.0:
+    cooldown_factor = -4  # Recent reset cooldown
+elif days_since <= 4.0:
+    cooldown_factor = +6  # Nearing typical cadence
+else:
+    cooldown_factor = min(40, round((days_since - 4) * 8.5))  # Overdue escalation
+
+# 3. Product & social release signal hint (Tibo mentioned upcoming next week rollout)
+signal_hint = 3
+
+prob = max(10, min(85, round(baseline + cooldown_factor + signal_hint)))
+
 months = Counter(r["at"][:7] for r in recs)
 banked = sum(1 for r in recs if r["type"] == "banked")
 regular = sum(1 for r in recs if r["type"] == "regular")
 
-# monthly series (last 12 months including zeros)
-from datetime import date
 series = []
-start = date(2025, 9, 1)
-keys = sorted(months.keys())
-# build continuous months from 2025-09 to 2026-10
 y, m = 2025, 9
 while (y, m) <= (2026, 10):
     k = f"{y:04d}-{m:02d}"

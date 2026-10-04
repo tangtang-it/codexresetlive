@@ -9,7 +9,7 @@
   "days_since_last_reset": 1.6,
   "avg_gap_days_all": 7.1,
   "avg_gap_days_recent": 3.9,
-  "probability_48h": 5,
+  "probability_48h": 11,
   "monthly_series": [
     {
       "month": "2025-09",
