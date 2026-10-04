@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-# Explicit permission for AI search crawlers (Perplexity, SearchGPT, Claude)
+# GEO & Generative AI Search Engine Crawlers
 User-agent: OAI-SearchBot
 Allow: /
 
@@ -12,6 +12,9 @@ User-agent: PerplexityBot
 Allow: /
 
 User-agent: Claude-Web
+Allow: /
+
+User-agent: Google-Extended
 Allow: /
 
 Sitemap: https://willcodexreset.com/sitemap.xml

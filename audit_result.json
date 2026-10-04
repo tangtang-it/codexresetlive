@@ -1,0 +1,505 @@
+{
+  "pages": {
+    "en": {
+      "title": "Codex Quota Reset Time - Live Rate Limit & Status Tracker",
+      "title_len": 57,
+      "description": "Check when your OpenAI Codex rate limit and quota resets in your local timezone. Free instant countdown tracker with zero-latency calculation.",
+      "description_len": 142,
+      "keywords": "",
+      "keywords_count": 0,
+      "canonical": "https://willcodexreset.com/",
+      "hreflangs": {
+        "x-default": "https://willcodexreset.com/",
+        "en": "https://willcodexreset.com/",
+        "ja": "https://willcodexreset.com/ja/",
+        "ko": "https://willcodexreset.com/ko/",
+        "de": "https://willcodexreset.com/de/",
+        "es": "https://willcodexreset.com/es/"
+      },
+      "h1_count": 1,
+      "h1_texts": [
+        "OpenAI Codex Quota & Rate Limit Reset Tracker"
+      ],
+      "headings": [
+        {
+          "tag": "h1",
+          "text": "OpenAI Codex Quota & Rate Limit Reset Tracker"
+        },
+        {
+          "tag": "h2",
+          "text": "Frequently Asked Questions"
+        },
+        {
+          "tag": "h3",
+          "text": "When does the Codex 5-hour rolling limit reset?"
+        },
+        {
+          "tag": "h3",
+          "text": "How to avoid hitting rate limits?"
+        }
+      ],
+      "external_scripts": [
+        "https://cdn.tailwindcss.com"
+      ],
+      "external_styles": [],
+      "json_lds": [
+        {
+          "valid": true,
+          "data": {
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "SoftwareApplication",
+                "name": "Codex Quota Reset Tracker",
+                "operatingSystem": "All",
+                "applicationCategory": "DeveloperApplication",
+                "offers": {
+                  "@type": "Offer",
+                  "price": "0",
+                  "priceCurrency": "USD"
+                }
+              },
+              {
+                "@type": "FAQPage",
+                "mainEntity": [
+                  {
+                    "@type": "Question",
+                    "name": "When does OpenAI Codex quota reset?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "OpenAI Codex operates on a dynamic 5-hour rolling usage window based on your activity, alongside weekly account thresholds."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Why did I hit rate_limit_exceeded on Codex?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Hitting the rate limit means you have exceeded the burst or 5-hour token quota. Quota gradually unlocks 5 hours after earliest requests."
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "og": {
+        "og:type": "website",
+        "og:site_name": "Codex Quota Tracker",
+        "og:url": "https://willcodexreset.com/",
+        "og:title": "Codex Quota Reset Time - Live Rate Limit Tracker",
+        "og:description": "Real-time OpenAI Codex rate limit countdown, local reset schedule, and 5-hour rolling window calculator.",
+        "og:image": "https://willcodexreset.com/og-image.png",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "twitter:card": "summary_large_image",
+        "article:published_time": "2026-10-04T08:00:00+08:00",
+        "article:modified_time": "2026-10-04T12:00:00+08:00"
+      },
+      "images": []
+    },
+    "de": {
+      "title": "Codex Quota Reset Time - Live Rate Limit & Status Tracker",
+      "title_len": 57,
+      "description": "Check when your OpenAI Codex rate limit and quota resets in your local timezone. Free instant countdown tracker with zero-latency calculation.",
+      "description_len": 142,
+      "keywords": "",
+      "keywords_count": 0,
+      "canonical": "https://willcodexreset.com/",
+      "hreflangs": {
+        "x-default": "https://willcodexreset.com/",
+        "en": "https://willcodexreset.com/",
+        "ja": "https://willcodexreset.com/ja/",
+        "ko": "https://willcodexreset.com/ko/",
+        "de": "https://willcodexreset.com/de/",
+        "es": "https://willcodexreset.com/es/"
+      },
+      "h1_count": 1,
+      "h1_texts": [
+        "OpenAI Codex Rate-Limit & Quota Reset-Rechner"
+      ],
+      "headings": [
+        {
+          "tag": "h1",
+          "text": "OpenAI Codex Rate-Limit & Quota Reset-Rechner"
+        },
+        {
+          "tag": "h2",
+          "text": "Frequently Asked Questions"
+        },
+        {
+          "tag": "h3",
+          "text": "When does the Codex 5-hour rolling limit reset?"
+        },
+        {
+          "tag": "h3",
+          "text": "How to avoid hitting rate limits?"
+        }
+      ],
+      "external_scripts": [
+        "https://cdn.tailwindcss.com"
+      ],
+      "external_styles": [],
+      "json_lds": [
+        {
+          "valid": true,
+          "data": {
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "SoftwareApplication",
+                "name": "Codex Quota Reset Tracker",
+                "operatingSystem": "All",
+                "applicationCategory": "DeveloperApplication",
+                "offers": {
+                  "@type": "Offer",
+                  "price": "0",
+                  "priceCurrency": "USD"
+                }
+              },
+              {
+                "@type": "FAQPage",
+                "mainEntity": [
+                  {
+                    "@type": "Question",
+                    "name": "When does OpenAI Codex quota reset?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "OpenAI Codex operates on a dynamic 5-hour rolling usage window based on your activity, alongside weekly account thresholds."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Why did I hit rate_limit_exceeded on Codex?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Hitting the rate limit means you have exceeded the burst or 5-hour token quota. Quota gradually unlocks 5 hours after earliest requests."
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "og": {
+        "og:type": "website",
+        "og:site_name": "Codex Quota Tracker",
+        "og:url": "https://willcodexreset.com/",
+        "og:title": "Codex Quota Reset Time - Live Rate Limit Tracker",
+        "og:description": "Real-time OpenAI Codex rate limit countdown, local reset schedule, and 5-hour rolling window calculator.",
+        "og:image": "https://willcodexreset.com/og-image.png",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "twitter:card": "summary_large_image",
+        "article:published_time": "2026-10-04T08:00:00+08:00",
+        "article:modified_time": "2026-10-04T12:00:00+08:00"
+      },
+      "images": []
+    },
+    "es": {
+      "title": "Codex Quota Reset Time - Live Rate Limit & Status Tracker",
+      "title_len": 57,
+      "description": "Check when your OpenAI Codex rate limit and quota resets in your local timezone. Free instant countdown tracker with zero-latency calculation.",
+      "description_len": 142,
+      "keywords": "",
+      "keywords_count": 0,
+      "canonical": "https://willcodexreset.com/",
+      "hreflangs": {
+        "x-default": "https://willcodexreset.com/",
+        "en": "https://willcodexreset.com/",
+        "ja": "https://willcodexreset.com/ja/",
+        "ko": "https://willcodexreset.com/ko/",
+        "de": "https://willcodexreset.com/de/",
+        "es": "https://willcodexreset.com/es/"
+      },
+      "h1_count": 1,
+      "h1_texts": [
+        "Calculadora de Restablecimiento de Cuota y Límite de Codex"
+      ],
+      "headings": [
+        {
+          "tag": "h1",
+          "text": "Calculadora de Restablecimiento de Cuota y Límite de Codex"
+        },
+        {
+          "tag": "h2",
+          "text": "Frequently Asked Questions"
+        },
+        {
+          "tag": "h3",
+          "text": "When does the Codex 5-hour rolling limit reset?"
+        },
+        {
+          "tag": "h3",
+          "text": "How to avoid hitting rate limits?"
+        }
+      ],
+      "external_scripts": [
+        "https://cdn.tailwindcss.com"
+      ],
+      "external_styles": [],
+      "json_lds": [
+        {
+          "valid": true,
+          "data": {
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "SoftwareApplication",
+                "name": "Codex Quota Reset Tracker",
+                "operatingSystem": "All",
+                "applicationCategory": "DeveloperApplication",
+                "offers": {
+                  "@type": "Offer",
+                  "price": "0",
+                  "priceCurrency": "USD"
+                }
+              },
+              {
+                "@type": "FAQPage",
+                "mainEntity": [
+                  {
+                    "@type": "Question",
+                    "name": "When does OpenAI Codex quota reset?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "OpenAI Codex operates on a dynamic 5-hour rolling usage window based on your activity, alongside weekly account thresholds."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Why did I hit rate_limit_exceeded on Codex?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Hitting the rate limit means you have exceeded the burst or 5-hour token quota. Quota gradually unlocks 5 hours after earliest requests."
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "og": {
+        "og:type": "website",
+        "og:site_name": "Codex Quota Tracker",
+        "og:url": "https://willcodexreset.com/",
+        "og:title": "Codex Quota Reset Time - Live Rate Limit Tracker",
+        "og:description": "Real-time OpenAI Codex rate limit countdown, local reset schedule, and 5-hour rolling window calculator.",
+        "og:image": "https://willcodexreset.com/og-image.png",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "twitter:card": "summary_large_image",
+        "article:published_time": "2026-10-04T08:00:00+08:00",
+        "article:modified_time": "2026-10-04T12:00:00+08:00"
+      },
+      "images": []
+    },
+    "ja": {
+      "title": "Codex リセット時間はいつ？利用制限・クォータ復活リアルタイム計算機",
+      "title_len": 36,
+      "description": "OpenAI Codexの利用制限(Rate Limit)やクォータのリセット時間を日本時間でリアルタイム確認。5時間ローリング復活タイマー。",
+      "description_len": 71,
+      "keywords": "",
+      "keywords_count": 0,
+      "canonical": "https://willcodexreset.com/",
+      "hreflangs": {
+        "x-default": "https://willcodexreset.com/",
+        "en": "https://willcodexreset.com/",
+        "ja": "https://willcodexreset.com/ja/",
+        "ko": "https://willcodexreset.com/ko/",
+        "de": "https://willcodexreset.com/de/",
+        "es": "https://willcodexreset.com/es/"
+      },
+      "h1_count": 1,
+      "h1_texts": [
+        "OpenAI Codex 利用制限・クォータリセット時間チェッカー"
+      ],
+      "headings": [
+        {
+          "tag": "h1",
+          "text": "OpenAI Codex 利用制限・クォータリセット時間チェッカー"
+        },
+        {
+          "tag": "h2",
+          "text": "よくある質問 (FAQ)"
+        },
+        {
+          "tag": "h3",
+          "text": "Codexの全体リセット・5時間制限はいつ解除されますか？"
+        },
+        {
+          "tag": "h3",
+          "text": "How to avoid hitting rate limits?"
+        }
+      ],
+      "external_scripts": [
+        "https://cdn.tailwindcss.com"
+      ],
+      "external_styles": [],
+      "json_lds": [
+        {
+          "valid": true,
+          "data": {
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "SoftwareApplication",
+                "name": "Codex Quota Reset Tracker",
+                "operatingSystem": "All",
+                "applicationCategory": "DeveloperApplication",
+                "offers": {
+                  "@type": "Offer",
+                  "price": "0",
+                  "priceCurrency": "USD"
+                }
+              },
+              {
+                "@type": "FAQPage",
+                "mainEntity": [
+                  {
+                    "@type": "Question",
+                    "name": "When does OpenAI Codex quota reset?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "OpenAI Codex operates on a dynamic 5-hour rolling usage window based on your activity, alongside weekly account thresholds."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Why did I hit rate_limit_exceeded on Codex?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Hitting the rate limit means you have exceeded the burst or 5-hour token quota. Quota gradually unlocks 5 hours after earliest requests."
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "og": {
+        "og:type": "website",
+        "og:site_name": "Codex Quota Tracker",
+        "og:url": "https://willcodexreset.com/",
+        "og:title": "Codex Quota Reset Time - Live Rate Limit Tracker",
+        "og:description": "Real-time OpenAI Codex rate limit countdown, local reset schedule, and 5-hour rolling window calculator.",
+        "og:image": "https://willcodexreset.com/og-image.png",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "twitter:card": "summary_large_image",
+        "article:published_time": "2026-10-04T08:00:00+08:00",
+        "article:modified_time": "2026-10-04T12:00:00+08:00"
+      },
+      "images": []
+    },
+    "ko": {
+      "title": "Codex 사용량 리셋 시간 계산기 - 실시간 Rate Limit 초기화 카운트다운",
+      "title_len": 46,
+      "description": "OpenAI Codex 사용량 제한 및 쿼터 초기화 시간을 내 현지 시간대로 실시간 확인하세요. 5시간 롤링 윈도우 무료 계산기.",
+      "description_len": 72,
+      "keywords": "",
+      "keywords_count": 0,
+      "canonical": "https://willcodexreset.com/",
+      "hreflangs": {
+        "x-default": "https://willcodexreset.com/",
+        "en": "https://willcodexreset.com/",
+        "ja": "https://willcodexreset.com/ja/",
+        "ko": "https://willcodexreset.com/ko/",
+        "de": "https://willcodexreset.com/de/",
+        "es": "https://willcodexreset.com/es/"
+      },
+      "h1_count": 1,
+      "h1_texts": [
+        "OpenAI Codex 사용량 제한 및 쿼터 리셋 타이머"
+      ],
+      "headings": [
+        {
+          "tag": "h1",
+          "text": "OpenAI Codex 사용량 제한 및 쿼터 리셋 타이머"
+        },
+        {
+          "tag": "h2",
+          "text": "자주 묻는 질문 (FAQ)"
+        },
+        {
+          "tag": "h3",
+          "text": "Codex 5시간 롤링 사용량 제한은 어떻게 초기화되나요?"
+        },
+        {
+          "tag": "h3",
+          "text": "How to avoid hitting rate limits?"
+        }
+      ],
+      "external_scripts": [
+        "https://cdn.tailwindcss.com"
+      ],
+      "external_styles": [],
+      "json_lds": [
+        {
+          "valid": true,
+          "data": {
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "SoftwareApplication",
+                "name": "Codex Quota Reset Tracker",
+                "operatingSystem": "All",
+                "applicationCategory": "DeveloperApplication",
+                "offers": {
+                  "@type": "Offer",
+                  "price": "0",
+                  "priceCurrency": "USD"
+                }
+              },
+              {
+                "@type": "FAQPage",
+                "mainEntity": [
+                  {
+                    "@type": "Question",
+                    "name": "When does OpenAI Codex quota reset?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "OpenAI Codex operates on a dynamic 5-hour rolling usage window based on your activity, alongside weekly account thresholds."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Why did I hit rate_limit_exceeded on Codex?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Hitting the rate limit means you have exceeded the burst or 5-hour token quota. Quota gradually unlocks 5 hours after earliest requests."
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "og": {
+        "og:type": "website",
+        "og:site_name": "Codex Quota Tracker",
+        "og:url": "https://willcodexreset.com/",
+        "og:title": "Codex Quota Reset Time - Live Rate Limit Tracker",
+        "og:description": "Real-time OpenAI Codex rate limit countdown, local reset schedule, and 5-hour rolling window calculator.",
+        "og:image": "https://willcodexreset.com/og-image.png",
+        "og:image:width": "1200",
+        "og:image:height": "630",
+        "twitter:card": "summary_large_image",
+        "article:published_time": "2026-10-04T08:00:00+08:00",
+        "article:modified_time": "2026-10-04T12:00:00+08:00"
+      },
+      "images": []
+    }
+  },
+  "sitemap": {
+    "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:xhtml=\"http://www.w3.org/1999/xhtml\">\n  <url>\n    <loc>https://willcodexreset.com/</loc>\n    <lastmod>2026-10-04</lastmod>\n    <changefreq>daily</changefreq>\n    <priority>1.0</priority>\n    <xhtml:link rel=\"alternate\" hreflang=\"x-default\" href=\"https://willcodexreset.com/\" />\n    <xhtml:link rel=\"alternate\" hreflang=\"en\" href=\"https://willcodexreset.com/\" />\n    <xhtml:link rel=\"alternate\" hreflang=\"ja\" href=\"https://willcodexreset.com/ja/\" />\n    <xhtml:link rel=\"alternate\" hreflang=\"ko\" href=\"https://willcodexreset.com/ko/\" />\n    <xhtml:link rel=\"alternate\" hreflang=\"de\" href=\"https://willcodexreset.com/de/\" />\n    <xhtml:link rel=\"alternate\" hreflang=\"es\" href=\"https://willcodexreset.com/es/\" />\n  </url>\n  <url>\n    <loc>https://willcodexreset.com/ja/</loc>\n    <lastmod>2026-10-04</lastmod>\n    <changefreq>daily</changefreq>\n    <priority>0.9</priority>\n  </url>\n  <url>\n    <loc>https://willcodexreset.com/ko/</loc>\n    <lastmod>2026-10-04</lastmod>\n    <changefreq>daily</changefreq>\n    <priority>0.9</priority>\n  </url>\n  <url>\n    <loc>https://willcodexreset.com/de/</loc>\n    <lastmod>2026-10-04</lastmod>\n    <changefreq>daily</changefreq>\n    <priority>0.9</priority>\n  </url>\n  <url>\n    <loc>https://willcodexreset.com/es/</loc>\n    <lastmod>2026-10-04</lastmod>\n    <changefreq>daily</changefreq>\n    <priority>0.9</priority>\n  </url>\n</urlset>"
+  },
+  "robots": {
+    "raw": "User-agent: *\nAllow: /\n\n# Explicit permission for AI search crawlers (Perplexity, SearchGPT, Claude)\nUser-agent: OAI-SearchBot\nAllow: /\n\nUser-agent: ChatGPT-User\nAllow: /\n\nUser-agent: PerplexityBot\nAllow: /\n\nUser-agent: Claude-Web\nAllow: /\n\nSitemap: https://willcodexreset.com/sitemap.xml"
+  }
+}

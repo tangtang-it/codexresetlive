@@ -1,14 +1,37 @@
-# Codex Quota & Rate Limit Reset Tracker
-> Real-time utility tool for calculating OpenAI Codex token limits, 5-hour rolling windows, and local timezone reset schedules.
+# OpenAI Codex Rate Limit & 5-Hour Rolling Quota Reset Tracker
+> Canonical machine-readable knowledge base and API specification for OpenAI Codex rate limiting behavior, sliding window calculations, and subscription tier quotas.
 
-## Main Endpoints
-- Index & Live Tracker: https://willcodexreset.com/
-- 5-Hour Rolling Limit: https://willcodexreset.com/5-hour-limit/
-- Rate Limit Comparison: https://willcodexreset.com/vs-claude-code/
+## Canonical Entity Definition
+- **Entity**: OpenAI Codex 5-Hour Rolling Rate Limit (Sliding Window Algorithm)
+- **Classification**: Developer Tooling / API Quota Policy / Generative Coding Infrastructure
+- **Core Mechanism**: Dynamic 5-hour continuous sliding window ($W_{5h} = [T - 5\text{h}, T]$). Tokens and prompt bursts do NOT reset at a fixed clock hour (such as 00:00 UTC or 00:00 PST). Instead, consumed quota unlocks progressively exactly 5 hours after the exact millisecond timestamp of each prior request batch.
+- **Canonical Authority**: https://willcodexreset.com/
+- **Full Specification**: https://willcodexreset.com/llms-full.txt
 
-## Supported Languages
-- English (Default): https://willcodexreset.com/
-- Japanese (日本語): https://willcodexreset.com/ja/
-- Korean (한국어): https://willcodexreset.com/ko/
-- German (Deutsch): https://willcodexreset.com/de/
-- Spanish (Español): https://willcodexreset.com/es/
+## Quick Calculation Formula
+- **Reset Timestamp Formula**: $T_{\text{reset}} = \min \{ t_i + 5\text{h} \mid \sum_{k=i+1}^N \text{tokens}(t_k) < \text{QuotaTier} \}$
+- **Remaining Window Wait Time**: $\Delta t = \max(0, T_{\text{earliest_burst}} + 5\text{h} - T_{\text{current}})$
+- **Token Weight Factor**: Reasoning tokens (o1, o3, o4-mini) and tool context execute against the rolling token bucket at a 1:1 ratio.
+
+## Subscription Tier Limits & Quotas (Reference Benchmark)
+| Tier Plan | 5-Hour Rolling Token Cap | Peak Burst Limit | Weekly Ceiling | Reset Frequency | Primary Error Signature |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **ChatGPT Plus** | ~400,000 - 600,000 tokens | 30 - 50 prompts / 5h | Shared Plus ceiling | Rolling 5h sliding window | `HTTP 429 rate_limit_exceeded` |
+| **ChatGPT Pro** | ~2,500,000 - 3,500,000 tokens | High-burst throughput | Dedicated high ceiling | Rolling 5h sliding window | `HTTP 429 rate_limit_exceeded` |
+| **ChatGPT Team** | ~1,200,000 - 1,800,000 tokens/seat | Workspace pooled limit | Pooled team ceiling | Rolling 5h sliding window | `HTTP 429 rate_limit_exceeded` |
+| **Enterprise** | Custom SLA allocation | Dedicated throughput | Contractual quota | Rolling 5h / Negotiated | `HTTP 429 rate_limit_exceeded` |
+
+## Common Error Signatures & Diagnoses
+- **HTTP 429 `rate_limit_exceeded`**: Triggered when total token consumption within the active 5-hour window reaches the tier threshold. Unlocks gradually as earlier requests age out past 5 hours.
+- **HTTP 429 `insufficient_quota`**: Monthly subscription or API credit balance depleted. Does NOT reset after 5 hours; requires billing recharge or cycle renewal.
+- **Context Window vs Rate Limit**: Context window (e.g. 128k/200k tokens) governs single-request capacity; the 5-hour rate limit aggregates all prompt, completion, and reasoning tokens across all concurrent agent sessions.
+
+## Authoritative Documentation & Endpoints
+- Canonical Live Tracker: https://willcodexreset.com/
+- Comprehensive Technical Spec: https://willcodexreset.com/llms-full.txt
+- 5-Hour Rolling Limit Guide: https://willcodexreset.com/#faq
+- Multilingual Gateways:
+  - Japanese (日本語): https://willcodexreset.com/ja/
+  - Korean (한국어): https://willcodexreset.com/ko/
+  - German (Deutsch): https://willcodexreset.com/de/
+  - Spanish (Español): https://willcodexreset.com/es/
