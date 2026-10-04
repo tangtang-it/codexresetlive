@@ -78,7 +78,7 @@ for r in recs[-14:][::-1]:
 '<span class="badge %s">%s</span></div>'
 '<time class="post-time" data-utc="%s" datetime="%s">%s</time>'
 '<p class="post-q">%s</p>'
-'<div class="post-f"><a href="%s" target="_blank" rel="noopener nofollow">View on X ↗</a></div>'
+'<div class="post-f"><a href="%s" target="_blank" rel="noopener nofollow">View on X <svg class="icon-svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a></div>'
 '</div></article>' % (t, badge, r["at"], r["at"], fmt_utc(r["at"]), quote, r["url"]))
 RAIL_ITEMS = "".join(rail)
 
