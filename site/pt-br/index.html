@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Codex Quota Reset Radar & Calculadora de Limite de 5h</title>
-  <meta name="description" content="O OpenAI Codex vai resetar hoje? Radar de probabilidade global (19% hoje) + calculadora de limite de 5 horas no seu fuso horário local.">
+  <title>Will Codex Reset Today? Live Quota Reset Radar & Update Monitor</title>
+  <meta name="description" content="Did OpenAI Codex reset quotas with the latest update? Source-first radar tracking Tibo tweets, official update announcements, reset probability & 5-hour limit calculator.">
   <link rel="canonical" href="https://willcodexreset.com/pt-br/" />
   
-  <!-- Hreflang Multi-language Matrix (10 Languages) -->
+  <!-- Hreflang Multi-language Matrix (10 Locales) -->
   <link rel="alternate" hreflang="x-default" href="https://willcodexreset.com/" />
   <link rel="alternate" hreflang="en" href="https://willcodexreset.com/" />
   <link rel="alternate" hreflang="zh-hans" href="https://willcodexreset.com/zh-hans/" />
@@ -22,11 +22,11 @@
 
   <!-- Open Graph & Social -->
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Codex Quota Radar">
+  <meta property="og:site_name" content="Codex Reset Radar">
   <meta property="og:url" content="https://willcodexreset.com/pt-br/">
   <meta property="og:locale" content="pt_BR">
-  <meta property="og:title" content="Codex Quota Reset Radar & Calculadora de Limite de 5h">
-  <meta property="og:description" content="O OpenAI Codex vai resetar hoje? Radar de probabilidade global (19% hoje) + calculadora de limite de 5 horas no seu fuso horário local.">
+  <meta property="og:title" content="Will Codex Reset Today? Live Quota Reset Radar & Update Monitor">
+  <meta property="og:description" content="Did OpenAI Codex reset quotas with the latest update? Source-first radar tracking Tibo tweets, official update announcements, reset probability & 5-hour limit calculator.">
   <meta property="og:image" content="https://willcodexreset.com/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -39,7 +39,7 @@
   "@graph": [
     {
       "@type": "SoftwareApplication",
-      "name": "Codex Quota Reset Radar & Calculadora de Limite de 5h",
+      "name": "Will Codex Reset Today? Live Quota Reset Radar & Update Monitor",
       "operatingSystem": "All",
       "applicationCategory": "DeveloperApplication",
       "url": "https://willcodexreset.com/pt-br/",
@@ -49,7 +49,7 @@
         "price": "0",
         "priceCurrency": "USD"
       },
-      "description": "O OpenAI Codex vai resetar hoje? Radar de probabilidade global (19% hoje) + calculadora de limite de 5 horas no seu fuso horário local."
+      "description": "Did OpenAI Codex reset quotas with the latest update? Source-first radar tracking Tibo tweets, official update announcements, reset probability & 5-hour limit calculator."
     },
     {
       "@type": "BreadcrumbList",
@@ -74,26 +74,26 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Qual a diferença entre reset global e o limite de 5h ?",
+          "name": "Does Codex reset quotas when a new update releases?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "O reset global é uma liberação extraordinária da OpenAI para todos os usuários. O limite de 5h é a sua cota individual que se renova continuamente."
+            "text": "Yes! Historically, whenever OpenAI ships a significant feature update or rolls out new agentic capabilities, team lead Tibo Sottiaux frequently executes a hard reset for all paid subscribers."
           }
         },
         {
           "@type": "Question",
-          "name": "Como os 19% de probabilidade são calculados ?",
+          "name": "How does this radar predict resets?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Avaliamos logs de status, tweets do time da OpenAI e os dias passados desde a última liberação."
+            "text": "We continuously monitor official status feeds, X/Twitter posts from OpenAI leadership (Tibo, Sam Altman, developers), and calculate days elapsed since the last major release."
           }
         },
         {
           "@type": "Question",
-          "name": "Mudar o fuso horário adianta a liberação ?",
+          "name": "If there is no public reset today, when can I code again?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Não. O servidor calcula a janela exclusivamente em UTC."
+            "text": "You don't have to wait for an official public reset! Your account's personal 5-hour rolling limit automatically replenishes 5 hours after your earliest prompts."
           }
         }
       ]
@@ -117,7 +117,7 @@
               cyan: '#06b6d4',
               orange: '#f97316',
               surface: '#090d16',
-              card: '#0f172a',
+              card: '#0c1322',
               border: 'rgba(255, 255, 255, 0.08)'
             }
           }
@@ -158,7 +158,7 @@
               Live Sync
             </span>
           </div>
-          <span class="text-[10px] text-slate-500 hidden sm:block">Macro Probability + Micro 5h Tracker</span>
+          <span class="text-[10px] text-slate-500 hidden sm:block">Update Radar + Personal Limit Tracker</span>
         </div>
       </div>
 
@@ -196,104 +196,212 @@
     </div>
   </header>
 
-  <!-- Main Content -->
+  <!-- Main Container -->
   <main class="flex-1 max-w-4xl mx-auto px-4 py-8 w-full space-y-12 relative z-10">
 
-    <!-- Hero Title -->
-    <div class="text-center space-y-2">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800/80 border border-white/[0.08] text-xs text-slate-300">
-        <span class="text-emerald-400">●</span> Radar de Probabilidade Global + Contador de Recuperação de 5 Horas
-      </div>
-      <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-        O Codex vai resetar hoje?
-      </h1>
-    </div>
-
-    <!-- MODULE 1: MACRO GLOBAL RESET PROBABILITY RADAR (Comp 1 & 2 Fusion) -->
-    <section class="rounded-2xl border border-white/[0.08] bg-[#0c1322]/90 backdrop-blur-xl p-6 sm:p-8 shadow-2xl relative overflow-hidden space-y-6">
-      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-white/[0.06] pb-4">
-        <div class="flex items-center gap-2">
-          <span class="px-2 py-0.5 rounded bg-orange-500/10 border border-orange-500/30 text-orange-400 font-mono text-xs font-bold uppercase tracking-wider">Previsão Global de 48h</span>
-          <span class="text-xs text-slate-400">Sources checked every 15 min</span>
+    <!-- HERO SECTION: 100% SEARCH INTENT ALIGNED -->
+    <section class="space-y-6">
+      <div class="text-center space-y-3">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/40 border border-emerald-500/30 text-xs text-emerald-300">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>LIVE CODEX UPDATE & RESET MONITOR</span>
         </div>
-        <div class="text-xs font-mono text-slate-400 flex items-center gap-2">
-          <span>OpenAI Status:</span>
-          <span class="text-emerald-400 font-bold flex items-center gap-1">● Operational</span>
-        </div>
+        <h1 class="text-3xl sm:text-5xl font-black text-white tracking-tight">
+          Will Codex Reset?
+        </h1>
+        <p class="text-slate-400 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
+          Source-first radar for public Codex quota resets, app update signals, and verified reset evidence.
+        </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
-        <!-- Verdict Text -->
-        <div class="md:col-span-2 space-y-4">
-          <h2 class="text-3xl sm:text-4xl font-black text-white tracking-tight">
-            Provavelmente não hoje.
-          </h2>
-          <p class="text-slate-300 text-sm leading-relaxed">
-            Sem incidentes na infraestrutura da OpenAI e sem anúncios de recarga emergencial de tokens.
-          </p>
-          <div class="border-l-2 border-orange-500/80 pl-3 py-0.5 space-y-1">
-            <span class="text-[10px] font-mono font-bold text-orange-400 uppercase tracking-wider block">O QUE FAZER</span>
-            <p class="text-xs text-slate-400">Confira seu contador de 5 horas abaixo ou alterne para ferramentas secundárias.</p>
-          </div>
-        </div>
-
-        <!-- Likelihood Badge / Radial Ring -->
-        <div class="flex flex-col items-center justify-center p-6 rounded-2xl bg-gradient-to-br from-[#1e1412] to-[#0c1322] border border-orange-500/20 text-center relative shadow-inner">
-          <div class="relative w-28 h-28 flex items-center justify-center">
-            <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
-              <path class="text-slate-800" stroke-width="3.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-              <path class="text-orange-500" stroke-dasharray="19, 100" stroke-width="3.5" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-            </svg>
-            <div class="absolute inset-0 flex flex-col items-center justify-center">
-              <span class="text-3xl font-black text-white font-mono">19%</span>
+      <!-- REAL-TIME VERDICT CARD & RADAR METRICS -->
+      <div class="rounded-2xl border border-white/[0.08] bg-[#0c1322]/90 backdrop-blur-xl p-6 sm:p-8 shadow-2xl relative overflow-hidden space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+          <div class="md:col-span-2 space-y-4">
+            <div class="flex items-center gap-2">
+              <span class="px-2.5 py-1 rounded-full text-xs font-mono font-bold bg-orange-500/10 text-orange-400 border border-orange-500/30">
+                PROBABLY NOT TODAY
+              </span>
+              <span class="text-xs text-slate-400">OpenAI Status: Operational</span>
+            </div>
+            <p class="text-slate-200 text-sm leading-relaxed">
+              No unexpected capacity refresh confirmed today. Latest confirmed reset: Jul 29 · 04:09 UTC.
+            </p>
+            <div class="flex flex-wrap gap-3 pt-1">
+              <a href="https://x.com/thsottiaux" target="_blank" rel="noopener noreferrer nofollow" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition-all shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+                View Primary Source ↗
+              </a>
+              <a href="#evidence" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-200 font-semibold text-xs border border-white/10 transition-all">
+                How We Score
+              </a>
             </div>
           </div>
-          <span class="text-xs font-semibold text-slate-300 mt-2">Probabilidade de Reset Global</span>
-        </div>
-      </div>
 
-      <!-- Signal Desk 4 Cards (From Comp 1 & 2) -->
-      <div class="pt-4 border-t border-white/[0.06] space-y-3">
-        <span class="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider block">Mesa de Sinais & Canais Monitorados</span>
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <div class="p-3 rounded-xl bg-slate-900/60 border border-white/[0.06] space-y-1">
-            <span class="text-[10px] font-mono text-slate-500 block">01 / STATUS</span>
-            <span class="text-xs font-bold text-white block">Operacional</span>
-            <span class="text-[10px] text-slate-400 block">OpenAI API & Codex sem falhas.</span>
-          </div>
-          <div class="p-3 rounded-xl bg-slate-900/60 border border-white/[0.06] space-y-1">
-            <span class="text-[10px] font-mono text-slate-500 block">02 / INDÍCIOS</span>
-            <span class="text-xs font-bold text-orange-400 block">Pista de Lançamento</span>
-            <span class="text-[10px] text-slate-400 block">Liderança antecipou novidades para a próxima semana.</span>
-          </div>
-          <div class="p-3 rounded-xl bg-slate-900/60 border border-white/[0.06] space-y-1">
-            <span class="text-[10px] font-mono text-slate-500 block">03 / INTERVALO</span>
-            <span class="text-xs font-bold text-white block">Há 34 Dias</span>
-            <span class="text-[10px] text-slate-400 block">O último reset global reduz a chance imediata.</span>
-          </div>
-          <div class="p-3 rounded-xl bg-slate-900/60 border border-white/[0.06] space-y-1">
-            <span class="text-[10px] font-mono text-slate-500 block">04 / FONTES</span>
-            <span class="text-xs font-bold text-emerald-400 block">6 Canais Oficiais</span>
-            <span class="text-[10px] text-slate-400 block">Sam Altman, Tibo, Desenvolvedores OpenAI.</span>
+          <!-- PROBABILITY RADAR RING -->
+          <div class="flex flex-col items-center justify-center p-6 rounded-2xl bg-gradient-to-br from-[#1e1412] to-[#0c1322] border border-orange-500/20 text-center relative shadow-inner">
+            <span class="text-[10px] font-mono font-bold text-orange-400 uppercase tracking-wider mb-2">48H RESET FORECAST</span>
+            <div class="relative w-28 h-28 flex items-center justify-center">
+              <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                <path class="text-slate-800" stroke-width="3.5" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                <path class="text-orange-500" stroke-dasharray="19, 100" stroke-width="3.5" stroke-linecap="round" stroke="currentColor" fill="none" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+              </svg>
+              <div class="absolute inset-0 flex flex-col items-center justify-center">
+                <span class="text-3xl font-black text-white font-mono">19%</span>
+              </div>
+            </div>
+            <span class="text-xs font-semibold text-slate-300 mt-2">Unlikely · Waiting for Next Feature Release</span>
+            <span class="text-[10px] text-slate-500 mt-1">Last checked: Today · Monitored feeds quiet. Public resets typically accompany major version rollouts.</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- MODULE 2: MICRO PERSONAL 5-HOUR ROLLING TRACKER (Our Killer Feature) -->
-    <section aria-labelledby="personal-tracker-heading" class="rounded-2xl border border-emerald-500/30 bg-[#0c1322]/90 backdrop-blur-xl p-6 sm:p-8 shadow-2xl relative overflow-hidden space-y-6">
-      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-white/[0.06] pb-4">
-        <div>
-          <span class="px-2 py-0.5 rounded bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs font-bold uppercase tracking-wider">Personal Micro Tracker</span>
-          <h2 id="personal-tracker-heading" class="text-xl sm:text-2xl font-bold text-white mt-1">Calculadora de Janela Móvel de 5 Horas</h2>
-          <p class="text-xs text-slate-400 mt-0.5">Recebeu rate_limit_exceeded? Calcule o horário exato de desbloqueio da sua conta.</p>
+    <!-- SECTION 1: TIMELINE EVIDENCE (PRIMARY SOURCES & TIBO TWEETS) -->
+    <section id="evidence" class="space-y-4">
+      <div class="border-b border-white/[0.08] pb-3">
+        <span class="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">01 / SIGNAL DESK</span>
+        <h2 class="text-xl sm:text-2xl font-bold text-white mt-1">Primary Evidence & Release Signals</h2>
+        <p class="text-xs text-slate-400 mt-0.5">Verified developer statements regarding quota resets and upcoming OpenAI desktop updates.</p>
+      </div>
+      <div class="grid grid-cols-1 gap-4">
+                <article class="p-5 rounded-2xl bg-slate-900/60 border border-white/[0.08] space-y-3 relative group hover:border-emerald-500/30 transition-all">
+          <div class="flex items-center justify-between text-xs">
+            <span class="font-mono text-emerald-400 font-bold">Jul 31 · 04:53 UTC</span>
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-400 font-mono text-[10px]">VERIFIED PRIMARY SOURCE</span>
+          </div>
+          <div>
+            <span class="font-bold text-white text-sm block">@thsottiaux (Tibo, Codex Lead)</span>
+            <blockquote class="text-slate-200 text-sm italic border-l-2 border-emerald-500/60 pl-3 my-2 leading-relaxed bg-slate-950/40 py-1.5 rounded-r">
+              “The day we develop really good models. There will be signs. We learn. We reset. Enjoy.”
+            </blockquote>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed font-sans">
+            <strong class="text-slate-300">Why this matters:</strong> Historical context: Confirms OpenAI's policy of resetting quotas alongside breakthrough model/app updates.
+          </p>
+        </article>
+        <article class="p-5 rounded-2xl bg-slate-900/60 border border-white/[0.08] space-y-3 relative group hover:border-emerald-500/30 transition-all">
+          <div class="flex items-center justify-between text-xs">
+            <span class="font-mono text-emerald-400 font-bold">Jul 29 · 04:09 UTC</span>
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-400 font-mono text-[10px]">VERIFIED PRIMARY SOURCE</span>
+          </div>
+          <div>
+            <span class="font-bold text-white text-sm block">@thsottiaux (Tibo, Codex Lead)</span>
+            <blockquote class="text-slate-200 text-sm italic border-l-2 border-emerald-500/60 pl-3 my-2 leading-relaxed bg-slate-950/40 py-1.5 rounded-r">
+              “Usage limits reset for all ChatGPT Work and Codex users. Happy coding!”
+            </blockquote>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed font-sans">
+            <strong class="text-slate-300">Why this matters:</strong> Confirmed hard reset: Official global refill executed following the multi-file agent update.
+          </p>
+        </article>
+        <article class="p-5 rounded-2xl bg-slate-900/60 border border-white/[0.08] space-y-3 relative group hover:border-emerald-500/30 transition-all">
+          <div class="flex items-center justify-between text-xs">
+            <span class="font-mono text-emerald-400 font-bold">Jul 20 · 04:19 UTC</span>
+            <span class="px-2 py-0.5 rounded bg-slate-800 text-slate-400 font-mono text-[10px]">VERIFIED PRIMARY SOURCE</span>
+          </div>
+          <div>
+            <span class="font-bold text-white text-sm block">@thsottiaux (Tibo, Codex Lead)</span>
+            <blockquote class="text-slate-200 text-sm italic border-l-2 border-emerald-500/60 pl-3 my-2 leading-relaxed bg-slate-950/40 py-1.5 rounded-r">
+              “Don't really mind it! The resets will continue as we scale capacity.”
+            </blockquote>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed font-sans">
+            <strong class="text-slate-300">Why this matters:</strong> Forward guidance: Explicit reassurance that periodic hard resets will accompany capacity milestones.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION 2: VERIFIED RESET HISTORY (MILESTONES & UPDATES) -->
+    <section id="history" class="space-y-4">
+      <div class="border-b border-white/[0.08] pb-3">
+        <span class="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">02 / HISTORICAL LOG</span>
+        <h2 class="text-xl sm:text-2xl font-bold text-white mt-1">Confirmed Public Reset History</h2>
+        <p class="text-xs text-slate-400 mt-0.5">Verified dates when OpenAI manually refilled usage quotas for all paid users:</p>
+      </div>
+      <div class="overflow-x-auto rounded-xl border border-white/[0.08] bg-[#0c1322]">
+        <table class="w-full text-left text-xs sm:text-sm text-slate-300">
+          <thead class="bg-slate-900/80 text-slate-400 uppercase font-mono text-[11px] border-b border-white/[0.08]">
+            <tr>
+              <th scope="col" class="py-3 px-4">Date (UTC)</th>
+              <th scope="col" class="py-3 px-4">Confirmed Reset Event</th>
+              <th scope="col" class="py-3 px-4">Trigger Type</th>
+              <th scope="col" class="py-3 px-4">Verdict</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-white/[0.06]">
+                        <tr class="hover:bg-slate-900/40">
+              <td class="py-3 px-4 font-mono text-emerald-400 whitespace-nowrap">2026-07-29</td>
+              <td class="py-3 px-4 font-medium text-white">Usage limits reset for all ChatGPT Work and Codex users</td>
+              <td class="py-3 px-4 text-slate-400 whitespace-nowrap">Major App Update</td>
+              <td class="py-3 px-4 whitespace-nowrap"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">CONFIRMED</span></td>
+            </tr>
+            <tr class="hover:bg-slate-900/40">
+              <td class="py-3 px-4 font-mono text-emerald-400 whitespace-nowrap">2026-07-28</td>
+              <td class="py-3 px-4 font-medium text-white">Usage limits reset for all paid Codex users</td>
+              <td class="py-3 px-4 text-slate-400 whitespace-nowrap">Mid-week Refresh</td>
+              <td class="py-3 px-4 whitespace-nowrap"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">CONFIRMED</span></td>
+            </tr>
+            <tr class="hover:bg-slate-900/40">
+              <td class="py-3 px-4 font-mono text-emerald-400 whitespace-nowrap">2026-07-25</td>
+              <td class="py-3 px-4 font-medium text-white">Global compensation reset after infrastructure outage</td>
+              <td class="py-3 px-4 text-slate-400 whitespace-nowrap">Outage Compensation</td>
+              <td class="py-3 px-4 whitespace-nowrap"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">CONFIRMED</span></td>
+            </tr>
+            <tr class="hover:bg-slate-900/40">
+              <td class="py-3 px-4 font-mono text-emerald-400 whitespace-nowrap">2026-07-18</td>
+              <td class="py-3 px-4 font-medium text-white">Usage limits reset again for all subscribers</td>
+              <td class="py-3 px-4 text-slate-400 whitespace-nowrap">Capacity Boost</td>
+              <td class="py-3 px-4 whitespace-nowrap"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">CONFIRMED</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 3: CORE EDUCATIONAL VALUE (TYPE A vs TYPE B DISTINCTION) -->
+    <section class="rounded-2xl border border-emerald-500/20 bg-emerald-950/10 p-6 sm:p-8 space-y-4">
+      <div class="space-y-1">
+        <span class="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">03 / CRITICAL EXPLANATION</span>
+        <h2 class="text-xl sm:text-2xl font-bold text-white">Why Did You Search 'Codex Reset'?</h2>
+        <p class="text-xs text-slate-400">Understand the two completely different reset mechanisms in OpenAI Codex:</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+        <div class="p-4 rounded-xl bg-slate-900/80 border border-white/[0.08] space-y-2">
+          <div class="flex items-center gap-2 text-orange-400 font-bold text-sm">
+            <span>🎉</span>
+            <h3>1. Public Hard Reset (Update-Driven)</h3>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Occurs when OpenAI releases an app update, celebrates milestones (e.g., 3M/9M users), or compensates for downtime. It resets weekly limits for ALL users simultaneously.
+          </p>
         </div>
+
+        <div class="p-4 rounded-xl bg-slate-900/80 border border-emerald-500/30 space-y-2">
+          <div class="flex items-center gap-2 text-emerald-400 font-bold text-sm">
+            <span>⏳</span>
+            <h3>2. Personal 5-Hour Rolling Limit (Daily Engine)</h3>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">
+            Your private token bucket. When you hit rate_limit_exceeded during coding, your individual quota restores 5 hours after each batch of prompt requests.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: PERSONAL 5-HOUR ROLLING CALCULATOR (DAILY WORKHORSE) -->
+    <section id="calculator" class="rounded-2xl border border-emerald-500/30 bg-[#0c1322]/90 backdrop-blur-xl p-6 sm:p-8 shadow-2xl relative overflow-hidden space-y-6">
+      <div class="border-b border-white/[0.06] pb-4">
+        <span class="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">04 / PERSONAL ROLLING CALCULATOR</span>
+        <h2 class="text-xl sm:text-2xl font-bold text-white mt-1">Didn't Get a Public Reset? Calculate Your Personal 5h Unlock</h2>
+        <p class="text-xs text-slate-400 mt-0.5">Track your exact individual rate limit recovery in your local timezone:</p>
       </div>
 
       <!-- Timezone & Sync Bar -->
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 text-xs text-slate-400 bg-slate-900/50 p-3 rounded-xl border border-white/[0.06]">
         <div class="flex items-center gap-2">
-          <span>Fuso horário ativo:</span>
+          <span>Active Timezone:</span>
           <select id="tz-select" class="bg-slate-950 border border-white/10 rounded px-2.5 py-1 text-slate-200 text-xs font-mono focus:outline-none focus:border-emerald-500">
             <option value="LOCAL" selected>Local Browser Time</option>
             <option value="UTC">UTC (Universal)</option>
@@ -302,43 +410,43 @@
           </select>
         </div>
         <div class="flex items-center gap-2 font-mono">
-          <span>Próxima liberação:</span>
-          <span id="next-refresh" class="text-emerald-400 font-bold bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-500/20">Calculando...</span>
+          <span>Next Window Unlock:</span>
+          <span id="next-refresh" class="text-emerald-400 font-bold bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-500/20">Calculating...</span>
         </div>
       </div>
 
-      <!-- Quick Preset Selector -->
+      <!-- Presets -->
       <div class="space-y-2">
-        <label class="text-xs text-slate-400 font-medium block">Quando você atingiu o limite?</label>
+        <label class="text-xs text-slate-400 font-medium block">When did your personal session get rate limited?</label>
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
-          <button type="button" class="preset-btn py-2 px-3 rounded-lg border text-xs font-medium transition-all bg-emerald-500/10 border-emerald-500/40 text-emerald-300" data-minutes="300">Agora mesmo (5h restantes)</button>
-          <button type="button" class="preset-btn py-2 px-3 rounded-lg border text-xs font-medium transition-all bg-slate-900/60 border-white/[0.06] text-slate-300 hover:border-white/20" data-minutes="240">Há 1 hora</button>
-          <button type="button" class="preset-btn py-2 px-3 rounded-lg border text-xs font-medium transition-all bg-slate-900/60 border-white/[0.06] text-slate-300 hover:border-white/20" data-minutes="180">Há 2 horas</button>
-          <button type="button" class="preset-btn py-2 px-3 rounded-lg border text-xs font-medium transition-all bg-slate-900/60 border-white/[0.06] text-slate-300 hover:border-white/20" data-minutes="120">Há 3 horas</button>
+          <button type="button" class="preset-btn py-2 px-3 rounded-lg border text-xs font-medium transition-all bg-emerald-500/10 border-emerald-500/40 text-emerald-300" data-minutes="300">Just Now (5h Left)</button>
+          <button type="button" class="preset-btn py-2 px-3 rounded-lg border text-xs font-medium transition-all bg-slate-900/60 border-white/[0.06] text-slate-300 hover:border-white/20" data-minutes="240">1 Hour Ago</button>
+          <button type="button" class="preset-btn py-2 px-3 rounded-lg border text-xs font-medium transition-all bg-slate-900/60 border-white/[0.06] text-slate-300 hover:border-white/20" data-minutes="180">2 Hours Ago</button>
+          <button type="button" class="preset-btn py-2 px-3 rounded-lg border text-xs font-medium transition-all bg-slate-900/60 border-white/[0.06] text-slate-300 hover:border-white/20" data-minutes="120">3 Hours Ago</button>
         </div>
       </div>
 
-      <!-- Countdown Display -->
+      <!-- Timer Grid -->
       <div class="grid grid-cols-3 gap-3 sm:gap-4 text-center font-mono my-4" aria-live="polite">
         <div class="bg-[#070b14] border border-white/[0.06] p-4 sm:p-6 rounded-xl relative">
           <div id="h" class="text-4xl sm:text-6xl font-black text-white tabular-nums tracking-tight">00</div>
-          <div class="text-[11px] text-slate-400 uppercase tracking-wider mt-2 font-sans font-semibold">Horas</div>
+          <div class="text-[11px] text-slate-400 uppercase tracking-wider mt-2 font-sans font-semibold">Hours</div>
         </div>
         <div class="bg-[#070b14] border border-white/[0.06] p-4 sm:p-6 rounded-xl relative">
           <div id="m" class="text-4xl sm:text-6xl font-black text-white tabular-nums tracking-tight">00</div>
-          <div class="text-[11px] text-slate-400 uppercase tracking-wider mt-2 font-sans font-semibold">Minutos</div>
+          <div class="text-[11px] text-slate-400 uppercase tracking-wider mt-2 font-sans font-semibold">Minutes</div>
         </div>
         <div class="bg-[#070b14] border border-emerald-500/30 p-4 sm:p-6 rounded-xl relative bg-gradient-to-b from-emerald-950/20 to-transparent">
           <div id="s" class="text-4xl sm:text-6xl font-black text-emerald-400 tabular-nums tracking-tight">00</div>
-          <div class="text-[11px] text-emerald-400/80 uppercase tracking-wider mt-2 font-sans font-semibold">Segundos</div>
+          <div class="text-[11px] text-emerald-400/80 uppercase tracking-wider mt-2 font-sans font-semibold">Seconds</div>
         </div>
       </div>
 
-      <!-- Rolling Window Progress Bar -->
+      <!-- Recovery Progress -->
       <div class="space-y-1.5">
         <div class="flex justify-between text-xs text-slate-400">
-          <span>Recuperação de 5 horas</span>
-          <span id="progress-percent" class="font-mono text-emerald-400">0% Recuperado</span>
+          <span>5-Hour Personal Recovery</span>
+          <span id="progress-percent" class="font-mono text-emerald-400">0% Recovered</span>
         </div>
         <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-white/[0.06]">
           <div id="progress-bar" class="bg-gradient-to-r from-emerald-500 to-cyan-400 h-full w-0 transition-all duration-500"></div>
@@ -348,22 +456,22 @@
       <!-- Action Buttons -->
       <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2">
         <button id="notify-btn" class="sm:col-span-2 py-3.5 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-sm transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] flex items-center justify-center gap-2">
-          <span>🔔</span> 🔔 Notificar quando desbloquear
+          <span>🔔</span> 🔔 Notify When Personal Limit Unlocks
         </button>
         <button id="cal-btn" class="py-3.5 px-4 rounded-xl border border-white/10 bg-slate-900/80 hover:bg-slate-800 text-slate-200 text-sm font-semibold transition-all flex items-center justify-center gap-2">
-          <span>📅</span> 📅 Adicionar ao Google Agenda
+          <span>📅</span> 📅 Add to Calendar
         </button>
       </div>
     </section>
 
-    <!-- MODULE 3: MONETIZATION FALLBACK CODING STACK (Affiliate Revenue Engine) -->
+    <!-- SECTION 5: FALLBACK CODING TOOLS (AFFILIATE REVENUE) -->
     <section class="space-y-6 pt-2">
       <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 border-b border-white/[0.08] pb-4">
         <div>
-          <span class="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">Unblock Workflow</span>
-          <h2 class="text-xl sm:text-2xl font-bold text-white mt-1">Não espere 5 horas — Melhores alternativas</h2>
+          <span class="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">05 / ALTERNATIVE AGENTS</span>
+          <h2 class="text-xl sm:text-2xl font-bold text-white mt-1">Can't Wait for a Reset? Top Alternative Coding Agents</h2>
         </div>
-        <p class="text-xs text-slate-400">Assistentes de código prontos para uso sem fila</p>
+        <p class="text-xs text-slate-400">Keep developing immediately with zero queue friction</p>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -430,35 +538,23 @@
       </div>
     </section>
 
-    <!-- MODULE 4: GEO DIRECT ANSWER & TIERS -->
-    <section id="direct-answer" class="rounded-2xl border border-emerald-500/30 bg-emerald-950/10 p-6 sm:p-8 space-y-4">
-      <div class="flex items-center space-x-2 text-emerald-400 font-semibold text-sm">
-        <span>📌</span>
-        <span>Direct Answer / Canonical Reference</span>
-      </div>
-      <h2 class="text-xl sm:text-2xl font-bold text-white">Como funciona o reset de limite do Codex?</h2>
-      <p class="text-slate-300 leading-relaxed text-sm sm:text-base">
-        O OpenAI Codex utiliza uma janela deslizante contínua de 5 horas. Cada lote de requisições libera sua cota exatamente 5 horas após a execução.
-      </p>
-      <div class="bg-slate-950 border border-slate-800 p-4 rounded-xl text-xs sm:text-sm font-mono text-emerald-300 overflow-x-auto">
-        <code>Reset_Timestamp = min { t_i + 5h | sum_{k=i+1}^N tokens(t_k) &lt; QuotaTier }</code>
-      </div>
-    </section>
-
-    <!-- FAQ Section -->
+    <!-- SECTION 6: FAQ -->
     <section id="faq" class="space-y-4 pt-4 border-t border-white/[0.08]">
-      <h2 class="text-2xl font-bold text-white tracking-tight">Perguntas Frequentes (FAQ)</h2>
-      <div class="border border-white/[0.08] rounded-xl p-5 bg-slate-900/40 space-y-2">
-        <h3 class="text-base font-semibold text-white">Qual a diferença entre reset global e o limite de 5h ?</h3>
-        <p class="text-slate-400 text-sm leading-relaxed">O reset global é uma liberação extraordinária da OpenAI para todos os usuários. O limite de 5h é a sua cota individual que se renova continuamente.</p>
+      <div class="border-b border-white/[0.08] pb-3">
+        <span class="text-xs font-mono font-bold text-emerald-400 uppercase tracking-wider">06 / FAQ</span>
+        <h2 class="text-xl sm:text-2xl font-bold text-white mt-1">Frequently Asked Questions</h2>
+      </div>
+            <div class="border border-white/[0.08] rounded-xl p-5 bg-slate-900/40 space-y-2">
+        <h3 class="text-base font-semibold text-white">Does Codex reset quotas when a new update releases?</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Yes! Historically, whenever OpenAI ships a significant feature update or rolls out new agentic capabilities, team lead Tibo Sottiaux frequently executes a hard reset for all paid subscribers.</p>
       </div>
       <div class="border border-white/[0.08] rounded-xl p-5 bg-slate-900/40 space-y-2">
-        <h3 class="text-base font-semibold text-white">Como os 19% de probabilidade são calculados ?</h3>
-        <p class="text-slate-400 text-sm leading-relaxed">Avaliamos logs de status, tweets do time da OpenAI e os dias passados desde a última liberação.</p>
+        <h3 class="text-base font-semibold text-white">How does this radar predict resets?</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">We continuously monitor official status feeds, X/Twitter posts from OpenAI leadership (Tibo, Sam Altman, developers), and calculate days elapsed since the last major release.</p>
       </div>
       <div class="border border-white/[0.08] rounded-xl p-5 bg-slate-900/40 space-y-2">
-        <h3 class="text-base font-semibold text-white">Mudar o fuso horário adianta a liberação ?</h3>
-        <p class="text-slate-400 text-sm leading-relaxed">Não. O servidor calcula a janela exclusivamente em UTC.</p>
+        <h3 class="text-base font-semibold text-white">If there is no public reset today, when can I code again?</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">You don't have to wait for an official public reset! Your account's personal 5-hour rolling limit automatically replenishes 5 hours after your earliest prompts.</p>
       </div>
     </section>
   </main>
@@ -466,7 +562,7 @@
   <!-- Footer -->
   <footer class="border-t border-white/[0.08] bg-[#070b14] py-8 text-xs text-slate-500 text-center relative z-10">
     <div class="max-w-5xl mx-auto px-4 space-y-2">
-      <p>© 2026 CodexReset.live • Utilitário independente para desenvolvedores. Não afiliado à OpenAI.</p>
+      <p>© 2026 CodexReset.live • Independent monitoring utility. Built to track OpenAI Codex updates and quota resets. Not affiliated with OpenAI.</p>
       <div class="flex justify-center gap-4 text-slate-600">
         <a href="/llms.txt" class="hover:text-slate-400">llms.txt</a>
         <span>•</span>
@@ -546,7 +642,7 @@
 
       const recoveredPercent = Math.min(100, Math.max(0, Math.round(((TOTAL_WINDOW_SECONDS - diff) / TOTAL_WINDOW_SECONDS) * 100)));
       document.getElementById("progress-bar").style.width = recoveredPercent + "%";
-      document.getElementById("progress-percent").textContent = recoveredPercent + "% Recuperado";
+      document.getElementById("progress-percent").textContent = recoveredPercent + "% Recovered";
 
       if (diff === 0 && window.notificationSent === false) {
         window.notificationSent = true;
