@@ -1,5 +1,5 @@
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 from collections import Counter
 from pathlib import Path
 
@@ -15,7 +15,7 @@ def pt(ts):
     return datetime.strptime(ts[:19], "%Y-%m-%dT%H:%M:%S")
 
 last = recs[-1]
-now = datetime.utcnow()
+now = datetime.now(timezone.utc).replace(tzinfo=None)
 days_since = round((now - pt(last["at"])).total_seconds() / 86400, 1)
 
 gaps = [(pt(recs[i]["at"]) - pt(recs[i-1]["at"])).total_seconds()/86400 for i in range(1, len(recs))]
