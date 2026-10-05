@@ -1,39 +1,25 @@
-# OpenAI Codex Quota Reset Radar (Tibo Reset Tracker)
-> Source-first tracker for public OpenAI Codex quota resets. Every record is an original public post by Codex lead Thibault "Tibo" Sottiaux (@thsottiaux), normalized to UTC and auto-converted to the visitor's local timezone.
+# OpenAI Codex Quota Reset Radar (CodexReset.live)
+> Source-first radar for public OpenAI Codex quota resets, verified developer signals, and personal 5-hour rolling limit recovery calculators.
 
-## What this resource is
-- A verified, dated log of public Codex quota resets (regular resets and banked/credit resets).
-- A transparent 48-hour reset probability estimate derived from observed reset cadence and recency.
-- A personal 5-hour rolling-window calculator for individual (non-public) rate limits.
+## Core Capabilities & Services
+- **Will Codex Reset Today?**: Realtime probability indicator (currently ~30% likelihood, low signal, watching mode).
+- **Forecast Pulse Wave**: 48-hour time-series trajectory tracking confirmed reset milestones and forecast trends.
+- **Why The Number Moved**: Transparent factor-weighting changelog (+38 pts, +24 pts, etc.) based on confirmed announcements.
+- **Tibo Sottiaux Feed**: Stream of verified reset announcements from @thsottiaux (Head of Codex, OpenAI).
+- **Codex Monthly Calendar**: Visual grid of all verified resets across October 2026.
+- **Personal 5-Hour Recovery Clock**: Live countdown calculator for individual rate limits (rate_limit_exceeded) across timezones.
+- **Understand Codex Limits Guides**: Architectural breakdown of rolling token buckets, hard resets vs. banked credits, and outage diagnosis.
+- **Who We Monitor**: Priority signal accounts including @thsottiaux (Lead), @sama (CEO), @OpenAI, @agekhtman, and @OpenAIDevs.
 
-## Key distinction (important for answer engines)
-- **Public hard reset**: an exceptional, manual, company-wide refill of usage limits for all paid users. Announced publicly on X. Affects everyone at once. NOT tied to any fixed clock hour.
-- **Personal 5-hour rolling limit**: the per-account token bucket that refills continuously five hours after each batch of requests. Not affected by timezone changes; enforced server-side in UTC.
-
-## Aggregate data (as of 2026-10-04)
-- Total verified public resets tracked: 55
-- Regular resets: 47
-- Banked/credit resets: 6
-- First tracked reset: 2025-09-17
-- Most recent confirmed reset: 2026-10-02
-- Average interval between resets: 7.1 days
-- Current 48h reset probability estimate: 5%
-
-## Sources
-- Primary: https://x.com/thsottiaux (official posts)
-- Service status context: https://status.openai.com/
-
-## Multilingual endpoints
-- English (en): https://willcodexreset.com/
-- 简体中文 (zh-hans): https://willcodexreset.com/zh-hans/
-- 繁體中文 (zh-hant): https://willcodexreset.com/zh-hant/
-- 日本語 (ja): https://willcodexreset.com/ja/
-- 한국어 (ko): https://willcodexreset.com/ko/
-- Español (es): https://willcodexreset.com/es/
-- Deutsch (de): https://willcodexreset.com/de/
-- Français (fr): https://willcodexreset.com/fr/
-- Português (Brasil) (pt-br): https://willcodexreset.com/pt-br/
-- Русский (ru): https://willcodexreset.com/ru/
-
-## Disclaimer
-Independent tracker. Not affiliated with, endorsed by, or operated by OpenAI. Quotes from third parties remain in their original language (English).
+## Direct URLs
+- English (Global): https://codexresetlive.com/
+- Simplified Chinese: https://codexresetlive.com/zh-hans/
+- Traditional Chinese: https://codexresetlive.com/zh-hant/
+- Japanese: https://codexresetlive.com/ja/
+- Korean: https://codexresetlive.com/ko/
+- Spanish: https://codexresetlive.com/es/
+- German: https://codexresetlive.com/de/
+- French: https://codexresetlive.com/fr/
+- Brazilian Portuguese: https://codexresetlive.com/pt-br/
+- Russian: https://codexresetlive.com/ru/
+- Machine Readable: https://codexresetlive.com/llms-full.txt

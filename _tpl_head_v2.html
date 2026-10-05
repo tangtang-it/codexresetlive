@@ -13,7 +13,7 @@ __HREFLANG__
 <meta property="og:locale" content="__LOCALE__">
 <meta property="og:title" content="__TITLE__">
 <meta property="og:description" content="__DESC__">
-<meta property="og:image" content="https://willcodexreset.com/og-image.png">
+<meta property="og:image" content="https://codexresetlive.com/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
 __SCHEMA__
@@ -378,5 +378,105 @@ h1{font-size:36px}
 .cal-table th{font-size:9px}
 .cal-table td{height:60px;padding:3px}
 }
+
+/* Direct Answer Banner */
+.direct-ans-banner{background:linear-gradient(135deg,rgba(43,49,57,.65),rgba(24,26,32,.95));border:1px solid rgba(252,213,53,.35);border-radius:var(--r-xl);padding:20px 24px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.dab-left{display:flex;flex-direction:column;gap:6px}
+.dab-badge{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--primary)}
+.dab-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--primary);animation:pulse 2s infinite}
+.dab-h{font-size:18px;font-weight:700;color:var(--on-dark)}
+.dab-h strong{color:var(--primary)}
+.dab-p{font-size:13px;color:var(--muted-strong);line-height:1.6}
+.dab-p strong{color:var(--on-dark)}
+.dab-btn{display:inline-flex;align-items:center;padding:10px 18px;border-radius:var(--r-md);background:var(--primary);color:var(--on-primary);font-size:12px;font-weight:700;white-space:nowrap;transition:.15s}
+.dab-btn:hover{background:var(--primary-active)}
+
+/* Educational Guides Grid */
+.guides-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.guide-card{background:var(--card);border:1px solid var(--hairline);border-radius:var(--r-xl);padding:22px;display:flex;flex-direction:column;justify-content:space-between;transition:.15s}
+.guide-card:hover{border-color:var(--primary);transform:translateY(-2px)}
+.guide-tag{font-size:9px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--primary);margin-bottom:8px;font-family:var(--mono)}
+.guide-title{font-size:15px;font-weight:700;color:var(--on-dark);line-height:1.4;margin-bottom:10px}
+.guide-desc{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:16px;flex-grow:1}
+.guide-link{font-size:12px;font-weight:600;color:var(--primary);display:inline-flex;align-items:center;gap:4px;transition:.12s}
+.guide-link:hover{text-decoration:underline}
+
+/* Authority Monitors Grid */
+.monitor-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.monitor-card{background:var(--card);border:1px solid var(--hairline);border-radius:var(--r-xl);padding:16px;display:flex;flex-direction:column;gap:12px;transition:.15s}
+.monitor-card:hover{border-color:var(--primary)}
+.monitor-avatar{width:36px;height:36px;border-radius:var(--r-lg);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;font-family:var(--mono)}
+.monitor-info{display:flex;flex-direction:column;gap:3px}
+.monitor-name{font-size:13px;font-weight:700;color:var(--on-dark);display:flex;align-items:center;justify-content:space-between}
+.monitor-tag{font-size:8px;padding:2px 5px;border-radius:var(--r-sm);font-weight:700;font-family:var(--mono)}
+.monitor-tag.p1{background:rgba(14,203,129,.15);color:var(--up);border:1px solid rgba(14,203,129,.3)}
+.monitor-tag.p2{background:rgba(252,213,53,.15);color:var(--primary);border:1px solid rgba(252,213,53,.3)}
+.monitor-tag.p3{background:rgba(59,130,246,.15);color:var(--info);border:1px solid rgba(59,130,246,.3)}
+.monitor-role{font-size:11px;color:var(--muted)}
+.monitor-handle{font-size:11px;color:var(--primary);font-family:var(--mono);margin-top:2px}
+
+/* Directory Links Grid in Footer */
+.footer-dir{width:100%;max-width:1160px;margin:24px 0 16px;display:grid;grid-template-columns:repeat(3,1fr);gap:32px;text-align:left;border-top:1px solid var(--hairline);padding-top:28px}
+.dir-col{display:flex;flex-direction:column;gap:10px}
+.dir-title{font-size:12px;font-weight:700;color:var(--on-dark);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px}
+.dir-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.dir-list a{font-size:12px;color:var(--muted);transition:.12s}
+.dir-list a:hover{color:var(--primary)}
+
+@media(max-width:1020px){
+  .guides-grid{grid-template-columns:1fr}
+  .monitor-grid{grid-template-columns:repeat(2,1fr)}
+  .footer-dir{grid-template-columns:1fr;gap:20px}
+  .direct-ans-banner{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:640px){
+  .monitor-grid{grid-template-columns:1fr}
+}
+
+
+/* ---------- Navigation & Subpage Styles ---------- */
+.hdr-nav{display:flex;align-items:center;gap:4px}
+.nav-item{padding:6px 12px;border-radius:var(--r-md);font-size:13px;font-weight:600;color:var(--muted-strong);transition:.12s;white-space:nowrap}
+.nav-item:hover{color:var(--on-dark);background:var(--card)}
+.nav-item.on{color:var(--primary);background:rgba(252,213,53,.12);border:1px solid rgba(252,213,53,.25)}
+
+/* Subpage Hero */
+.sub-hero{padding:36px 0 20px;border-bottom:1px solid var(--hairline);margin-bottom:28px}
+.sub-badge{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;color:var(--primary);margin-bottom:10px;font-family:var(--mono)}
+.sub-h1{font-size:32px;font-weight:800;color:var(--on-dark);line-height:1.2;margin-bottom:10px;letter-spacing:-.5px}
+.sub-p{font-size:14px;color:var(--muted-strong);max-width:760px;line-height:1.6}
+
+/* History Full Table */
+.hist-table-card{background:var(--card);border:1px solid var(--hairline);border-radius:var(--r-xl);overflow:hidden;margin:20px 0}
+.hist-full-table{width:100%;border-collapse:collapse;font-size:13px;text-align:left}
+.hist-full-table th{background:var(--canvas);color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:12px 16px;border-bottom:1px solid var(--hairline)}
+.hist-full-table td{padding:14px 16px;border-bottom:1px solid var(--hairline);color:var(--on-dark);vertical-align:top}
+.hist-full-table tr:hover td{background:rgba(255,255,255,.02)}
+.hist-full-table tr:last-child td{border-bottom:none}
+
+/* Methodology / Math Box */
+.math-card{background:var(--card);border:1px solid var(--hairline);border-radius:var(--r-xl);padding:24px;margin:20px 0}
+.math-formula{background:var(--canvas);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:16px 20px;font-family:var(--mono);font-size:13px;color:var(--primary);line-height:1.7;margin:14px 0}
+.math-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:16px}
+.math-item{background:var(--canvas);border:1px solid var(--hairline);border-radius:var(--r-lg);padding:16px}
+.math-item-t{font-size:14px;font-weight:700;color:var(--on-dark);margin-bottom:6px;display:flex;align-items:center;justify-content:space-between}
+.math-item-d{font-size:12px;color:var(--muted-strong);line-height:1.6}
+
+@media(max-width:768px){
+  .hdr-nav{display:none}
+  .sub-h1{font-size:26px}
+  .math-grid{grid-template-columns:1fr}
+}
+
+
+/* Calendar Nav & Controls */
+.cal-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px}
+.cal-right{display:flex;align-items:center;gap:14px}
+.cal-nav-btns{display:flex;align-items:center;gap:6px}
+.cal-nav-btn{width:30px;height:30px;border-radius:var(--r-md);background:var(--canvas);border:1px solid var(--hairline);color:var(--muted-strong);display:flex;align-items:center;justify-content:center;transition:.15s;cursor:pointer}
+.cal-nav-btn:hover:not(:disabled){border-color:var(--primary);color:var(--primary);background:var(--card)}
+.cal-nav-btn:disabled{opacity:.25;cursor:not-allowed}
+.cal-month-badge{font-size:11px;padding:2px 8px;border-radius:var(--r-pill);background:rgba(252,213,53,.12);color:var(--primary);font-family:var(--mono);font-weight:700;margin-left:6px;display:inline-block}
+
 </style>
 </head>

@@ -1,173 +1,243 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://willcodexreset.com/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <loc>https://codexresetlive.com/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
     <changefreq>hourly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://willcodexreset.com/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://willcodexreset.com/"/>
-    <xhtml:link rel="alternate" hreflang="zh-hans" href="https://willcodexreset.com/zh-hans/"/>
-    <xhtml:link rel="alternate" hreflang="zh-hant" href="https://willcodexreset.com/zh-hant/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://willcodexreset.com/ja/"/>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://willcodexreset.com/ko/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://willcodexreset.com/es/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://willcodexreset.com/de/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://willcodexreset.com/fr/"/>
-    <xhtml:link rel="alternate" hreflang="pt-br" href="https://willcodexreset.com/pt-br/"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://willcodexreset.com/ru/"/>
   </url>
   <url>
-    <loc>https://willcodexreset.com/zh-hans/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <loc>https://codexresetlive.com/reset-today/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
     <changefreq>hourly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://willcodexreset.com/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://willcodexreset.com/"/>
-    <xhtml:link rel="alternate" hreflang="zh-hans" href="https://willcodexreset.com/zh-hans/"/>
-    <xhtml:link rel="alternate" hreflang="zh-hant" href="https://willcodexreset.com/zh-hant/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://willcodexreset.com/ja/"/>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://willcodexreset.com/ko/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://willcodexreset.com/es/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://willcodexreset.com/de/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://willcodexreset.com/fr/"/>
-    <xhtml:link rel="alternate" hreflang="pt-br" href="https://willcodexreset.com/pt-br/"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://willcodexreset.com/ru/"/>
   </url>
   <url>
-    <loc>https://willcodexreset.com/zh-hant/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <loc>https://codexresetlive.com/history/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
     <changefreq>hourly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://willcodexreset.com/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://willcodexreset.com/"/>
-    <xhtml:link rel="alternate" hreflang="zh-hans" href="https://willcodexreset.com/zh-hans/"/>
-    <xhtml:link rel="alternate" hreflang="zh-hant" href="https://willcodexreset.com/zh-hant/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://willcodexreset.com/ja/"/>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://willcodexreset.com/ko/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://willcodexreset.com/es/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://willcodexreset.com/de/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://willcodexreset.com/fr/"/>
-    <xhtml:link rel="alternate" hreflang="pt-br" href="https://willcodexreset.com/pt-br/"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://willcodexreset.com/ru/"/>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://willcodexreset.com/ja/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <loc>https://codexresetlive.com/methodology/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
     <changefreq>hourly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://willcodexreset.com/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://willcodexreset.com/"/>
-    <xhtml:link rel="alternate" hreflang="zh-hans" href="https://willcodexreset.com/zh-hans/"/>
-    <xhtml:link rel="alternate" hreflang="zh-hant" href="https://willcodexreset.com/zh-hant/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://willcodexreset.com/ja/"/>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://willcodexreset.com/ko/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://willcodexreset.com/es/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://willcodexreset.com/de/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://willcodexreset.com/fr/"/>
-    <xhtml:link rel="alternate" hreflang="pt-br" href="https://willcodexreset.com/pt-br/"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://willcodexreset.com/ru/"/>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://willcodexreset.com/ko/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <loc>https://codexresetlive.com/zh-hans/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
     <changefreq>hourly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://willcodexreset.com/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://willcodexreset.com/"/>
-    <xhtml:link rel="alternate" hreflang="zh-hans" href="https://willcodexreset.com/zh-hans/"/>
-    <xhtml:link rel="alternate" hreflang="zh-hant" href="https://willcodexreset.com/zh-hant/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://willcodexreset.com/ja/"/>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://willcodexreset.com/ko/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://willcodexreset.com/es/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://willcodexreset.com/de/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://willcodexreset.com/fr/"/>
-    <xhtml:link rel="alternate" hreflang="pt-br" href="https://willcodexreset.com/pt-br/"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://willcodexreset.com/ru/"/>
+    <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://willcodexreset.com/es/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <loc>https://codexresetlive.com/zh-hans/reset-today/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
     <changefreq>hourly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://willcodexreset.com/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://willcodexreset.com/"/>
-    <xhtml:link rel="alternate" hreflang="zh-hans" href="https://willcodexreset.com/zh-hans/"/>
-    <xhtml:link rel="alternate" hreflang="zh-hant" href="https://willcodexreset.com/zh-hant/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://willcodexreset.com/ja/"/>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://willcodexreset.com/ko/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://willcodexreset.com/es/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://willcodexreset.com/de/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://willcodexreset.com/fr/"/>
-    <xhtml:link rel="alternate" hreflang="pt-br" href="https://willcodexreset.com/pt-br/"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://willcodexreset.com/ru/"/>
   </url>
   <url>
-    <loc>https://willcodexreset.com/de/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <loc>https://codexresetlive.com/zh-hans/history/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
     <changefreq>hourly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://willcodexreset.com/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://willcodexreset.com/"/>
-    <xhtml:link rel="alternate" hreflang="zh-hans" href="https://willcodexreset.com/zh-hans/"/>
-    <xhtml:link rel="alternate" hreflang="zh-hant" href="https://willcodexreset.com/zh-hant/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://willcodexreset.com/ja/"/>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://willcodexreset.com/ko/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://willcodexreset.com/es/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://willcodexreset.com/de/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://willcodexreset.com/fr/"/>
-    <xhtml:link rel="alternate" hreflang="pt-br" href="https://willcodexreset.com/pt-br/"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://willcodexreset.com/ru/"/>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://willcodexreset.com/fr/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <loc>https://codexresetlive.com/zh-hans/methodology/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
     <changefreq>hourly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://willcodexreset.com/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://willcodexreset.com/"/>
-    <xhtml:link rel="alternate" hreflang="zh-hans" href="https://willcodexreset.com/zh-hans/"/>
-    <xhtml:link rel="alternate" hreflang="zh-hant" href="https://willcodexreset.com/zh-hant/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://willcodexreset.com/ja/"/>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://willcodexreset.com/ko/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://willcodexreset.com/es/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://willcodexreset.com/de/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://willcodexreset.com/fr/"/>
-    <xhtml:link rel="alternate" hreflang="pt-br" href="https://willcodexreset.com/pt-br/"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://willcodexreset.com/ru/"/>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://willcodexreset.com/pt-br/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <loc>https://codexresetlive.com/zh-hant/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
     <changefreq>hourly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://willcodexreset.com/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://willcodexreset.com/"/>
-    <xhtml:link rel="alternate" hreflang="zh-hans" href="https://willcodexreset.com/zh-hans/"/>
-    <xhtml:link rel="alternate" hreflang="zh-hant" href="https://willcodexreset.com/zh-hant/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://willcodexreset.com/ja/"/>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://willcodexreset.com/ko/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://willcodexreset.com/es/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://willcodexreset.com/de/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://willcodexreset.com/fr/"/>
-    <xhtml:link rel="alternate" hreflang="pt-br" href="https://willcodexreset.com/pt-br/"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://willcodexreset.com/ru/"/>
+    <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://willcodexreset.com/ru/</loc>
-    <lastmod>2026-10-04</lastmod>
+    <loc>https://codexresetlive.com/zh-hant/reset-today/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
     <changefreq>hourly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://willcodexreset.com/"/>
-    <xhtml:link rel="alternate" hreflang="en" href="https://willcodexreset.com/"/>
-    <xhtml:link rel="alternate" hreflang="zh-hans" href="https://willcodexreset.com/zh-hans/"/>
-    <xhtml:link rel="alternate" hreflang="zh-hant" href="https://willcodexreset.com/zh-hant/"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://willcodexreset.com/ja/"/>
-    <xhtml:link rel="alternate" hreflang="ko" href="https://willcodexreset.com/ko/"/>
-    <xhtml:link rel="alternate" hreflang="es" href="https://willcodexreset.com/es/"/>
-    <xhtml:link rel="alternate" hreflang="de" href="https://willcodexreset.com/de/"/>
-    <xhtml:link rel="alternate" hreflang="fr" href="https://willcodexreset.com/fr/"/>
-    <xhtml:link rel="alternate" hreflang="pt-br" href="https://willcodexreset.com/pt-br/"/>
-    <xhtml:link rel="alternate" hreflang="ru" href="https://willcodexreset.com/ru/"/>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/zh-hant/history/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/zh-hant/methodology/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/ja/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/ja/reset-today/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/ja/history/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/ja/methodology/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/ko/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/ko/reset-today/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/ko/history/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/ko/methodology/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/es/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/es/reset-today/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/es/history/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/es/methodology/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/de/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/de/reset-today/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/de/history/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/de/methodology/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/fr/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/fr/reset-today/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/fr/history/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/fr/methodology/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/pt-br/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/pt-br/reset-today/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/pt-br/history/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/pt-br/methodology/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/ru/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/ru/reset-today/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/ru/history/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://codexresetlive.com/ru/methodology/</loc>
+    <lastmod>2026-10-05T09:00:00+00:00</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

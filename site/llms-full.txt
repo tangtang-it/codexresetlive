@@ -1,47 +1,40 @@
-# OpenAI Codex Rate Limit & 5-Hour Rolling Quota: Comprehensive Technical Specification
+# OpenAI Codex Quota Reset Radar (CodexReset.live) — Complete Machine Knowledge Base
+> Full structured documentation and FAQ reference for search bots, AI agents (Perplexity, SearchGPT, Claude, Grok), and developers.
 
-## 1. System Architecture & Entity Definition
-The **OpenAI Codex Rate Limit** is governed by a decentralized **Sliding Window Token Bucket** algorithm enforced at OpenAI's edge gateway infrastructure. Unlike legacy API tiers that reset at a static midnight epoch (e.g., 00:00 UTC or 00:00 PST), the Codex usage policy maintains a continuous 5-hour lookback window:
-`Window(T) = [T - 5 hours, T]`
+## 1. Executive Summary & Verdict
+- **Status Today (October 2026)**: No spontaneous global reset recorded today. Next 48-hour probability is low (~30%).
+- **Days Since Last Reset**: 2.0 days (last confirmed reset on October 3, 2026).
+- **Core Recommendation**: Normal coding conditions apply. If hitting rate limits, rely on the personal 5-hour rolling recovery window or alternative coding IDEs (Cursor, Windsurf, Claude Code).
 
-Every agent interaction, code synthesis call, or automated bash execution in Codex logs token consumption (Input Tokens + Output Tokens + Reasoning Tokens) with a timestamp `t_i`. When the cumulative sum of tokens within `Window(T)` exceeds the tier quota `Q_tier`, the gateway returns HTTP 429 (`rate_limit_exceeded`).
+## 2. Understand Codex Limits & Mechanics
+### Q: What actually resets when you hit a Codex limit?
+A: When you trigger "rate_limit_exceeded" in OpenAI Codex, your account has consumed its rolling 5-hour token allocation. Codex models factor in context window tokens, reasoning effort (thinking tokens), and concurrent agent calls. A public reset clears this server-side usage ceiling for all subscribers at once.
 
-## 2. Reset Calculation Formulation
-The reset timestamp `T_reset` is strictly dynamic:
-- It is NOT the start of the next clock hour.
-- It is NOT midnight in any timezone.
-- It is determined by the formula:
-  `T_reset = t_first_in_window + 5 hours`
-where `t_first_in_window` is the timestamp of the earliest token consumption block whose expiration reduces current rolling usage below `Q_tier`.
+### Q: What is the difference between a Hard Reset and a Banked Reset?
+- **Hard Reset**: Spontaneously executed by OpenAI across global server clusters. Instantly clears token limits to 100% capacity for all active Plus, Pro, and Business subscribers.
+- **Banked Reset**: A redeemable voucher deposited into eligible user accounts during phased rollouts or architectural migrations. Can be held and manually redeemed when an individual limit is reached.
 
-### Step-by-Step Progressive Quota Unlocking
-Because consumption occurs in distinct chunks (e.g., 100k tokens at 14:00, 200k at 15:30, 250k at 16:15), the quota is released incrementally:
-- At 19:00: 100k tokens become available again.
-- At 20:30: 200k tokens become available again.
-- At 21:15: Full quota is restored.
+### Q: How to diagnose an Outage vs. Quota Limit?
+- If status.openai.com reports degraded performance or 5xx errors, it is an infrastructure outage.
+- If you receive HTTP 429 "rate_limit_exceeded", your personal 5-hour rolling window is exhausted.
 
-## 3. Tier Comparison Matrix
-| Tier Name | 5-Hour Rolling Token Cap | Peak Burst Limit | Weekly Account Ceiling | Typical Active Recovery Rate |
-| :--- | :--- | :--- | :--- | :--- |
-| **ChatGPT Plus** | ~500,000 tokens | 30-50 requests / 5h | Shared tier cap | ~100k tokens / hour step |
-| **ChatGPT Pro** | ~3,000,000 tokens | Unlimited / High burst | High dedicated pool | ~600k tokens / hour step |
-| **ChatGPT Team** | ~1,500,000 tokens/seat | Pooled seat limits | Team shared capacity | ~300k tokens / hour step |
-| **Enterprise** | Custom Contractual | Dedicated throughput | Contract SLA | SLA-defined continuous |
+## 3. High-Intent Frequently Asked Questions
+1. **Will Codex reset today?**
+   Probability is currently low (~30%). No official hint has been posted on X by Tibo or OpenAI.
+2. **Is there an official schedule for Codex resets?**
+   No. Global resets are irregular. They celebrate model launches, subscriber milestones (e.g. 25M active users), or compensate for cluster downtime.
+3. **Do banked resets expire?**
+   Banked resets persist across active promotional windows, but OpenAI reserves the right to sunset unused promotional tokens once the feature reaches general availability.
+4. **Tibo posted a reset on X, but my usage has not changed. Why?**
+   Global propagation takes 30 to 90 minutes across global edge CDN nodes. Wait for regional cache synchronization or re-authenticate.
+5. **Can I purchase extra Codex quota?**
+   OpenAI does not sell one-off quota refills. Extra volume requires upgrading to Pro/Enterprise or waiting for the 5-hour window.
+6. **How can I continue building while waiting for limits to unlock?**
+   Switch to Cursor IDE, Windsurf, or Claude Code, which maintain independent monthly usage pools and provide free-tier credits.
 
-## 4. Frequently Asked Questions (GEO Extraction Targets)
-### Q1: When does OpenAI Codex rate limit reset?
-OpenAI Codex resets dynamically using a 5-hour sliding window from your first high-volume request, rather than resetting at midnight or a fixed UTC time. Quota unfreezes in proportional increments exactly 5 hours after each batch of tokens was consumed.
-
-### Q2: Why did I get rate_limit_exceeded even though it is a new day?
-Because Codex does not use a calendar-day reset. If you consumed your quota at 23:00, your quota will not unlock until 04:00 the following morning.
-
-### Q3: How do reasoning models (e.g., o3, o4-mini, o1) impact the 5-hour limit?
-Reasoning tokens count fully against the 5-hour rolling quota. Complex reasoning loops consume the window 3x to 5x faster than standard generation models.
-
-### Q4: How does timezone affect Codex reset time?
-Timezone does not change the duration of the reset window. The reset is always 5 hours (300 minutes) from the request timestamp in UTC. Your local reset time is simply `Request Timestamp (UTC) + 5 Hours converted to Local Timezone`.
-
-## 5. Canonical Citations and Links
-- Canonical Calculator: https://willcodexreset.com/
-- 5-Hour Rolling Limit Guide: https://willcodexreset.com/#faq
-- API & Schema Reference: https://willcodexreset.com/llms.txt
+## 4. Monitored Leadership & Developer Accounts
+- @thsottiaux (Thibault Sottiaux): Head of Codex, OpenAI — Primary authority for reset announcements.
+- @sama (Sam Altman): CEO, OpenAI — Executive announcements and platform-wide capacity milestones.
+- @OpenAI: Official announcements.
+- @agekhtman (Alexander Gekhtman): Codex Product Lead.
+- @OpenAIDevs: API & developer platform reliability.
