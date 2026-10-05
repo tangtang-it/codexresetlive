@@ -16,6 +16,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
+          ref: main
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
@@ -34,12 +35,11 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           git add data/ site/
           if git diff --staged --quiet; then
             echo "No updates detected in Tibo's feeds."
           else
             git commit -m "chore(auto-update): sync latest Tibo tweets and radar metrics [skip ci]"
-            git push origin main
+            git push origin HEAD:main
             echo "Radar updated and deployed successfully!"
           fi
