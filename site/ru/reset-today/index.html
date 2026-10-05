@@ -585,6 +585,33 @@ h1{font-size:36px}
 
 .monitor-avatar{width:42px;height:42px;border-radius:var(--r-lg);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;font-family:var(--mono);overflow:hidden;border:1px solid var(--hairline);background:var(--canvas);flex-shrink:0}
 .monitor-avatar-img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* Functional Icons & Modern Switchboard */
+.live-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:var(--r-pill);background:rgba(14,203,129,.1);border:1px solid rgba(14,203,129,.25);color:var(--up);font-size:11px;font-family:var(--mono);font-weight:700}
+.live-pill svg{width:12px;height:12px;flex-shrink:0}
+.pulse-badges{display:flex;align-items:center;gap:8px}
+.badge-sm{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:var(--r-md);font-size:10px;font-family:var(--mono);font-weight:600}
+.badge-sm svg{width:11px;height:11px;flex-shrink:0}
+.badge-reset{background:rgba(14,203,129,.12);border:1px solid rgba(14,203,129,.25);color:var(--up)}
+.badge-forecast{background:rgba(252,213,53,.12);border:1px solid rgba(252,213,53,.25);color:var(--primary)}
+
+.switch-items{display:flex;flex-direction:column;gap:8px}
+.switch-row{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;border-radius:var(--r-md);background:var(--canvas);border:1px solid var(--hairline);font-size:12px;transition:.12s}
+.switch-row:hover{border-color:rgba(252,213,53,.25);background:rgba(255,255,255,.015)}
+.sr-left{display:flex;align-items:center;gap:9px}
+.sr-ico-box{width:26px;height:26px;border-radius:var(--r-sm);background:rgba(255,255,255,.03);border:1px solid var(--hairline);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.sr-ico-box.green{color:var(--up);border-color:rgba(14,203,129,.25);background:rgba(14,203,129,.08)}
+.sr-ico-box.yellow{color:var(--primary);border-color:rgba(252,213,53,.25);background:rgba(252,213,53,.08)}
+.sr-ico-box.gray{color:var(--muted-strong);border-color:rgba(112,122,138,.25);background:rgba(112,122,138,.08)}
+.sr-ico-box svg{width:13px;height:13px}
+.sr-name{font-weight:600;color:var(--on-dark);font-size:12px}
+.sr-right{display:flex;align-items:center;gap:7px}
+.sr-dot{width:6px;height:6px;border-radius:50%}
+.sr-dot.green{background:var(--up);box-shadow:0 0 6px var(--up)}
+.sr-dot.yellow{background:var(--primary);box-shadow:0 0 6px var(--primary)}
+.sr-dot.gray{background:var(--muted)}
+.sr-status{font-family:var(--mono);font-size:10px;color:var(--muted-strong)}
+
 </style>
 </head>
 
@@ -616,7 +643,10 @@ h1{font-size:36px}
 </nav>
 
 <div style="display:flex;align-items:center;gap:14px">
-<span class="live-pill"><span class="dot"></span>Онлайн</span>
+<span class="live-pill">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/><circle cx="12" cy="12" r="2" fill="currentColor"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/><path d="M19.1 4.9C23 8.8 23 15.2 19.1 19.1"/></svg>
+Онлайн
+</span>
 <div class="lang">
 <button class="lang-btn" id="langBtn" aria-label="Язык"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg> <span>Русский</span>
 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
@@ -684,8 +714,14 @@ h1{font-size:36px}
 <div class="pulse-sub">リアルタイム確率軌跡と確認済みイベント</div>
 </div>
 <div class="pulse-badges">
-<span class="badge-sm badge-reset">● Confirmed Reset</span>
-<span class="badge-sm badge-forecast">--- Projected 48h</span>
+<span class="badge-sm badge-reset">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+Confirmed Reset
+</span>
+<span class="badge-sm badge-forecast">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+Projected 48h
+</span>
 </div>
 </div>
 <div class="chart-svg-wrap">
@@ -972,52 +1008,76 @@ h1{font-size:36px}
 <div class="switch-items">
 <div class="switch-row">
   <div class="sr-left">
-    <span class="sr-dot green"></span>
+    <div class="sr-ico-box green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></svg></div>
     <span class="sr-name">OpenAI status</span>
   </div>
-  <span class="sr-status">Operational</span>
+  <div class="sr-right">
+    <span class="sr-dot green"></span>
+    <span class="sr-status">Operational</span>
+  </div>
 </div><div class="switch-row">
   <div class="sr-left">
-    <span class="sr-dot green"></span>
+    <div class="sr-ico-box green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
     <span class="sr-name">Tibo posts</span>
   </div>
-  <span class="sr-status">55 Verified</span>
+  <div class="sr-right">
+    <span class="sr-dot green"></span>
+    <span class="sr-status">55 Verified</span>
+  </div>
 </div><div class="switch-row">
   <div class="sr-left">
-    <span class="sr-dot yellow"></span>
+    <div class="sr-ico-box yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
     <span class="sr-name">User milestones</span>
   </div>
-  <span class="sr-status">43M (Nearing 50M)</span>
+  <div class="sr-right">
+    <span class="sr-dot yellow"></span>
+    <span class="sr-status">43M (Nearing 50M)</span>
+  </div>
 </div><div class="switch-row">
   <div class="sr-left">
-    <span class="sr-dot green"></span>
+    <div class="sr-ico-box green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg></div>
     <span class="sr-name">Release cadence</span>
   </div>
-  <span class="sr-status">Mid-week active</span>
+  <div class="sr-right">
+    <span class="sr-dot green"></span>
+    <span class="sr-status">Mid-week active</span>
+  </div>
 </div><div class="switch-row">
   <div class="sr-left">
-    <span class="sr-dot gray"></span>
+    <div class="sr-ico-box gray"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></div>
     <span class="sr-name">Community predictions</span>
   </div>
-  <span class="sr-status">Consensus low</span>
+  <div class="sr-right">
+    <span class="sr-dot gray"></span>
+    <span class="sr-status">Consensus low</span>
+  </div>
 </div><div class="switch-row">
   <div class="sr-left">
-    <span class="sr-dot yellow"></span>
+    <div class="sr-ico-box yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
     <span class="sr-name">Reset cooldown</span>
   </div>
-  <span class="sr-status">Cooldown active (2.3d)</span>
+  <div class="sr-right">
+    <span class="sr-dot yellow"></span>
+    <span class="sr-status">Cooldown active (2.3d)</span>
+  </div>
 </div><div class="switch-row">
   <div class="sr-left">
-    <span class="sr-dot green"></span>
+    <div class="sr-ico-box green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></div>
     <span class="sr-name">SF work window</span>
   </div>
-  <span class="sr-status">Daytime (US Pacific)</span>
+  <div class="sr-right">
+    <span class="sr-dot green"></span>
+    <span class="sr-status">Daytime (US Pacific)</span>
+  </div>
 </div><div class="switch-row">
   <div class="sr-left">
-    <span class="sr-dot gray"></span>
+    <div class="sr-ico-box gray"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg></div>
     <span class="sr-name">Token bucket backlog</span>
   </div>
-  <span class="sr-status">Stable load</span>
+  <div class="sr-right">
+    <span class="sr-dot gray"></span>
+    <span class="sr-status">Stable load</span>
+  </div>
 </div>
 </div>
 </div>
