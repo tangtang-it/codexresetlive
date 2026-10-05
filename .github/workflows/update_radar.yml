@@ -26,7 +26,7 @@ jobs:
 
       - name: Run Scraper & Rebuild Pages
         run: |
-          python scripts/scrape_tibo.py
+          python scripts/scrape_tibo.py || true
           python scripts/compute_stats.py
           python scripts/build_studio.py
 
@@ -34,6 +34,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
           git add data/ site/
           if git diff --staged --quiet; then
             echo "No updates detected in Tibo's feeds."
