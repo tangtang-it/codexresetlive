@@ -477,7 +477,11 @@ def render_footer_dir(code, base_href):
 
     col1 = "".join(f'<li><a href="{href}">{esc(txt)}</a></li>' for txt, href in l1)
     col2 = "".join(f'<li><a href="{href}">{esc(txt)}</a></li>' for txt, href in l2)
-    col3 = "".join(f'<li><a href="{href}"{" target=\"_blank\" rel=\"noopener nofollow\"" if href.startswith("http") else ""}>{esc(txt)}</a></li>' for txt, href in l3)
+    col3_items = []
+    for txt, href in l3:
+        target_attr = ' target="_blank" rel="noopener nofollow"' if href.startswith("http") else ""
+        col3_items.append(f'<li><a href="{href}"{target_attr}>{esc(txt)}</a></li>')
+    col3 = "".join(col3_items)
 
     return f'''<div class="footer-dir">
   <div class="dir-col">
