@@ -119,6 +119,44 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .tool-ic{width:36px;height:36px;border-radius:var(--r-lg);background:var(--canvas);border:1px solid var(--hairline);
 display:flex;align-items:center;justify-content:center;color:var(--primary)}
 
+
+/* ---------- Sleek Dark Minimalist Scrollbars (Binance Theme) ---------- */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #2b3139;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #474f59;
+}
+
+.stream-box, .move-list, .lang-grid {
+  scrollbar-width: thin;
+  scrollbar-color: #2b3139 transparent;
+}
+.stream-box::-webkit-scrollbar, .move-list::-webkit-scrollbar, .lang-grid::-webkit-scrollbar {
+  width: 4px;
+}
+.stream-box::-webkit-scrollbar-track, .move-list::-webkit-scrollbar-track, .lang-grid::-webkit-scrollbar-track {
+  background: rgba(11, 14, 17, 0.4);
+  border-radius: 4px;
+}
+.stream-box::-webkit-scrollbar-thumb, .move-list::-webkit-scrollbar-thumb, .lang-grid::-webkit-scrollbar-thumb {
+  background: #2b3139;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+.stream-box::-webkit-scrollbar-thumb:hover, .move-list::-webkit-scrollbar-thumb:hover, .lang-grid::-webkit-scrollbar-thumb:hover {
+  background: rgba(252, 213, 53, 0.7);
+  box-shadow: 0 0 6px rgba(252, 213, 53, 0.4);
+}
+
 /* ---------- Header ---------- */
 .hdr{position:sticky;top:0;z-index:60;background:rgba(11,14,17,.92);backdrop-filter:blur(12px);
 border-bottom:1px solid var(--hairline)}
