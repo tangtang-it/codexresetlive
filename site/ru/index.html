@@ -259,15 +259,21 @@ border-bottom:1px solid var(--hairline)}
 background:var(--elevated);color:var(--muted-strong)}
 
 /* Col 1: What moved model events */
-.move-list{display:flex;flex-direction:column;gap:12px}
-.move-item{display:flex;gap:10px;align-items:flex-start}
-.move-icon{width:22px;height:22px;flex:0 0 22px;border-radius:var(--r-sm);background:rgba(252,213,53,.1);
-color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:11px;margin-top:2px}
+.move-list{display:flex;flex-direction:column;gap:11px;max-height:460px;overflow-y:auto;padding-right:4px}
+.move-item{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:var(--r-lg);background:var(--canvas);border:1px solid var(--hairline);transition:border-color .15s}
+.move-item:hover{border-color:rgba(252,213,53,.35)}
+.move-icon{width:24px;height:24px;flex:0 0 24px;border-radius:var(--r-sm);background:rgba(252,213,53,.1);
+color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:11px;margin-top:1px}
 .move-body{flex:1;min-width:0}
-.move-head{display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px}
-.move-tag{font-weight:700;color:var(--body)}
-.move-time{font-family:var(--mono);color:var(--muted)}
-.move-text{font-size:12px;color:var(--muted-strong);line-height:1.5}
+.move-head{display:flex;justify-content:space-between;align-items:center;font-size:11px;margin-bottom:3px}
+.move-tag{font-weight:700;color:var(--on-dark);display:flex;align-items:center;gap:6px}
+.move-pts{font-family:var(--mono);font-size:10px;font-weight:700;padding:1px 6px;border-radius:var(--r-sm)}
+.move-pts.up{background:rgba(14,203,129,.12);color:var(--up);border:1px solid rgba(14,203,129,.3)}
+.move-pts.down{background:rgba(246,70,93,.12);color:var(--down);border:1px solid rgba(246,70,93,.3)}
+.move-pts.neutral{background:rgba(252,213,53,.12);color:var(--primary);border:1px solid rgba(252,213,53,.3)}
+.move-time{font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:4px}
+.move-text{font-size:12px;color:var(--muted-strong);line-height:1.55}
+.move-reason{font-size:11px;color:var(--muted);margin-top:4px;border-left:2px solid var(--hairline);padding-left:6px;line-height:1.45}
 
 /* Col 2: Tibo posts stream */
 .stream-box{display:flex;flex-direction:column;gap:12px;max-height:460px;overflow-y:auto;padding-right:4px}
@@ -609,45 +615,88 @@ h1{font-size:36px}
   <div class="move-body">
     <div class="move-head">
       <span class="move-tag">Direct Usage Reset</span>
-      <span class="move-time num">Oct 2 · 21:18 UTC</span>
+      <span class="move-pts up num">+38 pts</span>
     </div>
-    <div class="move-text">Confirmed public reset propagated to all ChatGPT Work &amp; Codex users.</div>
+    <div class="move-time num">Oct 2 · 21:18 UTC</div>
+    <div class="move-text">Confirmed hard reset fully propagated to all ChatGPT Work &amp; Codex subscribers.</div>
+    <div class="move-reason">Execution: Tibo announced token caps cleared following Sol capacity scaling.</div>
   </div>
 </div><div class="move-item">
   <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
   <div class="move-body">
     <div class="move-head">
-      <span class="move-tag">Global Reset Announcement</span>
-      <span class="move-time num">Oct 2 · 02:14 UTC</span>
+      <span class="move-tag">Global Reset Notice</span>
+      <span class="move-pts up num">+24 pts</span>
     </div>
-    <div class="move-text">Tibo announced global reset following Sol load mitigation.</div>
+    <div class="move-time num">Oct 2 · 02:14 UTC</div>
+    <div class="move-text">Tibo gave advance warning of global refresh scheduled for 10am PST.</div>
+    <div class="move-reason">Advance Signal: Official commitment to resolve launch throughput bottleneck.</div>
   </div>
 </div><div class="move-item">
   <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
   <div class="move-body">
     <div class="move-head">
-      <span class="move-tag">Banked Credit Top-up</span>
-      <span class="move-time num">Sep 30 · 23:12 UTC</span>
+      <span class="move-tag">Banked Credit Rollout</span>
+      <span class="move-pts neutral num">+15 pts</span>
     </div>
-    <div class="move-text">One banked reset credited to Plus, Pro and Business subscribers.</div>
+    <div class="move-time num">Sep 30 · 23:12 UTC</div>
+    <div class="move-text">One banked reset credited daily to subscribers awaiting Astra architecture.</div>
+    <div class="move-reason">Credit Boost: Innovative banked mechanism for unreleased features.</div>
   </div>
 </div><div class="move-item">
   <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
   <div class="move-body">
     <div class="move-head">
-      <span class="move-tag">Weekend Reset Propagated</span>
-      <span class="move-time num">Sep 26 · 18:17 UTC</span>
+      <span class="move-tag">Pre-Weekend Hard Reset</span>
+      <span class="move-pts up num">+30 pts</span>
     </div>
-    <div class="move-text">Confirmed hard reset landed before weekend development rush.</div>
+    <div class="move-time num">Sep 26 · 18:17 UTC</div>
+    <div class="move-text">Hard quota refill landed ahead of peak weekend coding sprints.</div>
+    <div class="move-reason">Pattern Match: Validates OpenAI preference for Friday afternoon global flushes.</div>
   </div>
 </div><div class="move-item">
   <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
   <div class="move-body">
     <div class="move-head">
-      <span class="move-tag">GPT-6 Sol/Luna Release</span>
-      <span class="move-time num">Sep 22 · 18:23 UTC</span>
+      <span class="move-tag">GPT-6 Sol &amp; Luna Launch</span>
+      <span class="move-pts up num">+28 pts</span>
     </div>
-    <div class="move-text">New models shipped alongside permanently reduced API pricing.</div>
+    <div class="move-time num">Sep 22 · 18:23 UTC</div>
+    <div class="move-text">New flagship models rolled out alongside 50% permanent API price drop.</div>
+    <div class="move-reason">Milestone Catalyst: Major model releases consistently trigger account-wide flushes.</div>
+  </div>
+</div><div class="move-item">
+  <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+  <div class="move-body">
+    <div class="move-head">
+      <span class="move-tag">Nightly Capacity Injection</span>
+      <span class="move-pts up num">+20 pts</span>
+    </div>
+    <div class="move-time num">Sep 12 · 08:09 UTC</div>
+    <div class="move-text">Silent quota replenishment propagated prior to Asian &amp; European working windows.</div>
+    <div class="move-reason">Infrastructure: Periodic server-side buffer flushing during cluster upgrades.</div>
+  </div>
+</div><div class="move-item">
+  <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+  <div class="move-body">
+    <div class="move-head">
+      <span class="move-tag">Astra Early Rollout Bonus</span>
+      <span class="move-pts up num">+22 pts</span>
+    </div>
+    <div class="move-time num">Sep 5 · 00:39 UTC</div>
+    <div class="move-text">Astra launched ahead of internal timeline; full reset executed in celebration.</div>
+    <div class="move-reason">Engineering Surprise: Unscheduled reward flushes upon early feature deployment.</div>
+  </div>
+</div><div class="move-item">
+  <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+  <div class="move-body">
+    <div class="move-head">
+      <span class="move-tag">25M Active Users Milestone</span>
+      <span class="move-pts up num">+25 pts</span>
+    </div>
+    <div class="move-time num">Aug 31 · 02:29 UTC</div>
+    <div class="move-text">Codex &amp; ChatGPT Work crossed 25,000,000 active users; celebratory reset granted.</div>
+    <div class="move-reason">Scale Milestone: Round-number user thresholds trigger marketing-driven flushes.</div>
   </div>
 </div>
 </div>

@@ -180,15 +180,21 @@ border-bottom:1px solid var(--hairline)}
 background:var(--elevated);color:var(--muted-strong)}
 
 /* Col 1: What moved model events */
-.move-list{display:flex;flex-direction:column;gap:12px}
-.move-item{display:flex;gap:10px;align-items:flex-start}
-.move-icon{width:22px;height:22px;flex:0 0 22px;border-radius:var(--r-sm);background:rgba(252,213,53,.1);
-color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:11px;margin-top:2px}
+.move-list{display:flex;flex-direction:column;gap:11px;max-height:460px;overflow-y:auto;padding-right:4px}
+.move-item{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:var(--r-lg);background:var(--canvas);border:1px solid var(--hairline);transition:border-color .15s}
+.move-item:hover{border-color:rgba(252,213,53,.35)}
+.move-icon{width:24px;height:24px;flex:0 0 24px;border-radius:var(--r-sm);background:rgba(252,213,53,.1);
+color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:11px;margin-top:1px}
 .move-body{flex:1;min-width:0}
-.move-head{display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px}
-.move-tag{font-weight:700;color:var(--body)}
-.move-time{font-family:var(--mono);color:var(--muted)}
-.move-text{font-size:12px;color:var(--muted-strong);line-height:1.5}
+.move-head{display:flex;justify-content:space-between;align-items:center;font-size:11px;margin-bottom:3px}
+.move-tag{font-weight:700;color:var(--on-dark);display:flex;align-items:center;gap:6px}
+.move-pts{font-family:var(--mono);font-size:10px;font-weight:700;padding:1px 6px;border-radius:var(--r-sm)}
+.move-pts.up{background:rgba(14,203,129,.12);color:var(--up);border:1px solid rgba(14,203,129,.3)}
+.move-pts.down{background:rgba(246,70,93,.12);color:var(--down);border:1px solid rgba(246,70,93,.3)}
+.move-pts.neutral{background:rgba(252,213,53,.12);color:var(--primary);border:1px solid rgba(252,213,53,.3)}
+.move-time{font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:4px}
+.move-text{font-size:12px;color:var(--muted-strong);line-height:1.55}
+.move-reason{font-size:11px;color:var(--muted);margin-top:4px;border-left:2px solid var(--hairline);padding-left:6px;line-height:1.45}
 
 /* Col 2: Tibo posts stream */
 .stream-box{display:flex;flex-direction:column;gap:12px;max-height:460px;overflow-y:auto;padding-right:4px}

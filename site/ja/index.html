@@ -259,15 +259,21 @@ border-bottom:1px solid var(--hairline)}
 background:var(--elevated);color:var(--muted-strong)}
 
 /* Col 1: What moved model events */
-.move-list{display:flex;flex-direction:column;gap:12px}
-.move-item{display:flex;gap:10px;align-items:flex-start}
-.move-icon{width:22px;height:22px;flex:0 0 22px;border-radius:var(--r-sm);background:rgba(252,213,53,.1);
-color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:11px;margin-top:2px}
+.move-list{display:flex;flex-direction:column;gap:11px;max-height:460px;overflow-y:auto;padding-right:4px}
+.move-item{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:var(--r-lg);background:var(--canvas);border:1px solid var(--hairline);transition:border-color .15s}
+.move-item:hover{border-color:rgba(252,213,53,.35)}
+.move-icon{width:24px;height:24px;flex:0 0 24px;border-radius:var(--r-sm);background:rgba(252,213,53,.1);
+color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:11px;margin-top:1px}
 .move-body{flex:1;min-width:0}
-.move-head{display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px}
-.move-tag{font-weight:700;color:var(--body)}
-.move-time{font-family:var(--mono);color:var(--muted)}
-.move-text{font-size:12px;color:var(--muted-strong);line-height:1.5}
+.move-head{display:flex;justify-content:space-between;align-items:center;font-size:11px;margin-bottom:3px}
+.move-tag{font-weight:700;color:var(--on-dark);display:flex;align-items:center;gap:6px}
+.move-pts{font-family:var(--mono);font-size:10px;font-weight:700;padding:1px 6px;border-radius:var(--r-sm)}
+.move-pts.up{background:rgba(14,203,129,.12);color:var(--up);border:1px solid rgba(14,203,129,.3)}
+.move-pts.down{background:rgba(246,70,93,.12);color:var(--down);border:1px solid rgba(246,70,93,.3)}
+.move-pts.neutral{background:rgba(252,213,53,.12);color:var(--primary);border:1px solid rgba(252,213,53,.3)}
+.move-time{font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:4px}
+.move-text{font-size:12px;color:var(--muted-strong);line-height:1.55}
+.move-reason{font-size:11px;color:var(--muted);margin-top:4px;border-left:2px solid var(--hairline);padding-left:6px;line-height:1.45}
 
 /* Col 2: Tibo posts stream */
 .stream-box{display:flex;flex-direction:column;gap:12px;max-height:460px;overflow-y:auto;padding-right:4px}
@@ -608,46 +614,89 @@ h1{font-size:36px}
   <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
   <div class="move-body">
     <div class="move-head">
-      <span class="move-tag">Direct Usage Reset</span>
-      <span class="move-time num">Oct 2 · 21:18 UTC</span>
+      <span class="move-tag">全体ハードリセット反映完了</span>
+      <span class="move-pts up num">+38 pts</span>
     </div>
-    <div class="move-text">Confirmed public reset propagated to all ChatGPT Work &amp; Codex users.</div>
+    <div class="move-time num">10月2日 · 21:18 UTC</div>
+    <div class="move-text">全ChatGPT WorkおよびCodexユーザーの利用枠回復が完了しました。</div>
+    <div class="move-reason">【アプデ連動】Sol負荷緩和完了に伴い、Tiboが全量リセット完了を発表。</div>
   </div>
 </div><div class="move-item">
   <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
   <div class="move-body">
     <div class="move-head">
-      <span class="move-tag">Global Reset Announcement</span>
-      <span class="move-time num">Oct 2 · 02:14 UTC</span>
+      <span class="move-tag">全体リセット事前告知</span>
+      <span class="move-pts up num">+24 pts</span>
     </div>
-    <div class="move-text">Tibo announced global reset following Sol load mitigation.</div>
+    <div class="move-time num">10月2日 · 02:14 UTC</div>
+    <div class="move-text">TiboがPST午前10時に全有料アカウント向けリセットを実施すると事前予告。</div>
+    <div class="move-reason">【先行シグナル】新モデル公開初期の負荷急増に対し公式がリセットを確約。</div>
   </div>
 </div><div class="move-item">
   <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
   <div class="move-body">
     <div class="move-head">
-      <span class="move-tag">Banked Credit Top-up</span>
-      <span class="move-time num">Sep 30 · 23:12 UTC</span>
+      <span class="move-tag">Astra 向けバンク枠付与</span>
+      <span class="move-pts neutral num">+15 pts</span>
     </div>
-    <div class="move-text">One banked reset credited to Plus, Pro and Business subscribers.</div>
+    <div class="move-time num">9月30日 · 23:12 UTC</div>
+    <div class="move-text">Astra未利用ユーザーに対し、1日1回のバンク型リセット枠を補填付与。</div>
+    <div class="move-reason">【機能補填】新機能ロールアウト待ちユーザーに対するクレジット型救済。</div>
   </div>
 </div><div class="move-item">
   <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
   <div class="move-body">
     <div class="move-head">
-      <span class="move-tag">Weekend Reset Propagated</span>
-      <span class="move-time num">Sep 26 · 18:17 UTC</span>
+      <span class="move-tag">週末前全体枠リセット</span>
+      <span class="move-pts up num">+30 pts</span>
     </div>
-    <div class="move-text">Confirmed hard reset landed before weekend development rush.</div>
+    <div class="move-time num">9月26日 · 18:17 UTC</div>
+    <div class="move-text">週末の開発ラッシュに先立ち、サーバー側で枠全量回復が完了。</div>
+    <div class="move-reason">【周期性】週末の開発者アクティビティ活性化を狙った金曜リセットの傾向を実証。</div>
   </div>
 </div><div class="move-item">
   <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
   <div class="move-body">
     <div class="move-head">
-      <span class="move-tag">GPT-6 Sol/Luna Release</span>
-      <span class="move-time num">Sep 22 · 18:23 UTC</span>
+      <span class="move-tag">GPT-6 Sol/Luna リリース</span>
+      <span class="move-pts up num">+28 pts</span>
     </div>
-    <div class="move-text">New models shipped alongside permanently reduced API pricing.</div>
+    <div class="move-time num">9月22日 · 18:23 UTC</div>
+    <div class="move-text">新モデル配信とAPI恒久値下げに伴い、全アカウントに利用枠を一括注入。</div>
+    <div class="move-reason">【大型アプデ】主要モデル切り替え時には恒例の一括枠リセットが発動。</div>
+  </div>
+</div><div class="move-item">
+  <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+  <div class="move-body">
+    <div class="move-head">
+      <span class="move-tag">深夜インフラ枠追加</span>
+      <span class="move-pts up num">+20 pts</span>
+    </div>
+    <div class="move-time num">9月12日 · 08:09 UTC</div>
+    <div class="move-text">欧州・アジアの就業時間前にサイレントで枠全量回復が実行。</div>
+    <div class="move-reason">【キャパ解放】サーバークラスタ拡張に伴う定期的な枠解放。</div>
+  </div>
+</div><div class="move-item">
+  <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+  <div class="move-body">
+    <div class="move-head">
+      <span class="move-tag">Astra 前倒し配信ボーナス</span>
+      <span class="move-pts up num">+22 pts</span>
+    </div>
+    <div class="move-time num">9月5日 · 00:39 UTC</div>
+    <div class="move-text">予定より早くAstra配信が完了し、記念として全有料プランの枠を回復。</div>
+    <div class="move-reason">【マイルストーン】開発目標前倒し達成時に不定期で発動するボーナスリセット。</div>
+  </div>
+</div><div class="move-item">
+  <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+  <div class="move-body">
+    <div class="move-head">
+      <span class="move-tag">2500万人アクティブ達成</span>
+      <span class="move-pts up num">+25 pts</span>
+    </div>
+    <div class="move-time num">8月31日 · 02:29 UTC</div>
+    <div class="move-text">利用者が2,500万人に到達した節目を記念し、全ユーザー向けに大放水。</div>
+    <div class="move-reason">【規模拡大】ラウンドナンバーのマイルストーン達成に伴う祝賀リセット。</div>
   </div>
 </div>
 </div>

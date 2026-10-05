@@ -259,15 +259,21 @@ border-bottom:1px solid var(--hairline)}
 background:var(--elevated);color:var(--muted-strong)}
 
 /* Col 1: What moved model events */
-.move-list{display:flex;flex-direction:column;gap:12px}
-.move-item{display:flex;gap:10px;align-items:flex-start}
-.move-icon{width:22px;height:22px;flex:0 0 22px;border-radius:var(--r-sm);background:rgba(252,213,53,.1);
-color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:11px;margin-top:2px}
+.move-list{display:flex;flex-direction:column;gap:11px;max-height:460px;overflow-y:auto;padding-right:4px}
+.move-item{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:var(--r-lg);background:var(--canvas);border:1px solid var(--hairline);transition:border-color .15s}
+.move-item:hover{border-color:rgba(252,213,53,.35)}
+.move-icon{width:24px;height:24px;flex:0 0 24px;border-radius:var(--r-sm);background:rgba(252,213,53,.1);
+color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:11px;margin-top:1px}
 .move-body{flex:1;min-width:0}
-.move-head{display:flex;justify-content:space-between;font-size:11px;margin-bottom:2px}
-.move-tag{font-weight:700;color:var(--body)}
-.move-time{font-family:var(--mono);color:var(--muted)}
-.move-text{font-size:12px;color:var(--muted-strong);line-height:1.5}
+.move-head{display:flex;justify-content:space-between;align-items:center;font-size:11px;margin-bottom:3px}
+.move-tag{font-weight:700;color:var(--on-dark);display:flex;align-items:center;gap:6px}
+.move-pts{font-family:var(--mono);font-size:10px;font-weight:700;padding:1px 6px;border-radius:var(--r-sm)}
+.move-pts.up{background:rgba(14,203,129,.12);color:var(--up);border:1px solid rgba(14,203,129,.3)}
+.move-pts.down{background:rgba(246,70,93,.12);color:var(--down);border:1px solid rgba(246,70,93,.3)}
+.move-pts.neutral{background:rgba(252,213,53,.12);color:var(--primary);border:1px solid rgba(252,213,53,.3)}
+.move-time{font-family:var(--mono);font-size:10px;color:var(--muted);margin-bottom:4px}
+.move-text{font-size:12px;color:var(--muted-strong);line-height:1.55}
+.move-reason{font-size:11px;color:var(--muted);margin-top:4px;border-left:2px solid var(--hairline);padding-left:6px;line-height:1.45}
 
 /* Col 2: Tibo posts stream */
 .stream-box{display:flex;flex-direction:column;gap:12px;max-height:460px;overflow-y:auto;padding-right:4px}
@@ -608,46 +614,89 @@ h1{font-size:36px}
   <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
   <div class="move-body">
     <div class="move-head">
-      <span class="move-tag">Direct Usage Reset</span>
-      <span class="move-time num">Oct 2 · 21:18 UTC</span>
+      <span class="move-tag">全网硬重置已生效</span>
+      <span class="move-pts up num">+38 分</span>
     </div>
-    <div class="move-text">Confirmed public reset propagated to all ChatGPT Work &amp; Codex users.</div>
+    <div class="move-time num">10月2日 · 21:18 UTC</div>
+    <div class="move-text">官方全员硬重置下发完毕，所有 ChatGPT Work 与 Codex 额度回满。</div>
+    <div class="move-reason">【发版放水】伴随 Sol 负载优化完成，Tibo 发推确认全网额度一键清空。</div>
   </div>
 </div><div class="move-item">
   <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
   <div class="move-body">
     <div class="move-head">
-      <span class="move-tag">Global Reset Announcement</span>
-      <span class="move-time num">Oct 2 · 02:14 UTC</span>
+      <span class="move-tag">全球重置提前预告</span>
+      <span class="move-pts up num">+24 分</span>
     </div>
-    <div class="move-text">Tibo announced global reset following Sol load mitigation.</div>
+    <div class="move-time num">10月2日 · 02:14 UTC</div>
+    <div class="move-text">Tibo 提前发文预告将在美西时间上午 10 点为全体付费用户执行全量重置。</div>
+    <div class="move-reason">【官方前瞻】官方首次对大模型版本上线初期的排队和限流问题公开承诺补发。</div>
   </div>
 </div><div class="move-item">
   <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
   <div class="move-body">
     <div class="move-head">
-      <span class="move-tag">Banked Credit Top-up</span>
-      <span class="move-time num">Sep 30 · 23:12 UTC</span>
+      <span class="move-tag">Astra 存续额度补发</span>
+      <span class="move-pts neutral num">+15 分</span>
     </div>
-    <div class="move-text">One banked reset credited to Plus, Pro and Business subscribers.</div>
+    <div class="move-time num">9月30日 · 23:12 UTC</div>
+    <div class="move-text">针对未开放 Astra 权限的用户，每日补偿发放 1 次可保留的 Banked Reset。</div>
+    <div class="move-reason">【权益补偿】开创存续式额度发放机制，用户在特定功能开放前每日享有额外额度。</div>
   </div>
 </div><div class="move-item">
   <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
   <div class="move-body">
     <div class="move-head">
-      <span class="move-tag">Weekend Reset Propagated</span>
-      <span class="move-time num">Sep 26 · 18:17 UTC</span>
+      <span class="move-tag">周末前全员硬放水</span>
+      <span class="move-pts up num">+30 分</span>
     </div>
-    <div class="move-text">Confirmed hard reset landed before weekend development rush.</div>
+    <div class="move-time num">9月26日 · 18:17 UTC</div>
+    <div class="move-text">赶在周末高频编码高峰前，官方服务器端完成所有付费账户额度重置。</div>
+    <div class="move-reason">【周期规律】印证 OpenAI 倾向于在周五下午或周末前清空额度以鼓励开发者密集测试。</div>
   </div>
 </div><div class="move-item">
   <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
   <div class="move-body">
     <div class="move-head">
-      <span class="move-tag">GPT-6 Sol/Luna Release</span>
-      <span class="move-time num">Sep 22 · 18:23 UTC</span>
+      <span class="move-tag">GPT-6 Sol / Luna 双模型发版</span>
+      <span class="move-pts up num">+28 分</span>
     </div>
-    <div class="move-text">New models shipped alongside permanently reduced API pricing.</div>
+    <div class="move-time num">9月22日 · 18:23 UTC</div>
+    <div class="move-text">新模型上线并大幅下调 API 定价，全员账户注入一次完整重置额度。</div>
+    <div class="move-reason">【里程碑激励】重大模型换代上线时的标准操作，伴随额度翻倍或重置以促成调用增长。</div>
+  </div>
+</div><div class="move-item">
+  <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+  <div class="move-body">
+    <div class="move-head">
+      <span class="move-tag">凌晨全网配额更新</span>
+      <span class="move-pts up num">+20 分</span>
+    </div>
+    <div class="move-time num">9月12日 · 08:09 UTC</div>
+    <div class="move-text">欧洲与亚洲工作时段开启前，官方静默完成又一次硬性额度全量下发。</div>
+    <div class="move-reason">【算力释放】后台集群扩容完毕后的周期性容量释放，无预告直接回满。</div>
+  </div>
+</div><div class="move-item">
+  <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+  <div class="move-body">
+    <div class="move-head">
+      <span class="move-tag">Astra 提前上线庆祝重置</span>
+      <span class="move-pts up num">+22 分</span>
+    </div>
+    <div class="move-time num">9月5日 · 00:39 UTC</div>
+    <div class="move-text">Astra 架构比原计划提前部署完毕，为全量 Plus、Pro 和 Business 用户回满额度。</div>
+    <div class="move-reason">【工程庆祝】工程交付超前于产品路线图时的奖励性放水，单日激发超额调用。</div>
+  </div>
+</div><div class="move-item">
+  <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+  <div class="move-body">
+    <div class="move-head">
+      <span class="move-tag">2500 万活跃用户里程碑</span>
+      <span class="move-pts up num">+25 分</span>
+    </div>
+    <div class="move-time num">8月31日 · 02:29 UTC</div>
+    <div class="move-text">Codex 与 ChatGPT Work 活跃用户突破 2500 万大关，官方启动全员狂欢重置。</div>
+    <div class="move-reason">【规模红利】用户量级突破整数关口时，管理层启动营销放水。</div>
   </div>
 </div>
 </div>
