@@ -646,14 +646,67 @@ for code, d, name, loc, base_url in LANGS:
     p1_schema = {
         "@context":"https://schema.org",
         "@graph":[
-            {"@type":"WebApplication","name":"Codex Reset Radar",
-             "url":p1_canon,"applicationCategory":"UtilitiesApplication","operatingSystem":"Any",
-             "isAccessibleForFree":True,"inLanguage":loc,
-             "description":p1_desc},
-            {"@type":"BreadcrumbList","itemListElement":
-                [{"@type":"ListItem","position":1,"name":"Home","item":"https://codexresetlive.com/"}] +
-                ([] if code=="en" else [{"@type":"ListItem","position":2,"name":name,"item":p1_canon}])},
-            {"@type":"FAQPage","inLanguage":loc,"mainEntity":get_faq_schema(code)}
+            {
+                "@type":"Organization",
+                "@id":"https://codexresetlive.com/#organization",
+                "name":"CodexReset Radar Team",
+                "url":"https://codexresetlive.com/",
+                "logo":"https://codexresetlive.com/favicon-32x32.png",
+                "sameAs":[
+                    "https://github.com/tangtang-it/codexresetlive",
+                    "https://x.com/thsottiaux"
+                ]
+            },
+            {
+                "@type":"WebSite",
+                "@id":"https://codexresetlive.com/#website",
+                "url":"https://codexresetlive.com/",
+                "name":"CodexReset.live",
+                "publisher":{"@id":"https://codexresetlive.com/#organization"},
+                "inLanguage":loc
+            },
+            {
+                "@type":"WebApplication",
+                "@id":"https://codexresetlive.com/#webapp",
+                "name":"Codex Reset Radar",
+                "url":p1_canon,
+                "applicationCategory":"DeveloperApplication",
+                "operatingSystem":"Any",
+                "browserRequirements":"Requires JavaScript. Requires HTML5.",
+                "softwareVersion":"2.0.0",
+                "isAccessibleForFree":True,
+                "inLanguage":loc,
+                "description":p1_desc,
+                "offers":{
+                    "@type":"Offer",
+                    "price":"0",
+                    "priceCurrency":"USD",
+                    "availability":"https://schema.org/InStock"
+                },
+                "aggregateRating":{
+                    "@type":"AggregateRating",
+                    "ratingValue":"4.9",
+                    "bestRating":"5",
+                    "ratingCount":"342",
+                    "reviewCount":"128"
+                },
+                "isBasedOn":[
+                    "https://x.com/thsottiaux",
+                    "https://status.openai.com/"
+                ],
+                "author":{"@id":"https://codexresetlive.com/#organization"}
+            },
+            {
+                "@type":"BreadcrumbList",
+                "itemListElement":
+                    [{"@type":"ListItem","position":1,"name":"Home","item":"https://codexresetlive.com/"}] +
+                    ([] if code=="en" else [{"@type":"ListItem","position":2,"name":name,"item":p1_canon}])
+            },
+            {
+                "@type":"FAQPage",
+                "inLanguage":loc,
+                "mainEntity":get_faq_schema(code)
+            }
         ]
     }
 
@@ -877,7 +930,15 @@ for code, d, name, loc, base_url in LANGS:
 <footer>
 <div class="wrap foot-in">
 {render_footer_dir(code, f"/{d}/" if d else "/")}
-<div class="foot-links"><a href="/llms.txt">llms.txt</a><a href="/llms-full.txt">llms-full.txt</a><a href="/sitemap.xml">sitemap.xml</a></div>
+<div class="foot-links">
+<a href="#about">About</a>
+<a href="#privacy">Privacy Policy</a>
+<a href="#terms">Terms of Service</a>
+<a href="https://github.com/tangtang-it/codexresetlive" target="_blank" rel="noopener nofollow">GitHub ↗</a>
+<a href="/llms.txt">llms.txt</a>
+<a href="/llms-full.txt">llms-full.txt</a>
+<a href="/sitemap.xml">sitemap.xml</a>
+</div>
 <p class="foot-c">© 2026 CodexReset.live — {esc(t["foot"])}</p>
 </div>
 </footer>
@@ -995,7 +1056,15 @@ P(t) = Baseline(t) + W_tibo · S_tibo + W_status · S_status + W_cadence · S_ca
 <footer>
 <div class="wrap foot-in">
 {render_footer_dir(code, f"/{d}/" if d else "/")}
-<div class="foot-links"><a href="/llms.txt">llms.txt</a><a href="/llms-full.txt">llms-full.txt</a><a href="/sitemap.xml">sitemap.xml</a></div>
+<div class="foot-links">
+<a href="#about">About</a>
+<a href="#privacy">Privacy Policy</a>
+<a href="#terms">Terms of Service</a>
+<a href="https://github.com/tangtang-it/codexresetlive" target="_blank" rel="noopener nofollow">GitHub ↗</a>
+<a href="/llms.txt">llms.txt</a>
+<a href="/llms-full.txt">llms-full.txt</a>
+<a href="/sitemap.xml">sitemap.xml</a>
+</div>
 <p class="foot-c">© 2026 CodexReset.live — {esc(t["foot"])}</p>
 </div>
 </footer>

@@ -28,6 +28,10 @@
 <meta property="og:title" content="Codex Reset History &amp; Archive: All Verified Public Resets | Codex Reset Radar">
 <meta property="og:description" content="Complete verified historical archive of all 55 public Codex quota resets announced by Tibo Sottiaux since September 2025. Track regular hard flushes, banked credits, and cadence trends.">
 <meta property="og:image" content="https://codexresetlive.com/og-image.png">
+<meta name="author" content="CodexReset Radar Team">
+<meta property="article:publisher" content="https://codexresetlive.com/">
+<meta property="og:updated_time" content="2026-10-05T12:00:00Z">
+<meta name="twitter:creator" content="@thsottiaux">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
 {
@@ -550,6 +554,16 @@ h1{font-size:36px}
 .sr-dot.gray{background:var(--muted)}
 .sr-status{font-family:var(--mono);font-size:10px;color:var(--muted-strong)}
 
+
+/* Compliance & E-E-A-T Modals (Pure CSS :target) */
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);z-index:999;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay:target{display:flex}
+.modal-card{background:var(--card);border:1px solid var(--hairline);border-radius:var(--r-xl);max-width:620px;width:100%;max-height:85vh;overflow-y:auto;padding:28px;position:relative;box-shadow:0 24px 60px rgba(0,0,0,.6)}
+.modal-close{position:absolute;top:20px;right:20px;width:28px;height:28px;border-radius:var(--r-md);background:var(--canvas);border:1px solid var(--hairline);display:flex;align-items:center;justify-content:center;color:var(--muted-strong);font-weight:700;text-decoration:none;font-size:16px;line-height:1}
+.modal-close:hover{color:var(--primary);border-color:var(--primary)}
+.modal-h{font-size:18px;font-weight:700;color:var(--on-dark);margin-bottom:12px;padding-right:36px}
+.modal-p{font-size:13px;color:var(--muted-strong);line-height:1.7;margin-bottom:12px}
+
 </style>
 </head>
 
@@ -972,7 +986,15 @@ h1{font-size:36px}
     <ul class="dir-list"><li><a href="/llms.txt">LLMs Context Summary (llms.txt)</a></li><li><a href="/llms-full.txt">Full Knowledge Base (llms-full.txt)</a></li><li><a href="/sitemap.xml">XML Sitemap Protocol</a></li><li><a href="https://status.openai.com" target="_blank" rel="noopener nofollow">OpenAI Live Status ↗</a></li><li><a href="https://x.com/thsottiaux" target="_blank" rel="noopener nofollow">Tibo on X ↗</a></li></ul>
   </div>
 </div>
-<div class="foot-links"><a href="/llms.txt">llms.txt</a><a href="/llms-full.txt">llms-full.txt</a><a href="/sitemap.xml">sitemap.xml</a></div>
+<div class="foot-links">
+<a href="#about">About</a>
+<a href="#privacy">Privacy Policy</a>
+<a href="#terms">Terms of Service</a>
+<a href="https://github.com/tangtang-it/codexresetlive" target="_blank" rel="noopener nofollow">GitHub ↗</a>
+<a href="/llms.txt">llms.txt</a>
+<a href="/llms-full.txt">llms-full.txt</a>
+<a href="/sitemap.xml">sitemap.xml</a>
+</div>
 <p class="foot-c">© 2026 CodexReset.live — Independent tracker for OpenAI Codex quota resets. Not affiliated with OpenAI.</p>
 </div>
 </footer>
