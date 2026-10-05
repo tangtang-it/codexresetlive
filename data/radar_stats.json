@@ -6,10 +6,10 @@
   "last_reset_text": "Reset all propagated. Enjoy.",
   "last_reset_url": "https://x.com/thsottiaux/status/2106131810921136451",
   "first_reset_at": "2025-09-17T04:02:52.000Z",
-  "days_since_last_reset": 1.6,
+  "days_since_last_reset": 2.6,
   "avg_gap_days_all": 7.1,
   "avg_gap_days_recent": 3.9,
-  "probability_48h": 11,
+  "probability_48h": 21,
   "monthly_series": [
     {
       "month": "2025-09",

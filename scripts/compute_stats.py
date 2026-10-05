@@ -1,8 +1,12 @@
 import json
 from datetime import datetime
 from collections import Counter
+from pathlib import Path
 
-p = r"D:/ZySpace/zy_code/seo/codexlimit/data/tibo_reset_history.json"
+ROOT_DIR = Path(__file__).resolve().parent.parent
+DATA_DIR = ROOT_DIR / "data"
+
+p = DATA_DIR / "tibo_reset_history.json"
 with open(p, encoding="utf-8") as f:
     data = json.load(f)
 recs = sorted(data["records"], key=lambda x: x["at"])
@@ -11,7 +15,7 @@ def pt(ts):
     return datetime.strptime(ts[:19], "%Y-%m-%dT%H:%M:%S")
 
 last = recs[-1]
-now = datetime(2026, 10, 4, 12, 0, 0)
+now = datetime(2026, 10, 5, 12, 0, 0)
 days_since = round((now - pt(last["at"])).total_seconds() / 86400, 1)
 
 gaps = [(pt(recs[i]["at"]) - pt(recs[i-1]["at"])).total_seconds()/86400 for i in range(1, len(recs))]
@@ -19,21 +23,17 @@ recent_gaps = gaps[-14:]
 avg_recent = round(sum(recent_gaps)/len(recent_gaps), 1)
 avg_all = round(sum(gaps)/len(gaps), 1)
 
-# Four-factor smooth probability model aligned with willcodexreset.com standard
-# 1. Base baseline (preserves space for consecutive/double resets)
+# Four-factor smooth probability model
 baseline = 12
 
-# 2. Cooldown vs overdue factor
 if days_since <= 2.0:
     cooldown_factor = -4  # Recent reset cooldown
 elif days_since <= 4.0:
     cooldown_factor = +6  # Nearing typical cadence
 else:
-    cooldown_factor = min(40, round((days_since - 4) * 8.5))  # Overdue escalation
+    cooldown_factor = min(40, round((days_since - 4) * 8.5))
 
-# 3. Product & social release signal hint (Tibo mentioned upcoming next week rollout)
 signal_hint = 3
-
 prob = max(10, min(85, round(baseline + cooldown_factor + signal_hint)))
 
 months = Counter(r["at"][:7] for r in recs)
@@ -64,6 +64,9 @@ out = {
     "monthly_series": series,
     "monthly_max": max(s["count"] for s in series) or 1
 }
-print(json.dumps(out, ensure_ascii=False, indent=2))
-with open(r"D:/ZySpace/zy_code/seo/codexlimit/data/radar_stats.json", "w", encoding="utf-8") as f:
+
+out_file = DATA_DIR / "radar_stats.json"
+with open(out_file, "w", encoding="utf-8") as f:
     json.dump(out, f, ensure_ascii=False, indent=2)
+
+print(f"Computed stats: total={len(recs)}, prob={prob}%, saved to {out_file}")

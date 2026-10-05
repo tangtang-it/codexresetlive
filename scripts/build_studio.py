@@ -1,21 +1,24 @@
 # -*- coding: utf-8 -*-
 import json, os, html, re, sys
-sys.path.insert(0, r"D:/ZySpace/zy_code/seo/codexlimit")
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT_DIR))
+
 from _i18n_priority import I18N
 from _i18n_rest import I18N2
 
 I18N.update(I18N2)
 
-BASE = r"D:/ZySpace/zy_code/seo/codexlimit"
-SITE = os.path.join(BASE, "site")
+SITE_DIR = ROOT_DIR / "site"
 
-with open(os.path.join(BASE, "_tpl_head_v2.html"), encoding="utf-8") as f:
+with open(ROOT_DIR / "_tpl_head_v2.html", encoding="utf-8") as f:
     HEAD = f.read()
-with open(os.path.join(BASE, "_tpl_body_v2.html"), encoding="utf-8") as f:
+with open(ROOT_DIR / "_tpl_body_v2.html", encoding="utf-8") as f:
     BODY = f.read()
-with open(os.path.join(BASE, "data/tibo_reset_history.json"), encoding="utf-8") as f:
+with open(ROOT_DIR / "data/tibo_reset_history.json", encoding="utf-8") as f:
     HIST = json.load(f)
-with open(os.path.join(BASE, "data/radar_stats.json"), encoding="utf-8") as f:
+with open(ROOT_DIR / "data/radar_stats.json", encoding="utf-8") as f:
     STATS = json.load(f)
 
 LANGS = [
@@ -42,60 +45,51 @@ days_since_str = ("%.1f" % days_since) + "d"
 last_date = last["at"][:10]
 
 # 1. GENERATE NATIVE SVG PULSE CHART (Forecast Pulse)
-pulse_svg = '''<svg viewBox="0 0 740 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Horizontal gridlines -->
+pulse_svg = f'''<svg viewBox="0 0 740 180" fill="none" xmlns="http://www.w3.org/2000/svg">
   <line x1="40" y1="30" x2="710" y2="30" stroke="#2b3139" stroke-width="1" stroke-dasharray="3 3"/>
   <line x1="40" y1="80" x2="710" y2="80" stroke="#2b3139" stroke-width="1" stroke-dasharray="3 3"/>
   <line x1="40" y1="130" x2="710" y2="130" stroke="#2b3139" stroke-width="1"/>
   
-  <!-- Y-Axis labels -->
   <text x="15" y="34" fill="#707a8a" font-family="ui-monospace" font-size="10">80%</text>
   <text x="15" y="84" fill="#707a8a" font-family="ui-monospace" font-size="10">40%</text>
   <text x="15" y="134" fill="#707a8a" font-family="ui-monospace" font-size="10">0%</text>
 
-  <!-- Dates on X-axis -->
   <text x="60" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Sep 26</text>
   <text x="130" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Sep 28</text>
   <text x="210" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Sep 30</text>
   <text x="310" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 2</text>
-  <text x="420" y="156" fill="#0ecb81" font-family="ui-monospace" font-size="10" font-weight="bold" text-anchor="middle">Oct 4 (Now)</text>
-  <text x="530" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 5</text>
-  <text x="630" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 7</text>
+  <text x="420" y="156" fill="#0ecb81" font-family="ui-monospace" font-size="10" font-weight="bold" text-anchor="middle">Oct 5 (Now)</text>
+  <text x="530" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 6</text>
+  <text x="630" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 8</text>
 
-  <!-- Historical Solid Curve (Sep 26 -> Oct 4 Now) -->
   <path d="M 60 40 Q 95 110, 130 95 T 210 50 T 260 115 T 310 40 Q 365 110, 420 116" 
         stroke="#0ecb81" stroke-width="2.6" fill="none" stroke-linecap="round"/>
 
-  <!-- Future Forecast Dashed Curve (Oct 4 -> Oct 7) -->
   <path d="M 420 116 Q 475 105, 530 90 T 630 65 T 690 55" 
         stroke="#FCD535" stroke-width="2.2" stroke-dasharray="5 4" fill="none" stroke-linecap="round"/>
 
-  <!-- Event 1: Sep 26 Reset -->
   <line x1="60" y1="40" x2="60" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.4"/>
   <circle cx="60" cy="40" r="4.5" fill="#0ecb81"/>
   <rect x="42" y="16" width="36" height="15" rx="3" fill="#1e2329" stroke="#0ecb81" stroke-width="1"/>
   <text x="60" y="27" fill="#0ecb81" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Reset</text>
 
-  <!-- Event 2: Sep 30 Banked Reset -->
   <line x1="210" y1="50" x2="210" y2="130" stroke="#FCD535" stroke-width="1.2" stroke-opacity="0.4"/>
   <circle cx="210" cy="50" r="4.5" fill="#FCD535"/>
   <rect x="189" y="26" width="42" height="15" rx="3" fill="#1e2329" stroke="#FCD535" stroke-width="1"/>
   <text x="210" y="37" fill="#FCD535" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Banked</text>
 
-  <!-- Event 3: Oct 2 Hard Reset -->
   <line x1="310" y1="40" x2="310" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.4"/>
   <circle cx="310" cy="40" r="4.5" fill="#0ecb81"/>
   <rect x="292" y="16" width="36" height="15" rx="3" fill="#1e2329" stroke="#0ecb81" stroke-width="1"/>
   <text x="310" y="27" fill="#0ecb81" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Reset</text>
 
-  <!-- Point Now on Oct 4 -->
   <circle cx="420" cy="116" r="5.5" fill="#0ecb81" stroke="#0b0e11" stroke-width="2"/>
   <rect x="395" y="86" width="50" height="20" rx="4" fill="#0ecb81"/>
-  <text x="420" y="100" fill="#0b0e11" font-family="ui-monospace" font-size="10" font-weight="bold" text-anchor="middle">Now 11%</text>
+  <text x="420" y="100" fill="#0b0e11" font-family="ui-monospace" font-size="10" font-weight="bold" text-anchor="middle">Now {prob}%</text>
   <path d="M 420 106 L 417 110 L 423 110 Z" fill="#0ecb81"/>
 </svg>'''
 
-# 2. GENERATE WHAT MOVED THE MODEL (Col 1)
+# 2. GENERATE WHAT MOVED THE MODEL
 moves = [
     ("Oct 2 · 21:18 UTC", "Direct Usage Reset", "Confirmed public reset propagated to all ChatGPT Work & Codex users.", "+38 pts"),
     ("Oct 2 · 02:14 UTC", "Global Reset Announcement", "Tibo announced global reset following Sol load mitigation.", "+24 pts"),
@@ -117,7 +111,7 @@ for m_time, m_tag, m_desc, m_pts in moves:
 </div>''')
 MOVE_ITEMS = "".join(move_items)
 
-# 3. GENERATE TIBO STREAM MINI POSTS (Col 2)
+# 3. GENERATE TIBO STREAM MINI POSTS
 stream_items = []
 for r in recs[-10:][::-1]:
     t = r["type"]
@@ -135,14 +129,14 @@ for r in recs[-10:][::-1]:
 </div>''')
 STREAM_ITEMS = "".join(stream_items)
 
-# 4. GENERATE 8 SIGNAL SWITCHES (Col 3)
+# 4. GENERATE 8 SIGNAL SWITCHES
 switches = [
     ("OpenAI status", "green", "Operational"),
     ("Tibo posts", "green", "55 Verified"),
     ("User milestones", "yellow", "43M (Nearing 50M)"),
     ("Release cadence", "green", "Mid-week active"),
     ("Community predictions", "gray", "Consensus low"),
-    ("Reset cooldown", "yellow", "Cooldown active (1.6d)"),
+    ("Reset cooldown", "yellow", f"Cooldown active ({days_since_str})"),
     ("SF work window", "green", "Daytime (US Pacific)"),
     ("Token bucket backlog", "gray", "Stable load")
 ]
@@ -157,10 +151,7 @@ for s_name, s_color, s_status in switches:
 </div>''')
 SWITCH_ITEMS = "".join(switch_items)
 
-# 5. GENERATE MONTHLY CALENDAR GRID (7 columns)
-# For Oct 2026: Oct 1 is Thu. 31 days.
-cal_rows = []
-# Pre-pad: Sun Sep 27 (pad), Mon 28 (pad), Tue 29 (pad), Wed 30 (pad - Banked Reset!), Thu Oct 1, Fri Oct 2 (Reset!), Sat Oct 3
+# 5. GENERATE MONTHLY CALENDAR GRID
 week1 = '''<tr>
   <td class="pad"><span class="day-num">27</span></td>
   <td class="pad"><span class="day-num">28</span></td>
@@ -171,8 +162,8 @@ week1 = '''<tr>
   <td><span class="day-num">3</span></td>
 </tr>'''
 week2 = '''<tr>
-  <td><span class="day-num" style="color:var(--primary);font-weight:800">4 (Today)</span><span style="font-size:9px;color:var(--muted)">Watching</span></td>
-  <td><span class="day-num">5</span></td>
+  <td><span class="day-num">4</span></td>
+  <td><span class="day-num" style="color:var(--primary);font-weight:800">5 (Today)</span><span style="font-size:9px;color:var(--muted)">Watching</span></td>
   <td><span class="day-num">6</span></td>
   <td><span class="day-num">7</span></td>
   <td><span class="day-num">8</span></td>
@@ -180,31 +171,13 @@ week2 = '''<tr>
   <td><span class="day-num">10</span></td>
 </tr>'''
 week3 = '''<tr>
-  <td><span class="day-num">11</span></td>
-  <td><span class="day-num">12</span></td>
-  <td><span class="day-num">13</span></td>
-  <td><span class="day-num">14</span></td>
-  <td><span class="day-num">15</span></td>
-  <td><span class="day-num">16</span></td>
-  <td><span class="day-num">17</span></td>
+  <td><span class="day-num">11</span></td><td><span class="day-num">12</span></td><td><span class="day-num">13</span></td><td><span class="day-num">14</span></td><td><span class="day-num">15</span></td><td><span class="day-num">16</span></td><td><span class="day-num">17</span></td>
 </tr>'''
 week4 = '''<tr>
-  <td><span class="day-num">18</span></td>
-  <td><span class="day-num">19</span></td>
-  <td><span class="day-num">20</span></td>
-  <td><span class="day-num">21</span></td>
-  <td><span class="day-num">22</span></td>
-  <td><span class="day-num">23</span></td>
-  <td><span class="day-num">24</span></td>
+  <td><span class="day-num">18</span></td><td><span class="day-num">19</span></td><td><span class="day-num">20</span></td><td><span class="day-num">21</span></td><td><span class="day-num">22</span></td><td><span class="day-num">23</span></td><td><span class="day-num">24</span></td>
 </tr>'''
 week5 = '''<tr>
-  <td><span class="day-num">25</span></td>
-  <td><span class="day-num">26</span></td>
-  <td><span class="day-num">27</span></td>
-  <td><span class="day-num">28</span></td>
-  <td><span class="day-num">29</span></td>
-  <td><span class="day-num">30</span></td>
-  <td><span class="day-num">31</span></td>
+  <td><span class="day-num">25</span></td><td><span class="day-num">26</span></td><td><span class="day-num">27</span></td><td><span class="day-num">28</span></td><td><span class="day-num">29</span></td><td><span class="day-num">30</span></td><td><span class="day-num">31</span></td>
 </tr>'''
 
 CAL_TABLE_HTML = f'''<table class="cal-table">
@@ -222,7 +195,6 @@ CAL_TABLE_HTML = f'''<table class="cal-table">
   </tbody>
 </table>'''
 
-# 6. Localization helpers
 def build_lang_items(current):
     out = []
     for code, d, name, loc, url in LANGS:
@@ -239,12 +211,12 @@ def build_hreflang(current_url):
             parts.append(f'<link rel="alternate" hreflang="{code}" href="{url}">')
     return "\n".join(parts)
 
-# 7. Generate all 10 language pages
+# Generate all 10 language pages
 for code, d, name, loc, canon in LANGS:
     t = I18N[code]
-    out_dir = os.path.join(SITE, d) if d else SITE
-    os.makedirs(out_dir, exist_ok=True)
-    path = os.path.join(out_dir, "index.html")
+    out_dir = (SITE_DIR / d) if d else SITE_DIR
+    out_dir.mkdir(parents=True, exist_ok=True)
+    path = out_dir / "index.html"
 
     title = f"{t['h1_a'].rstrip('?')} {t['h1_b']} | Codex Reset Radar"
     desc = t["hero_p"]
@@ -272,7 +244,6 @@ for code, d, name, loc, canon in LANGS:
         f'<div class="faq-i"><div class="faq-q">{esc(t["faq_q%d"%i])}</div><div class="faq-a">{esc(t["faq_a%d"%i])}</div></div>'
         for i in (1,2,3,4))
 
-    # New studio & alert translations
     alert_t = "Get Realtime Reset Prediction Alerts" if code=="en" else ("获取实时重置预警广播" if "zh" in code else ("リセット予測通知を受け取る" if code=="ja" else ("실시간 리셋 알림 받기" if code=="ko" else "Recibe Alertas en Tiempo Real")))
     alert_d = "Alerts sent when the next 48h reset chance exceeds 80% or when verified by Tibo." if code=="en" else ("当未来48小时重置概率超过80%或Tibo发布确认推文时立即通知。" if "zh" in code else ("48時間以内のリセット確率が80%を超えるか、公式確認された際に通知。" if code=="ja" else ("48시간 리셋 확률이 80%를 초과하거나 공식 확인 시 즉시 알림." if code=="ko" else "Alertas cuando la probabilidad supere el 80% o se confirme.")) )
     notify_me = "Notify Me" if code=="en" else ("立即订阅" if "zh" in code else ("通知登録" if code=="ja" else ("알림 받기" if code=="ko" else "Avisarme")))
@@ -294,10 +265,10 @@ for code, d, name, loc, canon in LANGS:
         "__LANG__":code,"__TITLE__":esc(title),"__DESC__":esc(desc),"__CANONICAL__":canon,
         "__HREFLANG__":build_hreflang(canon),"__LOCALE__":loc,
         "__SCHEMA__":json.dumps(schema,ensure_ascii=False,indent=2),
-        "__BRAND_SUB__":esc(t["brand_sub"]),
-        "__HOME_PATH__":(f"/{d}/" if d else "/"),"__LIVE__":esc(t["live"]),
+        "__BRAND_SUB__":esc(t["brand_sub"]),"__LIVE__":esc(t["live"]),
         "__LANG_LABEL__":esc(t["lang_label"]),"__LANG_NAME__":esc(name),
         "__LANG_ITEMS__":build_lang_items(code),
+        "__HOME_PATH__":(f"/{d}/" if d else "/"),
         "__BADGE__":esc(t["badge"]),
         "__H1_A__":esc(t["h1_a"]),"__H1_B__":esc(t["h1_b"]),"__HERO_P__":esc(t["hero_p"]),
         "__GAUGE_LBL__":esc(t["gauge_lbl"]),"__GAUGE_TAG__":esc(t["gauge_tag"]),
@@ -305,15 +276,12 @@ for code, d, name, loc, canon in LANGS:
         "__LAST_DATE__":last_date,"__DAYS_SINCE__":days_since_str,
         "__PROB_NUM__":str(prob),
         
-        # Pulse chart tokens
         "__PULSE_T__":esc(pulse_t),"__PULSE_SUB__":esc(pulse_sub),
         "__PULSE_SVG__":pulse_svg,
 
-        # Alert tokens
         "__ALERT_T__":esc(alert_t),"__ALERT_D__":esc(alert_d),
         "__NOTIFY_ME__":esc(notify_me),"__SUBSCRIBER_COUNT__":esc(sub_count),
 
-        # 4 Readouts
         "__RO_1_L__":("OpenAI Status" if code=="en" else "OpenAI 服务状态"),
         "__RO_1_S__":("No major active outage" if code=="en" else "当前无全局宕机事故"),
         "__RO_2_L__":("Tibo Twitter Watch" if code=="en" else "负责人推特追踪"),
@@ -323,16 +291,13 @@ for code, d, name, loc, canon in LANGS:
         "__RO_4_L__":("Estimated Codex Users" if code=="en" else "全球活跃用户估算"),
         "__RO_4_S__":("Milestone: 25M published" if code=="en" else "官方披露基线：2500万"),
 
-        # 3-Column Studio
         "__STUDIO_T__":esc(studio_t),"__STUDIO_S__":esc(studio_s),
         "__COL1_T__":esc(col1_t),"__COL3_T__":esc(col3_t),
         "__MOVE_ITEMS__":MOVE_ITEMS,"__STREAM_ITEMS__":STREAM_ITEMS,"__SWITCH_ITEMS__":SWITCH_ITEMS,
 
-        # Calendar
         "__CAL_RADAR_T__":esc(cal_radar_t),"__CAL_RADAR_S__":esc(cal_radar_s),
         "__CAL_TABLE_HTML__":CAL_TABLE_HTML,
 
-        # Personal Calculator
         "__CALC_T__":esc(t["calc_t"]),"__CALC_S__":esc(t["calc_s"]),
         "__TZ_L__":esc(t["tz_l"]),"__TZ_LOCAL__":esc(t["tz_local"]),"__UNLOCK_L__":esc(t["unlock_l"]),
         "__CALCULATING__":esc(t["calculating"]),"__PRESET_L__":esc(t["preset_l"]),
@@ -341,12 +306,10 @@ for code, d, name, loc, canon in LANGS:
         "__PROG_L__":esc(t["prog_l"]),"__RECOVERED__":esc(t["recovered"]),
         "__NOTIFY__":esc(t["notify"]),"__CAL__":esc(t["cal"]),
 
-        # Tools
         "__TOOLS_T__":esc(t["tools_t"]),"__TOOLS_S__":esc(t["tools_s"]),
         "__TOOL1_D__":esc(t["tool1_d"]),"__TOOL2_D__":esc(t["tool2_d"]),"__TOOL3_D__":esc(t["tool3_d"]),
         "__TOOL1_A__":esc(t["tool1_a"]),"__TOOL2_A__":esc(t["tool2_a"]),"__TOOL3_A__":esc(t["tool3_a"]),
 
-        # FAQ & Footer
         "__FAQ_T__":esc(t["faq_t"]),"__FAQ_ITEMS__":faq_items,
         "__FOOT__":esc(t["foot"]),"__FOOT_SRC__":esc(t["foot_src"]),
         "__TZ_TOAST__":esc(t["tz_toast"]),"__MIN_TOAST__":esc(t["min_toast"]),
@@ -360,6 +323,6 @@ for code, d, name, loc, canon in LANGS:
 
     with open(path, "w", encoding="utf-8") as f:
         f.write(page)
-    print(f"WROTE STUDIO PAGE: {code:8s} {len(page):6d} bytes -> {path}")
+    print(f"Built {code:8s} -> {path} ({len(page)} bytes)")
 
-print("ALL_STUDIO_PAGES_BUILT_SUCCESSFULLY")
+print("ALL_STUDIO_PAGES_BUILT_CROSS_PLATFORM_OK")

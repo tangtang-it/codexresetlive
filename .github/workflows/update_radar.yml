@@ -27,7 +27,7 @@ jobs:
         run: |
           python scripts/scrape_tibo.py
           python scripts/compute_stats.py
-          python scripts/build_final.py
+          python scripts/build_studio.py
 
       - name: Commit and Push if Changed
         run: |
