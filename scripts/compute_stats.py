@@ -15,7 +15,7 @@ def pt(ts):
     return datetime.strptime(ts[:19], "%Y-%m-%dT%H:%M:%S")
 
 last = recs[-1]
-now = datetime(2026, 10, 5, 12, 0, 0)
+now = datetime.utcnow()
 days_since = round((now - pt(last["at"])).total_seconds() / 86400, 1)
 
 gaps = [(pt(recs[i]["at"]) - pt(recs[i-1]["at"])).total_seconds()/86400 for i in range(1, len(recs))]
