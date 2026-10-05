@@ -404,46 +404,56 @@ def render_guides(code):
 </div>'''
 
 def render_monitors(code):
-    return '''<div class="monitor-card">
-  <div class="monitor-avatar" style="background:#0ecb81;color:#0b0e11">T</div>
+    return """<div class="monitor-card">
+  <div class="monitor-avatar">
+    <img class="monitor-avatar-img" src="/assets/avatars/tibo.jpg" alt="Tibo Sottiaux" width="42" height="42" loading="lazy">
+  </div>
   <div class="monitor-info">
     <div class="monitor-name">Tibo Sottiaux <span class="monitor-tag p1">PRIMARY</span></div>
     <div class="monitor-role">Head of Codex, OpenAI</div>
-    <a class="monitor-handle" href="https://x.com/thsottiaux" target="_blank" rel="noopener nofollow">@thsottiaux ↗</a>
+    <a class="monitor-handle" href="https://x.com/thsottiaux" target="_blank" rel="noopener nofollow">@thsottiaux &#x2197;</a>
   </div>
 </div>
 <div class="monitor-card">
-  <div class="monitor-avatar" style="background:#3b82f6;color:#ffffff">S</div>
+  <div class="monitor-avatar">
+    <img class="monitor-avatar-img" src="/assets/avatars/sama.jpg" alt="Sam Altman" width="42" height="42" loading="lazy">
+  </div>
   <div class="monitor-info">
     <div class="monitor-name">Sam Altman <span class="monitor-tag p1">EXECUTIVE</span></div>
     <div class="monitor-role">CEO, OpenAI</div>
-    <a class="monitor-handle" href="https://x.com/sama" target="_blank" rel="noopener nofollow">@sama ↗</a>
+    <a class="monitor-handle" href="https://x.com/sama" target="_blank" rel="noopener nofollow">@sama &#x2197;</a>
   </div>
 </div>
 <div class="monitor-card">
-  <div class="monitor-avatar" style="background:#FCD535;color:#181a20">O</div>
+  <div class="monitor-avatar">
+    <img class="monitor-avatar-img" src="/assets/avatars/openai.jpg" alt="OpenAI Official" width="42" height="42" loading="lazy">
+  </div>
   <div class="monitor-info">
     <div class="monitor-name">OpenAI Official <span class="monitor-tag p2">SYSTEM</span></div>
     <div class="monitor-role">Company Announcements</div>
-    <a class="monitor-handle" href="https://x.com/OpenAI" target="_blank" rel="noopener nofollow">@OpenAI ↗</a>
+    <a class="monitor-handle" href="https://x.com/OpenAI" target="_blank" rel="noopener nofollow">@OpenAI &#x2197;</a>
   </div>
 </div>
 <div class="monitor-card">
-  <div class="monitor-avatar" style="background:#a855f7;color:#ffffff">A</div>
+  <div class="monitor-avatar">
+    <img class="monitor-avatar-img" src="/assets/avatars/agekhtman.jpg" alt="Alexander Gekhtman" width="42" height="42" loading="lazy">
+  </div>
   <div class="monitor-info">
     <div class="monitor-name">Alexander Gekhtman <span class="monitor-tag p2">PRODUCT</span></div>
     <div class="monitor-role">Codex Product Lead</div>
-    <a class="monitor-handle" href="https://x.com/agekhtman" target="_blank" rel="noopener nofollow">@agekhtman ↗</a>
+    <a class="monitor-handle" href="https://x.com/agekhtman" target="_blank" rel="noopener nofollow">@agekhtman &#x2197;</a>
   </div>
 </div>
 <div class="monitor-card">
-  <div class="monitor-avatar" style="background:#06b6d4;color:#0b0e11">D</div>
+  <div class="monitor-avatar">
+    <img class="monitor-avatar-img" src="/assets/avatars/openaidevs.jpg" alt="OpenAI Developers" width="42" height="42" loading="lazy">
+  </div>
   <div class="monitor-info">
     <div class="monitor-name">OpenAI Developers <span class="monitor-tag p3">DEVREL</span></div>
     <div class="monitor-role">Platform & API Status</div>
-    <a class="monitor-handle" href="https://x.com/OpenAIDevs" target="_blank" rel="noopener nofollow">@OpenAIDevs ↗</a>
+    <a class="monitor-handle" href="https://x.com/OpenAIDevs" target="_blank" rel="noopener nofollow">@OpenAIDevs &#x2197;</a>
   </div>
-</div>'''
+</div>"""
 
 def render_footer_dir(code, base_href):
     if "zh" in code:
