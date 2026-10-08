@@ -381,39 +381,111 @@ CAL_TABLE_HTML = '''<table class="cal-table">
 </table>'''
 
 def render_direct_ans(code):
-    if "zh" in code:
-        return f'''<div class="direct-ans-banner">
+    # Check if a reset occurred within the last 24 hours (or today)
+    reset_recs = [r for r in recs if any(k in r.get("text", "").lower() for k in ["reset", "banked", "propagated"])]
+    l_rec = reset_recs[-1] if reset_recs else recs[-1]
+    l_dt = datetime.strptime(l_rec["at"][:19], "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc)
+    now_u = datetime.now(timezone.utc)
+    h_diff = max(0.1, (now_u - l_dt).total_seconds() / 3600.0)
+    is_today_reset = (h_diff < 24.0)
+    h_round = int(round(h_diff))
+    l_type = l_rec.get("type", "banked").upper()
+    badge_cls = l_rec.get("type", "banked")
+
+    # YES Stamp Badge SVG (Inspired by OpenTheRank)
+    yes_stamp = f'''<div class="dab-stamp yes">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="46" stroke="#0ecb81" stroke-width="2.2" stroke-dasharray="4 2"/>
+        <circle cx="50" cy="50" r="39" stroke="#0ecb81" stroke-width="1.2"/>
+        <text x="50" y="58" fill="#0ecb81" font-size="28" font-weight="900" text-anchor="middle" font-family="system-ui, sans-serif">Yes.</text>
+        <text x="50" y="74" fill="#0ecb81" font-size="8.5" font-weight="700" text-anchor="middle" letter-spacing="1.5">CONFIRMED</text>
+      </svg>
+    </div>'''
+
+    soon_stamp = f'''<div class="dab-stamp soon">
+      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="46" stroke="#FCD535" stroke-width="2.2" stroke-dasharray="4 2"/>
+        <circle cx="50" cy="50" r="39" stroke="#FCD535" stroke-width="1.2"/>
+        <text x="50" y="58" fill="#FCD535" font-size="24" font-weight="900" text-anchor="middle" font-family="system-ui, sans-serif">SOON</text>
+        <text x="50" y="74" fill="#FCD535" font-size="8.5" font-weight="700" text-anchor="middle" letter-spacing="1.5">{prob}% ODDS</text>
+      </svg>
+    </div>'''
+
+    if is_today_reset:
+        if "zh" in code:
+            return f'''<div class="direct-ans-banner">
   <div class="dab-left">
-    <span class="dab-badge"><span class="dot"></span> 实时状态判定：低放水概率 · 观察中</span>
-    <div class="dab-h">Codex 今天会全网重置吗？ <strong>今日暂无放水迹象（{prob}% 概率）</strong></div>
-    <div class="dab-p">今日尚未监测到官方全量重置记录。最近一次官方放水发生在 <strong>{days_since_str} 前</strong>（{last_date}）。建议保持正常开发节奏，下方可测算个人 5 小时解锁倒计时。</div>
+    <span class="dab-badge yes"><span class="dot"></span> 实时状态判定：今日已完成放水 (YES)</span>
+    <div class="dab-h">Codex 今天重置了吗？ <strong>是的，今日已重置！(Yes.)</strong></div>
+    <div class="dab-p">最新一次官方额度注入发生在 <strong>{h_round} 小时前</strong>（{last_date}，类型：<span class="badge {badge_cls}">{l_type}</span>）。额度已补充完毕，无需再等待！下方可测算个人 5 小时解锁倒计时。</div>
   </div>
-  <div class="dab-right">
-    <a href="#calculator" class="dab-btn">测算个人解锁时间 ↓</a>
+  <div class="dab-right-wrap">
+    {yes_stamp}
+    <a href="#calculator" class="dab-btn">测算个人解锁 ↓</a>
   </div>
 </div>'''
-    elif code == "ja":
-        return f'''<div class="direct-ans-banner">
+        elif code == "ja":
+            return f'''<div class="direct-ans-banner">
   <div class="dab-left">
-    <span class="dab-badge"><span class="dot"></span> リアルタイム判定：低確率 · 観測中</span>
-    <div class="dab-h">Codexは今日リセットされますか？ <strong>現時点でリセットなし（確率 {prob}%）</strong></div>
-    <div class="dab-p">本日公式による一括リセットは記録されていません。直近のリセットは <strong>{days_since_str} 前</strong>（{last_date}）です。個人向け5時間制限の回復時間は以下より算出できます。</div>
+    <span class="dab-badge yes"><span class="dot"></span> リアルタイム判定：本日リセット完了 (YES)</span>
+    <div class="dab-h">Codexは今日リセットされましたか？ <strong>はい、本日リセットされました (Yes.)</strong></div>
+    <div class="dab-p">直近の公式リセットは <strong>{h_round} 時間前</strong> に完了しました（{last_date}、種別：<span class="badge {badge_cls}">{l_type}</span>）。利用枠は回復済みです。</div>
   </div>
-  <div class="dab-right">
-    <a href="#calculator" class="dab-btn">個人の解除時間を計算 ↓</a>
+  <div class="dab-right-wrap">
+    {yes_stamp}
+    <a href="#calculator" class="dab-btn">解除時間を計算 ↓</a>
+  </div>
+</div>'''
+        else:
+            return f'''<div class="direct-ans-banner">
+  <div class="dab-left">
+    <span class="dab-badge yes"><span class="dot"></span> LIVE VERDICT: RESET CONFIRMED TODAY (YES)</span>
+    <div class="dab-h">Will Codex reset today? <strong>Yes. The latest reset landed {h_round}h ago.</strong></div>
+    <div class="dab-p">Latest recorded reset landed <strong>{h_round} hours ago</strong> ({last_date}, type: <span class="badge {badge_cls}">{l_type}</span>). Global quotas have been replenished today — build with confidence.</div>
+  </div>
+  <div class="dab-right-wrap">
+    {yes_stamp}
+    <a href="#calculator" class="dab-btn">Check 5h Window ↓</a>
   </div>
 </div>'''
     else:
-        return f'''<div class="direct-ans-banner">
+        # Not reset today yet
+        if prob >= 60:
+            stamp = soon_stamp
+            badge_str = "HIGH SIGNAL · PROBABLE"
+            zh_title = f"Codex 今天会全网重置吗？ <strong>今日放水概率较高 ({prob}% 预测)</strong>"
+            en_title = f"Will Codex reset today? <strong>High probability ({prob}% chance)</strong>"
+        else:
+            stamp = ""
+            badge_str = "LOW SIGNAL · WATCHING"
+            zh_title = f"Codex 今天会全网重置吗？ <strong>今日暂无放水迹象 ({prob}% 概率)</strong>"
+            en_title = f"Will Codex reset today? <strong>Not yet ({prob}% probability)</strong>"
+
+        if "zh" in code:
+            return f'''<div class="direct-ans-banner">
   <div class="dab-left">
-    <span class="dab-badge"><span class="dot"></span> LIVE VERDICT: LOW SIGNAL · WATCHING</span>
-    <div class="dab-h">Will Codex reset today? <strong>Not yet ({prob}% probability)</strong></div>
-    <div class="dab-p">No global reset recorded today. The last verified reset was <strong>{days_since_str} ago</strong> ({last_date}). Normal building conditions — calculate your personal 5-hour rolling window below.</div>
+    <span class="dab-badge"><span class="dot"></span> 实时状态判定：{badge_str}</span>
+    <div class="dab-h">{zh_title}</div>
+    <div class="dab-p">今日尚未监测到官方全量重置记录。最近一次官方放水发生在 <strong>{days_since_str} 前</strong>（{last_date}）。建议保持正常开发节奏，下方可测算个人 5 小时解锁倒计时。</div>
   </div>
-  <div class="dab-right">
-    <a href="#calculator" class="dab-btn">Check Personal Recovery ↓</a>
+  <div class="dab-right-wrap">
+    {stamp}
+    <a href="#calculator" class="dab-btn">测算个人解锁 ↓</a>
   </div>
 </div>'''
+        else:
+            return f'''<div class="direct-ans-banner">
+  <div class="dab-left">
+    <span class="dab-badge"><span class="dot"></span> LIVE VERDICT: {badge_str}</span>
+    <div class="dab-h">{en_title}</div>
+    <div class="dab-p">No global reset recorded today. The last verified reset was <strong>{days_since_str} ago</strong> ({last_date}). Normal building conditions — calculate your personal 5-hour rolling window below.</div>
+  </div>
+  <div class="dab-right-wrap">
+    {stamp}
+    <a href="#calculator" class="dab-btn">Check Recovery ↓</a>
+  </div>
+</div>'''
+
 
 def render_guides(code):
     if "zh" in code:
