@@ -178,8 +178,26 @@ SWITCH_ITEMS = "".join(switch_items)
 
 
 # Compact resets for client-side calendar navigation
-compact_resets = []
+by_dt = {}
 for r in recs:
+    key = (r["at"][:10], r["type"])
+    by_dt.setdefault(key, []).append(r)
+
+deduped_recs = []
+for (d, t), items in by_dt.items():
+    if len(items) > 1 and t == "regular":
+        confirmed = [x for x in items if x.get("status") == "confirmed"]
+        if confirmed:
+            deduped_recs.extend(confirmed)
+        else:
+            deduped_recs.append(items[-1])
+    else:
+        deduped_recs.extend(items)
+
+deduped_recs.sort(key=lambda x: x["at"])
+
+compact_resets = []
+for r in deduped_recs:
     d = r["at"][:10]
     t = r["type"]
     time_str = r["at"][11:16] if len(r["at"]) > 16 else ""
@@ -453,12 +471,12 @@ def render_monitors(code):
 </div>
 <div class="monitor-card">
   <div class="monitor-avatar">
-    <img class="monitor-avatar-img" src="/assets/avatars/agekhtman.jpg" alt="Alexander Gekhtman" width="42" height="42" loading="lazy">
+    <img class="monitor-avatar-img" src="/assets/avatars/kevinweil.jpg" alt="Kevin Weil" width="42" height="42" loading="lazy">
   </div>
   <div class="monitor-info">
-    <div class="monitor-name">Alexander Gekhtman <span class="monitor-tag p2">PRODUCT</span></div>
-    <div class="monitor-role">Codex Product Lead</div>
-    <a class="monitor-handle" href="https://x.com/agekhtman" target="_blank" rel="noopener nofollow">@agekhtman &#x2197;</a>
+    <div class="monitor-name">Kevin Weil <span class="monitor-tag p2">PRODUCT</span></div>
+    <div class="monitor-role">Chief Product Officer, OpenAI</div>
+    <a class="monitor-handle" href="https://x.com/kevinweil" target="_blank" rel="noopener nofollow">@kevinweil &#x2197;</a>
   </div>
 </div>
 <div class="monitor-card">

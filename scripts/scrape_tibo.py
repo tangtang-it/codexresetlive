@@ -123,7 +123,17 @@ for p in posts:
     else:
         merged[p["id"]] = p
 
-records = sorted(merged.values(), key=lambda x: x["at"])
+valid_records = []
+reset_keywords = ["reset", "quota", "limit", "refill", "banked", "cleared", "propagated", "bonus", "capacity"]
+for r in merged.values():
+    t = r.get("text", "").lower()
+    if t:
+        if any(k in t for k in reset_keywords):
+            valid_records.append(r)
+    else:
+        valid_records.append(r)
+
+records = sorted(valid_records, key=lambda x: x["at"])
 print(f"Total merged records count: {len(records)}")
 
 with open(CACHE_FILE, "w", encoding="utf-8") as f:

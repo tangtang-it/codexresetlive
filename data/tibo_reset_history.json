@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 59,
+  "total": 58,
   "records": [
     {
       "id": "1968163721034994139",
@@ -469,14 +469,6 @@
       "type": "regular",
       "status": "confirmed",
       "text": "Confirmed landed across all accounts. How are we doing so far?",
-      "url": "https://x.com/thsottiaux"
-    },
-    {
-      "id": "2108159238472912896",
-      "at": "2026-10-08T07:30:00.000Z",
-      "type": "regular",
-      "status": "confirmed",
-      "text": "Day 3 (encore)/ We silently re-shipped codex cloud. It's pretty good now. Codex  Tailscale: Codex Cloud can now securely connect to resources on your tailnet with Tailscale.",
       "url": "https://x.com/thsottiaux"
     }
   ]
