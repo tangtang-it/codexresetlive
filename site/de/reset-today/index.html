@@ -720,8 +720,8 @@ Live
 <div class="direct-ans-banner">
   <div class="dab-left">
     <span class="dab-badge yes"><span class="dot"></span> LIVE VERDICT: RESET CONFIRMED TODAY (YES)</span>
-    <div class="dab-h">Will Codex reset today? <strong>Yes. The latest reset landed 16h ago.</strong></div>
-    <div class="dab-p">Latest recorded reset landed <strong>16 hours ago</strong> (2026-10-08, type: <span class="banked-wrap" tabindex="0" onclick="this.classList.toggle('active')"><span class="badge banked">BANKED</span><span class="banked-info-icon" title="查看使用说明">?</span><span class="banked-tooltip">Dies ist ein Banked Reset: Muss unter Codex &quot;Einstellungen → Nutzung&quot; manuell eingelöst werden.</span></span>). Global quotas have been replenished today — build with confidence.</div>
+    <div class="dab-h">Will Codex reset today? <strong>Yes. The latest reset landed 17h ago.</strong></div>
+    <div class="dab-p">Latest recorded reset landed <strong data-ago-utc="2026-10-07T19:19:17.000Z">17 hours ago</strong> (2026-10-08, type: <span class="banked-wrap" tabindex="0" onclick="this.classList.toggle('active')"><span class="badge banked">BANKED</span><span class="banked-info-icon" title="查看使用说明">?</span><span class="banked-tooltip">Dies ist ein Banked Reset: Muss unter Codex &quot;Einstellungen → Nutzung&quot; manuell eingelöst werden.</span></span>). Global quotas have been replenished today — build with confidence.</div>
   </div>
   <div class="dab-right-wrap">
     <div class="dab-stamp yes">
@@ -1562,6 +1562,34 @@ Projected 48h
     document.querySelectorAll('[data-utc]').forEach(function(el){
       var d=new Date(el.getAttribute('data-utc'));
       if(!isNaN(d)) el.textContent=fmt.format(d);
+  // Live relative time updater for [data-ago-utc]
+  function updateAgo(){
+    var lang = document.documentElement.lang || "en";
+    document.querySelectorAll("[data-ago-utc]").forEach(function(el){
+      var d = new Date(el.getAttribute("data-ago-utc"));
+      if(isNaN(d.getTime())) return;
+      var diffMs = Date.now() - d.getTime();
+      var diffSec = Math.max(0, Math.floor(diffMs / 1000));
+      var diffMin = Math.floor(diffSec / 60);
+      var diffH = Math.floor(diffMin / 60);
+      var diffD = Math.floor(diffH / 24);
+      if(lang.indexOf("zh") === 0){
+        if(diffH < 1) el.textContent = Math.max(1, diffMin) + " 分钟前";
+        else if(diffH < 24) el.textContent = diffH + " 小时前";
+        else el.textContent = diffD + " 天前";
+      } else if(lang === "ja"){
+        if(diffH < 1) el.textContent = Math.max(1, diffMin) + " 分前";
+        else if(diffH < 24) el.textContent = diffH + " 時間前";
+        else el.textContent = diffD + " 日前";
+      } else {
+        if(diffH < 1) el.textContent = Math.max(1, diffMin) + "m ago";
+        else if(diffH < 24) el.textContent = diffH + "h ago";
+        else el.textContent = diffD + "d ago";
+      }
+    });
+  }
+  updateAgo();
+  setInterval(updateAgo, 60000);
     });
   }
 

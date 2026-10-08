@@ -436,6 +436,34 @@ __FOOTER_DIR_HTML__
     document.querySelectorAll('[data-utc]').forEach(function(el){
       var d=new Date(el.getAttribute('data-utc'));
       if(!isNaN(d)) el.textContent=fmt.format(d);
+  // Live relative time updater for [data-ago-utc]
+  function updateAgo(){
+    var lang = document.documentElement.lang || "en";
+    document.querySelectorAll("[data-ago-utc]").forEach(function(el){
+      var d = new Date(el.getAttribute("data-ago-utc"));
+      if(isNaN(d.getTime())) return;
+      var diffMs = Date.now() - d.getTime();
+      var diffSec = Math.max(0, Math.floor(diffMs / 1000));
+      var diffMin = Math.floor(diffSec / 60);
+      var diffH = Math.floor(diffMin / 60);
+      var diffD = Math.floor(diffH / 24);
+      if(lang.indexOf("zh") === 0){
+        if(diffH < 1) el.textContent = Math.max(1, diffMin) + " 分钟前";
+        else if(diffH < 24) el.textContent = diffH + " 小时前";
+        else el.textContent = diffD + " 天前";
+      } else if(lang === "ja"){
+        if(diffH < 1) el.textContent = Math.max(1, diffMin) + " 分前";
+        else if(diffH < 24) el.textContent = diffH + " 時間前";
+        else el.textContent = diffD + " 日前";
+      } else {
+        if(diffH < 1) el.textContent = Math.max(1, diffMin) + "m ago";
+        else if(diffH < 24) el.textContent = diffH + "h ago";
+        else el.textContent = diffD + "d ago";
+      }
+    });
+  }
+  updateAgo();
+  setInterval(updateAgo, 60000);
     });
   }
 

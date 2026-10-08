@@ -419,7 +419,7 @@ def render_direct_ans(code):
   <div class="dab-left">
     <span class="dab-badge yes"><span class="dot"></span> 实时状态判定：今日已完成放水 (YES)</span>
     <div class="dab-h">Codex 今天重置了吗？ <strong>是的，今日已重置！(Yes.)</strong></div>
-    <div class="dab-p">最新一次官方额度注入发生在 <strong>{h_round} 小时前</strong>（{last_date}，类型：{type_badge}）。额度已补充完毕，无需再等待！下方可测算个人 5 小时解锁倒计时。</div>
+    <div class="dab-p">最新一次官方额度注入发生在 <strong data-ago-utc="{l_rec['at']}">{h_round} 小时前</strong>（{last_date}，类型：{type_badge}）。额度已补充完毕，无需再等待！下方可测算个人 5 小时解锁倒计时。</div>
   </div>
   <div class="dab-right-wrap">
     {yes_stamp}
@@ -431,7 +431,7 @@ def render_direct_ans(code):
   <div class="dab-left">
     <span class="dab-badge yes"><span class="dot"></span> リアルタイム判定：本日リセット完了 (YES)</span>
     <div class="dab-h">Codexは今日リセットされましたか？ <strong>はい、本日リセットされました (Yes.)</strong></div>
-    <div class="dab-p">直近の公式リセットは <strong>{h_round} 時間前</strong> に完了しました（{last_date}、種別：{type_badge}）。利用枠は回復済みです。</div>
+    <div class="dab-p">直近の公式リセットは <strong data-ago-utc="{l_rec['at']}">{h_round} 時間前</strong> に完了しました（{last_date}、種別：{type_badge}）。利用枠は回復済みです。</div>
   </div>
   <div class="dab-right-wrap">
     {yes_stamp}
@@ -443,7 +443,7 @@ def render_direct_ans(code):
   <div class="dab-left">
     <span class="dab-badge yes"><span class="dot"></span> LIVE VERDICT: RESET CONFIRMED TODAY (YES)</span>
     <div class="dab-h">Will Codex reset today? <strong>Yes. The latest reset landed {h_round}h ago.</strong></div>
-    <div class="dab-p">Latest recorded reset landed <strong>{h_round} hours ago</strong> ({last_date}, type: {type_badge}). Global quotas have been replenished today — build with confidence.</div>
+    <div class="dab-p">Latest recorded reset landed <strong data-ago-utc="{l_rec['at']}">{h_round} hours ago</strong> ({last_date}, type: {type_badge}). Global quotas have been replenished today — build with confidence.</div>
   </div>
   <div class="dab-right-wrap">
     {yes_stamp}
