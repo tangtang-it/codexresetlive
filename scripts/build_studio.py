@@ -6,6 +6,7 @@ from pathlib import Path
 ROOT_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT_DIR))
 
+from banked_tooltips import render_banked_badge, render_stream_items
 from _i18n_priority import I18N
 from _i18n_rest import I18N2
 
@@ -391,6 +392,7 @@ def render_direct_ans(code):
     h_round = int(round(h_diff))
     l_type = l_rec.get("type", "banked").upper()
     badge_cls = l_rec.get("type", "banked")
+    type_badge = render_banked_badge(code, l_type) if badge_cls == "banked" else f'<span class="badge {badge_cls}">{l_type}</span>'
 
     # YES Stamp Badge SVG (Inspired by OpenTheRank)
     yes_stamp = f'''<div class="dab-stamp yes">
@@ -417,7 +419,7 @@ def render_direct_ans(code):
   <div class="dab-left">
     <span class="dab-badge yes"><span class="dot"></span> 实时状态判定：今日已完成放水 (YES)</span>
     <div class="dab-h">Codex 今天重置了吗？ <strong>是的，今日已重置！(Yes.)</strong></div>
-    <div class="dab-p">最新一次官方额度注入发生在 <strong>{h_round} 小时前</strong>（{last_date}，类型：<span class="badge {badge_cls}">{l_type}</span>）。额度已补充完毕，无需再等待！下方可测算个人 5 小时解锁倒计时。</div>
+    <div class="dab-p">最新一次官方额度注入发生在 <strong>{h_round} 小时前</strong>（{last_date}，类型：{type_badge}）。额度已补充完毕，无需再等待！下方可测算个人 5 小时解锁倒计时。</div>
   </div>
   <div class="dab-right-wrap">
     {yes_stamp}
@@ -429,7 +431,7 @@ def render_direct_ans(code):
   <div class="dab-left">
     <span class="dab-badge yes"><span class="dot"></span> リアルタイム判定：本日リセット完了 (YES)</span>
     <div class="dab-h">Codexは今日リセットされましたか？ <strong>はい、本日リセットされました (Yes.)</strong></div>
-    <div class="dab-p">直近の公式リセットは <strong>{h_round} 時間前</strong> に完了しました（{last_date}、種別：<span class="badge {badge_cls}">{l_type}</span>）。利用枠は回復済みです。</div>
+    <div class="dab-p">直近の公式リセットは <strong>{h_round} 時間前</strong> に完了しました（{last_date}、種別：{type_badge}）。利用枠は回復済みです。</div>
   </div>
   <div class="dab-right-wrap">
     {yes_stamp}
@@ -441,7 +443,7 @@ def render_direct_ans(code):
   <div class="dab-left">
     <span class="dab-badge yes"><span class="dot"></span> LIVE VERDICT: RESET CONFIRMED TODAY (YES)</span>
     <div class="dab-h">Will Codex reset today? <strong>Yes. The latest reset landed {h_round}h ago.</strong></div>
-    <div class="dab-p">Latest recorded reset landed <strong>{h_round} hours ago</strong> ({last_date}, type: <span class="badge {badge_cls}">{l_type}</span>). Global quotas have been replenished today — build with confidence.</div>
+    <div class="dab-p">Latest recorded reset landed <strong>{h_round} hours ago</strong> ({last_date}, type: {type_badge}). Global quotas have been replenished today — build with confidence.</div>
   </div>
   <div class="dab-right-wrap">
     {yes_stamp}
@@ -855,7 +857,7 @@ for code, d, name, loc, base_url in LANGS:
     p1_body = p1_body.replace("__RO_4_L__", "Active Developers").replace("__RO_4_S__", "43M+ Estimated users")
 
     p1_body = p1_body.replace("__STUDIO_T__", esc(studio_t)).replace("__STUDIO_S__", esc(studio_s)).replace("__COL1_T__", esc(col1_t))
-    p1_body = p1_body.replace("__MOVE_ITEMS__", render_move_items(code)).replace("__STREAM_ITEMS__", STREAM_ITEMS)
+    p1_body = p1_body.replace("__MOVE_ITEMS__", render_move_items(code)).replace("__STREAM_ITEMS__", render_stream_items(recs, code, esc))
     p1_body = p1_body.replace("__COL3_T__", esc(col3_t)).replace("__SWITCH_ITEMS__", SWITCH_ITEMS)
 
     p1_body = p1_body.replace("__CAL_RADAR_T__", esc(cal_radar_t)).replace("__CAL_RADAR_S__", esc(cal_radar_s)).replace("__CAL_TABLE_HTML__", CAL_TABLE_HTML)
