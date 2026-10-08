@@ -136,6 +136,11 @@
   ]
 }
 </script>
+<!-- High-Craft Typography: Inter & JetBrains Mono -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
 :root{
 --primary:#FCD535;--primary-active:#f0b90b;--primary-disabled:#3a3a1f;
@@ -326,17 +331,18 @@ display:block;margin-bottom:6px}
 .sec-s{font-size:13px;color:var(--muted);margin-top:5px;max-width:680px}
 
 /* ---------- 3-Column Studio Workspace ---------- */
-.studio-grid{display:grid;grid-template-columns:1fr 1.35fr 1fr;gap:18px;margin-bottom:48px}
+.studio-grid{display:grid;grid-template-columns:1fr 1.35fr 1fr;gap:18px;margin-bottom:48px;align-items:stretch}
 .studio-col{background:var(--card);border:1px solid var(--hairline);border-radius:var(--r-xl);padding:20px;
-display:flex;flex-direction:column;gap:16px}
+display:flex;flex-direction:column;gap:16px;height:100%;box-sizing:border-box}
 .col-header{display:flex;justify-content:space-between;align-items:center;padding-bottom:12px;
 border-bottom:1px solid var(--hairline)}
-.col-t{font-size:13px;font-weight:700;color:var(--on-dark);text-transform:uppercase;letter-spacing:.4px}
+.col-t{font-size:13px;font-weight:700;color:var(--on-dark);text-transform:uppercase;letter-spacing:.4px;display:inline-flex;align-items:center;gap:8px}
+.col-t-avatar{width:22px;height:22px;border-radius:50%;object-fit:cover;border:1px solid rgba(255,255,255,0.18);box-shadow:0 1px 3px rgba(0,0,0,0.35);flex-shrink:0}
 .col-badge{font-size:10px;font-family:var(--mono);padding:2px 7px;border-radius:var(--r-pill);
 background:var(--elevated);color:var(--muted-strong)}
 
 /* Col 1: What moved model events */
-.move-list{display:flex;flex-direction:column;gap:11px;max-height:460px;overflow-y:auto;padding-right:4px}
+.move-list{display:flex;flex-direction:column;gap:11px;flex:1 1 0%;min-height:0;overflow-y:auto;padding-right:4px}
 .move-item{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:var(--r-lg);background:var(--canvas);border:1px solid var(--hairline);transition:border-color .15s}
 .move-item:hover{border-color:rgba(252,213,53,.35)}
 .move-icon{width:24px;height:24px;flex:0 0 24px;border-radius:var(--r-sm);background:rgba(252,213,53,.1);
@@ -353,7 +359,7 @@ color:var(--primary);display:flex;align-items:center;justify-content:center;font
 .move-reason{font-size:11px;color:var(--muted);margin-top:4px;border-left:2px solid var(--hairline);padding-left:6px;line-height:1.45}
 
 /* Col 2: Tibo posts stream */
-.stream-box{display:flex;flex-direction:column;gap:12px;max-height:460px;overflow-y:auto;padding-right:4px}
+.stream-box{display:flex;flex-direction:column;gap:12px;flex:1 1 0%;min-height:0;overflow-y:auto;padding-right:4px}
 .post-mini{padding:12px;border-radius:var(--r-lg);background:var(--canvas);border:1px solid var(--hairline);
 display:flex;flex-direction:column;gap:8px}
 .pm-head{display:flex;justify-content:space-between;align-items:center;font-size:11px}
@@ -681,6 +687,377 @@ h1{font-size:36px}
 .tz-indicator{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);margin-top:4px}
 .tz-indicator svg{width:12px;height:12px;color:var(--primary);flex-shrink:0}
 
+
+/* ---------- UI/UX Pro Max: De-AI & Precision Telemetry ---------- */
+.dab-telemetry-badge {
+  background: #14171d;
+  border: 1px solid #282f38;
+  border-radius: 12px;
+  padding: 10px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  min-width: 170px;
+}
+.dab-telemetry-badge.standby {
+  border-color: #383120;
+}
+.dt-top {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.dt-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #707a8a;
+  letter-spacing: 0.06em;
+  font-family: var(--mono);
+  text-transform: uppercase;
+}
+.dt-source {
+  font-size: 11.5px;
+  color: #eaecef;
+}
+.dt-source strong {
+  color: #FCD535;
+}
+.dt-time {
+  font-size: 11px;
+  color: #707a8a;
+  font-family: var(--mono);
+}
+.dt-prob-pill {
+  margin-top: 4px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 10.5px;
+  font-weight: 700;
+  font-family: var(--mono);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: fit-content;
+}
+.dt-prob-pill.yes {
+  background: rgba(14, 203, 129, 0.14);
+  color: #0ecb81;
+  border: 1px solid rgba(14, 203, 129, 0.3);
+}
+.dt-prob-pill.yellow {
+  background: rgba(252, 213, 53, 0.14);
+  color: #FCD535;
+  border: 1px solid rgba(252, 213, 53, 0.3);
+}
+
+.dot-live {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #0ecb81;
+  box-shadow: 0 0 8px #0ecb81;
+  animation: dt-pulse 2s infinite ease-in-out;
+}
+.dot-amber {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #FCD535;
+  box-shadow: 0 0 8px #FCD535;
+  animation: dt-pulse 2s infinite ease-in-out;
+}
+@keyframes dt-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.25); opacity: 0.6; }
+}
+
+/* De-AI Precision Font Stacks */
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+  letter-spacing: -0.01em;
+}
+.num, [data-ago-utc], [data-local-dt], .dt-time, .ro-v, .gauge-num, .dial-num {
+  font-family: "JetBrains Mono", ui-monospace, "SF Mono", monospace !important;
+  font-variant-numeric: tabular-nums;
+}
+h1, h2, h3, .h1, .h2, .h3 {
+  letter-spacing: -0.025em !important;
+}
+
+/* Card Clean Hairlines (No cheap heavy glow) */
+.card-box, .gauge-wrap, .chart-svg-wrap, .studio-col, .calc, .cal-grid-card, .direct-ans-banner {
+  border: 1px solid #23272e !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+  transition: border-color 0.2s ease;
+}
+.card-box:hover, .studio-col:hover, .calc:hover {
+  border-color: #353c48 !important;
+}
+
+/* Strict Sizing Guardrails */
+svg:not([width]):not([height]) {
+  max-width: 100%;
+}
+.ico, .ico svg {
+  width: 15px !important;
+  height: 15px !important;
+  display: inline-block;
+  vertical-align: -2px;
+}
+.tool-ic svg {
+  width: 18px !important;
+  height: 18px !important;
+}
+.leg-item svg {
+  width: 16px !important;
+  height: 16px !important;
+  flex-shrink: 0;
+}
+.brand-mark svg {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+
+/* ---------- OpenTheRank-Inspired High-Impact Stamp Banner ---------- */
+.direct-ans-banner {
+  border-radius: 20px !important;
+  background: radial-gradient(circle at 86% 50%, rgba(14, 203, 129, 0.16) 0%, rgba(20, 24, 30, 0.98) 60%), #12151b !important;
+  border: 1px solid rgba(14, 203, 129, 0.28) !important;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  padding: 24px 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 24px !important;
+  margin-bottom: 24px !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+
+.dab-left {
+  flex: 1 1 0% !important;
+  min-width: 280px !important;
+}
+
+.dab-h {
+  font-size: 26px !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  letter-spacing: -0.02em !important;
+  margin: 6px 0 8px !important;
+  line-height: 1.25 !important;
+}
+.dab-h strong {
+  color: #0ecb81 !important;
+}
+
+.dab-p {
+  font-size: 14px !important;
+  color: #a0a6b2 !important;
+  line-height: 1.55 !important;
+  margin-bottom: 12px !important;
+}
+.dab-p strong {
+  color: #ffffff !important;
+}
+
+.dab-rec-line {
+  font-size: 12.5px !important;
+  color: #707a8a !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex-wrap: wrap !important;
+  margin-bottom: 6px !important;
+}
+.dab-rec-dt {
+  color: #eaecef !important;
+  font-weight: 600 !important;
+}
+
+.dab-right-wrap {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 12px !important;
+  flex-shrink: 0 !important;
+}
+
+/* Eye-Catching SVG Circular Stamp */
+.openthe-stamp-wrap {
+  width: 170px !important;
+  height: 170px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transform: rotate(-4deg);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
+}
+.openthe-stamp-wrap:hover {
+  transform: rotate(0deg) scale(1.05);
+}
+
+.stamp-svg {
+  width: 100% !important;
+  height: 100% !important;
+  overflow: visible !important;
+}
+
+/* Subtle Slow Rotation of Outer Orbit Track */
+.stamp-spin-orbit {
+  animation: stamp-orbit-spin 36s linear infinite;
+  transform-origin: 110px 110px;
+}
+@keyframes stamp-orbit-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stamp-spin-orbit {
+    animation: none;
+  }
+}
+
+.dab-btn {
+  background: #1e2329 !important;
+  border: 1px solid #2b3139 !important;
+  color: #eaecef !important;
+  padding: 6px 14px !important;
+  border-radius: 9999px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  transition: all 0.15s ease !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+}
+.dab-btn:hover {
+  background: #2b3139 !important;
+  border-color: #FCD535 !important;
+  color: #FCD535 !important;
+}
+
+@media (max-width: 768px) {
+  .direct-ans-banner {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    padding: 20px 20px !important;
+  }
+  .dab-right-wrap {
+    width: 100% !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    margin-top: 14px !important;
+  }
+  .openthe-stamp-wrap {
+    width: 120px !important;
+    height: 120px !important;
+  }
+}
+
+
+/* Studio 3-Column Strict Bottom Alignment Guarantee */
+.studio-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1.35fr 1fr !important;
+  align-items: stretch !important;
+}
+.studio-col {
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-sizing: border-box !important;
+}
+.studio-col > .col-header {
+  flex-shrink: 0 !important;
+}
+.studio-col > .move-list,
+.studio-col > .stream-box {
+  flex: 1 1 0% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow-y: auto !important;
+}
+@media(max-width:1020px){
+  .studio-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .studio-col > .move-list,
+  .studio-col > .stream-box {
+    max-height: 480px !important;
+  }
+}
+
+
+/* ---------- Studio 3-Column Compact Height & Pixel Alignment ---------- */
+.studio-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1.35fr 1fr !important;
+  gap: 18px !important;
+  margin-bottom: 36px !important;
+  align-items: stretch !important;
+}
+.studio-col {
+  height: 520px !important;
+  max-height: 520px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 12px !important;
+  padding: 18px !important;
+  box-sizing: border-box !important;
+  overflow: hidden !important;
+}
+.studio-col > .col-header {
+  flex-shrink: 0 !important;
+  padding-bottom: 10px !important;
+}
+.studio-col > .move-list,
+.studio-col > .stream-box {
+  flex: 1 1 0% !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow-y: auto !important;
+  padding-right: 4px !important;
+}
+.switch-user-card {
+  padding: 10px 12px !important;
+  gap: 2px !important;
+  flex-shrink: 0 !important;
+}
+.switch-user-card .suc-num {
+  font-size: 22px !important;
+  line-height: 1.1 !important;
+}
+.switch-items {
+  flex: 1 1 0% !important;
+  min-height: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 5px !important;
+}
+.switch-row {
+  padding: 5px 10px !important;
+  font-size: 11.5px !important;
+}
+@media(max-width:1020px){
+  .studio-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .studio-col {
+    height: auto !important;
+    max-height: none !important;
+  }
+  .studio-col > .move-list,
+  .studio-col > .stream-box {
+    max-height: 420px !important;
+  }
+}
+
 </style>
 </head>
 
@@ -737,8 +1114,8 @@ En vivo
 <div class="direct-ans-banner">
   <div class="dab-left">
     <span class="dab-badge yes"><span class="dot"></span> LIVE VERDICT: RESET CONFIRMED TODAY (YES)</span>
-    <div class="dab-h">Will Codex reset today? <strong>Yes. The latest reset landed 17h ago.</strong></div>
-    <div class="dab-p">Latest recorded reset landed <strong data-ago-utc="2026-10-07T19:19:17.000Z">17 hours ago</strong>. Global quotas have been replenished today — build with confidence.</div>
+    <div class="dab-h">Will Codex reset today? <strong>Yes. The latest reset landed <span data-ago-utc="2026-10-07T19:19:17.000Z">20h ago</span>.</strong></div>
+    <div class="dab-p">Latest recorded reset landed <strong data-ago-utc="2026-10-07T19:19:17.000Z">20 hours ago</strong>. Global quotas have been replenished today — build with confidence.</div>
     <div class="dab-rec-line">
       <span>Latest recorded reset:</span>
       <span class="dab-rec-dt" data-local-dt="2026-10-07T19:19:17.000Z">Thu, Oct 8, 2026, 03:19</span>
@@ -748,12 +1125,37 @@ En vivo
     <div class="tz-indicator"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> <span data-tz-display>Displayed in your local timezone</span></div>
   </div>
   <div class="dab-right-wrap">
-    <div class="dab-stamp yes">
-      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="46" stroke="#0ecb81" stroke-width="2.2" stroke-dasharray="4 2"/>
-        <circle cx="50" cy="50" r="39" stroke="#0ecb81" stroke-width="1.2"/>
-        <text x="50" y="58" fill="#0ecb81" font-size="28" font-weight="900" text-anchor="middle" font-family="system-ui, sans-serif">Yes.</text>
-        <text x="50" y="74" fill="#0ecb81" font-size="8.5" font-weight="700" text-anchor="middle" letter-spacing="1.5">CONFIRMED</text>
+    <div class="openthe-stamp-wrap yes">
+      <svg class="stamp-svg" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <path id="circleTextPathYes" d="M 110, 110 m -82, 0 a 82,82 0 1,1 164,0 a 82,82 0 1,1 -164,0" />
+          <filter id="glowGreenBig" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        
+        <!-- 环形自转轨道与文字 -->
+        <g class="stamp-spin-orbit">
+          <circle cx="110" cy="110" r="98" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.35"/>
+          <circle cx="110" cy="110" r="82" stroke="#0ecb81" stroke-width="1.6" stroke-dasharray="4 3" stroke-opacity="0.75"/>
+          <circle cx="110" cy="110" r="68" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.4"/>
+          <text fill="#0ecb81" font-size="9" font-family="'JetBrains Mono', ui-monospace, monospace" font-weight="700" letter-spacing="2.6" opacity="0.85">
+            <textPath href="#circleTextPathYes" startOffset="0%">
+              OPENAI CODEX RESET &bull; VERIFIED FLUSH &bull; 
+            </textPath>
+          </text>
+        </g>
+
+        <!-- 超大醒目的 Yes. 与下划虚线 -->
+        <g class="stamp-center" filter="url(#glowGreenBig)">
+          <text x="110" y="118" fill="#0ecb81" font-size="54" font-weight="900" text-anchor="middle" font-family="'Inter', system-ui, -apple-system, sans-serif" letter-spacing="-1">Yes.</text>
+          <line x1="68" y1="132" x2="152" y2="132" stroke="#0ecb81" stroke-width="2" stroke-dasharray="3 3" stroke-opacity="0.85"/>
+          <text x="110" y="148" fill="#0ecb81" font-size="9.5" font-weight="800" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" letter-spacing="2">CONFIRMED</text>
+        </g>
       </svg>
     </div>
     <a href="#calculator" class="dab-btn">Check 5h Window ↓</a>
@@ -785,8 +1187,8 @@ En vivo
 </div>
 </div>
 <div class="gauge-foot">
-<span>Último reinicio <b class="num">2026-10-08</b></span>
-<span>Días desde <b class="num">0.7d</b></span>
+<span>Último reinicio <b class="num" data-local-date-only="2026-10-07T19:19:17.000Z">2026-10-07</b></span>
+<span>Días desde <b class="num" data-days-since-utc="2026-10-07T19:19:17.000Z">0.8d</b></span>
 </div>
 </div>
 
@@ -896,8 +1298,8 @@ Projected 48h
 </div>
 <div class="readout-item">
 <div class="ro-l">Days Since Reset</div>
-<div class="ro-v num">0.7d</div>
-<div class="ro-s">Last: 2026-10-08</div>
+<div class="ro-v num" data-days-since-utc="2026-10-07T19:19:17.000Z">0.8d</div>
+<div class="ro-s">Last: <span data-local-date-only="2026-10-07T19:19:17.000Z">2026-10-07</span></div>
 </div>
 <div class="readout-item">
 <div class="ro-l">Active Developers</div>
@@ -1018,7 +1420,7 @@ Projected 48h
 <!-- Col 2: Tibo Sottiaux Stream -->
 <div class="studio-col">
 <div class="col-header">
-<span class="col-t">Tibo Sottiaux (@thsottiaux)</span>
+<span class="col-t"><img class="col-t-avatar" src="/assets/avatars/tibo.jpg" alt="Tibo Sottiaux" width="22" height="22" loading="lazy">Tibo Sottiaux (@thsottiaux)</span>
 <span class="col-badge">58 VERIFIED</span>
 </div>
 <div class="stream-box">
@@ -1194,7 +1596,7 @@ Projected 48h
   </div>
   <div class="sr-right">
     <span class="sr-dot yellow"></span>
-    <span class="sr-status">Cooldown active (0.7d)</span>
+    <span class="sr-status"><span data-cooldown-utc="2026-10-07T19:19:17.000Z">Cooldown active (0.8d)</span></span>
   </div>
 </div><div class="switch-row">
   <div class="sr-left">
@@ -1203,7 +1605,7 @@ Projected 48h
   </div>
   <div class="sr-right">
     <span class="sr-dot green"></span>
-    <span class="sr-status">Daytime (US Pacific)</span>
+    <span class="sr-status"><span data-sf-window>Daytime (US Pacific)</span></span>
   </div>
 </div><div class="switch-row">
   <div class="sr-left">
@@ -1220,10 +1622,70 @@ Projected 48h
 </div>
 </section>
 
+<section id="monitors">
+<div class="sec-h">
+<span class="sec-kick">02 — Authority & Proximity</span>
+<h2 class="sec-t">A Quiénes Monitoreamos</h2>
+<p class="sec-s">Fuentes priorizadas según proximidad y autoridad técnica.</p>
+</div>
+<div class="monitor-grid">
+<div class="monitor-card">
+  <div class="monitor-avatar">
+    <img class="monitor-avatar-img" src="/assets/avatars/tibo.jpg" alt="Tibo Sottiaux" width="42" height="42" loading="lazy">
+  </div>
+  <div class="monitor-info">
+    <div class="monitor-name">Tibo Sottiaux <span class="monitor-tag p1">PRIMARY</span></div>
+    <div class="monitor-role">Head of Codex, OpenAI</div>
+    <a class="monitor-handle" href="https://x.com/thsottiaux" target="_blank" rel="noopener nofollow">@thsottiaux &#x2197;</a>
+  </div>
+</div>
+<div class="monitor-card">
+  <div class="monitor-avatar">
+    <img class="monitor-avatar-img" src="/assets/avatars/sama.jpg" alt="Sam Altman" width="42" height="42" loading="lazy">
+  </div>
+  <div class="monitor-info">
+    <div class="monitor-name">Sam Altman <span class="monitor-tag p1">EXECUTIVE</span></div>
+    <div class="monitor-role">CEO, OpenAI</div>
+    <a class="monitor-handle" href="https://x.com/sama" target="_blank" rel="noopener nofollow">@sama &#x2197;</a>
+  </div>
+</div>
+<div class="monitor-card">
+  <div class="monitor-avatar">
+    <img class="monitor-avatar-img" src="/assets/avatars/openai.jpg" alt="OpenAI Official" width="42" height="42" loading="lazy">
+  </div>
+  <div class="monitor-info">
+    <div class="monitor-name">OpenAI Official <span class="monitor-tag p2">SYSTEM</span></div>
+    <div class="monitor-role">Company Announcements</div>
+    <a class="monitor-handle" href="https://x.com/OpenAI" target="_blank" rel="noopener nofollow">@OpenAI &#x2197;</a>
+  </div>
+</div>
+<div class="monitor-card">
+  <div class="monitor-avatar">
+    <img class="monitor-avatar-img" src="/assets/avatars/kevinweil.jpg" alt="Kevin Weil" width="42" height="42" loading="lazy">
+  </div>
+  <div class="monitor-info">
+    <div class="monitor-name">Kevin Weil <span class="monitor-tag p2">PRODUCT</span></div>
+    <div class="monitor-role">Chief Product Officer, OpenAI</div>
+    <a class="monitor-handle" href="https://x.com/kevinweil" target="_blank" rel="noopener nofollow">@kevinweil &#x2197;</a>
+  </div>
+</div>
+<div class="monitor-card">
+  <div class="monitor-avatar">
+    <img class="monitor-avatar-img" src="/assets/avatars/openaidevs.jpg" alt="OpenAI Developers" width="42" height="42" loading="lazy">
+  </div>
+  <div class="monitor-info">
+    <div class="monitor-name">OpenAI Developers <span class="monitor-tag p3">DEVREL</span></div>
+    <div class="monitor-role">Platform & API Status</div>
+    <a class="monitor-handle" href="https://x.com/OpenAIDevs" target="_blank" rel="noopener nofollow">@OpenAIDevs &#x2197;</a>
+  </div>
+</div>
+</div>
+</section>
+
 <!-- Monthly Visual Calendar (Reset Calendar 2026-10) -->
 <section id="calendar-grid">
 <div class="sec-h">
-<span class="sec-kick">02 — Calendar Radar</span>
+<span class="sec-kick">03 — Calendar Radar</span>
 <h2 class="sec-t">Calendario Mensual de Resets</h2>
 <p class="sec-s">Historial de resets verificados en octubre 2026.</p>
 </div>
@@ -1299,7 +1761,7 @@ Projected 48h
 <!-- Personal 5h Calculator -->
 <section id="calculator">
 <div class="sec-h">
-<span class="sec-kick">03 — Personal Engine</span>
+<span class="sec-kick">04 — Personal Engine</span>
 <h2 class="sec-t">¿Agotaste tu propio límite de 5 horas?</h2>
 <p class="sec-s">Un reinicio público no es lo mismo que tu ventana móvil personal. Calcula cuándo se reabre tu cuota.</p>
 </div>
@@ -1358,7 +1820,7 @@ Projected 48h
 <!-- 04 — Understand Codex Limits -->
 <section id="guides">
 <div class="sec-h">
-<span class="sec-kick">04 — Deep Dive</span>
+<span class="sec-kick">05 — Deep Dive</span>
 <h2 class="sec-t">Comprende los Límites de Codex</h2>
 <p class="sec-s">Guías clave sobre arquitectura de tokens y diagnóstico.</p>
 </div>
@@ -1385,65 +1847,7 @@ Projected 48h
 </section>
 
 <!-- 05 — Who We Monitor -->
-<section id="monitors">
-<div class="sec-h">
-<span class="sec-kick">05 — Authority & Proximity</span>
-<h2 class="sec-t">A Quiénes Monitoreamos</h2>
-<p class="sec-s">Fuentes priorizadas según proximidad y autoridad técnica.</p>
-</div>
-<div class="monitor-grid">
-<div class="monitor-card">
-  <div class="monitor-avatar">
-    <img class="monitor-avatar-img" src="/assets/avatars/tibo.jpg" alt="Tibo Sottiaux" width="42" height="42" loading="lazy">
-  </div>
-  <div class="monitor-info">
-    <div class="monitor-name">Tibo Sottiaux <span class="monitor-tag p1">PRIMARY</span></div>
-    <div class="monitor-role">Head of Codex, OpenAI</div>
-    <a class="monitor-handle" href="https://x.com/thsottiaux" target="_blank" rel="noopener nofollow">@thsottiaux &#x2197;</a>
-  </div>
-</div>
-<div class="monitor-card">
-  <div class="monitor-avatar">
-    <img class="monitor-avatar-img" src="/assets/avatars/sama.jpg" alt="Sam Altman" width="42" height="42" loading="lazy">
-  </div>
-  <div class="monitor-info">
-    <div class="monitor-name">Sam Altman <span class="monitor-tag p1">EXECUTIVE</span></div>
-    <div class="monitor-role">CEO, OpenAI</div>
-    <a class="monitor-handle" href="https://x.com/sama" target="_blank" rel="noopener nofollow">@sama &#x2197;</a>
-  </div>
-</div>
-<div class="monitor-card">
-  <div class="monitor-avatar">
-    <img class="monitor-avatar-img" src="/assets/avatars/openai.jpg" alt="OpenAI Official" width="42" height="42" loading="lazy">
-  </div>
-  <div class="monitor-info">
-    <div class="monitor-name">OpenAI Official <span class="monitor-tag p2">SYSTEM</span></div>
-    <div class="monitor-role">Company Announcements</div>
-    <a class="monitor-handle" href="https://x.com/OpenAI" target="_blank" rel="noopener nofollow">@OpenAI &#x2197;</a>
-  </div>
-</div>
-<div class="monitor-card">
-  <div class="monitor-avatar">
-    <img class="monitor-avatar-img" src="/assets/avatars/kevinweil.jpg" alt="Kevin Weil" width="42" height="42" loading="lazy">
-  </div>
-  <div class="monitor-info">
-    <div class="monitor-name">Kevin Weil <span class="monitor-tag p2">PRODUCT</span></div>
-    <div class="monitor-role">Chief Product Officer, OpenAI</div>
-    <a class="monitor-handle" href="https://x.com/kevinweil" target="_blank" rel="noopener nofollow">@kevinweil &#x2197;</a>
-  </div>
-</div>
-<div class="monitor-card">
-  <div class="monitor-avatar">
-    <img class="monitor-avatar-img" src="/assets/avatars/openaidevs.jpg" alt="OpenAI Developers" width="42" height="42" loading="lazy">
-  </div>
-  <div class="monitor-info">
-    <div class="monitor-name">OpenAI Developers <span class="monitor-tag p3">DEVREL</span></div>
-    <div class="monitor-role">Platform & API Status</div>
-    <a class="monitor-handle" href="https://x.com/OpenAIDevs" target="_blank" rel="noopener nofollow">@OpenAIDevs &#x2197;</a>
-  </div>
-</div>
-</div>
-</section>
+
 
 <!-- Fallback Coding Tools -->
 <section id="tools">
@@ -1603,14 +2007,53 @@ Projected 48h
   // Live relative time updater for [data-ago-utc]
   function updateAgo(){
     var lang = document.documentElement.lang || "en";
+    // Dynamic SF Work Window updater (Pacific Time HQ)
+    try {
+      var now = new Date();
+      var sfStr = now.toLocaleTimeString("en-US", {timeZone: "America/Los_Angeles", hour12: false, hour: "numeric", minute: "numeric"});
+      var sfDay = new Intl.DateTimeFormat("en-US", {timeZone: "America/Los_Angeles", weekday: "short"}).format(now);
+      var parts = sfStr.split(":");
+      var h = parseInt(parts[0], 10);
+      var isWknd = (sfDay === "Sat" || sfDay === "Sun");
+      var isZh = lang.indexOf("zh") === 0;
+      var isJa = lang === "ja";
+      var sfText = "";
+      var sfDot = "green";
+      if(isWknd){
+        sfText = isZh ? "周末休整 (美西)" : (isJa ? "週末オフライン (米国太平洋)" : "Weekend (US Pacific)");
+        sfDot = "gray";
+      } else if(h >= 9 && h < 18){
+        sfText = isZh ? "工作时段 (美西)" : (isJa ? "就業時間中 (米国太平洋)" : "Active hours (US Pacific)");
+        sfDot = "green";
+      } else if(h >= 18 && h < 22){
+        sfText = isZh ? "傍晚非高峰 (美西)" : (isJa ? "夕方オフピーク (米国太平洋)" : "Evening / Off-peak (US Pacific)");
+        sfDot = "yellow";
+      } else {
+        sfText = isZh ? "夜间非工作时段 (美西)" : (isJa ? "夜間オフライン (米国太平洋)" : "Night / Off-hours (US Pacific)");
+        sfDot = "gray";
+      }
+      document.querySelectorAll("[data-sf-window]").forEach(function(el){ el.textContent = sfText; });
+      document.querySelectorAll("[data-sf-dot]").forEach(function(el){ el.className = "sr-dot " + sfDot; });
+    } catch(e){}
+
+    // Local date converter for [data-local-date-only]
+    document.querySelectorAll("[data-local-date-only]").forEach(function(el){
+      var d = new Date(el.getAttribute("data-local-date-only"));
+      if(isNaN(d.getTime())) return;
+      var y = d.getFullYear();
+      var m = String(d.getMonth() + 1).padStart(2, "0");
+      var day = String(d.getDate()).padStart(2, "0");
+      el.textContent = y + "-" + m + "-" + day;
+    });
+
     document.querySelectorAll("[data-ago-utc]").forEach(function(el){
       var d = new Date(el.getAttribute("data-ago-utc"));
       if(isNaN(d.getTime())) return;
       var diffMs = Date.now() - d.getTime();
       var diffSec = Math.max(0, Math.floor(diffMs / 1000));
       var diffMin = Math.floor(diffSec / 60);
-      var diffH = Math.floor(diffMin / 60);
-      var diffD = Math.floor(diffH / 24);
+      var diffH = Math.round(diffMin / 60);
+      var diffD = Math.round(diffH / 24);
       if(lang.indexOf("zh") === 0){
         if(diffH < 1) el.textContent = Math.max(1, diffMin) + " 分钟前";
         else if(diffH < 24) el.textContent = diffH + " 小时前";

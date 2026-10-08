@@ -40,13 +40,14 @@ def esc(s):
     return html.escape(str(s), quote=True)
 
 recs = sorted(HIST["records"], key=lambda x: x["at"])
-last = recs[-1]
+reset_recs_all = [r for r in recs if any(k in r.get("text", "").lower() for k in ["reset", "banked", "propagated"])]
+last = reset_recs_all[-1] if reset_recs_all else recs[-1]
 prob = STATS["probability_48h"]
-days_since = STATS["days_since_last_reset"]
+now_dt = datetime.now(timezone.utc)
+last_dt = datetime.strptime(last["at"][:19], "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc)
+days_since = max(0.0, (now_dt - last_dt).total_seconds() / 86400.0)
 days_since_str = ("%.1f" % days_since) + "d"
 last_date = last["at"][:10]
-
-now_dt = datetime.now(timezone.utc)
 p_now_lbl = f"{now_dt.strftime('%b')} {now_dt.day} (Now)"
 p_t1_lbl = f"{(now_dt + timedelta(days=1)).strftime('%b')} {(now_dt + timedelta(days=1)).day}"
 p_t2_lbl = f"{(now_dt + timedelta(days=2)).strftime('%b')} {(now_dt + timedelta(days=2)).day}"
@@ -174,8 +175,8 @@ switches = [
     ("User milestones", "yellow", "43M (Nearing 50M)", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>'),
     ("Release cadence", "green", "Mid-week active", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>'),
     ("Community predictions", "gray", "Consensus low", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>'),
-    ("Reset cooldown", "yellow", f"Cooldown active ({days_since_str})", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>'),
-    ("SF work window", "green", "Daytime (US Pacific)", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>'),
+    ("Reset cooldown", "yellow", f'<span data-cooldown-utc="{last["at"]}">Cooldown active ({days_since_str})</span>', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>'),
+    ("SF work window", "green", '<span data-sf-window>Daytime (US Pacific)</span>', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>'),
     ("Token bucket backlog", "gray", "Stable load", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg>')
 ]
 switch_items = []
@@ -400,23 +401,71 @@ def render_direct_ans(code):
     type_badge = render_banked_badge(code, l_type) if badge_cls == "banked" else f'<span class="badge {badge_cls}">{l_type}</span>'
 
     # YES Stamp Badge SVG (Inspired by OpenTheRank)
-    yes_stamp = f'''<div class="dab-stamp yes">
-      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="46" stroke="#0ecb81" stroke-width="2.2" stroke-dasharray="4 2"/>
-        <circle cx="50" cy="50" r="39" stroke="#0ecb81" stroke-width="1.2"/>
-        <text x="50" y="58" fill="#0ecb81" font-size="28" font-weight="900" text-anchor="middle" font-family="system-ui, sans-serif">Yes.</text>
-        <text x="50" y="74" fill="#0ecb81" font-size="8.5" font-weight="700" text-anchor="middle" letter-spacing="1.5">CONFIRMED</text>
-      </svg>
-    </div>'''
+    yes_stamp = f"""<div class="openthe-stamp-wrap yes">
+      <svg class="stamp-svg" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <path id="circleTextPathYes" d="M 110, 110 m -82, 0 a 82,82 0 1,1 164,0 a 82,82 0 1,1 -164,0" />
+          <filter id="glowGreenBig" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        
+        <!-- 环形自转轨道与文字 -->
+        <g class="stamp-spin-orbit">
+          <circle cx="110" cy="110" r="98" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.35"/>
+          <circle cx="110" cy="110" r="82" stroke="#0ecb81" stroke-width="1.6" stroke-dasharray="4 3" stroke-opacity="0.75"/>
+          <circle cx="110" cy="110" r="68" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.4"/>
+          <text fill="#0ecb81" font-size="9" font-family="'JetBrains Mono', ui-monospace, monospace" font-weight="700" letter-spacing="2.6" opacity="0.85">
+            <textPath href="#circleTextPathYes" startOffset="0%">
+              OPENAI CODEX RESET &bull; VERIFIED FLUSH &bull; 
+            </textPath>
+          </text>
+        </g>
 
-    soon_stamp = f'''<div class="dab-stamp soon">
-      <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="46" stroke="#FCD535" stroke-width="2.2" stroke-dasharray="4 2"/>
-        <circle cx="50" cy="50" r="39" stroke="#FCD535" stroke-width="1.2"/>
-        <text x="50" y="58" fill="#FCD535" font-size="24" font-weight="900" text-anchor="middle" font-family="system-ui, sans-serif">SOON</text>
-        <text x="50" y="74" fill="#FCD535" font-size="8.5" font-weight="700" text-anchor="middle" letter-spacing="1.5">{prob}% ODDS</text>
+        <!-- 超大醒目的 Yes. 与下划虚线 -->
+        <g class="stamp-center" filter="url(#glowGreenBig)">
+          <text x="110" y="118" fill="#0ecb81" font-size="54" font-weight="900" text-anchor="middle" font-family="'Inter', system-ui, -apple-system, sans-serif" letter-spacing="-1">Yes.</text>
+          <line x1="68" y1="132" x2="152" y2="132" stroke="#0ecb81" stroke-width="2" stroke-dasharray="3 3" stroke-opacity="0.85"/>
+          <text x="110" y="148" fill="#0ecb81" font-size="9.5" font-weight="800" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" letter-spacing="2">CONFIRMED</text>
+        </g>
       </svg>
-    </div>'''
+    </div>"""
+
+    soon_stamp = f"""<div class="openthe-stamp-wrap soon">
+      <svg class="stamp-svg" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <path id="circleTextPathSoon" d="M 110, 110 m -82, 0 a 82,82 0 1,1 164,0 a 82,82 0 1,1 -164,0" />
+          <filter id="glowGoldBig" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        
+        <g class="stamp-spin-orbit">
+          <circle cx="110" cy="110" r="98" stroke="#FCD535" stroke-width="1.2" stroke-opacity="0.35"/>
+          <circle cx="110" cy="110" r="82" stroke="#FCD535" stroke-width="1.6" stroke-dasharray="4 3" stroke-opacity="0.75"/>
+          <circle cx="110" cy="110" r="68" stroke="#FCD535" stroke-width="1.2" stroke-opacity="0.4"/>
+          <text fill="#FCD535" font-size="9" font-family="'JetBrains Mono', ui-monospace, monospace" font-weight="700" letter-spacing="2.6" opacity="0.85">
+            <textPath href="#circleTextPathSoon" startOffset="0%">
+              PREDICTION RADAR &bull; PROBABILITY PULSE &bull; 
+            </textPath>
+          </text>
+        </g>
+
+        <g class="stamp-center" filter="url(#glowGoldBig)">
+          <text x="110" y="118" fill="#FCD535" font-size="44" font-weight="900" text-anchor="middle" font-family="'Inter', system-ui, -apple-system, sans-serif" letter-spacing="-1">{prob}%</text>
+          <line x1="68" y1="132" x2="152" y2="132" stroke="#FCD535" stroke-width="2" stroke-dasharray="3 3" stroke-opacity="0.85"/>
+          <text x="110" y="148" fill="#FCD535" font-size="9.5" font-weight="800" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" letter-spacing="2">PROBABLE</text>
+        </g>
+      </svg>
+    </div>"""
 
     tz_icon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>'
     if is_today_reset:
@@ -462,7 +511,7 @@ def render_direct_ans(code):
             return f'''<div class="direct-ans-banner">
   <div class="dab-left">
     <span class="dab-badge yes"><span class="dot"></span> LIVE VERDICT: RESET CONFIRMED TODAY (YES)</span>
-    <div class="dab-h">Will Codex reset today? <strong>Yes. The latest reset landed {h_round}h ago.</strong></div>
+    <div class="dab-h">Will Codex reset today? <strong>Yes. The latest reset landed <span data-ago-utc="{l_rec['at']}">{h_round}h ago</span>.</strong></div>
     <div class="dab-p">Latest recorded reset landed <strong data-ago-utc="{l_rec['at']}">{h_round} hours ago</strong>. Global quotas have been replenished today — build with confidence.</div>
     <div class="dab-rec-line">
       <span>Latest recorded reset:</span>
@@ -495,7 +544,7 @@ def render_direct_ans(code):
   <div class="dab-left">
     <span class="dab-badge"><span class="dot"></span> 实时状态判定：{badge_str}</span>
     <div class="dab-h">{zh_title}</div>
-    <div class="dab-p">今日尚未监测到官方全量重置记录。最近一次官方放水发生在 <strong>{days_since_str} 前</strong>（{last_date}）。建议保持正常开发节奏，下方可测算个人 5 小时解锁倒计时。</div>
+    <div class="dab-p">今日尚未监测到官方全量重置记录。最近一次官方放水发生在 <strong data-days-since-utc="{last['at']}">{days_since_str} 前</strong>（<span data-local-date-only="{last['at']}">{last_date}</span>）。建议保持正常开发节奏，下方可测算个人 5 小时解锁倒计时。</div>
   </div>
   <div class="dab-right-wrap">
     {stamp}
@@ -507,7 +556,7 @@ def render_direct_ans(code):
   <div class="dab-left">
     <span class="dab-badge"><span class="dot"></span> LIVE VERDICT: {badge_str}</span>
     <div class="dab-h">{en_title}</div>
-    <div class="dab-p">No global reset recorded today. The last verified reset was <strong>{days_since_str} ago</strong> ({last_date}). Normal building conditions — calculate your personal 5-hour rolling window below.</div>
+    <div class="dab-p">No global reset recorded today. The last verified reset was <strong data-days-since-utc="{last['at']}">{days_since_str} ago</strong> (<span data-local-date-only="{last['at']}">{last_date}</span>). Normal building conditions — calculate your personal 5-hour rolling window below.</div>
   </div>
   <div class="dab-right-wrap">
     {stamp}
@@ -872,7 +921,7 @@ for code, d, name, loc, base_url in LANGS:
     p1_body = p1_body.replace("__DIRECT_ANS_BANNER__", render_direct_ans(code))
     p1_body = p1_body.replace("__BADGE__", esc(t["badge"])).replace("__H1_A__", esc(t["h1_a"])).replace("__H1_B__", esc(t["h1_b"])).replace("__HERO_P__", esc(t["hero_p"]))
     p1_body = p1_body.replace("__GAUGE_LBL__", esc(t["gauge_lbl"])).replace("__GAUGE_TAG__", esc(t["gauge_tag"])).replace("__GAUGE_CAP__", esc(t["gauge_cap"]))
-    p1_body = p1_body.replace("__GF_1__", esc(t["gf_1"])).replace("__GF_2__", esc(t["gf_2"])).replace("__LAST_DATE__", esc(last_date)).replace("__DAYS_SINCE__", esc(days_since_str))
+    p1_body = p1_body.replace("__GF_1__", esc(t["gf_1"])).replace("__GF_2__", esc(t["gf_2"])).replace("__LAST_DATE__", esc(last_date)).replace("__DAYS_SINCE__", esc(days_since_str)).replace("__LAST_RESET_UTC__", esc(last["at"]))
     p1_body = p1_body.replace("__PULSE_T__", "48-Hour Forecast Pulse" if code=="en" else ("未来48小时预测脉冲曲线" if "zh" in code else "48時間予測パルス曲線"))
     p1_body = p1_body.replace("__PULSE_SUB__", "Realtime probability trajectory & verified event markers" if code=="en" else ("实时概率推演轨迹与已确认事件标记" if "zh" in code else "リアルタイム確率軌跡と確認済みイベント"))
     p1_body = p1_body.replace("__PULSE_SVG__", pulse_svg)

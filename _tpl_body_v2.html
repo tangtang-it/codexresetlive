@@ -72,8 +72,8 @@ __DIRECT_ANS_BANNER__
 </div>
 </div>
 <div class="gauge-foot">
-<span>__GF_1__ <b class="num">__LAST_DATE__</b></span>
-<span>__GF_2__ <b class="num">__DAYS_SINCE__</b></span>
+<span>__GF_1__ <b class="num" data-local-date-only="__LAST_RESET_UTC__">__LAST_DATE__</b></span>
+<span>__GF_2__ <b class="num" data-days-since-utc="__LAST_RESET_UTC__">__DAYS_SINCE__</b></span>
 </div>
 </div>
 
@@ -136,8 +136,8 @@ __PULSE_SVG__
 </div>
 <div class="readout-item">
 <div class="ro-l">__RO_3_L__</div>
-<div class="ro-v num">__DAYS_SINCE__</div>
-<div class="ro-s">__RO_3_S__</div>
+<div class="ro-v num" data-days-since-utc="__LAST_RESET_UTC__">__DAYS_SINCE__</div>
+<div class="ro-s">Last: <span data-local-date-only="__LAST_RESET_UTC__">__LAST_DATE__</span></div>
 </div>
 <div class="readout-item">
 <div class="ro-l">__RO_4_L__</div>
@@ -170,7 +170,7 @@ __MOVE_ITEMS__
 <!-- Col 2: Tibo Sottiaux Stream -->
 <div class="studio-col">
 <div class="col-header">
-<span class="col-t">Tibo Sottiaux (@thsottiaux)</span>
+<span class="col-t"><img class="col-t-avatar" src="/assets/avatars/tibo.jpg" alt="Tibo Sottiaux" width="22" height="22" loading="lazy">Tibo Sottiaux (@thsottiaux)</span>
 <span class="col-badge">__TIBO_POSTS_COUNT__ VERIFIED</span>
 </div>
 <div class="stream-box">
@@ -200,10 +200,21 @@ __SWITCH_ITEMS__
 </div>
 </section>
 
+<section id="monitors">
+<div class="sec-h">
+<span class="sec-kick">02 — Authority & Proximity</span>
+<h2 class="sec-t">__MONITORS_T__</h2>
+<p class="sec-s">__MONITORS_S__</p>
+</div>
+<div class="monitor-grid">
+__MONITOR_HTML__
+</div>
+</section>
+
 <!-- Monthly Visual Calendar (Reset Calendar 2026-10) -->
 <section id="calendar-grid">
 <div class="sec-h">
-<span class="sec-kick">02 — Calendar Radar</span>
+<span class="sec-kick">03 — Calendar Radar</span>
 <h2 class="sec-t">__CAL_RADAR_T__</h2>
 <p class="sec-s">__CAL_RADAR_S__</p>
 </div>
@@ -244,7 +255,7 @@ __CAL_TABLE_HTML__
 <!-- Personal 5h Calculator -->
 <section id="calculator">
 <div class="sec-h">
-<span class="sec-kick">03 — Personal Engine</span>
+<span class="sec-kick">04 — Personal Engine</span>
 <h2 class="sec-t">__CALC_T__</h2>
 <p class="sec-s">__CALC_S__</p>
 </div>
@@ -303,7 +314,7 @@ __CAL_TABLE_HTML__
 <!-- 04 — Understand Codex Limits -->
 <section id="guides">
 <div class="sec-h">
-<span class="sec-kick">04 — Deep Dive</span>
+<span class="sec-kick">05 — Deep Dive</span>
 <h2 class="sec-t">__GUIDES_T__</h2>
 <p class="sec-s">__GUIDES_S__</p>
 </div>
@@ -313,16 +324,7 @@ __GUIDES_HTML__
 </section>
 
 <!-- 05 — Who We Monitor -->
-<section id="monitors">
-<div class="sec-h">
-<span class="sec-kick">05 — Authority & Proximity</span>
-<h2 class="sec-t">__MONITORS_T__</h2>
-<p class="sec-s">__MONITORS_S__</p>
-</div>
-<div class="monitor-grid">
-__MONITOR_HTML__
-</div>
-</section>
+
 
 <!-- Fallback Coding Tools -->
 <section id="tools">
@@ -448,14 +450,53 @@ __FOOTER_DIR_HTML__
   // Live relative time updater for [data-ago-utc]
   function updateAgo(){
     var lang = document.documentElement.lang || "en";
+    // Dynamic SF Work Window updater (Pacific Time HQ)
+    try {
+      var now = new Date();
+      var sfStr = now.toLocaleTimeString("en-US", {timeZone: "America/Los_Angeles", hour12: false, hour: "numeric", minute: "numeric"});
+      var sfDay = new Intl.DateTimeFormat("en-US", {timeZone: "America/Los_Angeles", weekday: "short"}).format(now);
+      var parts = sfStr.split(":");
+      var h = parseInt(parts[0], 10);
+      var isWknd = (sfDay === "Sat" || sfDay === "Sun");
+      var isZh = lang.indexOf("zh") === 0;
+      var isJa = lang === "ja";
+      var sfText = "";
+      var sfDot = "green";
+      if(isWknd){
+        sfText = isZh ? "周末休整 (美西)" : (isJa ? "週末オフライン (米国太平洋)" : "Weekend (US Pacific)");
+        sfDot = "gray";
+      } else if(h >= 9 && h < 18){
+        sfText = isZh ? "工作时段 (美西)" : (isJa ? "就業時間中 (米国太平洋)" : "Active hours (US Pacific)");
+        sfDot = "green";
+      } else if(h >= 18 && h < 22){
+        sfText = isZh ? "傍晚非高峰 (美西)" : (isJa ? "夕方オフピーク (米国太平洋)" : "Evening / Off-peak (US Pacific)");
+        sfDot = "yellow";
+      } else {
+        sfText = isZh ? "夜间非工作时段 (美西)" : (isJa ? "夜間オフライン (米国太平洋)" : "Night / Off-hours (US Pacific)");
+        sfDot = "gray";
+      }
+      document.querySelectorAll("[data-sf-window]").forEach(function(el){ el.textContent = sfText; });
+      document.querySelectorAll("[data-sf-dot]").forEach(function(el){ el.className = "sr-dot " + sfDot; });
+    } catch(e){}
+
+    // Local date converter for [data-local-date-only]
+    document.querySelectorAll("[data-local-date-only]").forEach(function(el){
+      var d = new Date(el.getAttribute("data-local-date-only"));
+      if(isNaN(d.getTime())) return;
+      var y = d.getFullYear();
+      var m = String(d.getMonth() + 1).padStart(2, "0");
+      var day = String(d.getDate()).padStart(2, "0");
+      el.textContent = y + "-" + m + "-" + day;
+    });
+
     document.querySelectorAll("[data-ago-utc]").forEach(function(el){
       var d = new Date(el.getAttribute("data-ago-utc"));
       if(isNaN(d.getTime())) return;
       var diffMs = Date.now() - d.getTime();
       var diffSec = Math.max(0, Math.floor(diffMs / 1000));
       var diffMin = Math.floor(diffSec / 60);
-      var diffH = Math.floor(diffMin / 60);
-      var diffD = Math.floor(diffH / 24);
+      var diffH = Math.round(diffMin / 60);
+      var diffD = Math.round(diffH / 24);
       if(lang.indexOf("zh") === 0){
         if(diffH < 1) el.textContent = Math.max(1, diffMin) + " 分钟前";
         else if(diffH < 24) el.textContent = diffH + " 小时前";
