@@ -82,11 +82,16 @@ pulse_svg = f'''<svg viewBox="0 0 740 180" fill="none" xmlns="http://www.w3.org/
   <circle cx="170" cy="38" r="4.5" fill="#0ecb81"/>
   <rect x="152" y="15" width="36" height="15" rx="3" fill="#1e2329" stroke="#0ecb81" stroke-width="1"/>
   <text x="170" y="26" fill="#0ecb81" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Reset</text>
-  <!-- Event Marker 3: Oct 7 Double Reset (Hard + Banked) -->
+  <!-- Event Marker 3: Oct 7 Double Event (Hard Reset + Banked Credit) -->
   <line x1="400" y1="36" x2="400" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.4"/>
-  <circle cx="400" cy="36" r="4.5" fill="#0ecb81"/>
-  <rect x="382" y="13" width="36" height="15" rx="3" fill="#1e2329" stroke="#0ecb81" stroke-width="1"/>
-  <text x="400" y="24" fill="#0ecb81" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Reset</text>
+  <!-- Concentric Rings: Green inner + Yellow outer for Dual Event -->
+  <circle cx="400" cy="36" r="6.5" stroke="#FCD535" stroke-width="1.5" fill="none"/>
+  <circle cx="400" cy="36" r="4" fill="#0ecb81"/>
+  <!-- Combined Reset + Banked Badge -->
+  <rect x="357" y="13" width="86" height="15" rx="3" fill="#1e2329" stroke="#0ecb81" stroke-width="1"/>
+  <text x="382" y="24" fill="#0ecb81" font-family="ui-monospace" font-size="8" font-weight="bold" text-anchor="middle">Reset</text>
+  <text x="400" y="24" fill="#707a8a" font-family="ui-monospace" font-size="8" text-anchor="middle">+</text>
+  <text x="424" y="24" fill="#FCD535" font-family="ui-monospace" font-size="8" font-weight="bold" text-anchor="middle">Banked</text>
   <!-- Current Status Anchor: Oct 8 Now Point -->
   <line x1="500" y1="116" x2="500" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.7"/>
   <circle cx="500" cy="116" r="5" fill="#0ecb81"/>
@@ -849,6 +854,15 @@ for code, d, name, loc, base_url in LANGS:
     p1_body = p1_body.replace("__PULSE_T__", "48-Hour Forecast Pulse" if code=="en" else ("未来48小时预测脉冲曲线" if "zh" in code else "48時間予測パルス曲線"))
     p1_body = p1_body.replace("__PULSE_SUB__", "Realtime probability trajectory & verified event markers" if code=="en" else ("实时概率推演轨迹与已确认事件标记" if "zh" in code else "リアルタイム確率軌跡と確認済みイベント"))
     p1_body = p1_body.replace("__PULSE_SVG__", pulse_svg)
+    if "zh" in code:
+        l_res, l_bnk, l_prj, l_tod = "全网重置 (自动)", "重置卡 (需手动使用)", "未来48h推演", "今天"
+    elif code == "ja":
+        l_res, l_bnk, l_prj, l_tod = "全体リセット (自動)", "バンク枠 (手動適用)", "48h予測", "今日"
+    elif code == "ko":
+        l_res, l_bnk, l_prj, l_tod = "확정 리셋 (자동)", "뱅크 리셋 (수동)", "48시간 예측", "오늘"
+    else:
+        l_res, l_bnk, l_prj, l_tod = "Confirmed Reset (Auto)", "Banked Reset (Manual)", "Projected 48h", "Today"
+    p1_body = p1_body.replace("__LEG_RESET__", l_res).replace("__LEG_BANKED__", l_bnk).replace("__LEG_PROJ__", l_prj).replace("__LEG_TODAY__", l_tod)
 
     p1_body = p1_body.replace("__ALERT_T__", esc(alert_t)).replace("__ALERT_D__", esc(alert_d)).replace("__NOTIFY_ME__", esc(notify_me)).replace("__SUBSCRIBER_COUNT__", esc(sub_count))
     p1_body = p1_body.replace("__RO_1_L__", "OpenAI Status").replace("__RO_1_S__", "API & Platform healthy")

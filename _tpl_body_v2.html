@@ -85,13 +85,17 @@ __DIRECT_ANS_BANNER__
 <div class="pulse-sub">__PULSE_SUB__</div>
 </div>
 <div class="pulse-badges">
-<span class="badge-sm badge-reset">
+<span class="badge-sm badge-reset" title="官方全网硬重置，所有订阅账户自动回满">
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-Confirmed Reset
+__LEG_RESET__
+</span>
+<span class="badge-sm badge-banked" title="官方发放的存续额度券，需在 Codex「设置 → 用量」手动激活">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+__LEG_BANKED__
 </span>
 <span class="badge-sm badge-forecast">
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-Projected 48h
+__LEG_PROJ__
 </span>
 </div>
 </div>
@@ -228,6 +232,11 @@ __SWITCH_ITEMS__
 </div>
 <div id="calTableWrap">
 __CAL_TABLE_HTML__
+</div>
+<div class="cal-legend-bar">
+  <span class="cal-leg-item"><span class="cal-dot-leg reset"></span> __LEG_RESET__</span>
+  <span class="cal-leg-item"><span class="cal-dot-leg banked"></span> __LEG_BANKED__</span>
+  <span class="cal-leg-item"><span class="cal-dot-leg today"></span> __LEG_TODAY__</span>
 </div>
 </div>
 </section>

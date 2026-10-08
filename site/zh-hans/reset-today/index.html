@@ -664,6 +664,15 @@ h1{font-size:36px}
 .banked-tooltip::after{content:'';position:absolute;top:100%;left:50%;margin-left:-6px;border-width:6px;border-style:solid;border-color:#ffffff transparent transparent transparent}
 .banked-wrap:hover .banked-tooltip,.banked-wrap:focus-within .banked-tooltip,.banked-wrap.active .banked-tooltip{visibility:visible;opacity:1;transform:translateX(-50%) translateY(0)}
 
+
+.badge-sm.badge-banked{color:#fcd535;background:rgba(252,213,53,.12);border:1px solid rgba(252,213,53,.3)}
+.cal-legend-bar{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:14px;font-size:11px;color:var(--muted-strong);flex-wrap:wrap}
+.cal-leg-item{display:inline-flex;align-items:center;gap:6px}
+.cal-dot-leg{width:8px;height:8px;border-radius:50%}
+.cal-dot-leg.reset{background:#0ecb81}
+.cal-dot-leg.banked{background:#fcd535}
+.cal-dot-leg.today{border:1.5px solid var(--primary);background:none}
+
 </style>
 </head>
 
@@ -774,13 +783,17 @@ h1{font-size:36px}
 <div class="pulse-sub">实时概率推演轨迹与已确认事件标记</div>
 </div>
 <div class="pulse-badges">
-<span class="badge-sm badge-reset">
+<span class="badge-sm badge-reset" title="官方全网硬重置，所有订阅账户自动回满">
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-Confirmed Reset
+全网重置 (自动)
+</span>
+<span class="badge-sm badge-banked" title="官方发放的存续额度券，需在 Codex「设置 → 用量」手动激活">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+重置卡 (需手动使用)
 </span>
 <span class="badge-sm badge-forecast">
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-Projected 48h
+未来48h推演
 </span>
 </div>
 </div>
@@ -816,11 +829,16 @@ Projected 48h
   <circle cx="170" cy="38" r="4.5" fill="#0ecb81"/>
   <rect x="152" y="15" width="36" height="15" rx="3" fill="#1e2329" stroke="#0ecb81" stroke-width="1"/>
   <text x="170" y="26" fill="#0ecb81" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Reset</text>
-  <!-- Event Marker 3: Oct 7 Double Reset (Hard + Banked) -->
+  <!-- Event Marker 3: Oct 7 Double Event (Hard Reset + Banked Credit) -->
   <line x1="400" y1="36" x2="400" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.4"/>
-  <circle cx="400" cy="36" r="4.5" fill="#0ecb81"/>
-  <rect x="382" y="13" width="36" height="15" rx="3" fill="#1e2329" stroke="#0ecb81" stroke-width="1"/>
-  <text x="400" y="24" fill="#0ecb81" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Reset</text>
+  <!-- Concentric Rings: Green inner + Yellow outer for Dual Event -->
+  <circle cx="400" cy="36" r="6.5" stroke="#FCD535" stroke-width="1.5" fill="none"/>
+  <circle cx="400" cy="36" r="4" fill="#0ecb81"/>
+  <!-- Combined Reset + Banked Badge -->
+  <rect x="357" y="13" width="86" height="15" rx="3" fill="#1e2329" stroke="#0ecb81" stroke-width="1"/>
+  <text x="382" y="24" fill="#0ecb81" font-family="ui-monospace" font-size="8" font-weight="bold" text-anchor="middle">Reset</text>
+  <text x="400" y="24" fill="#707a8a" font-family="ui-monospace" font-size="8" text-anchor="middle">+</text>
+  <text x="424" y="24" fill="#FCD535" font-family="ui-monospace" font-size="8" font-weight="bold" text-anchor="middle">Banked</text>
   <!-- Current Status Anchor: Oct 8 Now Point -->
   <line x1="500" y1="116" x2="500" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.7"/>
   <circle cx="500" cy="116" r="5" fill="#0ecb81"/>
@@ -1254,6 +1272,11 @@ Projected 48h
     </tr>
   </tbody>
 </table>
+</div>
+<div class="cal-legend-bar">
+  <span class="cal-leg-item"><span class="cal-dot-leg reset"></span> 全网重置 (自动)</span>
+  <span class="cal-leg-item"><span class="cal-dot-leg banked"></span> 重置卡 (需手动使用)</span>
+  <span class="cal-leg-item"><span class="cal-dot-leg today"></span> 今天</span>
 </div>
 </div>
 </section>
