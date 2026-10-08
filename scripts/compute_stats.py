@@ -14,7 +14,9 @@ recs = sorted(data["records"], key=lambda x: x["at"])
 def pt(ts):
     return datetime.strptime(ts[:19], "%Y-%m-%dT%H:%M:%S")
 
-last = recs[-1]
+# Find the most recent actual quota reset announcement
+reset_recs = [r for r in recs if any(k in r.get("text", "").lower() for k in ["reset", "banked", "propagated"])]
+last = reset_recs[-1] if reset_recs else recs[-1]
 now = datetime.now(timezone.utc).replace(tzinfo=None)
 days_since = round((now - pt(last["at"])).total_seconds() / 86400, 1)
 
