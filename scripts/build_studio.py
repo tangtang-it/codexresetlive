@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import json, os, html, re, sys
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parent.parent
@@ -44,6 +45,10 @@ days_since = STATS["days_since_last_reset"]
 days_since_str = ("%.1f" % days_since) + "d"
 last_date = last["at"][:10]
 
+now_dt = datetime.now(timezone.utc)
+p_now_lbl = f"{now_dt.strftime('%b')} {now_dt.day} (Now)"
+p_t1_lbl = f"{(now_dt + timedelta(days=1)).strftime('%b')} {(now_dt + timedelta(days=1)).day}"
+p_t2_lbl = f"{(now_dt + timedelta(days=2)).strftime('%b')} {(now_dt + timedelta(days=2)).day}"
 # --- Shared UI Components ---
 pulse_svg = f'''<svg viewBox="0 0 740 180" fill="none" xmlns="http://www.w3.org/2000/svg">
   <line x1="40" y1="30" x2="710" y2="30" stroke="#2b3139" stroke-width="1" stroke-dasharray="3 3"/>
@@ -56,9 +61,9 @@ pulse_svg = f'''<svg viewBox="0 0 740 180" fill="none" xmlns="http://www.w3.org/
   <text x="130" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 2</text>
   <text x="210" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 4</text>
   <text x="310" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 7</text>
-  <text x="420" y="156" fill="#0ecb81" font-family="ui-monospace" font-size="10" font-weight="bold" text-anchor="middle">Oct 8 (Now)</text>
-  <text x="530" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 9</text>
-  <text x="630" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 10</text>
+  <text x="420" y="156" fill="#0ecb81" font-family="ui-monospace" font-size="10" font-weight="bold" text-anchor="middle">{p_now_lbl}</text>
+  <text x="530" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">{p_t1_lbl}</text>
+  <text x="630" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">{p_t2_lbl}</text>
   <path d="M 60 40 Q 95 110, 130 95 T 210 50 T 260 115 T 310 40 Q 365 110, 420 116" stroke="#0ecb81" stroke-width="2.6" fill="none" stroke-linecap="round"/>
   <path d="M 420 116 Q 475 105, 530 90 T 630 65 T 690 55" stroke="#FCD535" stroke-width="2.2" stroke-dasharray="5 4" fill="none" stroke-linecap="round"/>
   <line x1="60" y1="40" x2="60" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.4"/>
