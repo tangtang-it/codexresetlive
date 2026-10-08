@@ -218,7 +218,7 @@ for r in deduped_recs:
     t = r["type"]
     time_str = r["at"][11:16] if len(r["at"]) > 16 else ""
     lbl = f"{time_str} Hard Reset".strip() if t == "regular" else "Banked Reset"
-    compact_resets.append({"d": d, "t": t, "l": lbl})
+    compact_resets.append({"d": d, "t": t, "l": lbl, "at": r["at"]})
 ALL_RESETS_JSON = json.dumps(compact_resets, ensure_ascii=False)
 
 def get_cal_js(code):
@@ -418,13 +418,21 @@ def render_direct_ans(code):
       </svg>
     </div>'''
 
+    tz_icon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>'
     if is_today_reset:
         if "zh" in code:
             return f'''<div class="direct-ans-banner">
   <div class="dab-left">
     <span class="dab-badge yes"><span class="dot"></span> 实时状态判定：今日已完成放水 (YES)</span>
     <div class="dab-h">Codex 今天重置了吗？ <strong>是的，今日已重置！(Yes.)</strong></div>
-    <div class="dab-p">最新一次官方额度注入发生在 <strong data-ago-utc="{l_rec['at']}">{h_round} 小时前</strong>（{last_date}，类型：{type_badge}）。额度已补充完毕，无需再等待！下方可测算个人 5 小时解锁倒计时。</div>
+    <div class="dab-p">最新一次官方额度注入发生在 <strong data-ago-utc="{l_rec['at']}">{h_round} 小时前</strong>。额度已补充完毕，无需再等待！</div>
+    <div class="dab-rec-line">
+      <span>最近一次记录：</span>
+      <span class="dab-rec-dt" data-local-dt="{l_rec['at']}">2026年10月8日周四 03:19</span>
+      <span class="dab-rec-tz">(本地时间)</span>
+      {type_badge}
+    </div>
+    <div class="tz-indicator">{tz_icon} <span data-tz-display>按你的时区显示</span></div>
   </div>
   <div class="dab-right-wrap">
     {yes_stamp}
@@ -436,7 +444,14 @@ def render_direct_ans(code):
   <div class="dab-left">
     <span class="dab-badge yes"><span class="dot"></span> リアルタイム判定：本日リセット完了 (YES)</span>
     <div class="dab-h">Codexは今日リセットされましたか？ <strong>はい、本日リセットされました (Yes.)</strong></div>
-    <div class="dab-p">直近の公式リセットは <strong data-ago-utc="{l_rec['at']}">{h_round} 時間前</strong> に完了しました（{last_date}、種別：{type_badge}）。利用枠は回復済みです。</div>
+    <div class="dab-p">直近の公式リセットは <strong data-ago-utc="{l_rec['at']}">{h_round} 時間前</strong> に完了しました。利用枠は回復済みです。</div>
+    <div class="dab-rec-line">
+      <span>直近の記録：</span>
+      <span class="dab-rec-dt" data-local-dt="{l_rec['at']}">2026年10月8日(木) 03:19</span>
+      <span class="dab-rec-tz">(現地時間)</span>
+      {type_badge}
+    </div>
+    <div class="tz-indicator">{tz_icon} <span data-tz-display>お使いのタイムゾーンで表示中</span></div>
   </div>
   <div class="dab-right-wrap">
     {yes_stamp}
@@ -448,7 +463,14 @@ def render_direct_ans(code):
   <div class="dab-left">
     <span class="dab-badge yes"><span class="dot"></span> LIVE VERDICT: RESET CONFIRMED TODAY (YES)</span>
     <div class="dab-h">Will Codex reset today? <strong>Yes. The latest reset landed {h_round}h ago.</strong></div>
-    <div class="dab-p">Latest recorded reset landed <strong data-ago-utc="{l_rec['at']}">{h_round} hours ago</strong> ({last_date}, type: {type_badge}). Global quotas have been replenished today — build with confidence.</div>
+    <div class="dab-p">Latest recorded reset landed <strong data-ago-utc="{l_rec['at']}">{h_round} hours ago</strong>. Global quotas have been replenished today — build with confidence.</div>
+    <div class="dab-rec-line">
+      <span>Latest recorded reset:</span>
+      <span class="dab-rec-dt" data-local-dt="{l_rec['at']}">Thu, Oct 8, 2026, 03:19</span>
+      <span class="dab-rec-tz">(your time)</span>
+      {type_badge}
+    </div>
+    <div class="tz-indicator">{tz_icon} <span data-tz-display>Displayed in your local timezone</span></div>
   </div>
   <div class="dab-right-wrap">
     {yes_stamp}

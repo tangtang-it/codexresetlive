@@ -720,6 +720,14 @@ h1{font-size:36px}
 .cal-dot-leg.banked{background:#fcd535}
 .cal-dot-leg.today{border:1.5px solid var(--primary);background:none}
 
+
+/* Timezone & Record Line */
+.dab-rec-line{font-size:13px;color:var(--on-dark);margin:6px 0 3px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.dab-rec-dt{font-weight:700;color:var(--primary);font-family:var(--mono)}
+.dab-rec-tz{font-size:11px;color:var(--muted);font-weight:500}
+.tz-indicator{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--muted);margin-top:4px}
+.tz-indicator svg{width:12px;height:12px;color:var(--primary);flex-shrink:0}
+
 </style>
 </head>
 
@@ -777,7 +785,14 @@ Ao vivo
   <div class="dab-left">
     <span class="dab-badge yes"><span class="dot"></span> LIVE VERDICT: RESET CONFIRMED TODAY (YES)</span>
     <div class="dab-h">Will Codex reset today? <strong>Yes. The latest reset landed 17h ago.</strong></div>
-    <div class="dab-p">Latest recorded reset landed <strong data-ago-utc="2026-10-07T19:19:17.000Z">17 hours ago</strong> (2026-10-08, type: <span class="banked-wrap" tabindex="0" onclick="this.classList.toggle('active')"><span class="badge banked">BANKED</span><span class="banked-info-icon" title="查看使用说明">?</span><span class="banked-tooltip">Este é um Banked Reset: Deve ser resgatado manualmente em &quot;Configurações → Uso&quot; do Codex.</span></span>). Global quotas have been replenished today — build with confidence.</div>
+    <div class="dab-p">Latest recorded reset landed <strong data-ago-utc="2026-10-07T19:19:17.000Z">17 hours ago</strong>. Global quotas have been replenished today — build with confidence.</div>
+    <div class="dab-rec-line">
+      <span>Latest recorded reset:</span>
+      <span class="dab-rec-dt" data-local-dt="2026-10-07T19:19:17.000Z">Thu, Oct 8, 2026, 03:19</span>
+      <span class="dab-rec-tz">(your time)</span>
+      <span class="banked-wrap" tabindex="0" onclick="this.classList.toggle('active')"><span class="badge banked">BANKED</span><span class="banked-info-icon" title="查看使用说明">?</span><span class="banked-tooltip">Este é um Banked Reset: Deve ser resgatado manualmente em &quot;Configurações → Uso&quot; do Codex.</span></span>
+    </div>
+    <div class="tz-indicator"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> <span data-tz-display>Displayed in your local timezone</span></div>
   </div>
   <div class="dab-right-wrap">
     <div class="dab-stamp yes">
@@ -1660,6 +1675,39 @@ Projected 48h
   }
   updateAgo();
   setInterval(updateAgo, 60000);
+  // Local timezone resolver & full datetime converter for [data-local-dt]
+  try {
+    var uTz = Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
+    var lang = document.documentElement.lang || "en";
+    var tzLabels = {
+      "zh-hans": "按你的时区显示 (" + uTz + ")",
+      "zh-hant": "依你的時區顯示 (" + uTz + ")",
+      "ja": "お使いのタイムゾーンで表示中 (" + uTz + ")",
+      "en": "Displayed in your local timezone (" + uTz + ")"
+    };
+    var tzText = tzLabels[lang] || ("Displayed in your local timezone (" + uTz + ")");
+    document.querySelectorAll("[data-tz-display]").forEach(function(el){
+      el.textContent = tzText;
+    });
+    document.querySelectorAll("[data-local-dt]").forEach(function(el){
+      var d = new Date(el.getAttribute("data-local-dt"));
+      if(isNaN(d.getTime())) return;
+      if(lang.indexOf("zh") === 0){
+        var days = ["周日","周一","周二","周三","周四","周五","周六"];
+        var y = d.getFullYear(), m = d.getMonth()+1, day = d.getDate();
+        var hh = String(d.getHours()).padStart(2, "0"), mm = String(d.getMinutes()).padStart(2, "0");
+        el.textContent = y + "年" + m + "月" + day + "日" + days[d.getDay()] + " " + hh + ":" + mm;
+      } else if(lang === "ja"){
+        var daysJ = ["(日)","(月)","(火)","(水)","(木)","(金)","(土)"];
+        var y = d.getFullYear(), m = d.getMonth()+1, day = d.getDate();
+        var hh = String(d.getHours()).padStart(2, "0"), mm = String(d.getMinutes()).padStart(2, "0");
+        el.textContent = y + "年" + m + "月" + day + "日" + daysJ[d.getDay()] + " " + hh + ":" + mm;
+      } else {
+        var opts = { weekday: "short", year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit", hour12: false };
+        el.textContent = new Intl.DateTimeFormat("en-US", opts).format(d);
+      }
+    });
+  } catch(e){ console.warn("Timezone resolution failed", e); }
     });
   }
 
@@ -1771,7 +1819,7 @@ Projected 48h
 
 <script>
 (function(){
-  var resets = [{"d": "2025-09-17", "t": "regular", "l": "04:02 Hard Reset"}, {"d": "2025-11-05", "t": "regular", "l": "20:19 Hard Reset"}, {"d": "2025-11-22", "t": "regular", "l": "23:13 Hard Reset"}, {"d": "2025-12-02", "t": "regular", "l": "22:49 Hard Reset"}, {"d": "2025-12-17", "t": "regular", "l": "02:18 Hard Reset"}, {"d": "2025-12-19", "t": "regular", "l": "22:01 Hard Reset"}, {"d": "2025-12-25", "t": "regular", "l": "08:01 Hard Reset"}, {"d": "2026-03-03", "t": "regular", "l": "01:50 Hard Reset"}, {"d": "2026-03-04", "t": "regular", "l": "21:30 Hard Reset"}, {"d": "2026-03-08", "t": "regular", "l": "02:42 Hard Reset"}, {"d": "2026-03-10", "t": "regular", "l": "03:51 Hard Reset"}, {"d": "2026-03-11", "t": "regular", "l": "05:38 Hard Reset"}, {"d": "2026-03-27", "t": "regular", "l": "01:52 Hard Reset"}, {"d": "2026-04-01", "t": "regular", "l": "07:48 Hard Reset"}, {"d": "2026-04-07", "t": "regular", "l": "23:13 Hard Reset"}, {"d": "2026-04-09", "t": "regular", "l": "17:51 Hard Reset"}, {"d": "2026-04-17", "t": "regular", "l": "00:58 Hard Reset"}, {"d": "2026-04-20", "t": "regular", "l": "23:15 Hard Reset"}, {"d": "2026-04-28", "t": "regular", "l": "05:28 Hard Reset"}, {"d": "2026-05-16", "t": "regular", "l": "17:51 Hard Reset"}, {"d": "2026-05-23", "t": "regular", "l": "20:14 Hard Reset"}, {"d": "2026-05-31", "t": "regular", "l": "15:25 Hard Reset"}, {"d": "2026-06-04", "t": "regular", "l": "00:25 Hard Reset"}, {"d": "2026-06-18", "t": "both", "l": "Banked Reset"}, {"d": "2026-06-26", "t": "regular", "l": "23:39 Hard Reset"}, {"d": "2026-06-28", "t": "regular", "l": "23:54 Hard Reset"}, {"d": "2026-06-29", "t": "both", "l": "Banked Reset"}, {"d": "2026-07-09", "t": "regular", "l": "21:24 Hard Reset"}, {"d": "2026-07-10", "t": "regular", "l": "17:59 Hard Reset"}, {"d": "2026-07-11", "t": "regular", "l": "05:54 Hard Reset"}, {"d": "2026-07-12", "t": "banked", "l": "Banked Reset"}, {"d": "2026-07-13", "t": "banked", "l": "Banked Reset"}, {"d": "2026-07-14", "t": "regular", "l": "19:34 Hard Reset"}, {"d": "2026-07-16", "t": "regular", "l": "04:14 Hard Reset"}, {"d": "2026-07-18", "t": "regular", "l": "03:28 Hard Reset"}, {"d": "2026-07-21", "t": "regular", "l": "16:47 Hard Reset"}, {"d": "2026-07-25", "t": "regular", "l": "19:17 Hard Reset"}, {"d": "2026-07-28", "t": "regular", "l": "03:09 Hard Reset"}, {"d": "2026-07-29", "t": "regular", "l": "04:09 Hard Reset"}, {"d": "2026-08-01", "t": "regular", "l": "03:32 Hard Reset"}, {"d": "2026-08-08", "t": "regular", "l": "20:29 Hard Reset"}, {"d": "2026-08-11", "t": "regular", "l": "00:27 Hard Reset"}, {"d": "2026-08-13", "t": "regular", "l": "01:01 Hard Reset"}, {"d": "2026-08-21", "t": "banked", "l": "Banked Reset"}, {"d": "2026-08-24", "t": "regular", "l": "00:46 Hard Reset"}, {"d": "2026-08-27", "t": "regular", "l": "16:35 Hard Reset"}, {"d": "2026-08-29", "t": "regular", "l": "20:43 Hard Reset"}, {"d": "2026-08-31", "t": "regular", "l": "02:29 Hard Reset"}, {"d": "2026-09-03", "t": "banked", "l": "Banked Reset"}, {"d": "2026-09-05", "t": "banked", "l": "Banked Reset"}, {"d": "2026-09-12", "t": "regular", "l": "08:09 Hard Reset"}, {"d": "2026-09-22", "t": "banked", "l": "Banked Reset"}, {"d": "2026-09-26", "t": "regular", "l": "18:17 Hard Reset"}, {"d": "2026-10-02", "t": "regular", "l": "21:18 Hard Reset"}, {"d": "2026-10-07", "t": "regular", "l": "03:35 Hard Reset"}, {"d": "2026-10-07", "t": "banked", "l": "Banked Reset"}, {"d": "2026-10-08", "t": "regular", "l": "04:30 Hard Reset"}];
+  var resets = [{"d": "2025-09-17", "t": "regular", "l": "04:02 Hard Reset", "at": "2025-09-17T04:02:52.000Z"}, {"d": "2025-11-05", "t": "regular", "l": "20:19 Hard Reset", "at": "2025-11-05T20:19:29.000Z"}, {"d": "2025-11-22", "t": "regular", "l": "23:13 Hard Reset", "at": "2025-11-22T23:13:56.000Z"}, {"d": "2025-12-02", "t": "regular", "l": "22:49 Hard Reset", "at": "2025-12-02T22:49:02.000Z"}, {"d": "2025-12-17", "t": "regular", "l": "02:18 Hard Reset", "at": "2025-12-17T02:18:14.000Z"}, {"d": "2025-12-19", "t": "regular", "l": "22:01 Hard Reset", "at": "2025-12-19T22:01:37.000Z"}, {"d": "2025-12-25", "t": "regular", "l": "08:01 Hard Reset", "at": "2025-12-25T08:01:03.000Z"}, {"d": "2026-03-03", "t": "regular", "l": "01:50 Hard Reset", "at": "2026-03-03T01:50:07.000Z"}, {"d": "2026-03-04", "t": "regular", "l": "21:30 Hard Reset", "at": "2026-03-04T21:30:47.000Z"}, {"d": "2026-03-08", "t": "regular", "l": "02:42 Hard Reset", "at": "2026-03-08T02:42:13.000Z"}, {"d": "2026-03-10", "t": "regular", "l": "03:51 Hard Reset", "at": "2026-03-10T03:51:43.000Z"}, {"d": "2026-03-11", "t": "regular", "l": "05:38 Hard Reset", "at": "2026-03-11T05:38:13.000Z"}, {"d": "2026-03-27", "t": "regular", "l": "01:52 Hard Reset", "at": "2026-03-27T01:52:28.000Z"}, {"d": "2026-04-01", "t": "regular", "l": "07:48 Hard Reset", "at": "2026-04-01T07:48:39.000Z"}, {"d": "2026-04-07", "t": "regular", "l": "23:13 Hard Reset", "at": "2026-04-07T23:13:48.000Z"}, {"d": "2026-04-09", "t": "regular", "l": "17:51 Hard Reset", "at": "2026-04-09T17:51:28.000Z"}, {"d": "2026-04-17", "t": "regular", "l": "00:58 Hard Reset", "at": "2026-04-17T00:58:21.000Z"}, {"d": "2026-04-20", "t": "regular", "l": "23:15 Hard Reset", "at": "2026-04-20T23:15:21.000Z"}, {"d": "2026-04-28", "t": "regular", "l": "05:28 Hard Reset", "at": "2026-04-28T05:28:43.000Z"}, {"d": "2026-05-16", "t": "regular", "l": "17:51 Hard Reset", "at": "2026-05-16T17:51:03.000Z"}, {"d": "2026-05-23", "t": "regular", "l": "20:14 Hard Reset", "at": "2026-05-23T20:14:35.000Z"}, {"d": "2026-05-31", "t": "regular", "l": "15:25 Hard Reset", "at": "2026-05-31T15:25:06.000Z"}, {"d": "2026-06-04", "t": "regular", "l": "00:25 Hard Reset", "at": "2026-06-04T00:25:58.000Z"}, {"d": "2026-06-18", "t": "both", "l": "Banked Reset", "at": "2026-06-18T00:10:10.000Z"}, {"d": "2026-06-26", "t": "regular", "l": "23:39 Hard Reset", "at": "2026-06-26T23:39:48.000Z"}, {"d": "2026-06-28", "t": "regular", "l": "23:54 Hard Reset", "at": "2026-06-28T23:54:07.000Z"}, {"d": "2026-06-29", "t": "both", "l": "Banked Reset", "at": "2026-06-29T23:39:41.000Z"}, {"d": "2026-07-09", "t": "regular", "l": "21:24 Hard Reset", "at": "2026-07-09T21:24:11.000Z"}, {"d": "2026-07-10", "t": "regular", "l": "17:59 Hard Reset", "at": "2026-07-10T17:59:43.000Z"}, {"d": "2026-07-11", "t": "regular", "l": "05:54 Hard Reset", "at": "2026-07-11T05:54:25.000Z"}, {"d": "2026-07-12", "t": "banked", "l": "Banked Reset", "at": "2026-07-12T21:28:59.000Z"}, {"d": "2026-07-13", "t": "banked", "l": "Banked Reset", "at": "2026-07-13T18:29:31.000Z"}, {"d": "2026-07-14", "t": "regular", "l": "19:34 Hard Reset", "at": "2026-07-14T19:34:54.000Z"}, {"d": "2026-07-16", "t": "regular", "l": "04:14 Hard Reset", "at": "2026-07-16T04:14:09.000Z"}, {"d": "2026-07-18", "t": "regular", "l": "03:28 Hard Reset", "at": "2026-07-18T03:28:22.000Z"}, {"d": "2026-07-21", "t": "regular", "l": "16:47 Hard Reset", "at": "2026-07-21T16:47:15.000Z"}, {"d": "2026-07-25", "t": "regular", "l": "19:17 Hard Reset", "at": "2026-07-25T19:17:12.000Z"}, {"d": "2026-07-28", "t": "regular", "l": "03:09 Hard Reset", "at": "2026-07-28T03:09:23.000Z"}, {"d": "2026-07-29", "t": "regular", "l": "04:09 Hard Reset", "at": "2026-07-29T04:09:02.000Z"}, {"d": "2026-08-01", "t": "regular", "l": "03:32 Hard Reset", "at": "2026-08-01T03:32:37.000Z"}, {"d": "2026-08-08", "t": "regular", "l": "20:29 Hard Reset", "at": "2026-08-08T20:29:22.000Z"}, {"d": "2026-08-11", "t": "regular", "l": "00:27 Hard Reset", "at": "2026-08-11T00:27:44.000Z"}, {"d": "2026-08-13", "t": "regular", "l": "01:01 Hard Reset", "at": "2026-08-13T01:01:37.000Z"}, {"d": "2026-08-21", "t": "banked", "l": "Banked Reset", "at": "2026-08-21T11:43:19.000Z"}, {"d": "2026-08-24", "t": "regular", "l": "00:46 Hard Reset", "at": "2026-08-24T00:46:51.000Z"}, {"d": "2026-08-27", "t": "regular", "l": "16:35 Hard Reset", "at": "2026-08-27T16:35:05.000Z"}, {"d": "2026-08-29", "t": "regular", "l": "20:43 Hard Reset", "at": "2026-08-29T20:43:34.000Z"}, {"d": "2026-08-31", "t": "regular", "l": "02:29 Hard Reset", "at": "2026-08-31T02:29:25.000Z"}, {"d": "2026-09-03", "t": "banked", "l": "Banked Reset", "at": "2026-09-03T23:12:09.000Z"}, {"d": "2026-09-05", "t": "banked", "l": "Banked Reset", "at": "2026-09-05T00:39:25.000Z"}, {"d": "2026-09-12", "t": "regular", "l": "08:09 Hard Reset", "at": "2026-09-12T08:09:17.000Z"}, {"d": "2026-09-22", "t": "banked", "l": "Banked Reset", "at": "2026-09-22T18:23:37.000Z"}, {"d": "2026-09-26", "t": "regular", "l": "18:17 Hard Reset", "at": "2026-09-26T18:17:54.000Z"}, {"d": "2026-10-02", "t": "regular", "l": "21:18 Hard Reset", "at": "2026-10-02T21:18:48.417Z"}, {"d": "2026-10-07", "t": "regular", "l": "03:35 Hard Reset", "at": "2026-10-07T03:35:09.000Z"}, {"d": "2026-10-07", "t": "banked", "l": "Banked Reset", "at": "2026-10-07T19:19:17.000Z"}, {"d": "2026-10-08", "t": "regular", "l": "04:30 Hard Reset", "at": "2026-10-08T04:30:00.000Z"}];
   var resetMap = {};
   for(var i=0; i<resets.length; i++){
     var r = resets[i];
