@@ -81,6 +81,8 @@ pulse_svg = f'''<svg viewBox="0 0 740 180" fill="none" xmlns="http://www.w3.org/
 
 MOVES_DATA = {
     "en": [
+        ("Oct 7 · 19:19 UTC", "40M Users Banked Reset", "Day 3 celebration: 40M active users milestone with a banked reset credited to all paid accounts.", "+35 pts", "up", "Celebratory Quota: Tibo announced banked credit bonus honoring 40M developer benchmark."),
+        ("Oct 7 · 03:35 UTC", "Community Mandate Reset", "Global regular reset processed following community poll and 4 new feature shipments.", "+30 pts", "up", "Ecosystem Response: Community consensus trigger cleared personal usage limits worldwide."),
         ("Oct 2 · 21:18 UTC", "Direct Usage Reset", "Confirmed hard reset fully propagated to all ChatGPT Work & Codex subscribers.", "+38 pts", "up", "Execution: Tibo announced token caps cleared following Sol capacity scaling."),
         ("Oct 2 · 02:14 UTC", "Global Reset Notice", "Tibo gave advance warning of global refresh scheduled for 10am PST.", "+24 pts", "up", "Advance Signal: Official commitment to resolve launch throughput bottleneck."),
         ("Sep 30 · 23:12 UTC", "Banked Credit Rollout", "One banked reset credited daily to subscribers awaiting Astra architecture.", "+15 pts", "neutral", "Credit Boost: Innovative banked mechanism for unreleased features."),
@@ -88,6 +90,8 @@ MOVES_DATA = {
         ("Sep 22 · 18:23 UTC", "GPT-6 Sol & Luna Launch", "New flagship models rolled out alongside 50% permanent API price drop.", "+28 pts", "up", "Milestone Catalyst: Major model releases consistently trigger account-wide flushes.")
     ],
     "zh": [
+        ("10月7日 · 19:19 UTC", "4000万用户存续额度发放", "伴随 40M 活跃用户新高，官方为所有付费账户注入 1 次可保留的 Banked Reset。", "+35 分", "up", "【里程碑放水】Tibo 宣布为庆祝全网开发者达到 4000 万里程碑额外注入存续额度。"),
+        ("10月7日 · 03:35 UTC", "社区民意全网常规重置", "顺应社区投票诉求及 4 项功能上线，官方执行全网常规额度重置。", "+30 分", "up", "【响应诉求】官方校准后确认全员配额清零回满，所有付费用户重置完毕。"),
         ("10月2日 · 21:18 UTC", "全网硬重置已生效", "官方全员硬重置下发完毕，所有 ChatGPT Work 与 Codex 额度回满。", "+38 分", "up", "【发版放水】伴随 Sol 负载优化完成，Tibo 发推确认全网额度一键清空。"),
         ("10月2日 · 02:14 UTC", "全球重置提前预告", "Tibo 提前发文预告将在美西时间上午 10 点为全体付费用户执行全量重置。", "+24 分", "up", "【官方前瞻】官方首次对大模型版本上线初期的排队和限流问题公开承诺补发。"),
         ("9月30日 · 23:12 UTC", "Astra 存续额度补发", "针对未开放 Astra 权限的用户，每日补偿发放 1 次可保留的 Banked Reset。", "+15 分", "neutral", "【权益补偿】开创存续式额度发放机制，用户在特定功能开放前每日享有额外额度。"),
@@ -95,6 +99,8 @@ MOVES_DATA = {
         ("9月22日 · 18:23 UTC", "GPT-6 Sol / Luna 双模型发版", "新模型上线并大幅下调 API 定价，全员账户注入一次完整重置额度。", "+28 分", "up", "【里程碑激励】重大模型换代上线时的标准操作，伴随额度翻倍或重置以促成调用增长。")
     ],
     "ja": [
+        ("10月7日 · 19:19 UTC", "4000万人突破記念バンク枠付与", "4000万アクティブユーザー達成を記念し、全有料アカウントにバンク型リセット枠を付与。", "+35 pts", "up", "【マイルストーン】Tiboが4000万人達成を記念した追加枠付与を発表。"),
+        ("10月7日 · 03:35 UTC", "コミュニティ要望リセット反映", "コミュニティの要望と4つの機能リリースに伴い、全体リセットが実行完了。", "+30 pts", "up", "【全体反映】公式が投票結果を受け全ユーザーの利用枠を一括リセット。"),
         ("10月2日 · 21:18 UTC", "全体ハードリセット反映完了", "全ChatGPT WorkおよびCodexユーザーの利用枠回復が完了しました。", "+38 pts", "up", "【アプデ連動】Sol負荷緩和完了に伴い、Tiboが全量リセット完了を発表。"),
         ("10月2日 · 02:14 UTC", "全体リセット事前告知", "TiboがPST午前10時に全有料アカウント向けリセットを実施すると事前予告。", "+24 pts", "up", "【先行シグナル】新モデル公開初期の負荷急増に対し公式がリセットを確約。"),
         ("9月30日 · 23:12 UTC", "Astra 向けバンク枠付与", "Astra未利用ユーザーに対し、1日1回のバンク型リセット枠を補填付与。", "+15 pts", "neutral", "【機能補填】新機能ロールアウト待ちユーザーに対するクレジット型救済。"),
@@ -140,7 +146,7 @@ STREAM_ITEMS = "".join(stream_items)
 
 switches = [
     ("OpenAI status", "green", "Operational", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></svg>'),
-    ("Tibo posts", "green", "55 Verified", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'),
+    ("Tibo posts", "green", f"{len(recs)} Verified", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'),
     ("User milestones", "yellow", "43M (Nearing 50M)", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>'),
     ("Release cadence", "green", "Mid-week active", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>'),
     ("Community predictions", "gray", "Consensus low", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>'),
@@ -736,7 +742,7 @@ for code, d, name, loc, base_url in LANGS:
 
     p1_body = p1_body.replace("__ALERT_T__", esc(alert_t)).replace("__ALERT_D__", esc(alert_d)).replace("__NOTIFY_ME__", esc(notify_me)).replace("__SUBSCRIBER_COUNT__", esc(sub_count))
     p1_body = p1_body.replace("__RO_1_L__", "OpenAI Status").replace("__RO_1_S__", "API & Platform healthy")
-    p1_body = p1_body.replace("__RO_2_L__", "Tibo Watch").replace("__RO_2_S__", "55 Verified posts monitored")
+    p1_body = p1_body.replace("__RO_2_L__", "Tibo Watch").replace("__RO_2_S__", f"{len(recs)} Verified posts monitored").replace("__TIBO_POSTS_COUNT__", str(len(recs)))
     p1_body = p1_body.replace("__RO_3_L__", "Days Since Reset").replace("__RO_3_S__", f"Last: {last_date}")
     p1_body = p1_body.replace("__RO_4_L__", "Active Developers").replace("__RO_4_S__", "43M+ Estimated users")
 

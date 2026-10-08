@@ -1,11 +1,11 @@
 {
   "source": "https://opentherank.com/codex-reset/",
-  "scraped_at_utc": "2026-10-05",
+  "scraped_at_utc": "2026-10-08",
   "author": {
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 55,
+  "total": 57,
   "records": [
     {
       "id": "1968163721034994139",
@@ -446,6 +446,22 @@
       "status": "confirmed",
       "text": "Reset all propagated. Enjoy.",
       "url": "https://x.com/thsottiaux/status/2106131810921136451"
+    },
+    {
+      "id": "2107676072871600470",
+      "at": "2026-10-07T03:35:09.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "We shipped four things that were deemed good to great and some math proofs, but the vote is clear and the community demands a reset. I did calibrate it and it *seems* that the game is rigged in reset&#39;s favor, but such are the rules at the moment.Therefore ... the reset has been processed. Enjoy!",
+      "url": "https://x.com/thsottiaux/status/2107676072871600470"
+    },
+    {
+      "id": "2107913674593644711",
+      "at": "2026-10-07T19:19:17.000Z",
+      "type": "banked",
+      "status": "confirmed",
+      "text": "Day 3/The big one is GPT-6 in Chat, but today is also a little celebration day with a new high of 40M active users across Codex and ChatGPT Work.Loading a banked reset in everyone’s paid accounts. See you again tomorrow!",
+      "url": "https://x.com/thsottiaux/status/2107913674593644711"
     }
   ]
 }
