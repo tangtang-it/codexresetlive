@@ -1,14 +1,14 @@
 {
-  "total": 57,
-  "regular": 48,
+  "total": 59,
+  "regular": 50,
   "banked": 7,
-  "last_reset_at": "2026-10-07T19:19:17.000Z",
-  "last_reset_text": "Day 3/The big one is GPT-6 in Chat, but today is also a little celebration day with a new high of 40M active users across Codex and ChatGPT Work.Loading a banked reset in everyone’s paid accounts. See you again tomorrow!",
-  "last_reset_url": "https://x.com/thsottiaux/status/2107913674593644711",
+  "last_reset_at": "2026-10-08T07:30:00.000Z",
+  "last_reset_text": "Day 3 (encore)/ We silently re-shipped codex cloud. It's pretty good now. Codex  Tailscale: Codex Cloud can now securely connect to resources on your tailnet with Tailscale.",
+  "last_reset_url": "https://x.com/thsottiaux/status/2108159238472912896",
   "first_reset_at": "2025-09-17T04:02:52.000Z",
-  "days_since_last_reset": 0.6,
-  "avg_gap_days_all": 6.9,
-  "avg_gap_days_recent": 4.0,
+  "days_since_last_reset": 0.1,
+  "avg_gap_days_all": 6.7,
+  "avg_gap_days_recent": 3.2,
   "probability_48h": 11,
   "monthly_series": [
     {
@@ -65,7 +65,7 @@
     },
     {
       "month": "2026-10",
-      "count": 4
+      "count": 6
     }
   ],
   "monthly_max": 12

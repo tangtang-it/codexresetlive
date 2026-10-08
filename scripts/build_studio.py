@@ -52,13 +52,13 @@ pulse_svg = f'''<svg viewBox="0 0 740 180" fill="none" xmlns="http://www.w3.org/
   <text x="15" y="34" fill="#707a8a" font-family="ui-monospace" font-size="10">80%</text>
   <text x="15" y="84" fill="#707a8a" font-family="ui-monospace" font-size="10">40%</text>
   <text x="15" y="134" fill="#707a8a" font-family="ui-monospace" font-size="10">0%</text>
-  <text x="60" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Sep 26</text>
-  <text x="130" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Sep 28</text>
-  <text x="210" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Sep 30</text>
-  <text x="310" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 2</text>
-  <text x="420" y="156" fill="#0ecb81" font-family="ui-monospace" font-size="10" font-weight="bold" text-anchor="middle">Oct 5 (Now)</text>
-  <text x="530" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 6</text>
-  <text x="630" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 8</text>
+  <text x="60" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Sep 30</text>
+  <text x="130" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 2</text>
+  <text x="210" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 4</text>
+  <text x="310" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 7</text>
+  <text x="420" y="156" fill="#0ecb81" font-family="ui-monospace" font-size="10" font-weight="bold" text-anchor="middle">Oct 8 (Now)</text>
+  <text x="530" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 9</text>
+  <text x="630" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 10</text>
   <path d="M 60 40 Q 95 110, 130 95 T 210 50 T 260 115 T 310 40 Q 365 110, 420 116" stroke="#0ecb81" stroke-width="2.6" fill="none" stroke-linecap="round"/>
   <path d="M 420 116 Q 475 105, 530 90 T 630 65 T 690 55" stroke="#FCD535" stroke-width="2.2" stroke-dasharray="5 4" fill="none" stroke-linecap="round"/>
   <line x1="60" y1="40" x2="60" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.4"/>
@@ -81,6 +81,7 @@ pulse_svg = f'''<svg viewBox="0 0 740 180" fill="none" xmlns="http://www.w3.org/
 
 MOVES_DATA = {
     "en": [
+        ("Oct 8 · 07:30 UTC", "Codex Cloud & Tailscale", "Tibo confirmed Day 3 (encore) silent rollout of Codex Cloud Tailnet integration.", "+20 pts", "up", "Infrastructure Boost: Official multi-cloud developer networking landed."),
         ("Oct 7 · 19:19 UTC", "40M Users Banked Reset", "Day 3 celebration: 40M active users milestone with a banked reset credited to all paid accounts.", "+35 pts", "up", "Celebratory Quota: Tibo announced banked credit bonus honoring 40M developer benchmark."),
         ("Oct 7 · 03:35 UTC", "Community Mandate Reset", "Global regular reset processed following community poll and 4 new feature shipments.", "+30 pts", "up", "Ecosystem Response: Community consensus trigger cleared personal usage limits worldwide."),
         ("Oct 2 · 21:18 UTC", "Direct Usage Reset", "Confirmed hard reset fully propagated to all ChatGPT Work & Codex subscribers.", "+38 pts", "up", "Execution: Tibo announced token caps cleared following Sol capacity scaling."),
@@ -90,6 +91,7 @@ MOVES_DATA = {
         ("Sep 22 · 18:23 UTC", "GPT-6 Sol & Luna Launch", "New flagship models rolled out alongside 50% permanent API price drop.", "+28 pts", "up", "Milestone Catalyst: Major model releases consistently trigger account-wide flushes.")
     ],
     "zh": [
+        ("10月8日 · 07:30 UTC", "Codex Cloud 与 Tailscale 联调上线", "Tibo 确认 Day 3 (encore) 静默上线 Codex Cloud 的 Tailnet 安全互联支持。", "+20 分", "up", "【基建上新】官方发推确认全量落地多环境网络互联，服务稳定性增强。"),
         ("10月7日 · 19:19 UTC", "4000万用户存续额度发放", "伴随 40M 活跃用户新高，官方为所有付费账户注入 1 次可保留的 Banked Reset。", "+35 分", "up", "【里程碑放水】Tibo 宣布为庆祝全网开发者达到 4000 万里程碑额外注入存续额度。"),
         ("10月7日 · 03:35 UTC", "社区民意全网常规重置", "顺应社区投票诉求及 4 项功能上线，官方执行全网常规额度重置。", "+30 分", "up", "【响应诉求】官方校准后确认全员配额清零回满，所有付费用户重置完毕。"),
         ("10月2日 · 21:18 UTC", "全网硬重置已生效", "官方全员硬重置下发完毕，所有 ChatGPT Work 与 Codex 额度回满。", "+38 分", "up", "【发版放水】伴随 Sol 负载优化完成，Tibo 发推确认全网额度一键清空。"),
@@ -99,6 +101,7 @@ MOVES_DATA = {
         ("9月22日 · 18:23 UTC", "GPT-6 Sol / Luna 双模型发版", "新模型上线并大幅下调 API 定价，全员账户注入一次完整重置额度。", "+28 分", "up", "【里程碑激励】重大模型换代上线时的标准操作，伴随额度翻倍或重置以促成调用增长。")
     ],
     "ja": [
+        ("10月8日 · 07:30 UTC", "Codex Cloud・Tailscale連携開始", "TiboがDay 3 (encore) としてCodex CloudとTailscaleの連携完了を発表。", "+20 pts", "up", "【インフラ拡充】公式によるクラウド環境間セキュア接続の展開完了。"),
         ("10月7日 · 19:19 UTC", "4000万人突破記念バンク枠付与", "4000万アクティブユーザー達成を記念し、全有料アカウントにバンク型リセット枠を付与。", "+35 pts", "up", "【マイルストーン】Tiboが4000万人達成を記念した追加枠付与を発表。"),
         ("10月7日 · 03:35 UTC", "コミュニティ要望リセット反映", "コミュニティの要望と4つの機能リリースに伴い、全体リセットが実行完了。", "+30 pts", "up", "【全体反映】公式が投票結果を受け全ユーザーの利用枠を一括リセット。"),
         ("10月2日 · 21:18 UTC", "全体ハードリセット反映完了", "全ChatGPT WorkおよびCodexユーザーの利用枠回復が完了しました。", "+38 pts", "up", "【アプデ連動】Sol負荷緩和完了に伴い、Tiboが全量リセット完了を発表。"),
@@ -255,7 +258,7 @@ def get_cal_js(code):
         html += '</tr><tr>';
       }}
       var cDate = ymPrefix + "-" + (d < 10 ? "0" + d : d);
-      var isToday = (curYear === 2026 && curMonth === 9 && d === 5);
+      var n = new Date(); var isToday = (curYear === n.getFullYear() && curMonth === n.getMonth() && d === n.getDate());
       var todayStyle = isToday ? ' style="color:var(--primary);font-weight:800"' : '';
       var todayLabel = isToday ? (isZh ? '<span style="font-size:9px;color:var(--muted)">观察中</span>' : (isJa ? '<span style="font-size:9px;color:var(--muted)">観測中</span>' : '<span style="font-size:9px;color:var(--muted)">Watching</span>')) : '';
       var dayDisplay = isToday ? d + (isZh ? ' (今天)' : (isJa ? ' (今日)' : ' (Today)')) : d;
@@ -325,7 +328,7 @@ CAL_TABLE_HTML = '''<table class="cal-table">
     </tr>
     <tr>
       <td><span class="day-num">4</span></td>
-      <td><span class="day-num" style="color:var(--primary);font-weight:800">5 (Today)</span><span style="font-size:9px;color:var(--muted)">Watching</span></td>
+      <td><span class="day-num">5</span></td>
       <td><span class="day-num">6</span></td>
       <td><span class="day-num">7</span></td>
       <td><span class="day-num">8</span></td>
