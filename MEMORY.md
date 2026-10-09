@@ -44,3 +44,13 @@
   - Subagent automated audit (scripts/subagent_qa_inspector.py): 18/18 test assertions passed.
   - Multilingual build audit (scripts/verify_site.py): 40/40 pages passed integrity, schema, and section audits.
   - Headless browser visual QA: Captured clean renders for banner, radar, stats, and studio.
+
+## 4. X (Twitter) Link Integrity & Mock Data Immunity (Completed 2026-10-09)
+- **Problem Solved**:
+  - Investigated user-reported 404 dead link on /reset-today/ pointing to https://x.com/thsottiaux/status/2108548123456789013.
+  - Root-caused to manual mock records with placeholder IDs (123456789012, 123456789013) ingested in prior development turns that persisted through cache merges.
+- **Implemented Fixes & Immunity Shields**:
+  - **Data Cleansing**: Completely purged fake records from data/tibo_reset_history.json and aligned with legitimate remote upstream records (56 verified records).
+  - **Scraper Ingestion Guard** (scripts/scrape_tibo.py): Added is_valid_tweet_id validator that rejects non-Snowflake IDs and mock patterns (e.g. 123456789, repeated sequences) both at parsing and cache merge stages.
+  - **CI & Build Pipeline Guard** (scripts/verify_site.py): Added mandatory integrity assertion scanning all generated HTML files for external X status links; any mock/invalid ID immediately aborts build with exit code 1.
+  - **Full Regeneration & QA**: Recomputed radar statistics, regenerated all 40 multilingual pages, and verified 100% test pass on both verify_site.py and subagent_qa_inspector.py.

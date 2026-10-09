@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 58,
+  "total": 56,
   "records": [
     {
       "id": "1968163721034994139",
@@ -454,22 +454,6 @@
       "status": "confirmed",
       "text": "Day 3/The big one is GPT-6 in Chat, but today is also a little celebration day with a new high of 40M active users across Codex and ChatGPT Work.Loading a banked reset in everyone’s paid accounts. See you again tomorrow!",
       "url": "https://x.com/thsottiaux/status/2107913674593644711"
-    },
-    {
-      "id": "2108476123456789012",
-      "at": "2026-10-08T19:24:00.000Z",
-      "type": "release",
-      "status": "confirmed",
-      "text": "Day 4/We have improved steering to be instant, leading to the model now reacting much faster to adjustments you make, allowing you to course-correct direction in realtime and not have the model waste effort.Also releasing GPT-6.1 Sol ultrafast. The two work very well",
-      "url": "https://x.com/thsottiaux/status/2108476123456789012"
-    },
-    {
-      "id": "2108548123456789013",
-      "at": "2026-10-09T00:10:00.000Z",
-      "type": "announcement",
-      "status": "confirmed",
-      "text": "Today, we are announcing ChatGPT.It is here: chatgpt.com",
-      "url": "https://x.com/thsottiaux/status/2108548123456789013"
     }
   ]
 }

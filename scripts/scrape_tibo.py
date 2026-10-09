@@ -19,6 +19,17 @@ headers = {
     )
 }
 
+def is_valid_tweet_id(tid: str) -> bool:
+    if not tid or not isinstance(tid, str):
+        return False
+    if not re.fullmatch(r"[0-9]{18,20}", tid):
+        return False
+    if "123456789" in tid or "987654321" in tid:
+        return False
+    if any(digit * 6 in tid for digit in "0123456789"):
+        return False
+    return True
+
 html = None
 openers = [
     urllib.request.build_opener(),
@@ -53,11 +64,14 @@ if not html:
         print("[ERROR] Fetch failed and no existing cache.")
         sys.exit(1)
 
-# Parse all cx-post articles
 posts = []
 post_pattern = r'<article class="cx-post" id="r-([0-9]+)"([^>]*)>(.*?)</article>'
 for m in re.finditer(post_pattern, html, re.DOTALL):
     tid = m.group(1)
+    if not is_valid_tweet_id(tid):
+        print(f"[FILTER] Dropped invalid post tweet id: {tid}")
+        continue
+
     attrs = m.group(2)
     inner = m.group(3)
 
@@ -85,19 +99,27 @@ for m in re.finditer(post_pattern, html, re.DOTALL):
         "url": "https://x.com/thsottiaux/status/" + tid,
     })
 
-# Calendar stamps
 stamps = []
 stamp_pattern = r'data-id="([0-9]+)"\s+data-at="([^"]+)"\s+data-type="([^"]+)"'
 for m in re.finditer(stamp_pattern, html):
-    stamps.append({"id": m.group(1), "at": m.group(2), "type": m.group(3)})
+    tid = m.group(1)
+    if not is_valid_tweet_id(tid):
+        print(f"[FILTER] Dropped invalid stamp tweet id: {tid}")
+        continue
+    stamps.append({"id": tid, "at": m.group(2), "type": m.group(3)})
 
-# Merge with existing cache if available
 existing_records = []
 if CACHE_FILE.exists():
     try:
         with open(CACHE_FILE, "r", encoding="utf-8") as f:
             existing_data = json.load(f)
-            existing_records = existing_data.get("records", [])
+            raw_records = existing_data.get("records", [])
+            for r in raw_records:
+                rid = r.get("id", "")
+                if is_valid_tweet_id(rid):
+                    existing_records.append(r)
+                else:
+                    print(f"[GUARD] Purged suspicious/mock tweet ID from cache: {rid}")
     except Exception:
         existing_records = []
 
@@ -152,4 +174,4 @@ with open(CACHE_FILE, "w", encoding="utf-8") as f:
         ensure_ascii=False,
         indent=2,
     )
-print(f"Saved: {CACHE_FILE}")
+print(f"Saved verified cache: {CACHE_FILE}")

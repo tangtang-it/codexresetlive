@@ -8,6 +8,17 @@ html_files = [f for f in site_dir.rglob("*.html") if "reset-history" not in str(
 print(f"Total HTML files verified: {len(html_files)}")
 all_ok = True
 
+def is_valid_tweet_id(tid: str) -> bool:
+    if not tid or not isinstance(tid, str):
+        return False
+    if not re.fullmatch(r"[0-9]{18,20}", tid):
+        return False
+    if "123456789" in tid or "987654321" in tid:
+        return False
+    if any(digit * 6 in tid for digit in "0123456789"):
+        return False
+    return True
+
 for hf in sorted(html_files):
     content = hf.read_text(encoding="utf-8")
     rel_path = str(hf.relative_to(site_dir))
@@ -55,7 +66,14 @@ for hf in sorted(html_files):
             print(f"FAILED: {hf} schema json decode error: {e}")
             all_ok = False
 
-    # Check key sections for main landing pages
+    # 4. Strict External X / Twitter URL Integrity Check (Block 404 & mock IDs)
+    x_links = re.findall(r'href="(https?://(?:x|twitter).com/thsottiaux/status/([0-9]+))"', content)
+    for full_url, tid in x_links:
+        if not is_valid_tweet_id(tid):
+            print(f"FAILED [MOCK TWEET LINK]: {hf} contains invalid/mock tweet link: {full_url}")
+            all_ok = False
+
+    # 5. Check key sections for main landing pages
     if not any(sub in rel_path for sub in ["history", "methodology", "reset-today"]):
         has_banner = "direct-ans-banner" in content
         has_gauge = "gauge-wrap" in content
@@ -78,7 +96,7 @@ for hf in sorted(html_files):
         print(f"OK [SUB] : {rel_path:24s} | Size: {len(content):,} B | Canonical: {canonical.group(1)}")
 
 if all_ok:
-    print("ALL VERIFIED FILES PASSED INTEGRITY, SCHEMA & SECTION AUDIT 100%!")
+    print("ALL VERIFIED FILES PASSED INTEGRITY, SCHEMA, LINK & SECTION AUDIT 100%!")
 else:
     print("AUDIT FAILED!")
     sys.exit(1)
