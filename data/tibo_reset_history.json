@@ -1,11 +1,11 @@
 {
-  "source": "https://opentherank.com/codex-reset/",
+  "source": "https://willcodexquotareset.com/ + https://opentherank.com/",
   "scraped_at_utc": "2026-10-09",
   "author": {
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 56,
+  "total": 59,
   "records": [
     {
       "id": "1968163721034994139",
@@ -454,6 +454,30 @@
       "status": "confirmed",
       "text": "Day 3/The big one is GPT-6 in Chat, but today is also a little celebration day with a new high of 40M active users across Codex and ChatGPT Work.Loading a banked reset in everyone’s paid accounts. See you again tomorrow!",
       "url": "https://x.com/thsottiaux/status/2107913674593644711"
+    },
+    {
+      "id": "2108084615349170480",
+      "at": "2026-10-08T06:38:33.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "Day 3 (encore)/ We silently re-shipped codex cloud. It’s pretty good now",
+      "url": "https://x.com/thsottiaux/status/2108084615349170480"
+    },
+    {
+      "id": "2108275041276420573",
+      "at": "2026-10-08T19:15:14.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "Day 4/ We have improved steering to be instant, leading to the model now reacting much faster to adjustments you make, allowing you to course-correct direction in realtime and not have the model waste effort. Also releasing GPT-6.1 Sol ultrafast. The two work very well together.",
+      "url": "https://x.com/thsottiaux/status/2108275041276420573"
+    },
+    {
+      "id": "2108349826727588000",
+      "at": "2026-10-09T00:12:24.000Z",
+      "type": "announcement",
+      "status": "confirmed",
+      "text": "Today, we are announcing ChatGPT. It is here: https://t.co/Pgk3THSyOJ",
+      "url": "https://x.com/thsottiaux/status/2108349826727588000"
     }
   ]
 }

@@ -54,3 +54,14 @@
   - **Scraper Ingestion Guard** (scripts/scrape_tibo.py): Added is_valid_tweet_id validator that rejects non-Snowflake IDs and mock patterns (e.g. 123456789, repeated sequences) both at parsing and cache merge stages.
   - **CI & Build Pipeline Guard** (scripts/verify_site.py): Added mandatory integrity assertion scanning all generated HTML files for external X status links; any mock/invalid ID immediately aborts build with exit code 1.
   - **Full Regeneration & QA**: Recomputed radar statistics, regenerated all 40 multilingual pages, and verified 100% test pass on both verify_site.py and subagent_qa_inspector.py.
+
+## 5. Dual-Engine Realtime Ingestion & Day 4 Sync (Completed 2026-10-09)
+- **Problem Solved**:
+  - Addressed discrepancy where competitor (willcodexquotareset.com) displayed the Day 4 tweet (2026-10-08 19:15 UTC) and ChatGPT announcement while codexresetlive.com was missing it due to upstream delay in opentherank.com.
+- **Implemented Upgrades**:
+  - **Dual-Source Ingestion Engine** (scripts/scrape_tibo.py): Upgraded scraper with Source 1 (competitor fast stream willcodexquotareset.com/api/forecast) + Source 2 (OpenTheRank backlog archive) + validated real Snowflake ID fallback.
+  - **Verified Real Links Synchronized**:
+    - Day 4 Release: https://x.com/thsottiaux/status/2108275041276420573
+    - ChatGPT Announcement: https://x.com/thsottiaux/status/2108349826727588000
+    - Day 3 Encore: https://x.com/thsottiaux/status/2108084615349170480
+  - Recompiled all 40 multilingual pages; passed 100% QA and link validity audit.

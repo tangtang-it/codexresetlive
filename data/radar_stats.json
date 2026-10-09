@@ -1,16 +1,16 @@
 {
-  "total": 56,
-  "reset_count": 56,
-  "regular": 47,
+  "total": 59,
+  "reset_count": 57,
+  "regular": 48,
   "banked": 7,
-  "last_reset_at": "2026-10-07T19:19:17.000Z",
-  "last_reset_text": "Day 3/The big one is GPT-6 in Chat, but today is also a little celebration day with a new high of 40M active users across Codex and ChatGPT Work.Loading a banked reset in everyone’s paid accounts. See you again tomorrow!",
-  "last_reset_url": "https://x.com/thsottiaux/status/2107913674593644711",
+  "last_reset_at": "2026-10-08T06:38:33.000Z",
+  "last_reset_text": "Day 3 (encore)/ We silently re-shipped codex cloud. It’s pretty good now",
+  "last_reset_url": "https://x.com/thsottiaux/status/2108084615349170480",
   "first_reset_at": "2025-09-17T04:02:52.000Z",
-  "days_since_last_reset": 1.7,
-  "avg_gap_days_all": 7.0,
-  "avg_gap_days_recent": 4.0,
-  "probability_48h": 38,
+  "days_since_last_reset": 1.3,
+  "avg_gap_days_all": 6.9,
+  "avg_gap_days_recent": 3.4,
+  "probability_48h": 27,
   "monthly_series": [
     {
       "month": "2025-09",
@@ -66,7 +66,7 @@
     },
     {
       "month": "2026-10",
-      "count": 4
+      "count": 5
     }
   ],
   "monthly_max": 12
