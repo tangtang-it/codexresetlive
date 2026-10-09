@@ -1,4 +1,5 @@
-import json
+# -*- coding: utf-8 -*-
+import json, math
 from datetime import datetime, timezone
 from collections import Counter
 from pathlib import Path
@@ -25,18 +26,12 @@ recent_gaps = gaps[-14:]
 avg_recent = round(sum(recent_gaps)/len(recent_gaps), 1)
 avg_all = round(sum(gaps)/len(gaps), 1)
 
-# Four-factor smooth probability model
-baseline = 12
+# Continuous smooth hazard sigmoid model
+def calc_probability(d):
+    p_val = 11.0 + (74.0 / (1.0 + math.exp(-1.8 * (max(0.0, d) - 2.0))))
+    return max(10, min(85, int(round(p_val))))
 
-if days_since <= 2.0:
-    cooldown_factor = -4  # Recent reset cooldown
-elif days_since <= 4.0:
-    cooldown_factor = +6  # Nearing typical cadence
-else:
-    cooldown_factor = min(40, round((days_since - 4) * 8.5))
-
-signal_hint = 3
-prob = max(10, min(85, round(baseline + cooldown_factor + signal_hint)))
+prob = calc_probability(days_since)
 
 months = Counter(r["at"][:7] for r in recs)
 banked = sum(1 for r in recs if r["type"] == "banked")
@@ -71,4 +66,4 @@ out_file = DATA_DIR / "radar_stats.json"
 with open(out_file, "w", encoding="utf-8") as f:
     json.dump(out, f, ensure_ascii=False, indent=2)
 
-print(f"Computed stats: total={len(recs)}, prob={prob}%, saved to {out_file}")
+print(f"Computed stats: total={len(recs)}, days_since={days_since}d, prob={prob}%, saved to {out_file}")

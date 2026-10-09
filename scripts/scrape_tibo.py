@@ -124,7 +124,7 @@ for p in posts:
         merged[p["id"]] = p
 
 valid_records = []
-reset_keywords = ["reset", "quota", "limit", "refill", "banked", "cleared", "propagated", "bonus", "capacity"]
+reset_keywords = ["reset", "quota", "limit", "refill", "banked", "cleared", "propagated", "bonus", "capacity", "day ", "chatgpt", "steering", "release", "announcing", "model"]
 for r in merged.values():
     t = r.get("text", "").lower()
     if t:

@@ -395,73 +395,162 @@ __FOOTER_DIR_HTML__
 
 <script>
 (function(){
-  // Lang dropdown
-  var lb=document.getElementById('langBtn'),lp=document.getElementById('langPanel');
-  lb.addEventListener('click',function(e){e.stopPropagation();lp.classList.toggle('open');lb.classList.toggle('open');});
-  document.addEventListener('click',function(e){if(!lp.contains(e.target)&&!lb.contains(e.target)){lp.classList.remove('open');lb.classList.remove('open');}});
+  // 1. Language Dropdown
+  var lb=document.getElementById("langBtn"),lp=document.getElementById("langPanel");
+  if(lb&&lp){
+    lb.addEventListener("click",function(e){e.stopPropagation();lp.classList.toggle("open");lb.classList.toggle("open");});
+    document.addEventListener("click",function(e){if(!lp.contains(e.target)&&!lb.contains(e.target)){lp.classList.remove("open");lb.classList.remove("open");}});
+  }
 
-  // Toast
+  // 2. Toast Notifications
   function getToastIco(k){
-    if(k==='warn'||k==='alert') return '<svg viewBox="0 0 24 24" fill="none" stroke="#f6465d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';
-    if(k==='clock') return '<svg viewBox="0 0 24 24" fill="none" stroke="#FCD535" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
-    if(k==='bell') return '<svg viewBox="0 0 24 24" fill="none" stroke="#FCD535" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>';
-    if(k==='plane') return '<svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>';
-    if(k==='chat') return '<svg viewBox="0 0 24 24" fill="none" stroke="#0ecb81" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>';
+    if(k==="warn"||k==="alert") return '<svg viewBox="0 0 24 24" fill="none" stroke="#f6465d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';
+    if(k==="clock") return '<svg viewBox="0 0 24 24" fill="none" stroke="#FCD535" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>';
+    if(k==="bell") return '<svg viewBox="0 0 24 24" fill="none" stroke="#FCD535" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>';
+    if(k==="plane") return '<svg viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>';
+    if(k==="chat") return '<svg viewBox="0 0 24 24" fill="none" stroke="#0ecb81" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>';
     return '<svg viewBox="0 0 24 24" fill="none" stroke="#0ecb81" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:17px;height:17px"><polyline points="20 6 9 17 4 12"/></svg>';
   }
-  function toast(m,k){var t=document.getElementById('toast');
-    document.getElementById('toastM').textContent=m;
-    document.getElementById('toastI').innerHTML=getToastIco(k);
-    t.classList.add('on');setTimeout(function(){t.classList.remove('on');},2800);}
-
-  // Gauge animation
-  var TARGET=__PROB_NUM__, TARGET_OFFSET=540.35*(1-TARGET/100);
-  var arc=document.getElementById('gaugeArc'),numEl=document.getElementById('gaugeNum');
-  var shown=false;
-  function animateGauge(){
-    if(shown)return; shown=true;
-    if(arc) arc.style.strokeDashoffset=TARGET_OFFSET;
-    var t0=null,dur=1700;
-    function step(ts){
-      if(t0===null)t0=ts;
-      var p=Math.min(1,(ts-t0)/dur);
-      var e=1-Math.pow(1-p,4);
-      if(numEl) numEl.textContent=Math.round(TARGET*e);
-      if(p<1)requestAnimationFrame(step);
-      else if(numEl) numEl.textContent=TARGET;
-    }
-    requestAnimationFrame(step);
+  function toast(m,k){
+    var t=document.getElementById("toast");
+    if(!t) return;
+    document.getElementById("toastM").textContent=m;
+    document.getElementById("toastI").innerHTML=getToastIco(k);
+    t.classList.add("on");
+    setTimeout(function(){t.classList.remove("on");},2800);
   }
-  if('IntersectionObserver' in window){
-    new IntersectionObserver(function(en,ob){
-      en.forEach(function(x){if(x.isIntersecting){animateGauge();ob.disconnect();}});
-    },{threshold:.25}).observe(document.querySelector('.card-box'));
-  } else { animateGauge(); }
-  setTimeout(animateGauge,800);
 
-  // Local time converter
-  var fmt;
-  try{ fmt=new Intl.DateTimeFormat(undefined,{weekday:'short',month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'}); }
-  catch(e){ fmt=null; }
-  if(fmt){
-    document.querySelectorAll('[data-utc]').forEach(function(el){
-      var d=new Date(el.getAttribute('data-utc'));
-      if(!isNaN(d)) el.textContent=fmt.format(d);
-  // Live relative time updater for [data-ago-utc]
-  function updateAgo(){
-    var lang = document.documentElement.lang || "en";
-    // Dynamic SF Work Window updater (Pacific Time HQ)
+  // 3. Mathematical Probability & Time Synchronization Engine
+  var LAST_RESET_UTC = "__LAST_RESET_UTC__";
+  var lang = document.documentElement.lang || "en";
+  var isZh = lang.indexOf("zh") === 0;
+  var isJa = lang === "ja";
+
+  function calcProbability(daysSince) {
+    var d = Math.max(0, daysSince);
+    var p = 11.0 + (74.0 / (1.0 + Math.exp(-1.8 * (d - 2.0))));
+    return Math.max(10, Math.min(85, Math.round(p)));
+  }
+
+  var arc = document.getElementById("gaugeArc");
+  var numEl = document.getElementById("gaugeNum");
+  var capEl = document.querySelector(".gauge-cap");
+  var gaugeAnimated = false;
+
+  function updateLiveEngine() {
+    var now = new Date();
+    var lastReset = new Date(LAST_RESET_UTC);
+    var diffMs = Math.max(0, now.getTime() - lastReset.getTime());
+    var diffDays = diffMs / 86400000;
+    var diffHours = diffMs / 3600000;
+    var diffMin = diffMs / 60000;
+    var liveProb = calcProbability(diffDays);
+
+    // A. Update Gauge
+    var offset = 540.35 * (1 - liveProb / 100);
+    if (!gaugeAnimated) {
+      gaugeAnimated = true;
+      if(arc) arc.style.strokeDashoffset = offset;
+      var t0 = null, dur = 1400;
+      function step(ts){
+        if(t0===null) t0=ts;
+        var p = Math.min(1, (ts-t0)/dur);
+        var e = 1 - Math.pow(1-p, 4);
+        if(numEl) numEl.textContent = Math.round(liveProb * e);
+        if(p < 1) requestAnimationFrame(step);
+        else if(numEl) numEl.textContent = liveProb;
+      }
+      requestAnimationFrame(step);
+    } else {
+      if(arc) arc.style.strokeDashoffset = offset;
+      if(numEl) numEl.textContent = liveProb;
+    }
+
+    // Gauge Caption Sync
+    if (capEl) {
+      if (liveProb < 30) {
+        capEl.textContent = isZh ? "偏低 —— 刚刚完成一次重置" : (isJa ? "低め —— 直近にリセット完了" : "Low — Recent reset cooldown");
+      } else if (liveProb < 60) {
+        capEl.textContent = isZh ? "适中 —— 进入常规等待窗口" : (isJa ? "中程度 —— 通常待機サイクル突入" : "Moderate — Normal replenishment cadence");
+      } else {
+        capEl.textContent = isZh ? "偏高 —— 接近平均补水周期" : (isJa ? "高め —— 平均間隔到達・高確率期" : "Elevated — Approaching average reset gap");
+      }
+    }
+
+    // B. Live Days-Since Synchronizer (Gauge footer & bottom stats)
+    var daysStr = diffDays.toFixed(1) + "d";
+    document.querySelectorAll("[data-days-since-utc]").forEach(function(el){
+      el.textContent = daysStr;
+    });
+
+    // C. Live Relative Time Synchronizer ([data-ago-utc])
+    document.querySelectorAll("[data-ago-utc]").forEach(function(el){
+      if (isZh) {
+        if (diffHours < 1) el.textContent = Math.max(1, Math.round(diffMin)) + " 分钟前";
+        else if (diffHours < 24) el.textContent = Math.round(diffHours) + " 小时前";
+        else el.textContent = daysStr + " 前";
+      } else if (isJa) {
+        if (diffHours < 1) el.textContent = Math.max(1, Math.round(diffMin)) + " 分前";
+        else if (diffHours < 24) el.textContent = Math.round(diffHours) + " 時間前";
+        else el.textContent = daysStr + " 前";
+      } else {
+        if (diffHours < 1) el.textContent = Math.max(1, Math.round(diffMin)) + "m ago";
+        else if (diffHours < 24) el.textContent = Math.round(diffHours) + "h ago";
+        else el.textContent = daysStr + " ago";
+      }
+    });
+
+    // D. Switchboard Cooldown Synchronizer
+    document.querySelectorAll("[data-cooldown-utc]").forEach(function(el){
+      if (diffDays < 2.0) {
+        el.textContent = isZh ? ("冷却观察中 (" + daysStr + ")") : (isJa ? ("クーリング中 (" + daysStr + ")") : ("Cooldown active (" + daysStr + ")"));
+      } else {
+        el.textContent = isZh ? ("高频放水窗口 (" + daysStr + ")") : (isJa ? ("高頻度リセット期 (" + daysStr + ")") : ("Window active (" + daysStr + ")"));
+      }
+    });
+
+    // E. Live Prob Badges in Banner / Stamp
+    document.querySelectorAll(".live-prob-val, #stampProbNum").forEach(function(el){
+      el.textContent = liveProb;
+    });
+
+    // F. SVG Chart Dynamic Dates & Prob Anchor
+    var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    var nowLabel = months[now.getMonth()] + " " + now.getDate() + " (Now)";
+    var t1 = new Date(now.getTime() + 86400000);
+    var t1Label = months[t1.getMonth()] + " " + t1.getDate();
+    var t2 = new Date(now.getTime() + 172800000);
+    var t2Label = months[t2.getMonth()] + " " + t2.getDate();
+
+    var chartNowD = document.getElementById("chartNowDate");
+    if(chartNowD) chartNowD.textContent = nowLabel;
+    var chartT1D = document.getElementById("chartT1Date");
+    if(chartT1D) chartT1D.textContent = t1Label;
+    var chartT2D = document.getElementById("chartT2Date");
+    if(chartT2D) chartT2D.textContent = t2Label;
+
+    var chartProbTxt = document.getElementById("chartNowProbText");
+    if(chartProbTxt) chartProbTxt.textContent = "Now " + liveProb + "%";
+
+    var yNow = 130 - (liveProb * 1.25);
+    var chartDot = document.getElementById("chartNowDot");
+    if(chartDot) chartDot.setAttribute("cy", yNow);
+    var chartRing = document.getElementById("chartNowRing");
+    if(chartRing) chartRing.setAttribute("cy", yNow);
+    var chartStem = document.getElementById("chartNowStem");
+    if(chartStem) chartStem.setAttribute("y1", yNow);
+    var chartBadgeRect = document.getElementById("chartNowBadgeRect");
+    if(chartBadgeRect) chartBadgeRect.setAttribute("y", (yNow - 23));
+    if(chartProbTxt) chartProbTxt.setAttribute("y", (yNow - 12));
+
+    // G. SF Work Window (Pacific Time HQ)
     try {
-      var now = new Date();
       var sfStr = now.toLocaleTimeString("en-US", {timeZone: "America/Los_Angeles", hour12: false, hour: "numeric", minute: "numeric"});
       var sfDay = new Intl.DateTimeFormat("en-US", {timeZone: "America/Los_Angeles", weekday: "short"}).format(now);
       var parts = sfStr.split(":");
       var h = parseInt(parts[0], 10);
       var isWknd = (sfDay === "Sat" || sfDay === "Sun");
-      var isZh = lang.indexOf("zh") === 0;
-      var isJa = lang === "ja";
-      var sfText = "";
-      var sfDot = "green";
+      var sfText = "", sfDot = "green";
       if(isWknd){
         sfText = isZh ? "周末休整 (美西)" : (isJa ? "週末オフライン (米国太平洋)" : "Weekend (US Pacific)");
         sfDot = "gray";
@@ -479,7 +568,7 @@ __FOOTER_DIR_HTML__
       document.querySelectorAll("[data-sf-dot]").forEach(function(el){ el.className = "sr-dot " + sfDot; });
     } catch(e){}
 
-    // Local date converter for [data-local-date-only]
+    // H. Local Date & Datetime Converters
     document.querySelectorAll("[data-local-date-only]").forEach(function(el){
       var d = new Date(el.getAttribute("data-local-date-only"));
       if(isNaN(d.getTime())) return;
@@ -489,138 +578,133 @@ __FOOTER_DIR_HTML__
       el.textContent = y + "-" + m + "-" + day;
     });
 
-    document.querySelectorAll("[data-ago-utc]").forEach(function(el){
-      var d = new Date(el.getAttribute("data-ago-utc"));
-      if(isNaN(d.getTime())) return;
-      var diffMs = Date.now() - d.getTime();
-      var diffSec = Math.max(0, Math.floor(diffMs / 1000));
-      var diffMin = Math.floor(diffSec / 60);
-      var diffH = Math.round(diffMin / 60);
-      var diffD = Math.round(diffH / 24);
-      if(lang.indexOf("zh") === 0){
-        if(diffH < 1) el.textContent = Math.max(1, diffMin) + " 分钟前";
-        else if(diffH < 24) el.textContent = diffH + " 小时前";
-        else el.textContent = diffD + " 天前";
-      } else if(lang === "ja"){
-        if(diffH < 1) el.textContent = Math.max(1, diffMin) + " 分前";
-        else if(diffH < 24) el.textContent = diffH + " 時間前";
-        else el.textContent = diffD + " 日前";
-      } else {
-        if(diffH < 1) el.textContent = Math.max(1, diffMin) + "m ago";
-        else if(diffH < 24) el.textContent = diffH + "h ago";
-        else el.textContent = diffD + "d ago";
+    try {
+      var uTz = Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
+      var tzLabels = {
+        "zh-hans": "按你的时区显示 (" + uTz + ")",
+        "zh-hant": "依你的時區顯示 (" + uTz + ")",
+        "ja": "お使いのタイムゾーンで表示中 (" + uTz + ")",
+        "en": "Displayed in your local timezone (" + uTz + ")"
+      };
+      var tzText = tzLabels[lang] || ("Displayed in your local timezone (" + uTz + ")");
+      document.querySelectorAll("[data-tz-display]").forEach(function(el){
+        el.textContent = tzText;
+      });
+      document.querySelectorAll("[data-local-dt]").forEach(function(el){
+        var d = new Date(el.getAttribute("data-local-dt"));
+        if(isNaN(d.getTime())) return;
+        if(isZh){
+          var days = ["周日","周一","周二","周三","周四","周五","周六"];
+          var y = d.getFullYear(), m = d.getMonth()+1, day = d.getDate();
+          var hh = String(d.getHours()).padStart(2, "0"), mm = String(d.getMinutes()).padStart(2, "0");
+          el.textContent = y + "年" + m + "月" + day + "日" + days[d.getDay()] + " " + hh + ":" + mm;
+        } else if(isJa){
+          var daysJ = ["(日)","(月)","(火)","(水)","(木)","(金)","(土)"];
+          var y = d.getFullYear(), m = d.getMonth()+1, day = d.getDate();
+          var hh = String(d.getHours()).padStart(2, "0"), mm = String(d.getMinutes()).padStart(2, "0");
+          el.textContent = y + "年" + m + "月" + day + "日" + daysJ[d.getDay()] + " " + hh + ":" + mm;
+        } else {
+          var opts = { weekday: "short", year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit", hour12: false };
+          el.textContent = new Intl.DateTimeFormat("en-US", opts).format(d);
+        }
+      });
+    } catch(e){}
+
+    // I. Stream timestamps in UTC
+    document.querySelectorAll("[data-utc]").forEach(function(el){
+      var raw = el.getAttribute("data-utc");
+      if(raw && raw.length >= 16) {
+        el.textContent = raw.substring(0, 16).replace("T", " ") + " UTC";
       }
-    });
-  }
-  updateAgo();
-  setInterval(updateAgo, 60000);
-  // Local timezone resolver & full datetime converter for [data-local-dt]
-  try {
-    var uTz = Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
-    var lang = document.documentElement.lang || "en";
-    var tzLabels = {
-      "zh-hans": "按你的时区显示 (" + uTz + ")",
-      "zh-hant": "依你的時區顯示 (" + uTz + ")",
-      "ja": "お使いのタイムゾーンで表示中 (" + uTz + ")",
-      "en": "Displayed in your local timezone (" + uTz + ")"
-    };
-    var tzText = tzLabels[lang] || ("Displayed in your local timezone (" + uTz + ")");
-    document.querySelectorAll("[data-tz-display]").forEach(function(el){
-      el.textContent = tzText;
-    });
-    document.querySelectorAll("[data-local-dt]").forEach(function(el){
-      var d = new Date(el.getAttribute("data-local-dt"));
-      if(isNaN(d.getTime())) return;
-      if(lang.indexOf("zh") === 0){
-        var days = ["周日","周一","周二","周三","周四","周五","周六"];
-        var y = d.getFullYear(), m = d.getMonth()+1, day = d.getDate();
-        var hh = String(d.getHours()).padStart(2, "0"), mm = String(d.getMinutes()).padStart(2, "0");
-        el.textContent = y + "年" + m + "月" + day + "日" + days[d.getDay()] + " " + hh + ":" + mm;
-      } else if(lang === "ja"){
-        var daysJ = ["(日)","(月)","(火)","(水)","(木)","(金)","(土)"];
-        var y = d.getFullYear(), m = d.getMonth()+1, day = d.getDate();
-        var hh = String(d.getHours()).padStart(2, "0"), mm = String(d.getMinutes()).padStart(2, "0");
-        el.textContent = y + "年" + m + "月" + day + "日" + daysJ[d.getDay()] + " " + hh + ":" + mm;
-      } else {
-        var opts = { weekday: "short", year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit", hour12: false };
-        el.textContent = new Intl.DateTimeFormat("en-US", opts).format(d);
-      }
-    });
-  } catch(e){ console.warn("Timezone resolution failed", e); }
     });
   }
 
-  // Personal Calculator
-  var TOTAL=18000, target=new Date(Date.now()+TOTAL*1000), tz='LOCAL';
-  var ch=document.getElementById('ch'),cm=document.getElementById('cm'),cs=document.getElementById('cs');
-  var ua=document.getElementById('unlockAt'),pf=document.getElementById('progFill'),pp=document.getElementById('progPct');
-  var REC='__RECOVERED__';
+  // Initialize Live Engine
+  updateLiveEngine();
+  setInterval(updateLiveEngine, 30000);
+
+  if("IntersectionObserver" in window){
+    new IntersectionObserver(function(en,ob){
+      en.forEach(function(x){
+        if(x.isIntersecting){
+          updateLiveEngine();
+          ob.disconnect();
+        }
+      });
+    },{threshold:.25}).observe(document.querySelector(".card-box") || document.body);
+  }
+
+  // 4. Personal Calculator Engine
+  var TOTAL=18000, target=new Date(Date.now()+TOTAL*1000), tz="LOCAL";
+  var ch=document.getElementById("ch"),cm=document.getElementById("cm"),cs=document.getElementById("cs");
+  var ua=document.getElementById("unlockAt"),pf=document.getElementById("progFill"),pp=document.getElementById("progPct");
+  var REC="__RECOVERED__";
   function fmtT(d){
     try{
-      if(tz==='LOCAL')return d.toLocaleTimeString(undefined,{hour:'2-digit',minute:'2-digit'});
-      return d.toLocaleTimeString('en-US',{timeZone:tz,hour:'2-digit',minute:'2-digit'})+' '+tz.split('/').pop();
+      if(tz==="LOCAL") return d.toLocaleTimeString(undefined,{hour:"2-digit",minute:"2-digit"});
+      return d.toLocaleTimeString("en-US",{timeZone:tz,hour:"2-digit",minute:"2-digit"})+" "+tz.split("/").pop();
     }catch(e){return d.toLocaleTimeString();}
   }
   function tick(){
     var diff=Math.max(0,Math.floor((target-new Date())/1000));
-    if(ch) ch.textContent=String(Math.floor(diff/3600)).padStart(2,'0');
-    if(cm) cm.textContent=String(Math.floor((diff%3600)/60)).padStart(2,'0');
-    if(cs) cs.textContent=String(diff%60).padStart(2,'0');
+    if(ch) ch.textContent=String(Math.floor(diff/3600)).padStart(2,"0");
+    if(cm) cm.textContent=String(Math.floor((diff%3600)/60)).padStart(2,"0");
+    if(cs) cs.textContent=String(diff%60).padStart(2,"0");
     if(ua) ua.textContent=fmtT(target);
     var pct=Math.min(100,Math.max(0,Math.round((TOTAL-diff)/TOTAL*100)));
-    if(pf) pf.style.width=pct+'%';
-    if(pp) pp.textContent=pct+'% '+REC;
+    if(pf) pf.style.width=pct+"%";
+    if(pp) pp.textContent=pct+"% "+REC;
     if(diff===0&&!window.__n){
       window.__n=true;
-      try{ if('Notification' in window&&Notification.permission==='granted'){
-        new Notification('Codex Quota Unlocked',{body:'Your 5-hour rolling window has reopened.'}); } }catch(e){}
+      try{ if("Notification" in window&&Notification.permission==="granted"){
+        new Notification("Codex Quota Unlocked",{body:"Your 5-hour rolling window has reopened."}); } }catch(e){}
     }
   }
   window.__n=false; setInterval(tick,1000); tick();
 
-  var tzSel=document.getElementById('tzSel');
-  if(tzSel) tzSel.addEventListener('change',function(e){
-    tz=e.target.value;tick();toast('__TZ_TOAST__ '+e.target.options[e.target.selectedIndex].text,'clock');});
+  var tzSel=document.getElementById("tzSel");
+  if(tzSel) tzSel.addEventListener("change",function(e){
+    tz=e.target.value;tick();toast("__TZ_TOAST__ "+e.target.options[e.target.selectedIndex].text,"clock");});
   
-  document.querySelectorAll('.preset').forEach(function(b){
-    b.addEventListener('click',function(){
-      document.querySelectorAll('.preset').forEach(function(x){x.classList.remove('on');});
-      b.classList.add('on');
-      var m=parseInt(b.getAttribute('data-min'),10);
+  document.querySelectorAll(".preset").forEach(function(b){
+    b.addEventListener("click",function(){
+      document.querySelectorAll(".preset").forEach(function(x){x.classList.remove("on");});
+      b.classList.add("on");
+      var m=parseInt(b.getAttribute("data-min"),10);
       target=new Date(Date.now()+m*60*1000);window.__n=false;tick();
-      toast(m+' __MIN_TOAST__','check');
+      toast(m+" __MIN_TOAST__","check");
     });
   });
 
-  var nb=document.getElementById('notifyBtn');
-  if(nb) nb.addEventListener('click',async function(){
-    if(!('Notification' in window)){toast('__NO_NOTIF__','warn');return;}
-    if(Notification.permission==='granted'){toast('__NOTIF_ON__','bell');}
-    else if(Notification.permission!=='denied'){
+  var nb=document.getElementById("notifyBtn");
+  if(nb) nb.addEventListener("click",async function(){
+    if(!("Notification" in window)){toast("__NO_NOTIF__","warn");return;}
+    if(Notification.permission==="granted"){toast("__NOTIF_ON__","bell");}
+    else if(Notification.permission!=="denied"){
       var p=await Notification.requestPermission();
-      if(p==='granted')toast('__NOTIF_SET__','bell');
-    } else {toast('__NOTIF_BLOCK__','warn');}
+      if(p==="granted")toast("__NOTIF_SET__","bell");
+    } else {toast("__NOTIF_BLOCK__","warn");}
   });
 
-  var cb=document.getElementById('calBtn');
-  if(cb) cb.addEventListener('click',function(){
-    var s=target.toISOString().replace(/-|:|\.\d\d\d/g,'');
-    var e2=new Date(target.getTime()+15*60000).toISOString().replace(/-|:|\.\d\d\d/g,'');
-    window.open('https://calendar.google.com/calendar/render?action=TEMPLATE&text='+
-      encodeURIComponent('Codex Quota Reset')+'&dates='+s+'/'+e2+
-      '&details='+encodeURIComponent('Your 5-hour rolling limit window on OpenAI Codex has unlocked.'),'_blank');
+  var cb=document.getElementById("calBtn");
+  if(cb) cb.addEventListener("click",function(){
+    var s=target.toISOString().replace(/-|:|\.\d\d\d/g,"");
+    var e2=new Date(target.getTime()+15*60000).toISOString().replace(/-|:|\.\d\d\d/g,"");
+    window.open("https://calendar.google.com/calendar/render?action=TEMPLATE&text="+
+      encodeURIComponent("Codex Quota Reset")+"&dates="+s+"/"+e2+
+      "&details="+encodeURIComponent("Your 5-hour rolling limit window on OpenAI Codex has unlocked."),"_blank");
   });
 
-  // Channel buttons
-  var tg=document.getElementById('tgBtn');
-  if(tg) tg.addEventListener('click',function(){toast('Telegram Bot alerts coming soon!','plane');});
-  var wx=document.getElementById('wxBtn');
-  if(wx) wx.addEventListener('click',function(){toast('WeChat notification channel active!','chat');});
-  var sub=document.getElementById('alertSubBtn');
-  if(sub) sub.addEventListener('click',function(){
-    var em=document.getElementById('alertEmail');
-    if(em&&em.value.indexOf('@')>0){toast('Subscribed successfully! You will be notified on reset.','check');em.value='';}
-    else{toast('Please enter a valid email address.','warn');}
+  // 5. Channels and Subscriptions
+  var tg=document.getElementById("tgBtn");
+  if(tg) tg.addEventListener("click",function(){toast("Telegram Bot alerts coming soon!","plane");});
+  var wx=document.getElementById("wxBtn");
+  if(wx) wx.addEventListener("click",function(){toast("WeChat notification channel active!","chat");});
+  var sub=document.getElementById("alertSubBtn");
+  if(sub) sub.addEventListener("click",function(){
+    var em=document.getElementById("alertEmail");
+    if(em&&em.value.indexOf("@")>0){toast("Subscribed successfully! You will be notified on reset.","check");em.value="";}
+    else{toast("Please enter a valid email address.","warn");}
   });
 })();
 </script>

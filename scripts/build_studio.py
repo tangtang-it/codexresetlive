@@ -66,13 +66,13 @@ pulse_svg = f'''<svg viewBox="0 0 740 180" fill="none" xmlns="http://www.w3.org/
   <text x="170" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 2</text>
   <text x="280" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 4</text>
   <text x="400" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 7</text>
-  <text x="500" y="156" fill="#0ecb81" font-family="ui-monospace" font-size="10" font-weight="bold" text-anchor="middle">{p_now_lbl}</text>
-  <text x="590" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">{p_t1_lbl}</text>
-  <text x="670" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">{p_t2_lbl}</text>
+  <text id="chartNowDate" x="500" y="156" fill="#0ecb81" font-family="ui-monospace" font-size="10" font-weight="bold" text-anchor="middle">{p_now_lbl}</text>
+  <text id="chartT1Date" x="590" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">{p_t1_lbl}</text>
+  <text id="chartT2Date" x="670" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">{p_t2_lbl}</text>
   <!-- Verified Historical Trajectory (Cubic Bezier: No Overshoot, bounds 36px - 116px) -->
-  <path d="M 70 48 C 105 75, 135 65, 170 38 C 210 40, 245 95, 280 95 C 320 95, 360 40, 400 36 C 435 36, 465 110, 500 116" stroke="#0ecb81" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+  <path d="M 70 48 C 105 75, 135 65, 170 38 C 210 40, 245 95, 280 95 C 320 95, 360 40, 400 36 C 435 36, 465 105, 500 99" stroke="#0ecb81" stroke-width="2.6" fill="none" stroke-linecap="round"/>
   <!-- 48-Hour Projection Line (Yellow Dash) -->
-  <path d="M 500 116 C 535 116, 565 95, 590 85 C 615 75, 645 60, 670 55" stroke="#FCD535" stroke-width="2.2" stroke-dasharray="5 4" fill="none" stroke-linecap="round"/>
+  <path d="M 500 99 C 535 99, 565 85, 590 75 C 615 65, 645 55, 670 50" stroke="#FCD535" stroke-width="2.2" stroke-dasharray="5 4" fill="none" stroke-linecap="round"/>
   <!-- Event Marker 1: Sep 30 Banked Reset -->
   <line x1="70" y1="48" x2="70" y2="130" stroke="#FCD535" stroke-width="1.2" stroke-opacity="0.4"/>
   <circle cx="70" cy="48" r="4.5" fill="#FCD535"/>
@@ -93,16 +93,17 @@ pulse_svg = f'''<svg viewBox="0 0 740 180" fill="none" xmlns="http://www.w3.org/
   <text x="382" y="24" fill="#0ecb81" font-family="ui-monospace" font-size="8" font-weight="bold" text-anchor="middle">Reset</text>
   <text x="400" y="24" fill="#707a8a" font-family="ui-monospace" font-size="8" text-anchor="middle">+</text>
   <text x="424" y="24" fill="#FCD535" font-family="ui-monospace" font-size="8" font-weight="bold" text-anchor="middle">Banked</text>
-  <!-- Current Status Anchor: Oct 8 Now Point -->
-  <line x1="500" y1="116" x2="500" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.7"/>
-  <circle cx="500" cy="116" r="5" fill="#0ecb81"/>
-  <circle cx="500" cy="116" r="8" stroke="#0ecb81" stroke-width="1.5" stroke-opacity="0.5"/>
-  <rect x="475" y="93" width="50" height="16" rx="3" fill="#0ecb81"/>
-  <text x="500" y="104" fill="#0b0e11" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Now {prob}%</text>
+  <!-- Current Status Anchor: Live Now Point -->
+  <line id="chartNowStem" x1="500" y1="99" x2="500" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.7"/>
+  <circle id="chartNowDot" cx="500" cy="99" r="5" fill="#0ecb81"/>
+  <circle id="chartNowRing" cx="500" cy="99" r="8" stroke="#0ecb81" stroke-width="1.5" stroke-opacity="0.5"/>
+  <rect id="chartNowBadgeRect" x="475" y="76" width="50" height="16" rx="3" fill="#0ecb81"/>
+  <text id="chartNowProbText" x="500" y="87" fill="#0b0e11" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Now {prob}%</text>
 </svg>'''
 
 MOVES_DATA = {
     "en": [
+        ("Oct 8 · 19:24 UTC", "Day 4 / Instant Steering & GPT-6.1 Sol", "Tibo announced Day 4: instant model steering for real-time course correction, and released GPT-6.1 Sol ultrafast.", "+25 pts", "up", "Model Architecture: Dual-engine workflow and instant steering reduce token waste."),
         ("Oct 8 · 07:30 UTC", "Codex Cloud & Tailscale", "Tibo confirmed Day 3 (encore) silent rollout of Codex Cloud Tailnet integration.", "+20 pts", "up", "Infrastructure Boost: Official multi-cloud developer networking landed."),
         ("Oct 7 · 19:19 UTC", "40M Users Banked Reset", "Day 3 celebration: 40M active users milestone with a banked reset credited to all paid accounts.", "+35 pts", "up", "Celebratory Quota: Tibo announced banked credit bonus honoring 40M developer benchmark."),
         ("Oct 7 · 03:35 UTC", "Community Mandate Reset", "Global regular reset processed following community poll and 4 new feature shipments.", "+30 pts", "up", "Ecosystem Response: Community consensus trigger cleared personal usage limits worldwide."),
@@ -113,6 +114,7 @@ MOVES_DATA = {
         ("Sep 22 · 18:23 UTC", "GPT-6 Sol & Luna Launch", "New flagship models rolled out alongside 50% permanent API price drop.", "+28 pts", "up", "Milestone Catalyst: Major model releases consistently trigger account-wide flushes.")
     ],
     "zh": [
+        ("10月8日 · 19:24 UTC", "Day 4 / Instant Steering 极速转向", "Tibo 宣布 Day 4 重磅更新：即时指令转向大幅降低废词消耗，同步上线 GPT-6.1 Sol 极速版。", "+25 分", "up", "【模型与架构】连续第 4 天大促上新，双模型协同与极速交互就绪。"),
         ("10月8日 · 07:30 UTC", "Codex Cloud 与 Tailscale 联调上线", "Tibo 确认 Day 3 (encore) 静默上线 Codex Cloud 的 Tailnet 安全互联支持。", "+20 分", "up", "【基建上新】官方发推确认全量落地多环境网络互联，服务稳定性增强。"),
         ("10月7日 · 19:19 UTC", "4000万用户存续额度发放", "伴随 40M 活跃用户新高，官方为所有付费账户注入 1 次可保留的 Banked Reset。", "+35 分", "up", "【里程碑放水】Tibo 宣布为庆祝全网开发者达到 4000 万里程碑额外注入存续额度。"),
         ("10月7日 · 03:35 UTC", "社区民意全网常规重置", "顺应社区投票诉求及 4 项功能上线，官方执行全网常规额度重置。", "+30 分", "up", "【响应诉求】官方校准后确认全员配额清零回满，所有付费用户重置完毕。"),
@@ -123,6 +125,7 @@ MOVES_DATA = {
         ("9月22日 · 18:23 UTC", "GPT-6 Sol / Luna 双模型发版", "新模型上线并大幅下调 API 定价，全员账户注入一次完整重置额度。", "+28 分", "up", "【里程碑激励】重大模型换代上线时的标准操作，伴随额度翻倍或重置以促成调用增长。")
     ],
     "ja": [
+        ("10月8日 · 19:24 UTC", "Day 4 / Instant Steering・GPT-6.1 Sol公開", "TiboがDay 4として即時ステアリング改善とGPT-6.1 Sol ultrafastの同時リリースを発表。", "+25 pts", "up", "【モデル拡充】対話修正のリアルタイム反映と高速推論モデルを投入。"),
         ("10月8日 · 07:30 UTC", "Codex Cloud・Tailscale連携開始", "TiboがDay 3 (encore) としてCodex CloudとTailscaleの連携完了を発表。", "+20 pts", "up", "【インフラ拡充】公式によるクラウド環境間セキュア接続の展開完了。"),
         ("10月7日 · 19:19 UTC", "4000万人突破記念バンク枠付与", "4000万アクティブユーザー達成を記念し、全有料アカウントにバンク型リセット枠を付与。", "+35 pts", "up", "【マイルストーン】Tiboが4000万人達成を記念した追加枠付与を発表。"),
         ("10月7日 · 03:35 UTC", "コミュニティ要望リセット反映", "コミュニティの要望と4つの機能リリースに伴い、全体リセットが実行完了。", "+30 pts", "up", "【全体反映】公式が投票結果を受け全ユーザーの利用枠を一括リセット。"),
@@ -394,7 +397,7 @@ def render_direct_ans(code):
     l_dt = datetime.strptime(l_rec["at"][:19], "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc)
     now_u = datetime.now(timezone.utc)
     h_diff = max(0.1, (now_u - l_dt).total_seconds() / 3600.0)
-    is_today_reset = (h_diff < 24.0)
+    is_today_reset = (h_diff < 18.0 and now_u.date() == l_dt.date())
     h_round = int(round(h_diff))
     l_type = l_rec.get("type", "banked").upper()
     badge_cls = l_rec.get("type", "banked")
@@ -460,7 +463,7 @@ def render_direct_ans(code):
         </g>
 
         <g class="stamp-center" filter="url(#glowGoldBig)">
-          <text x="110" y="118" fill="#FCD535" font-size="44" font-weight="900" text-anchor="middle" font-family="'Inter', system-ui, -apple-system, sans-serif" letter-spacing="-1">{prob}%</text>
+          <text x="110" y="118" fill="#FCD535" font-size="44" font-weight="900" text-anchor="middle" font-family="'Inter', system-ui, -apple-system, sans-serif" letter-spacing="-1"><tspan id="stampProbNum">{prob}</tspan>%</text>
           <line x1="68" y1="132" x2="152" y2="132" stroke="#FCD535" stroke-width="2" stroke-dasharray="3 3" stroke-opacity="0.85"/>
           <text x="110" y="148" fill="#FCD535" font-size="9.5" font-weight="800" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" letter-spacing="2">PROBABLE</text>
         </g>
@@ -531,13 +534,13 @@ def render_direct_ans(code):
         if prob >= 60:
             stamp = soon_stamp
             badge_str = "HIGH SIGNAL · PROBABLE"
-            zh_title = f"Codex 今天会全网重置吗？ <strong>今日放水概率较高 ({prob}% 预测)</strong>"
-            en_title = f"Will Codex reset today? <strong>High probability ({prob}% chance)</strong>"
+            zh_title = f"Codex 今天会全网重置吗？ <strong>今日放水概率较高 (<span class='live-prob-val'>{prob}</span>% 预测)</strong>"
+            en_title = f"Will Codex reset today? <strong>High probability (<span class='live-prob-val'>{prob}</span>% chance)</strong>"
         else:
-            stamp = ""
+            stamp = soon_stamp
             badge_str = "LOW SIGNAL · WATCHING"
-            zh_title = f"Codex 今天会全网重置吗？ <strong>今日暂无放水迹象 ({prob}% 概率)</strong>"
-            en_title = f"Will Codex reset today? <strong>Not yet ({prob}% probability)</strong>"
+            zh_title = f"Codex 今天会全网重置吗？ <strong>今日暂无放水迹象 (<span class='live-prob-val'>{prob}</span>% 概率)</strong>"
+            en_title = f"Will Codex reset today? <strong>Watching window (<span class='live-prob-val'>{prob}</span>% probability)</strong>"
 
         if "zh" in code:
             return f'''<div class="direct-ans-banner">
