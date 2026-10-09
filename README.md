@@ -1,40 +1,78 @@
-# codexresetlive
+# 🛰️ OpenAI Codex Quota Reset Radar (CodexReset.live)
 
-> 🚀 **CodexReset.live** — A source-first radar for public OpenAI Codex quota resets, verified developer signals, and personal 5-hour rolling limit recovery calculators.
+[![Live Website](https://img.shields.io/badge/Live%20Radar-codexresetlive.com-blue?style=for-the-badge&logo=googlechrome&logoColor=white)](https://codexresetlive.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
+[![Status](https://img.shields.io/badge/Status-Active%20Monitoring-brightgreen?style=for-the-badge)](https://codexresetlive.com/)
+[![Issues Welcome](https://img.shields.io/badge/Signals-Report%20Here-orange?style=for-the-badge)](https://github.com/tangtang-it/codexresetlive/issues)
 
-Official Site: [https://codexresetlive.com/](https://codexresetlive.com/)
+> **Official community hub & public signal radar for OpenAI Codex rate limit recoveries, rolling quota exhaustion, and verified developer tooling.**
 
----
-
-## Features
-
-- 📡 **Live Quota Radar**: Real-time 48-hour probability forecasting based on verified signals from OpenAI leadership (@thsottiaux).
-- 📈 **Forecast Pulse Curve**: Interactive native SVG time-series probability wave with historical milestone tags.
-- 🕒 **Personal 5-Hour Recovery Engine**: Dynamic rolling recovery clock with timezone detection, recovery progress bar, and unlock alerts.
-- 📅 **Interactive Reset Calendar**: Historical monthly calendar with prev/next navigation across all verified public resets since September 2025.
-- 🌐 **Global Multi-Language Matrix**: 10 dedicated locales (`en`, `zh-hans`, `zh-hant`, `ja`, `ko`, `es`, `de`, `fr`, `pt-br`, `ru`) with clean URLs and bi-directional `hreflang` matrices.
-- 📑 **Search Intent Segmentation**: 4 dedicated landing pages per locale:
-  - `/`: Dual-engine flagship dashboard
-  - `/reset-today/`: Timely status verdict
-  - `/history/`: Complete historical archive & monthly calendar
-  - `/methodology/`: Algorithm whitepaper & 8-factor signal switchboard
-- 🤖 **GEO & Machine Readable Ready**: Optimized with structured Schema.org JSON-LD, `llms.txt`, and `llms-full.txt`.
+👉 **[Launch Live Radar at codexresetlive.com](https://codexresetlive.com/)**
 
 ---
 
-## Tech Stack & Architecture
+## 🌟 What is CodexReset.live?
+
+When coding with OpenAI Codex (via Codex CLI, desktop app, or API integrations), developers frequently encounter rolling rate limits and quota caps. 
+
+**[CodexReset.live](https://codexresetlive.com/)** is a source-first public monitor designed to track:
+- 🕒 **Public Reset Signals**: Verified announcements and lead engineer updates regarding global quota lifts.
+- ⏱️ **Personal 5-Hour Limit Calculators**: Precise recovery countdowns for your rolling token exhaustion.
+- 📊 **Historical Reset Radar**: Monthly calendars mapping past reset timings and maintenance patterns.
+- ⚡ **Outage vs. Quota Detector**: Instant diagnosis to tell whether OpenAI servers are throttling or your personal token limit was reached.
+
+---
+
+## 🎯 Key Capabilities on the Web Platform
+
+| Feature | What it does | Direct Access |
+| :--- | :--- | :--- |
+| **Live Reset Radar** | Verified public announcements auto-converted to your local timezone. | [Open Radar](https://codexresetlive.com/#calendar) |
+| **Rolling Limit Calculator** | Interactive tool calculating when your 5-hour rolling token window replenishes. | [Calculate Recovery](https://codexresetlive.com/#calculator) |
+| **Reset Mechanics Guide** | Clear breakdown of Banked Resets vs. Hard Resets and quota ceilings. | [Read Guide](https://codexresetlive.com/#faq) |
+
+---
+
+## 💬 Community Contributions & Signal Reports
+
+Spotted a fresh quota reset announcement from the OpenAI team that hasn't appeared on the radar yet? Or noticed an anomaly in limit calculations?
+
+- 💡 **Report a Reset Signal**: [Open a Signal Issue](https://github.com/tangtang-it/codexresetlive/issues)
+- 🐛 **Report a Bug**: [Submit Bug Report](https://github.com/tangtang-it/codexresetlive/issues)
+- 🚀 **Feature Requests**: Share what Codex models or metrics you want us to monitor next!
+
+---
+
+## 🛠️ Tech Stack & Architecture
 
 - **Static Generation Engine**: Python 3.11+
 - **Styling**: Sleek Binance-inspired Dark Minimalist UI (Pure Vanilla CSS, zero heavy frontend framework overhead)
 - **Deployment**: Cloudflare Pages / Vercel (Pure static HTML with millisecond edge CDN delivery)
+- **Multi-language Matrix**: 10 locales with 40 prerendered pages and bidirectional hreflang mapping
 
 ---
 
-## Build & Compile
+## 💻 Build & Compile
 
 ```bash
 # Build all 40+ static pages across 10 languages
 python scripts/build_studio.py
+
+# Run site audit and schema verification
+python scripts/verify_site.py
 ```
 
-The generated static output will be located in the `site/` directory ready for deployment.
+The generated static output is located in the `site/` directory ready for deployment.
+
+---
+
+## ⚠️ Disclaimer
+
+`CodexReset.live` is an independent, community-driven developer initiative and is **not affiliated with, endorsed by, or sponsored by OpenAI**. All OpenAI, Codex, and ChatGPT trademarks belong to their respective owners.
+
+---
+
+## 📄 License
+
+This documentation and public issue tracking repository are licensed under the [MIT License](LICENSE).
+
