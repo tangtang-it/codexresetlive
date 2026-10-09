@@ -534,14 +534,14 @@ __FOOTER_DIR_HTML__
 
     var yNow = 130 - (liveProb * 1.25);
     var chartDot = document.getElementById("chartNowDot");
-    if(chartDot) chartDot.setAttribute("cy", yNow);
+    if(chartDot) chartDot.setAttribute("cy", yNow); chartDot.setAttribute("cx", "515");
     var chartRing = document.getElementById("chartNowRing");
-    if(chartRing) chartRing.setAttribute("cy", yNow);
+    if(chartRing) chartRing.setAttribute("cy", yNow); chartRing.setAttribute("cx", "515");
     var chartStem = document.getElementById("chartNowStem");
-    if(chartStem) chartStem.setAttribute("y1", yNow);
+    if(chartStem) chartStem.setAttribute("y1", yNow); chartStem.setAttribute("x1", "515"); chartStem.setAttribute("x2", "515");
     var chartBadgeRect = document.getElementById("chartNowBadgeRect");
-    if(chartBadgeRect) chartBadgeRect.setAttribute("y", (yNow - 23));
-    if(chartProbTxt) chartProbTxt.setAttribute("y", (yNow - 12));
+    if(chartBadgeRect) chartBadgeRect.setAttribute("y", (yNow - 23)); chartBadgeRect.setAttribute("x", "490");
+    if(chartProbTxt) chartProbTxt.setAttribute("y", (yNow - 12)); chartProbTxt.setAttribute("x", "515");
 
     // G. SF Work Window (Pacific Time HQ)
     try {

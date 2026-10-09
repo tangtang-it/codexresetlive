@@ -51,6 +51,11 @@ last_date = last["at"][:10]
 p_now_lbl = f"{now_dt.strftime('%b')} {now_dt.day} (Now)"
 p_t1_lbl = f"{(now_dt + timedelta(days=1)).strftime('%b')} {(now_dt + timedelta(days=1)).day}"
 p_t2_lbl = f"{(now_dt + timedelta(days=2)).strftime('%b')} {(now_dt + timedelta(days=2)).day}"
+
+y_now = round(130 - (prob * 1.25), 1)
+y_badge_rect = round(y_now - 23, 1)
+y_badge_text = round(y_now - 12, 1)
+
 # --- Shared UI Components ---
 pulse_svg = f'''<svg viewBox="0 0 740 180" fill="none" xmlns="http://www.w3.org/2000/svg">
   <!-- Horizontal Grid Lines -->
@@ -62,43 +67,47 @@ pulse_svg = f'''<svg viewBox="0 0 740 180" fill="none" xmlns="http://www.w3.org/
   <text x="15" y="84" fill="#707a8a" font-family="ui-monospace" font-size="10">40%</text>
   <text x="15" y="134" fill="#707a8a" font-family="ui-monospace" font-size="10">0%</text>
   <!-- X-Axis Date Labels -->
-  <text x="70" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Sep 30</text>
-  <text x="170" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 2</text>
-  <text x="280" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 4</text>
-  <text x="400" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 7</text>
-  <text id="chartNowDate" x="500" y="156" fill="#0ecb81" font-family="ui-monospace" font-size="10" font-weight="bold" text-anchor="middle">{p_now_lbl}</text>
-  <text id="chartT1Date" x="590" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">{p_t1_lbl}</text>
-  <text id="chartT2Date" x="670" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">{p_t2_lbl}</text>
-  <!-- Verified Historical Trajectory (Cubic Bezier: No Overshoot, bounds 36px - 116px) -->
-  <path d="M 70 48 C 105 75, 135 65, 170 38 C 210 40, 245 95, 280 95 C 320 95, 360 40, 400 36 C 435 36, 465 105, 500 99" stroke="#0ecb81" stroke-width="2.6" fill="none" stroke-linecap="round"/>
-  <!-- 48-Hour Projection Line (Yellow Dash) -->
-  <path d="M 500 99 C 535 99, 565 85, 590 75 C 615 65, 645 55, 670 50" stroke="#FCD535" stroke-width="2.2" stroke-dasharray="5 4" fill="none" stroke-linecap="round"/>
+  <text x="60" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Sep 30</text>
+  <text x="140" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 2</text>
+  <text x="220" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 4</text>
+  <text x="330" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 7</text>
+  <text x="425" y="156" fill="#0ecb81" font-family="ui-monospace" font-size="10" font-weight="600" text-anchor="middle">Oct 8</text>
+  <text id="chartNowDate" x="515" y="156" fill="#0ecb81" font-family="ui-monospace" font-size="10" font-weight="bold" text-anchor="middle">{p_now_lbl}</text>
+  <text id="chartT1Date" x="605" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">{p_t1_lbl}</text>
+  <text id="chartT2Date" x="690" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">{p_t2_lbl}</text>
+  <!-- Verified Historical Trajectory (Cubic Bezier across all verified resets including Oct 8) -->
+  <path d="M 60 48 C 90 70, 110 50, 140 38 C 170 38, 195 95, 220 95 C 255 95, 295 40, 330 36 C 365 36, 395 65, 425 40 C 455 40, 485 105, 515 {y_now}" stroke="#0ecb81" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+  <!-- 48-Hour Projection Line (Yellow Dash reaching edge) -->
+  <path d="M 515 {y_now} C 545 {y_now}, 575 84, 605 74 C 635 64, 665 54, 690 50" stroke="#FCD535" stroke-width="2.2" stroke-dasharray="5 4" fill="none" stroke-linecap="round"/>
   <!-- Event Marker 1: Sep 30 Banked Reset -->
-  <line x1="70" y1="48" x2="70" y2="130" stroke="#FCD535" stroke-width="1.2" stroke-opacity="0.4"/>
-  <circle cx="70" cy="48" r="4.5" fill="#FCD535"/>
-  <rect x="49" y="24" width="42" height="15" rx="3" fill="#1e2329" stroke="#FCD535" stroke-width="1"/>
-  <text x="70" y="35" fill="#FCD535" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Banked</text>
+  <line x1="60" y1="48" x2="60" y2="130" stroke="#FCD535" stroke-width="1.2" stroke-opacity="0.4"/>
+  <circle cx="60" cy="48" r="4.5" fill="#FCD535"/>
+  <rect x="39" y="24" width="42" height="15" rx="3" fill="#1e2329" stroke="#FCD535" stroke-width="1"/>
+  <text x="60" y="35" fill="#FCD535" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Banked</text>
   <!-- Event Marker 2: Oct 2 Hard Reset -->
-  <line x1="170" y1="38" x2="170" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.4"/>
-  <circle cx="170" cy="38" r="4.5" fill="#0ecb81"/>
-  <rect x="152" y="15" width="36" height="15" rx="3" fill="#1e2329" stroke="#0ecb81" stroke-width="1"/>
-  <text x="170" y="26" fill="#0ecb81" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Reset</text>
+  <line x1="140" y1="38" x2="140" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.4"/>
+  <circle cx="140" cy="38" r="4.5" fill="#0ecb81"/>
+  <rect x="122" y="15" width="36" height="15" rx="3" fill="#1e2329" stroke="#0ecb81" stroke-width="1"/>
+  <text x="140" y="26" fill="#0ecb81" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Reset</text>
   <!-- Event Marker 3: Oct 7 Double Event (Hard Reset + Banked Credit) -->
-  <line x1="400" y1="36" x2="400" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.4"/>
-  <!-- Concentric Rings: Green inner + Yellow outer for Dual Event -->
-  <circle cx="400" cy="36" r="6.5" stroke="#FCD535" stroke-width="1.5" fill="none"/>
-  <circle cx="400" cy="36" r="4" fill="#0ecb81"/>
-  <!-- Combined Reset + Banked Badge -->
-  <rect x="357" y="13" width="86" height="15" rx="3" fill="#1e2329" stroke="#0ecb81" stroke-width="1"/>
-  <text x="382" y="24" fill="#0ecb81" font-family="ui-monospace" font-size="8" font-weight="bold" text-anchor="middle">Reset</text>
-  <text x="400" y="24" fill="#707a8a" font-family="ui-monospace" font-size="8" text-anchor="middle">+</text>
-  <text x="424" y="24" fill="#FCD535" font-family="ui-monospace" font-size="8" font-weight="bold" text-anchor="middle">Banked</text>
-  <!-- Current Status Anchor: Live Now Point -->
-  <line id="chartNowStem" x1="500" y1="99" x2="500" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.7"/>
-  <circle id="chartNowDot" cx="500" cy="99" r="5" fill="#0ecb81"/>
-  <circle id="chartNowRing" cx="500" cy="99" r="8" stroke="#0ecb81" stroke-width="1.5" stroke-opacity="0.5"/>
-  <rect id="chartNowBadgeRect" x="475" y="76" width="50" height="16" rx="3" fill="#0ecb81"/>
-  <text id="chartNowProbText" x="500" y="87" fill="#0b0e11" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Now {prob}%</text>
+  <line x1="330" y1="36" x2="330" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.4"/>
+  <circle cx="330" cy="36" r="6.5" stroke="#FCD535" stroke-width="1.5" fill="none"/>
+  <circle cx="330" cy="36" r="4" fill="#0ecb81"/>
+  <rect x="287" y="13" width="86" height="15" rx="3" fill="#1e2329" stroke="#0ecb81" stroke-width="1"/>
+  <text x="312" y="24" fill="#0ecb81" font-family="ui-monospace" font-size="8" font-weight="bold" text-anchor="middle">Reset</text>
+  <text x="330" y="24" fill="#707a8a" font-family="ui-monospace" font-size="8" text-anchor="middle">+</text>
+  <text x="354" y="24" fill="#FCD535" font-family="ui-monospace" font-size="8" font-weight="bold" text-anchor="middle">Banked</text>
+  <!-- Event Marker 4: Oct 8 Confirmed Hard Reset (04:30 UTC) -->
+  <line x1="425" y1="40" x2="425" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.4"/>
+  <circle cx="425" cy="40" r="4.5" fill="#0ecb81"/>
+  <rect x="407" y="17" width="36" height="15" rx="3" fill="#1e2329" stroke="#0ecb81" stroke-width="1"/>
+  <text x="425" y="28" fill="#0ecb81" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Reset</text>
+  <!-- Current Status Anchor: Live Now Point (Oct 9) -->
+  <line id="chartNowStem" x1="515" y1="{y_now}" x2="515" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.7"/>
+  <circle id="chartNowDot" cx="515" cy="{y_now}" r="5" fill="#0ecb81"/>
+  <circle id="chartNowRing" cx="515" cy="{y_now}" r="8" stroke="#0ecb81" stroke-width="1.5" stroke-opacity="0.5"/>
+  <rect id="chartNowBadgeRect" x="490" y="{y_badge_rect}" width="50" height="16" rx="3" fill="#0ecb81"/>
+  <text id="chartNowProbText" x="515" y="{y_badge_text}" fill="#0b0e11" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Now {prob}%</text>
 </svg>'''
 
 MOVES_DATA = {
