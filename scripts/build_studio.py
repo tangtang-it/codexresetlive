@@ -218,8 +218,10 @@ deduped_recs.sort(key=lambda x: x["at"])
 
 compact_resets = []
 for r in deduped_recs:
+    t = r.get("type", "")
+    if t not in ["regular", "banked", "both"]:
+        continue  # Only actual quota reset events belong on the Reset Calendar
     d = r["at"][:10]
-    t = r["type"]
     time_str = r["at"][11:16] if len(r["at"]) > 16 else ""
     lbl = f"{time_str} Hard Reset".strip() if t == "regular" else "Banked Reset"
     compact_resets.append({"d": d, "t": t, "l": lbl, "at": r["at"]})

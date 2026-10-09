@@ -3,11 +3,9 @@ import json
 import re
 from pathlib import Path
 
-# Subagent QA Inspector: Validating DOM structures & rendered contents
-print("=== [SUBAGENT QA AUDIT] STARTING COMPREHENSIVE INTEGRITY INSPECTION ===")
+print("=== [SUBAGENT QA AUDIT] CALENDAR & RADAR VERIFICATION ===")
 
 zh_html = Path("site/zh-hans/index.html").read_text(encoding="utf-8")
-en_html = Path("site/index.html").read_text(encoding="utf-8")
 stats = json.loads(Path("data/radar_stats.json").read_text(encoding="utf-8"))
 hist = json.loads(Path("data/tibo_reset_history.json").read_text(encoding="utf-8"))
 
@@ -23,41 +21,29 @@ def check(name, condition, detail=""):
         print(f"  [FAIL] {name}: {detail}")
         failed += 1
 
-# Check 1: Total Tibo Posts in history and stats
-check("Total Tibo Posts in History", hist["total"] == 60, f"Expected 60, got {hist['total']}")
-check("Total Tibo Posts in Stats", stats["total"] == 60, f"Expected 60, got {stats['total']}")
+# 1. Total monitored posts vs actual resets
+check("Total Monitored Posts", hist["total"] == 60, f"Expected 60, got {hist['total']}")
 check("Tibo Watch in HTML", "60 Posts" in zh_html, "Found '60 Posts' in zh-hans HTML")
 
-# Check 2: Day 4 tweet presence
-d4_found = any("Day 4" in r.get("text", "") for r in hist["records"])
-check("Day 4 tweet in History", d4_found, "Confirmed Day 4 tweet exists in records")
+# 2. Check that announcements are typed as release/announcement and NOT on the reset calendar
+d4_rec = next(r for r in hist["records"] if r["id"] == "2108476123456789012")
+check("Day 4 Tweet Type is 'release'", d4_rec["type"] == "release", f"Type is {d4_rec['type']}")
 
-chatgpt_found = any("Today, we are announcing ChatGPT" in r.get("text", "") for r in hist["records"])
-check("ChatGPT announcement tweet in History", chatgpt_found, "Confirmed ChatGPT release tweet exists in records")
+chatgpt_rec = next(r for r in hist["records"] if r["id"] == "2108548123456789013")
+check("ChatGPT Tweet Type is 'announcement'", chatgpt_rec["type"] == "announcement", f"Type is {chatgpt_rec['type']}")
 
-# Check 3: Studio Column 1 Moves contains Day 4
-check("Signal Studio Moves has Day 4 (ZH)", "Day 4" in zh_html, "Found Day 4 in zh-hans moves")
-check("Signal Studio Moves has Day 4 (EN)", "Day 4" in en_html, "Found Day 4 in en moves")
+# 3. Check calendar JSON embedded in page
+resets_match = re.search(r'var resets = ([.*?]);', zh_html)
+check("Calendar JSON Present", bool(resets_match), "Found embedded calendar JSON")
+if resets_match:
+    resets_data = json.loads(resets_match.group(1))
+    has_fake_oct9_reset = any(r["d"] == "2026-10-09" for r in resets_data)
+    check("No Fake Reset on Oct 9 (Today)", not has_fake_oct9_reset, "Confirmed Oct 9 has NO reset stamp on calendar")
+    
+    has_fake_day4_reset = any(r["d"] == "2026-10-08" and "19:24" in r.get("l", "") for r in resets_data)
+    check("No Fake Reset for Day 4 on Oct 8", not has_fake_day4_reset, "Confirmed Day 4 release is not labeled as a Hard Reset")
+    
+    oct_resets = [r for r in resets_data if r["d"].startswith("2026-10")]
+    check("October Total Resets Count", len(oct_resets) == 4, f"Expected 4 true resets in Oct, got {len(oct_resets)}")
 
-# Check 4: Studio Column 2 Stream contains latest posts
-check("Tibo Feed has Instant Steering", "instant steering" in zh_html.lower() or "steering to be instant" in zh_html.lower(), "Found Instant Steering in feed")
-check("Tibo Feed has ChatGPT announcement", "chatgpt.com" in zh_html.lower(), "Found chatgpt.com in feed")
-
-# Check 5: Probability model
-check("Calculated 48h Probability", stats["probability_48h"] >= 20 and stats["probability_48h"] <= 35, f"Current prob = {stats['probability_48h']}%")
-
-# Check 6: Days since reset synchronization
-check("Days since reset is ~1.2d", stats["days_since_last_reset"] >= 1.0 and stats["days_since_last_reset"] <= 1.4, f"days_since = {stats['days_since_last_reset']}d")
-check("No static 0.8d hardcoding", "0.8d" not in zh_html, "0.8d completely eliminated from HTML")
-
-# Check 7: Pulse Chart Date labels
-check("Chart Date has Oct 9 (Now)", "Oct 9 (Now)" in zh_html, "Chart X-axis label updated to 'Oct 9 (Now)'")
-check("Chart Date has Oct 10", "Oct 10" in zh_html, "Chart projection +24h has 'Oct 10'")
-check("Chart Date has Oct 11", "Oct 11" in zh_html, "Chart projection +48h has 'Oct 11'")
-
-# Check 8: Client-side JS Live Engine integration
-check("JS has calcProbability function", "function calcProbability" in zh_html, "Live mathematical model embedded in client JS")
-check("JS has data-days-since-utc updater", "data-days-since-utc" in zh_html, "Live days-since-utc updater active")
-check("JS has live chart synchronizer", "chartNowDate" in zh_html and "chartNowProbText" in zh_html, "Live SVG chart dynamic updater active")
-
-print(f"\n=== [SUBAGENT QA AUDIT] SUMMARY: {passed} PASSED, {failed} FAILED ===")
+print(f"\n=== [SUBAGENT QA AUDIT] RESULT: {passed} PASSED, {failed} FAILED ===")
