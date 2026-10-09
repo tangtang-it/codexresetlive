@@ -65,3 +65,22 @@
     - ChatGPT Announcement: https://x.com/thsottiaux/status/2108349826727588000
     - Day 3 Encore: https://x.com/thsottiaux/status/2108084615349170480
   - Recompiled all 40 multilingual pages; passed 100% QA and link validity audit.
+
+
+## 6. SEO Audit Clean-up & Production Hardening (Completed 2026-10-09)
+- **External Redirects & Broken Links Fixed**:
+  - Replaced Windsurf redirect chain (`https://codeium.com/windsurf?ref=codexreset` -> `https://codeium.com/windsurf`).
+  - Replaced Claude 403 route (`https://claude.ai/code?ref=codexreset` -> `https://claude.ai/`).
+  - Verified zero placeholder / mock tweet links across all compiled HTML pages.
+- **llms.txt Markdown Links**:
+  - Enriched `site/llms.txt` with standard markdown hyperlinks to Radar, Calculator, FAQ, and GitHub signal repository.
+- **AI Crawler Allowances in robots.txt**:
+  - Explicitly allowed OAI-SearchBot, ChatGPT-User, GPTBot, PerplexityBot, Claude-Web, ClaudeBot, and Applebot-Extended.
+- **Edge Security Headers Configured**:
+  - Created `site/_headers` and `_headers` for Cloudflare Pages (HSTS, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy).
+- **H1 Keyword Consistency**:
+  - Added spacing around line breaks in `<h1>__H1_A__ <br><em>__H1_B__</em></h1>` so stripped-text parsers extract "Will Codex Reset Today?" cleanly.
+- **Verification**:
+  - Recompiled all 40 multilingual pages (`scripts/build_studio.py`).
+  - 100% passed `scripts/verify_site.py` integrity, schema, and link audit.
+

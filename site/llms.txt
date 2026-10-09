@@ -2,24 +2,11 @@
 > Source-first radar for public OpenAI Codex quota resets, verified developer signals, and personal 5-hour rolling limit recovery calculators.
 
 ## Core Capabilities & Services
-- **Will Codex Reset Today?**: Realtime probability indicator (currently ~30% likelihood, low signal, watching mode).
-- **Forecast Pulse Wave**: 48-hour time-series trajectory tracking confirmed reset milestones and forecast trends.
-- **Why The Number Moved**: Transparent factor-weighting changelog (+38 pts, +24 pts, etc.) based on confirmed announcements.
-- **Tibo Sottiaux Feed**: Stream of verified reset announcements from @thsottiaux (Head of Codex, OpenAI).
-- **Codex Monthly Calendar**: Visual grid of all verified resets across October 2026.
-- **Personal 5-Hour Recovery Clock**: Live countdown calculator for individual rate limits (rate_limit_exceeded) across timezones.
-- **Understand Codex Limits Guides**: Architectural breakdown of rolling token buckets, hard resets vs. banked credits, and outage diagnosis.
-- **Who We Monitor**: Priority signal accounts including @thsottiaux (Lead), @sama (CEO), @OpenAI, @agekhtman, and @OpenAIDevs.
+- [Live Reset Radar](https://codexresetlive.com/#calendar): Real-time tracker for public quota resets announced by OpenAI lead engineers.
+- [5-Hour Limit Calculator](https://codexresetlive.com/#calculator): Interactive recovery countdown and rolling quota estimator.
+- [Reset Mechanics FAQ](https://codexresetlive.com/#faq): In-depth breakdown between hard rate limits, banked tokens, and server throttles.
+- [Community Signal Repository](https://github.com/tangtang-it/codexresetlive): Official open-source GitHub hub for submitting community reset evidence.
 
 ## Direct URLs
-- English (Global): https://codexresetlive.com/
-- Simplified Chinese: https://codexresetlive.com/zh-hans/
-- Traditional Chinese: https://codexresetlive.com/zh-hant/
-- Japanese: https://codexresetlive.com/ja/
-- Korean: https://codexresetlive.com/ko/
-- Spanish: https://codexresetlive.com/es/
-- German: https://codexresetlive.com/de/
-- French: https://codexresetlive.com/fr/
-- Brazilian Portuguese: https://codexresetlive.com/pt-br/
-- Russian: https://codexresetlive.com/ru/
-- Machine Readable: https://codexresetlive.com/llms-full.txt
+- Full Documentation: https://codexresetlive.com/llms-full.txt
+- Official GitHub: https://github.com/tangtang-it/codexresetlive

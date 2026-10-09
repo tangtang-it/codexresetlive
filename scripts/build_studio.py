@@ -1139,8 +1139,8 @@ for code, d, name, loc, base_url in LANGS:
 <div class="sec-h"><span class="sec-kick">ALTERNATIVES</span><h2 class="sec-t">{esc(t["tools_t"])}</h2><p class="sec-s">{esc(t["tools_s"])}</p></div>
 <div class="tools">
 <div class="tool feat"><span class="tool-flag">Top</span><div><div class="tool-h"><span class="tool-n">Cursor IDE</span></div><p class="tool-d">{esc(t["tool1_d"])}</p></div><a class="tool-a" href="https://cursor.com/?ref=codexreset" target="_blank" rel="noopener nofollow">{esc(t["tool1_a"])}</a></div>
-<div class="tool"><div><div class="tool-h"><span class="tool-n">Windsurf</span></div><p class="tool-d">{esc(t["tool2_d"])}</p></div><a class="tool-a" href="https://codeium.com/windsurf?ref=codexreset" target="_blank" rel="noopener nofollow">{esc(t["tool2_a"])}</a></div>
-<div class="tool"><div><div class="tool-h"><span class="tool-n">Claude Code</span></div><p class="tool-d">{esc(t["tool3_d"])}</p></div><a class="tool-a" href="https://claude.ai/code?ref=codexreset" target="_blank" rel="noopener nofollow">{esc(t["tool3_a"])}</a></div>
+<div class="tool"><div><div class="tool-h"><span class="tool-n">Windsurf</span></div><p class="tool-d">{esc(t["tool2_d"])}</p></div><a class="tool-a" href="https://codeium.com/windsurf" target="_blank" rel="noopener nofollow">{esc(t["tool2_a"])}</a></div>
+<div class="tool"><div><div class="tool-h"><span class="tool-n">Claude Code</span></div><p class="tool-d">{esc(t["tool3_d"])}</p></div><a class="tool-a" href="https://claude.ai/" target="_blank" rel="noopener nofollow">{esc(t["tool3_a"])}</a></div>
 </div>
 </section>
 
