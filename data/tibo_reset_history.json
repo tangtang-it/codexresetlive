@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 59,
+  "total": 61,
   "records": [
     {
       "id": "1968163721034994139",
@@ -478,6 +478,22 @@
       "status": "confirmed",
       "text": "Today, we are announcing ChatGPT. It is here: https://t.co/Pgk3THSyOJ",
       "url": "https://x.com/thsottiaux/status/2108349826727588000"
+    },
+    {
+      "id": "2108842183749873664",
+      "at": "2026-10-09T20:38:12.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "Day 5/ Composer predictions in the desktop app. Often leads to a double take with how on point they are. Included in the Pro plans without consuming usage.",
+      "url": "https://x.com/thsottiaux/status/2108842183749873664"
+    },
+    {
+      "id": "2108845192084729856",
+      "at": "2026-10-09T20:45:30.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "Day 5 (dots edition)/ You can now create and text your dot entirely from the ChatGPT mobile app. Impressed so many created them via the desktop/web app previously. Time to scale!",
+      "url": "https://x.com/thsottiaux/status/2108845192084729856"
     }
   ]
 }

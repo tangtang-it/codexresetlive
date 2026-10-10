@@ -5,6 +5,25 @@ on:
     # Run every 30 minutes
     - cron: '*/30 * * * *'
   workflow_dispatch:
+    inputs:
+      tweet_id:
+        description: 'Optional: Manually inject a Tweet / Post Snowflake ID (e.g. 2108842183749873664)'
+        required: false
+        type: string
+      tweet_text:
+        description: 'Optional: Tweet text content'
+        required: false
+        type: string
+      tweet_type:
+        description: 'Optional: Tweet classification'
+        required: false
+        default: 'release'
+        type: choice
+        options:
+          - release
+          - announcement
+          - regular
+          - banked
 
 permissions:
   contents: write
@@ -24,11 +43,18 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Run Scraper & Rebuild Pages
+      - name: Run Manual Signal Ingestion (If Provided)
+        if: ${{ inputs.tweet_id != '' && inputs.tweet_text != '' }}
+        run: |
+          python scripts/add_signal.py --id "${{ inputs.tweet_id }}" --text "${{ inputs.tweet_text }}" --type "${{ inputs.tweet_type }}"
+
+      - name: Run Scraper & Rebuild Pages (If Automated)
+        if: ${{ inputs.tweet_id == '' || inputs.tweet_id == null }}
         run: |
           python scripts/scrape_tibo.py || true
           python scripts/compute_stats.py
           python scripts/build_studio.py
+          python scripts/verify_site.py
 
       - name: Commit and Push if Changed
         uses: stefanzweifel/git-auto-commit-action@v5

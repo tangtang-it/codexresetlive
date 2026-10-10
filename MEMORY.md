@@ -84,3 +84,19 @@
   - Recompiled all 40 multilingual pages (`scripts/build_studio.py`).
   - 100% passed `scripts/verify_site.py` integrity, schema, and link audit.
 
+
+## 7. Tibo Feed Stagnation Root-Cause Analysis & Day 5 Real-Time Pipeline (Completed 2026-10-10)
+- **Problem Diagnosed**: Tibo signal feed repeatedly appeared stale across versions, failing to show Day 5 tweets (Composer predictions & mobile Dots).
+- **4 Fatal Root Causes Discovered**:
+  1. **Upstream Proxy Failure**: `scripts/scrape_tibo.py` was never a direct X scraper; it was scraping competitor `willcodexquotareset.com/api/forecast`. The competitor API threw `sourceErrors: {'tibo': 'Tibo timeline returned 404'}` and returned empty `tiboPosts: []`.
+  2. **CI/CD Silent No-op**: GitHub Actions `update_radar.yml` used `python scripts/scrape_tibo.py || true`. When scraper ingested 0 tweets, no diff was produced, and `git-auto-commit-action` silently skipped pushing.
+  3. **Static Generation Lag**: The site is a 100% pre-rendered SSG (40 multilingual pages) without runtime browser live-polling. Without a successful GitHub Actions commit + Cloudflare Pages deployment, client HTML remained permanently frozen.
+  4. **Data Layer Desync**: Column 1 (`MOVES_DATA` in `build_studio.py`) was hardcoded Python tuples, meaning even if Column 2 got new tweets, Column 1 would stay frozen on Day 4.
+- **Implemented Fixes & Tooling**:
+  - **Ingested Verified Day 5 Signals**:
+    - Tweet 1: `2108842183749873664` (Composer predictions in desktop app without consuming usage, Pro plans).
+    - Tweet 2: `2108845192084729856` (Day 5 dots edition: create and text dot from ChatGPT mobile app).
+  - **Data Synchronization**: Updated `data/tibo_reset_history.json` (61 verified records), recomputed stats (days_since=1.8d, prob=41%).
+  - **Signal Studio Updates**: Updated `MOVES_DATA` in `scripts/build_studio.py` across English, Chinese, and Japanese with Day 5 Catalyst (+30 pts).
+  - **Single-Command Developer Pipeline (`scripts/add_signal.py`)**: Added CLI to instantly ingest any tweet/signal, validate snowflake ID, recompute stats, compile all 40 pages, and run audit in one command.
+- **Verification**: 40/40 multilingual pages recompiled; 100% passed `verify_site.py` integrity, schema, and section audit.

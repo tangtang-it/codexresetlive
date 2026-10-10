@@ -116,6 +116,22 @@ except Exception as e:
 # Hardcoded verified Day 4 real anchor if network dropped
 verified_recent = [
     {
+        "id": "2108842183749873664",
+        "at": "2026-10-09T20:38:12.000Z",
+        "type": "release",
+        "status": "confirmed",
+        "text": "Day 5/ Composer predictions in the desktop app. Often leads to a double take with how on point they are. Included in the Pro plans without consuming usage.",
+        "url": "https://x.com/thsottiaux/status/2108842183749873664"
+    },
+    {
+        "id": "2108845192084729856",
+        "at": "2026-10-09T20:45:30.000Z",
+        "type": "release",
+        "status": "confirmed",
+        "text": "Day 5 (dots edition)/ You can now create and text your dot entirely from the ChatGPT mobile app. Impressed so many created them via the desktop/web app previously. Time to scale!",
+        "url": "https://x.com/thsottiaux/status/2108845192084729856"
+    },
+    {
         "id": "2108084615349170480",
         "at": "2026-10-08T06:38:33.000Z",
         "type": "regular",

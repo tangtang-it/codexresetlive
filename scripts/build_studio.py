@@ -112,6 +112,7 @@ pulse_svg = f'''<svg viewBox="0 0 740 180" fill="none" xmlns="http://www.w3.org/
 
 MOVES_DATA = {
     "en": [
+        ("Oct 9 · 20:38 UTC", "Day 5 / Composer Predictions & Dots", "Tibo announced Day 5: Composer predictions in Codex desktop app without consuming usage, and mobile dot creation launched.", "+30 pts", "up", "Capacity and Efficiency: Free composer suggestions reduce prompt trial tokens; mobile dots expand ecosystem access."),
         ("Oct 8 · 19:24 UTC", "Day 4 / Instant Steering & GPT-6.1 Sol", "Tibo announced Day 4: instant model steering for real-time course correction, and released GPT-6.1 Sol ultrafast.", "+25 pts", "up", "Model Architecture: Dual-engine workflow and instant steering reduce token waste."),
         ("Oct 8 · 07:30 UTC", "Codex Cloud & Tailscale", "Tibo confirmed Day 3 (encore) silent rollout of Codex Cloud Tailnet integration.", "+20 pts", "up", "Infrastructure Boost: Official multi-cloud developer networking landed."),
         ("Oct 7 · 19:19 UTC", "40M Users Banked Reset", "Day 3 celebration: 40M active users milestone with a banked reset credited to all paid accounts.", "+35 pts", "up", "Celebratory Quota: Tibo announced banked credit bonus honoring 40M developer benchmark."),
@@ -123,6 +124,7 @@ MOVES_DATA = {
         ("Sep 22 · 18:23 UTC", "GPT-6 Sol & Luna Launch", "New flagship models rolled out alongside 50% permanent API price drop.", "+28 pts", "up", "Milestone Catalyst: Major model releases consistently trigger account-wide flushes.")
     ],
     "zh": [
+        ("10月10日 · 04:38", "Day 5 / Composer 预测免额度上线", "Tibo 宣布 Day 5 重磅更新：桌面端 Composer 预测功能面向 Pro 用户免费开放（不消耗额度），同步上线 ChatGPT 手机端 Dot 交互。", "+30 分", "up", "【效率与免额度】桌面端补全免耗额度大幅降低无效交互，移动端 Dot 正式规模化放量。原推确认不计入日常额度消耗。"),
         ("10月8日 · 19:24 UTC", "Day 4 / Instant Steering 极速转向", "Tibo 宣布 Day 4 重磅更新：即时指令转向大幅降低废词消耗，同步上线 GPT-6.1 Sol 极速版。", "+25 分", "up", "【模型与架构】连续第 4 天大促上新，双模型协同与极速交互就绪。"),
         ("10月8日 · 07:30 UTC", "Codex Cloud 与 Tailscale 联调上线", "Tibo 确认 Day 3 (encore) 静默上线 Codex Cloud 的 Tailnet 安全互联支持。", "+20 分", "up", "【基建上新】官方发推确认全量落地多环境网络互联，服务稳定性增强。"),
         ("10月7日 · 19:19 UTC", "4000万用户存续额度发放", "伴随 40M 活跃用户新高，官方为所有付费账户注入 1 次可保留的 Banked Reset。", "+35 分", "up", "【里程碑放水】Tibo 宣布为庆祝全网开发者达到 4000 万里程碑额外注入存续额度。"),
@@ -134,6 +136,7 @@ MOVES_DATA = {
         ("9月22日 · 18:23 UTC", "GPT-6 Sol / Luna 双模型发版", "新模型上线并大幅下调 API 定价，全员账户注入一次完整重置额度。", "+28 分", "up", "【里程碑激励】重大模型换代上线时的标准操作，伴随额度翻倍或重置以促成调用增长。")
     ],
     "ja": [
+        ("10月10日 · 04:38", "Day 5 / Composer 予測・モバイルDot公開", "TiboがDay 5としてデスクトップ版Composer予測（Pro枠の消費なし）とChatGPTモバイル版Dot作成・テキスト機能の提供開始を発表。", "+30 pts", "up", "【効率向上】予測機能の枠無消費化により試行トークンを削減、モバイルDot展開でエコシステムを拡大。"),
         ("10月8日 · 19:24 UTC", "Day 4 / Instant Steering・GPT-6.1 Sol公開", "TiboがDay 4として即時ステアリング改善とGPT-6.1 Sol ultrafastの同時リリースを発表。", "+25 pts", "up", "【モデル拡充】対話修正のリアルタイム反映と高速推論モデルを投入。"),
         ("10月8日 · 07:30 UTC", "Codex Cloud・Tailscale連携開始", "TiboがDay 3 (encore) としてCodex CloudとTailscaleの連携完了を発表。", "+20 pts", "up", "【インフラ拡充】公式によるクラウド環境間セキュア接続の展開完了。"),
         ("10月7日 · 19:19 UTC", "4000万人突破記念バンク枠付与", "4000万アクティブユーザー達成を記念し、全有料アカウントにバンク型リセット枠を付与。", "+35 pts", "up", "【マイルストーン】Tiboが4000万人達成を記念した追加枠付与を発表。"),
@@ -147,7 +150,29 @@ MOVES_DATA = {
 }
 
 def render_move_items(lang_code):
-    moves = MOVES_DATA.get("zh" if "zh" in lang_code else ("ja" if lang_code == "ja" else "en"), MOVES_DATA["en"])
+    moves = list(MOVES_DATA.get("zh" if "zh" in lang_code else ("ja" if lang_code == "ja" else "en"), MOVES_DATA["en"]))
+    # Dynamic Synthesis: If latest record is newer than top static move, auto-synthesize Move card
+    if recs:
+        latest = recs[-1]
+        top_static = moves[0] if moves else None
+        top_time_str = top_static[0] if top_static else ""
+        latest_time_iso = latest.get("at", "")
+        # If latest tweet is Day X not present in top move, synthesize adaptive entry
+        text_prefix = latest.get("text", "").strip()
+        if text_prefix and not any(top_time_str in latest_time_iso or text_prefix[:15].lower() in m[2].lower() for m in moves[:2]):
+            pts_map = {"release": ("+30 pts" if "en" in lang_code else ("+30 分" if "zh" in lang_code else "+30 pts"), "up"),
+                       "banked": ("+35 pts" if "en" in lang_code else ("+35 分" if "zh" in lang_code else "+35 pts"), "up"),
+                       "announcement": ("+25 pts" if "en" in lang_code else ("+25 分" if "zh" in lang_code else "+25 pts"), "up"),
+                       "regular": ("+20 pts" if "en" in lang_code else ("+20 分" if "zh" in lang_code else "+20 pts"), "neutral")}
+            p_pts, p_cls = pts_map.get(latest.get("type", "release"), ("+25 pts", "up"))
+            syn_time = latest_time_iso[:10] + " · " + latest_time_iso[11:16] + " UTC"
+            first_line = text_prefix.splitlines()[0] if text_prefix else "Official Signal Update"
+            syn_tag = first_line[:36]
+            syn_desc = text_prefix[:160]
+            syn_reason = "Auto-Synthesized from Verified Leadership Feed: Real-time update detected from @thsottiaux." if "en" in lang_code else (
+                "【官方信号自适应联动】实时解析自 Tibo 官方推文，雷达因子自动对齐最新放水动态。" if "zh" in lang_code else
+                "【公式シグナル連動】Tiboの最新ポストから自動合成されたリアルタイム指標です。")
+            moves.insert(0, (syn_time, syn_tag, syn_desc, p_pts, p_cls, syn_reason))
     items = []
     for m_time, m_tag, m_desc, m_pts, m_cls, m_reason in moves:
         items.append(f'''<div class="move-item">
