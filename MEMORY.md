@@ -1,5 +1,11 @@
 # MEMORY.md - Project State & Architecture Log
 
+## 2. Phase: Intelligent Tweet Classifier & Reset Banner Guard (2026-10-11)
+- Problem Solved: Fixed False Positive where Direct Answer Banner reported reset completed due to substring match on humorous community reply.
+- Architecture Delivered: Implemented scripts/classifier.py (Open-Source LLM + Heuristics + Cache).
+- Aligned direct answer banner with verified confirmed reset events.
+- Rebuilt all 40 pages and verified 100% integrity.
+
 ## 1. Current Phase: Signal Studio Height Optimization & Compaction (Completed 2026-10-08)
 - **Problem Solved**:
   - Addressed user feedback regarding `#studio` (01 — Signal Studio) being excessively tall (1200px+ vertical sprawl caused by unconstrained stream list expansion).
@@ -108,3 +114,14 @@
   2. **Client-Side SWR Hydration**: Injected hydrateLiveSignals() into _tpl_body_v2.html. Pages load instantly with pre-rendered SEO HTML and asynchronously fetch /api/radar to dynamically update probability stamps (e.g. 51% -> 99%) and prepend latest tweets without page refresh.
   3. **CI/CD Build Unblocking**: Removed '[skip ci]' from .github/workflows/update_radar.yml so Cloudflare Pages automatically detects changes and triggers deployments.
 - **Verification**: 40/40 multilingual pages recompiled; 100% passed verify_site.py integrity and schema audit.
+
+## 5. Monetag Monetization Integration (2026-10-11)
+- **Format 1 - In-Page Push (Banner)**:
+  - Injected Monetag zone `12002461` (`https://nap5k.com/tag.min.js`) into `_tpl_head_v2.html` after `<head>` / `<meta charset="UTF-8">`.
+  - Recompiled all 40 multilingual and historical pages via `scripts/build_studio.py`.
+  - Audited via `scripts/verify_site.py` (100% pass across all 40 pages).
+- **Format 2 - Direct Link (Completed 2026-10-11)**:
+  - Integrated Monetag Direct Link (`https://uplcm.com/4/12002462`) into `_tpl_body_v2.html` and `scripts/build_studio.py`.
+  - Native Placement 1: Multilingual responsive `.sponsor-banner` positioned between `#calculator` and `#guides` with `rel="noopener nofollow sponsored"`.
+  - Native Placement 2: Global `foot-links` partner anchor (`Partner Deals ↗`).
+  - Recompiled all 40 multilingual and historical pages; verified 100% pass via `scripts/verify_site.py`.

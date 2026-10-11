@@ -6,6 +6,8 @@ from pathlib import Path
 ROOT_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT_DIR))
 
+sys.path.insert(0, str(ROOT_DIR / 'scripts'))
+from classifier import classify_tweet
 from banked_tooltips import render_banked_badge, render_stream_items
 from _i18n_priority import I18N
 from _i18n_rest import I18N2
@@ -40,7 +42,7 @@ def esc(s):
     return html.escape(str(s), quote=True)
 
 recs = sorted(HIST["records"], key=lambda x: x["at"])
-reset_recs_all = [r for r in recs if any(k in r.get("text", "").lower() for k in ["reset", "banked", "propagated"])]
+reset_recs_all = [r for r in recs if classify_tweet(r.get("id"), r.get("text")).get("category") in ["confirmed_reset", "banked_reset"]]
 last = reset_recs_all[-1] if reset_recs_all else recs[-1]
 prob = STATS["probability_48h"]
 now_dt = datetime.now(timezone.utc)
@@ -252,9 +254,10 @@ deduped_recs.sort(key=lambda x: x["at"])
 
 compact_resets = []
 for r in deduped_recs:
-    t = r.get("type", "")
-    if t not in ["regular", "banked", "both"]:
-        continue  # Only actual quota reset events belong on the Reset Calendar
+    c_info = classify_tweet(r.get("id"), r.get("text"))
+    if not c_info.get("is_reset", False):
+        continue
+    t = 'banked' if c_info.get('category') == 'banked_reset' else 'regular'  # Only actual quota reset events belong on the Reset Calendar
     d = r["at"][:10]
     time_str = r["at"][11:16] if len(r["at"]) > 16 else ""
     lbl = f"{time_str} Hard Reset".strip() if t == "regular" else "Banked Reset"
@@ -428,11 +431,16 @@ CAL_TABLE_HTML = '''<table class="cal-table">
 
 def render_direct_ans(code):
     # Check if a reset occurred within the last 24 hours (or today)
-    reset_recs = [r for r in recs if any(k in r.get("text", "").lower() for k in ["reset", "banked", "propagated"])]
-    l_rec = reset_recs[-1] if reset_recs else recs[-1]
+    # Use semantic classifier: only confirmed or banked resets trigger YES banner
+    verified_resets = [
+        r for r in recs 
+        if classify_tweet(r.get("id"), r.get("text")).get("category") in ["confirmed_reset", "banked_reset"]
+    ]
+    l_rec = verified_resets[-1] if verified_resets else recs[-1]
     l_dt = datetime.strptime(l_rec["at"][:19], "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc)
     now_u = datetime.now(timezone.utc)
     h_diff = max(0.1, (now_u - l_dt).total_seconds() / 3600.0)
+    # Check if a real verified reset occurred within today (last 18h on same UTC date)
     is_today_reset = (h_diff < 18.0 and now_u.date() == l_dt.date())
     h_round = int(round(h_diff))
     l_type = l_rec.get("type", "banked").upper()
@@ -688,6 +696,63 @@ def render_monitors(code):
     <a class="monitor-handle" href="https://x.com/OpenAIDevs" target="_blank" rel="noopener nofollow">@OpenAIDevs &#x2197;</a>
   </div>
 </div>"""
+
+def render_sponsor_banner(code):
+    DIRECT_LINK = "https://uplcm.com/4/12002462"
+    if "zh" in code:
+        kicker = "特约赞助伙伴" if code == "zh-hans" else "特約贊助夥伴"
+        title = "精选开发者云资源与 AI 算力特惠" if code == "zh-hans" else "精選開發者雲端資源與 AI 算力特惠"
+        desc = "高性能开发者云服务、低延迟算力通道与限时特惠方案。" if code == "zh-hans" else "高性能開發者雲端服務、低延遲算力通道與限時特惠方案。"
+        cta = "立即查看特惠 →" if code == "zh-hans" else "立即查看特惠 →"
+    elif code == "ja":
+        kicker = "スポンサー提携"
+        title = "厳選開発者向けクラウド＆AIリソース"
+        desc = "高速クラウドインフラ、低遅延エンドポイント、特別提携オファー。"
+        cta = "特典を見る →"
+    elif code == "ko":
+        kicker = "파트너 제휴"
+        title = "개발자 전용 클라우드 & AI 리소스"
+        desc = "고성능 클라우드 인프라, 초저지연 엔드포인트 및 특별 제휴 혜택."
+        cta = "혜택 확인하기 →"
+    elif code == "de":
+        kicker = "SPONSOR-PARTNER"
+        title = "Entwickler-Cloud & KI-Ressourcen"
+        desc = "Hochleistungs-Infrastruktur, latenzarme Endpunkte und exklusive Angebote."
+        cta = "Angebote ansehen →"
+    elif code == "fr":
+        kicker = "PARTENAIRE SPONSOR"
+        title = "Ressources Cloud & IA pour Développeurs"
+        desc = "Infrastructure haute performance, points de terminaison à faible latence et offres exclusives."
+        cta = "Voir les offres →"
+    elif code == "es":
+        kicker = "SOCIO PATROCINADOR"
+        title = "Recursos de Nube e IA para Desarrolladores"
+        desc = "Infraestructura de alto rendimiento, endpoints de baja latencia y ofertas exclusivas."
+        cta = "Ver ofertas →"
+    elif code == "pt-br":
+        kicker = "PARCEIRO PATROCINADOR"
+        title = "Recursos de Nuvem e IA para Desenvolvedores"
+        desc = "Infraestrutura de alta performance, endpoints de baixa latência e ofertas exclusivas."
+        cta = "Ver ofertas →"
+    elif code == "ru":
+        kicker = "СПОНСОРСКИЙ ПАРТНЕР"
+        title = "Облачные и ИИ-ресурсы для разработчиков"
+        desc = "Высокопроизводительная инфраструктура, низкая задержка и эксклюзивные предложения."
+        cta = "Узнать больше →"
+    else:
+        kicker = "SPONSORED PARTNER"
+        title = "Featured Developer Cloud & AI Resources"
+        desc = "High-speed developer infrastructure, low-latency endpoints, and exclusive partner offers."
+        cta = "Explore Offers →"
+
+    return f'''<div class="sponsor-banner">
+<div class="sp-left">
+<span class="sp-kicker">{kicker}</span>
+<div class="sp-title">{title}</div>
+<div class="sp-desc">{desc}</div>
+</div>
+<a class="btn btn-primary" href="{DIRECT_LINK}" target="_blank" rel="noopener nofollow sponsored" style="height:36px;padding:0 20px;font-size:12px;white-space:nowrap">{cta}</a>
+</div>'''
 
 def render_footer_dir(code, base_href):
     if "zh" in code:
@@ -1001,6 +1066,7 @@ for code, d, name, loc, base_url in LANGS:
     p1_body = p1_body.replace("__TOOL3_D__", esc(t["tool3_d"])).replace("__TOOL3_A__", esc(t["tool3_a"]))
 
     p1_body = p1_body.replace("__FAQ_T__", esc(t["faq_t"])).replace("__FAQ_ITEMS__", render_faq_items(code))
+    p1_body = p1_body.replace("__SPONSOR_BANNER__", render_sponsor_banner(code))
     p1_body = p1_body.replace("__FOOTER_DIR_HTML__", render_footer_dir(code, f"/{d}/" if d else "/"))
     p1_body = p1_body.replace("__FOOT__", esc(t["foot"])).replace("__FOOT_SRC__", esc(t["foot_src"]))
 

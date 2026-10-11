@@ -1,0 +1,555 @@
+{
+  "2107676072871600470": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.99,
+    "reason": "Strong transactional reset execution confirmation: reset has been processed",
+    "source": "heuristic_engine"
+  },
+  "1968163721034994139": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.95,
+    "reason": "Confirmed past-tense reset execution: have reset",
+    "source": "heuristic_engine"
+  },
+  "1986166501435711936": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.95,
+    "reason": "Confirmed past-tense reset execution: have reset",
+    "source": "heuristic_engine"
+  },
+  "1992370994028388670": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.99,
+    "reason": "Strong transactional reset execution confirmation: have reset rate limits for all",
+    "source": "heuristic_engine"
+  },
+  "1995988609896513743": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.95,
+    "reason": "Confirmed past-tense reset execution: have reset",
+    "source": "heuristic_engine"
+  },
+  "2001114683047317723": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.99,
+    "reason": "Strong transactional reset execution confirmation: have reset everyone’s usage limits",
+    "source": "heuristic_engine"
+  },
+  "2002137269134819610": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.95,
+    "reason": "Confirmed past-tense reset execution: have reset",
+    "source": "heuristic_engine"
+  },
+  "2004100061933064395": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.7,
+    "reason": "Mentions reset without clear transactional confirmation; treated as chatter.",
+    "source": "heuristic_engine"
+  },
+  "2028649088594436225": {
+    "category": "pending_reset",
+    "is_reset": false,
+    "confidence": 0.95,
+    "reason": "Reset announced as pending/scheduled: will reset",
+    "source": "heuristic_engine"
+  },
+  "2029308599835738218": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.99,
+    "reason": "Strong transactional reset execution confirmation: reseting the rate limit for all",
+    "source": "heuristic_engine"
+  },
+  "2030474136024400173": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.95,
+    "reason": "Confirmed past-tense reset execution: have reset",
+    "source": "heuristic_engine"
+  },
+  "2031216405266481489": {
+    "category": "pending_reset",
+    "is_reset": false,
+    "confidence": 0.95,
+    "reason": "Reset announced as pending/scheduled: will be reset",
+    "source": "heuristic_engine"
+  },
+  "2031605592352313567": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.99,
+    "reason": "Strong transactional reset execution confirmation: reset button pressed",
+    "source": "heuristic_engine"
+  },
+  "2037346989244096581": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.99,
+    "reason": "Strong transactional reset execution confirmation: have reset codex usage limits",
+    "source": "heuristic_engine"
+  },
+  "2039248564967424483": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.7,
+    "reason": "Mentions reset without clear transactional confirmation; treated as chatter.",
+    "source": "heuristic_engine"
+  },
+  "2041655710346572085": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.99,
+    "reason": "Strong transactional reset execution confirmation: resetting rate limits so you can keep building",
+    "source": "heuristic_engine"
+  },
+  "2042299371602264319": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.99,
+    "reason": "Strong transactional reset execution confirmation: resetting the limits again",
+    "source": "heuristic_engine"
+  },
+  "2044943514832871564": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.99,
+    "reason": "Strong transactional reset execution confirmation: allowed codex to reset its own rate limits",
+    "source": "heuristic_engine"
+  },
+  "2046367145588916687": {
+    "category": "pending_reset",
+    "is_reset": false,
+    "confidence": 0.95,
+    "reason": "Reset announced as pending/scheduled: incoming",
+    "source": "heuristic_engine"
+  },
+  "2048997818673537399": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.99,
+    "reason": "Strong transactional reset execution confirmation: have reset codex rate limits",
+    "source": "heuristic_engine"
+  },
+  "2055707616605835333": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.99,
+    "reason": "Strong transactional reset execution confirmation: usage limits have now been reset",
+    "source": "heuristic_engine"
+  },
+  "2058280452851638313": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.7,
+    "reason": "Mentions reset without clear transactional confirmation; treated as chatter.",
+    "source": "heuristic_engine"
+  },
+  "2061106703446450392": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.95,
+    "reason": "Confirmed past-tense reset execution: back to 100%",
+    "source": "heuristic_engine"
+  },
+  "2062329981548802523": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.95,
+    "reason": "Confirmed past-tense reset execution: have reset",
+    "source": "heuristic_engine"
+  },
+  "2067399435009622521": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.7,
+    "reason": "Mentions reset without clear transactional confirmation; treated as chatter.",
+    "source": "heuristic_engine"
+  },
+  "2070653282440405046": {
+    "category": "pending_reset",
+    "is_reset": false,
+    "confidence": 0.95,
+    "reason": "Reset announced as pending/scheduled: next few hours",
+    "source": "heuristic_engine"
+  },
+  "2071381664853319742": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.95,
+    "reason": "Confirmed past-tense reset execution: have reset",
+    "source": "heuristic_engine"
+  },
+  "2071740419030053227": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.99,
+    "reason": "Strong transactional reset execution confirmation: usage limits will be fully reset again in the next hour",
+    "source": "heuristic_engine"
+  },
+  "2075330198887940337": {
+    "category": "pending_reset",
+    "is_reset": false,
+    "confidence": 0.95,
+    "reason": "Reset announced as pending/scheduled: propagating in",
+    "source": "heuristic_engine"
+  },
+  "2075641131002700120": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.95,
+    "reason": "Confirmed past-tense reset execution: have reset",
+    "source": "heuristic_engine"
+  },
+  "2075820987833274448": {
+    "category": "pending_reset",
+    "is_reset": false,
+    "confidence": 0.95,
+    "reason": "Reset announced as pending/scheduled: should land",
+    "source": "heuristic_engine"
+  },
+  "2076418567143408112": {
+    "category": "banked_reset",
+    "is_reset": true,
+    "confidence": 0.98,
+    "reason": "Banked quota credit announced or distributed.",
+    "source": "heuristic_engine"
+  },
+  "2076735790567338203": {
+    "category": "banked_reset",
+    "is_reset": true,
+    "confidence": 0.98,
+    "reason": "Banked quota credit announced or distributed.",
+    "source": "heuristic_engine"
+  },
+  "2077114635308986427": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.7,
+    "reason": "Mentions reset without clear transactional confirmation; treated as chatter.",
+    "source": "heuristic_engine"
+  },
+  "2077607697487188198": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.7,
+    "reason": "Mentions reset without clear transactional confirmation; treated as chatter.",
+    "source": "heuristic_engine"
+  },
+  "2078320950488297917": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.7,
+    "reason": "Mentions reset without clear transactional confirmation; treated as chatter.",
+    "source": "heuristic_engine"
+  },
+  "2079609157934886975": {
+    "category": "pending_reset",
+    "is_reset": false,
+    "confidence": 0.95,
+    "reason": "Reset announced as pending/scheduled: next hour",
+    "source": "heuristic_engine"
+  },
+  "2081096447718723984": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.99,
+    "reason": "Strong transactional reset execution confirmation: have reset usage limits for all",
+    "source": "heuristic_engine"
+  },
+  "2081940052154933696": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.7,
+    "reason": "Mentions reset without clear transactional confirmation; treated as chatter.",
+    "source": "heuristic_engine"
+  },
+  "2082317452755751098": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.7,
+    "reason": "Mentions reset without clear transactional confirmation; treated as chatter.",
+    "source": "heuristic_engine"
+  },
+  "2083395449814229287": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.95,
+    "reason": "Confirmed past-tense reset execution: have reset",
+    "source": "heuristic_engine"
+  },
+  "2086188036493344823": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.99,
+    "reason": "Strong transactional reset execution confirmation: have reset usage limits for all",
+    "source": "heuristic_engine"
+  },
+  "2087706104814023111": {
+    "category": "pending_reset",
+    "is_reset": false,
+    "confidence": 0.95,
+    "reason": "Reset announced as pending/scheduled: next hour",
+    "source": "heuristic_engine"
+  },
+  "2090766694897619318": {
+    "category": "banked_reset",
+    "is_reset": true,
+    "confidence": 0.98,
+    "reason": "Banked quota credit announced or distributed.",
+    "source": "heuristic_engine"
+  },
+  "2091688655828246890": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.7,
+    "reason": "Mentions reset without clear transactional confirmation; treated as chatter.",
+    "source": "heuristic_engine"
+  },
+  "2093014447833116908": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.7,
+    "reason": "Mentions reset without clear transactional confirmation; treated as chatter.",
+    "source": "heuristic_engine"
+  },
+  "2093801758665715784": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.95,
+    "reason": "Confirmed past-tense reset execution: are reset",
+    "source": "heuristic_engine"
+  },
+  "2094251180121854309": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.7,
+    "reason": "Mentions reset without clear transactional confirmation; treated as chatter.",
+    "source": "heuristic_engine"
+  },
+  "2095651088502591861": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.7,
+    "reason": "Mentions reset without clear transactional confirmation; treated as chatter.",
+    "source": "heuristic_engine"
+  },
+  "2096035437299237298": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.7,
+    "reason": "Mentions reset without clear transactional confirmation; treated as chatter.",
+    "source": "heuristic_engine"
+  },
+  "2098685367058612394": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.99,
+    "reason": "Strong transactional reset execution confirmation: reset all propagated",
+    "source": "heuristic_engine"
+  },
+  "2102463847714247142": {
+    "category": "banked_reset",
+    "is_reset": true,
+    "confidence": 0.98,
+    "reason": "Banked quota credit announced or distributed.",
+    "source": "heuristic_engine"
+  },
+  "2103911959544610829": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.99,
+    "reason": "Strong transactional reset execution confirmation: resets all propagated",
+    "source": "heuristic_engine"
+  },
+  "2105843926221660585": {
+    "category": "pending_reset",
+    "is_reset": false,
+    "confidence": 0.95,
+    "reason": "Reset announced as pending/scheduled: landing tomorrow",
+    "source": "heuristic_engine"
+  },
+  "2106131810921136451": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.99,
+    "reason": "Strong transactional reset execution confirmation: reset all propagated",
+    "source": "heuristic_engine"
+  },
+  "2107158998495748264": {
+    "category": "product_release",
+    "is_reset": false,
+    "confidence": 0.92,
+    "reason": "Feature shipment or engineering release update.",
+    "source": "heuristic_engine"
+  },
+  "2107159119107146237": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.85,
+    "reason": "General engineering tweet or conversational reply.",
+    "source": "heuristic_engine"
+  },
+  "2107311729768353844": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.99,
+    "reason": "Matched chatter/humor pattern: future is bright",
+    "source": "heuristic_engine"
+  },
+  "2107368734981517634": {
+    "category": "product_release",
+    "is_reset": false,
+    "confidence": 0.92,
+    "reason": "Feature shipment or engineering release update.",
+    "source": "heuristic_engine"
+  },
+  "2107548725359104441": {
+    "category": "product_release",
+    "is_reset": false,
+    "confidence": 0.92,
+    "reason": "Feature shipment or engineering release update.",
+    "source": "heuristic_engine"
+  },
+  "2107573405553938664": {
+    "category": "product_release",
+    "is_reset": false,
+    "confidence": 0.92,
+    "reason": "Feature shipment or engineering release update.",
+    "source": "heuristic_engine"
+  },
+  "2107574912349303197": {
+    "category": "product_release",
+    "is_reset": false,
+    "confidence": 0.92,
+    "reason": "Feature shipment or engineering release update.",
+    "source": "heuristic_engine"
+  },
+  "2107575657014468879": {
+    "category": "product_release",
+    "is_reset": false,
+    "confidence": 0.92,
+    "reason": "Feature shipment or engineering release update.",
+    "source": "heuristic_engine"
+  },
+  "2107577536779870210": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.99,
+    "reason": "Matched chatter/humor pattern: i do like giving resets",
+    "source": "heuristic_engine"
+  },
+  "2107578625419866469": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.99,
+    "reason": "Matched chatter/humor pattern: how was day",
+    "source": "heuristic_engine"
+  },
+  "2107597780352950624": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.85,
+    "reason": "General engineering tweet or conversational reply.",
+    "source": "heuristic_engine"
+  },
+  "2107676261099426030": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.99,
+    "reason": "Matched chatter/humor pattern: see you tomorrow for day",
+    "source": "heuristic_engine"
+  },
+  "2107913674593644711": {
+    "category": "banked_reset",
+    "is_reset": true,
+    "confidence": 0.98,
+    "reason": "Banked quota credit announced or distributed.",
+    "source": "heuristic_engine"
+  },
+  "2108084615349170480": {
+    "category": "product_release",
+    "is_reset": false,
+    "confidence": 0.92,
+    "reason": "Feature shipment or engineering release update.",
+    "source": "heuristic_engine"
+  },
+  "2108086116683526498": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.99,
+    "reason": "Matched chatter/humor pattern: spoiled my day",
+    "source": "heuristic_engine"
+  },
+  "2108275041276420573": {
+    "category": "product_release",
+    "is_reset": false,
+    "confidence": 0.92,
+    "reason": "Feature shipment or engineering release update.",
+    "source": "heuristic_engine"
+  },
+  "2108349826727588000": {
+    "category": "product_release",
+    "is_reset": false,
+    "confidence": 0.92,
+    "reason": "Feature shipment or engineering release update.",
+    "source": "heuristic_engine"
+  },
+  "2108645667451318747": {
+    "category": "product_release",
+    "is_reset": false,
+    "confidence": 0.92,
+    "reason": "Feature shipment or engineering release update.",
+    "source": "heuristic_engine"
+  },
+  "2108646052178092403": {
+    "category": "product_release",
+    "is_reset": false,
+    "confidence": 0.92,
+    "reason": "Feature shipment or engineering release update.",
+    "source": "heuristic_engine"
+  },
+  "2108842183749873664": {
+    "category": "product_release",
+    "is_reset": false,
+    "confidence": 0.92,
+    "reason": "Feature shipment or engineering release update.",
+    "source": "heuristic_engine"
+  },
+  "2108845192084729856": {
+    "category": "product_release",
+    "is_reset": false,
+    "confidence": 0.92,
+    "reason": "Feature shipment or engineering release update.",
+    "source": "heuristic_engine"
+  },
+  "2109045220411351517": {
+    "category": "product_release",
+    "is_reset": false,
+    "confidence": 0.92,
+    "reason": "Feature shipment or engineering release update.",
+    "source": "heuristic_engine"
+  },
+  "2109045392684032299": {
+    "category": "pending_reset",
+    "is_reset": false,
+    "confidence": 0.95,
+    "reason": "Reset announced as pending/scheduled: by eod",
+    "source": "heuristic_engine"
+  },
+  "2109090080497508356": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.99,
+    "reason": "Matched chatter/humor pattern: reach perfection",
+    "source": "heuristic_engine"
+  }
+}
