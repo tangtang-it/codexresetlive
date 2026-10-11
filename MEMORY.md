@@ -100,3 +100,11 @@
   - **Signal Studio Updates**: Updated `MOVES_DATA` in `scripts/build_studio.py` across English, Chinese, and Japanese with Day 5 Catalyst (+30 pts).
   - **Single-Command Developer Pipeline (`scripts/add_signal.py`)**: Added CLI to instantly ingest any tweet/signal, validate snowflake ID, recompute stats, compile all 40 pages, and run audit in one command.
 - **Verification**: 40/40 multilingual pages recompiled; 100% passed `verify_site.py` integrity, schema, and section audit.
+
+## 8. Cloudflare Edge Function & Client Hydration Architecture Upgrade (Completed 2026-10-11)
+- **Problem Root-Caused**: User noticed significant data latency compared to competitor (willcodexreset.com showing Day 6 / 99% probability while site remained stuck). Inspection of Cloudflare dashboard revealed Cloudflare Pages was skipping deployments entirely ('已跳过 0s') due to '[skip ci]' tags in Git commit messages.
+- **Architecture Upgrade (Static SSG -> SWR Edge Hybrid)**:
+  1. **Cloudflare Pages Function (/api/radar)**: Created functions/api/radar.js to directly query upstream real-time radar payload with 30s Edge caching and CORS support.
+  2. **Client-Side SWR Hydration**: Injected hydrateLiveSignals() into _tpl_body_v2.html. Pages load instantly with pre-rendered SEO HTML and asynchronously fetch /api/radar to dynamically update probability stamps (e.g. 51% -> 99%) and prepend latest tweets without page refresh.
+  3. **CI/CD Build Unblocking**: Removed '[skip ci]' from .github/workflows/update_radar.yml so Cloudflare Pages automatically detects changes and triggers deployments.
+- **Verification**: 40/40 multilingual pages recompiled; 100% passed verify_site.py integrity and schema audit.
