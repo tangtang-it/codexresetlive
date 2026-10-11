@@ -1059,6 +1059,7 @@ svg:not([width]):not([height]) {
 }
 
 </style>
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
 </head>
 
 <body>
@@ -1114,8 +1115,8 @@ svg:not([width]):not([height]) {
 <div class="direct-ans-banner">
   <div class="dab-left">
     <span class="dab-badge yes"><span class="dot"></span> LIVE VERDICT: RESET CONFIRMED TODAY (YES)</span>
-    <div class="dab-h">Will Codex reset today? <strong>Yes. The latest reset landed <span data-ago-utc="2026-10-11T01:13:54.000Z">1h ago</span>.</strong></div>
-    <div class="dab-p">Latest recorded reset landed <strong data-ago-utc="2026-10-11T01:13:54.000Z">1 hours ago</strong>. Global quotas have been replenished today — build with confidence.</div>
+    <div class="dab-h">Will Codex reset today? <strong>Yes. The latest reset landed <span data-ago-utc="2026-10-11T01:13:54.000Z">2h ago</span>.</strong></div>
+    <div class="dab-p">Latest recorded reset landed <strong data-ago-utc="2026-10-11T01:13:54.000Z">2 hours ago</strong>. Global quotas have been replenished today — build with confidence.</div>
     <div class="dab-rec-line">
       <span>Latest recorded reset:</span>
       <span class="dab-rec-dt" data-local-dt="2026-10-11T01:13:54.000Z">Thu, Oct 8, 2026, 03:19</span>
@@ -1214,7 +1215,9 @@ Projected 48h
 </span>
 </div>
 </div>
-<div class="chart-svg-wrap">
+<div class="chart-svg-wrap" style="position:relative;width:100%;height:190px;">
+  <div id="pulseEchartsContainer" style="width:100%;height:100%;"></div>
+  <noscript>
 <svg viewBox="0 0 740 180" fill="none" xmlns="http://www.w3.org/2000/svg">
   <!-- Horizontal Grid Lines -->
   <line x1="40" y1="30" x2="710" y2="30" stroke="#2b3139" stroke-width="1" stroke-dasharray="3 3"/>
@@ -1267,6 +1270,7 @@ Projected 48h
   <rect id="chartNowBadgeRect" x="490" y="-16.8" width="50" height="16" rx="3" fill="#0ecb81"/>
   <text id="chartNowProbText" x="515" y="-5.8" fill="#0b0e11" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Now 99%</text>
 </svg>
+  </noscript>
 </div>
 </div>
 </div>
@@ -2220,13 +2224,116 @@ Composer predictions in the desktop app. Often leads to a double take with how o
   // Initialize Live Engine
   updateLiveEngine();
   setInterval(updateLiveEngine, 30000);
+  
+  // ECharts Pulse Line Implementation
+  var pulseChartInstance = null;
+  function initPulseEcharts(currentProb) {
+    var container = document.getElementById('pulseEchartsContainer');
+    if (!container || typeof echarts === 'undefined') return;
+    if (!pulseChartInstance) {
+      pulseChartInstance = echarts.init(container, null, { renderer: 'canvas' });
+      window.addEventListener('resize', function(){ pulseChartInstance && pulseChartInstance.resize(); });
+    }
+
+    var nowD = new Date();
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var dNow = months[nowD.getMonth()] + ' ' + nowD.getDate() + ' (Now)';
+    var d1 = new Date(nowD.getTime() + 86400000);
+    var d1Label = months[d1.getMonth()] + ' ' + d1.getDate();
+    var d2 = new Date(nowD.getTime() + 172800000);
+    var d2Label = months[d2.getMonth()] + ' ' + d2.getDate();
+
+    var categories = ['Sep 30', 'Oct 2', 'Oct 4', 'Oct 7', 'Oct 8', dNow, d1Label, d2Label];
+    var probVal = typeof currentProb === 'number' ? currentProb : 99;
+
+    // Historical verified series up to Now
+    var histData = [65, 74, 28, 76, 72, probVal, null, null];
+    // Projected 48h series starting from Now
+    var projData = [null, null, null, null, null, probVal, Math.min(99, Math.round(probVal * 0.9)), Math.min(99, Math.round(probVal * 0.82))];
+
+    var option = {
+      backgroundColor: 'transparent',
+      animationDuration: 1000,
+      grid: { top: 38, right: 30, bottom: 25, left: 35, containLabel: false },
+      tooltip: {
+        trigger: 'axis',
+        backgroundColor: '#1e2329',
+        borderColor: '#2b3139',
+        textStyle: { color: '#eaecef', fontSize: 11, fontFamily: 'ui-monospace, monospace' },
+        formatter: function(params) {
+          var pt = params[0] || params[1];
+          if (!pt) return '';
+          return pt.name + '<br/><span style="color:#0ecb81;font-weight:bold;">Reset Probability: ' + pt.value + '%</span>';
+        }
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: categories,
+        axisLine: { lineStyle: { color: '#2b3139' } },
+        axisTick: { show: false },
+        axisLabel: {
+          color: function(val) { return val.indexOf('(Now)') !== -1 ? '#0ecb81' : '#707a8a'; },
+          fontSize: 10,
+          fontFamily: 'ui-monospace, monospace',
+          fontWeight: function(val) { return val.indexOf('(Now)') !== -1 ? 'bold' : 'normal'; }
+        }
+      },
+      yAxis: {
+        type: 'value',
+        min: 0,
+        max: 100,
+        interval: 40,
+        splitLine: { lineStyle: { color: '#2b3139', type: 'dashed' } },
+        axisLabel: { color: '#707a8a', fontSize: 10, fontFamily: 'ui-monospace, monospace', formatter: '{value}%' }
+      },
+      series: [
+        {
+          name: 'Verified Pulse',
+          type: 'line',
+          smooth: true,
+          data: histData,
+          lineStyle: { color: '#0ecb81', width: 2.6 },
+          symbol: 'circle',
+          symbolSize: function(val, params) { return params.dataIndex === 5 ? 8 : 6; },
+          itemStyle: { color: function(p){ return p.dataIndex === 5 ? '#0ecb81' : '#0ecb81'; }, borderColor: '#1e2329', borderWidth: 2 },
+          areaStyle: {
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              { offset: 0, color: 'rgba(14,203,129,0.22)' },
+              { offset: 1, color: 'rgba(14,203,129,0.00)' }
+            ])
+          },
+          markPoint: {
+            symbol: 'roundRect',
+            symbolSize: [68, 22],
+            symbolOffset: [0, -18],
+            itemStyle: { color: '#0ecb81' },
+            label: { color: '#0b0e11', fontWeight: 'bold', fontSize: 10, fontFamily: 'ui-monospace, monospace', formatter: 'Now ' + probVal + '%' },
+            data: [{ coord: [dNow, probVal] }]
+          }
+        },
+        {
+          name: '48h Projection',
+          type: 'line',
+          smooth: true,
+          data: projData,
+          lineStyle: { color: '#FCD535', width: 2.2, type: 'dashed' },
+          symbol: 'circle',
+          symbolSize: 4,
+          itemStyle: { color: '#FCD535' }
+        }
+      ]
+    };
+    pulseChartInstance.setOption(option);
+  }
+
   // G. Live Runtime Hydration via Cloudflare Edge API (/api/radar)
   function hydrateLiveSignals() {
     fetch('/api/radar')
       .then(function(res){ return res.ok ? res.json() : null; })
       .then(function(data){
         if (!data || !data.posts || !data.posts.length) return;
-        var p48 = data.probability48h;
+        var p48 = data.probability48h; if (typeof p48 === "number") { initPulseEcharts(p48); }
         if (typeof p48 === 'number') {
           document.querySelectorAll('.live-prob-val, #stampProbNum').forEach(function(el){
             el.textContent = p48;
@@ -2272,6 +2379,7 @@ Composer predictions in the desktop app. Often leads to a double take with how o
       })
       .catch(function(){});
   }
+  initPulseEcharts(99);
   hydrateLiveSignals();
   setInterval(hydrateLiveSignals, 30000);
 
