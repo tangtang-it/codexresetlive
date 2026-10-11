@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 79,
+  "total": 81,
   "records": [
     {
       "id": "1968163721034994139",
@@ -572,7 +572,7 @@
       "at": "2026-10-08T19:15:14.000Z",
       "type": "release",
       "status": "confirmed",
-      "text": "Day 4/ We have improved steering to be instant, leading to the model now reacting much faster to adjustments you make, allowing you to course-correct direction in realtime and not have the model waste effort. Also releasing GPT-6.1 Sol ultrafast. The two work very well together.",
+      "text": "Day 4/\n\nWe have improved steering to be instant, leading to the model now reacting much faster to adjustments you make, allowing you to course-correct direction in realtime and not have the model waste effort.\n\nAlso releasing GPT-6.1 Sol ultrafast. The two work very well together.",
       "url": "https://x.com/thsottiaux/status/2108275041276420573"
     },
     {
@@ -580,7 +580,7 @@
       "at": "2026-10-09T00:12:24.000Z",
       "type": "announcement",
       "status": "confirmed",
-      "text": "Today, we are announcing ChatGPT. It is here: https://t.co/Pgk3THSyOJ",
+      "text": "Today, we are announcing ChatGPT.\n\nIt is here: https://t.co/Pgk3THSyOJ",
       "url": "https://x.com/thsottiaux/status/2108349826727588000"
     },
     {
@@ -588,7 +588,7 @@
       "at": "2026-10-09T19:47:58.000Z",
       "type": "release",
       "status": "confirmed",
-      "text": "Day 5/\n\nComposer predictions in the desktop app. Often leads to a double take with how on point they are. Included in the Pro plans without consuming usage. https://t.co/02dqoClrWn",
+      "text": "Day 5/\n\nComposer predictions in the desktop app. Often leads to a double take with how on point they are. Included in the Pro plans without consuming usage.",
       "url": "https://x.com/thsottiaux/status/2108645667451318747"
     },
     {
@@ -596,7 +596,7 @@
       "at": "2026-10-09T19:49:30.000Z",
       "type": "release",
       "status": "confirmed",
-      "text": "Day 5 (dots edition)/\n\nYou can now create and text your dot entirely from the ChatGPT mobile app. Impressed so many created them via the desktop/web app previously. Time to scale! https://t.co/Im3fcNswPl",
+      "text": "Day 5 (dots edition)/\n\nYou can now create and text your dot entirely from the ChatGPT mobile app. Impressed so many created them via the desktop/web app previously. Time to scale!",
       "url": "https://x.com/thsottiaux/status/2108646052178092403"
     },
     {
@@ -616,9 +616,17 @@
       "url": "https://x.com/thsottiaux/status/2108845192084729856"
     },
     {
+      "id": "2108777962053292398",
+      "at": "2026-10-10T04:33:40.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "Your ChatGPT subscription is now also a Devin subscription",
+      "url": "https://x.com/thsottiaux/status/2108777962053292398"
+    },
+    {
       "id": "2109045220411351517",
       "at": "2026-10-10T22:15:39.000Z",
-      "type": "release",
+      "type": "regular",
       "status": "confirmed",
       "text": "Day 6/ Reset",
       "url": "https://x.com/thsottiaux/status/2109045220411351517"
@@ -626,7 +634,7 @@
     {
       "id": "2109045392684032299",
       "at": "2026-10-10T22:16:20.000Z",
-      "type": "release",
+      "type": "regular",
       "status": "confirmed",
       "text": "Global reset by EOD. May the tokens do good things for you.",
       "url": "https://x.com/thsottiaux/status/2109045392684032299"
@@ -634,10 +642,18 @@
     {
       "id": "2109090080497508356",
       "at": "2026-10-11T01:13:54.000Z",
-      "type": "release",
+      "type": "regular",
       "status": "confirmed",
-      "text": "The day we reach perfection it will be resets from there onwards https://t.co/I6A9WHOjXT",
+      "text": "The day we reach perfection it will be resets from there onwards",
       "url": "https://x.com/thsottiaux/status/2109090080497508356"
+    },
+    {
+      "id": "2109132167112782291",
+      "at": "2026-10-11T04:01:09.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "Put the reset in the bag. All propagated.",
+      "url": "https://x.com/thsottiaux/status/2109132167112782291"
     }
   ]
 }

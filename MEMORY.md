@@ -1,5 +1,19 @@
 # MEMORY.md - Project State & Architecture Log
 
+## 10. Phase: Day 6 Global Reset Pipeline Sync & Cooldown State Transition (2026-10-11)
+- **Problem Solved & Root Causes Fixed**:
+  - Investigated user report comparing competitor WillCodexReset.com against CodexReset.live.
+  - Repaired 4 root cause blockers across data pipeline and render engine:
+    1. Classifier Rule Collision (scripts/classifier.py): Promoted Day 6/ Reset to confirmed_reset.
+    2. Scraper Type Assignment (scripts/scrape_tibo.py): Ensured reset posts are classified as regular.
+    3. Hazard Engine Transition (scripts/compute_stats.py): Completed resets within 24h transition to 11% cooldown.
+    4. Direct Answer Banner & Calendar Sync (scripts/build_studio.py): 24h is_today_reset window, green YES stamp.
+    5. Restored Cloudflare Edge Hydration (_tpl_body_v2.html): Re-injected missing hydrateLiveSignals() calling /api/radar (functions/api/radar.js & src/worker.js). Now fetches real-time signals from edge with 30s cache, perfectly linking Cloudflare Function live data to the UI.
+- **Verification & QA**:
+  - Recomputed stats: 61 verified resets, latest reset 2026-10-10T22:16:20.000Z (0.7d ago), probability 11%.
+  - Recompiled all 40 multilingual pages via scripts/build_studio.py.
+  - Passed scripts/verify_site.py 100% across all 40 pages with zero errors.
+
 ## 9. Viral Forecast Share Modal & Share Button Integration (2026-10-11)
 - **Problem Solved & Feature Delivered**:
   - In response to user request and competitor reference (WillCodexReset.com), added a sleek, unobtrusive circular viral share button (.dab-share-btn, 38x38px, SVG connected-nodes share icon) in the top-right corner of .direct-ans-banner (Direct Answer Stamp Banner).

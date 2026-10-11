@@ -531,25 +531,88 @@
     "reason": "Feature shipment or engineering release update.",
     "source": "heuristic_engine"
   },
-  "2109045220411351517": {
+  "2109090080497508356": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.99,
+    "reason": "Matched chatter/humor pattern: reach perfection",
+    "source": "heuristic_engine"
+  },
+  "1": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.99,
+    "reason": "Matched chatter/humor pattern: reach perfection",
+    "source": "heuristic_engine"
+  },
+  "3": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.99,
+    "reason": "Strong transactional reset execution confirmation: reset all propagated",
+    "source": "heuristic_engine"
+  },
+  "4": {
     "category": "product_release",
     "is_reset": false,
     "confidence": 0.92,
     "reason": "Feature shipment or engineering release update.",
     "source": "heuristic_engine"
   },
-  "2109045392684032299": {
-    "category": "pending_reset",
-    "is_reset": false,
-    "confidence": 0.95,
-    "reason": "Reset announced as pending/scheduled: by eod",
+  "5": {
+    "category": "banked_reset",
+    "is_reset": true,
+    "confidence": 0.98,
+    "reason": "Banked quota credit announced or distributed.",
     "source": "heuristic_engine"
   },
-  "2109090080497508356": {
+  "6": {
     "category": "chatter",
     "is_reset": false,
     "confidence": 0.99,
-    "reason": "Matched chatter/humor pattern: reach perfection",
+    "reason": "Matched chatter/humor pattern: had a nightmare about this",
+    "source": "heuristic_engine"
+  },
+  "2": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.99,
+    "reason": "Strong transactional reset execution confirmation: global reset by eod",
+    "source": "heuristic_engine"
+  },
+  "7": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.99,
+    "reason": "Strong transactional reset execution confirmation: day \\d+\\s*[/:]\\s*reset",
+    "source": "heuristic_engine"
+  },
+  "2109045220411351517": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.99,
+    "reason": "Strong transactional reset execution confirmation: day \\d+\\s*[/:]\\s*reset",
+    "source": "heuristic_engine"
+  },
+  "2109045392684032299": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.99,
+    "reason": "Strong transactional reset execution confirmation: global reset by eod",
+    "source": "heuristic_engine"
+  },
+  "2108777962053292398": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.85,
+    "reason": "General engineering tweet or conversational reply.",
+    "source": "heuristic_engine"
+  },
+  "2109132167112782291": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.99,
+    "reason": "Strong transactional reset execution confirmation: put the reset in the bag",
     "source": "heuristic_engine"
   }
 }

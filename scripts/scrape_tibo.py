@@ -14,9 +14,17 @@ CACHE_FILE = DATA_DIR / "tibo_reset_history.json"
 PROXY = {"http": "http://127.0.0.1:7897", "https": "http://127.0.0.1:7897"}
 
 def get_opener():
+    if os.environ.get("GITHUB_ACTIONS") == "true":
+        return urllib.request.build_opener()
     if os.environ.get("HTTPS_PROXY") or os.environ.get("HTTP_PROXY"):
         return urllib.request.build_opener(urllib.request.ProxyHandler())
-    return urllib.request.build_opener(urllib.request.ProxyHandler(PROXY))
+    try:
+        import socket
+        s = socket.create_connection(("127.0.0.1", 7897), timeout=0.5)
+        s.close()
+        return urllib.request.build_opener(urllib.request.ProxyHandler(PROXY))
+    except Exception:
+        return urllib.request.build_opener()
 
 def is_valid_tweet_id(tid: str) -> bool:
     if not tid or not isinstance(tid, str):
@@ -50,9 +58,14 @@ try:
                 continue
             text = (p.get("title") or "").strip()
             at = p.get("pubDate")
-            dtype = "release" if "day " in text.lower() or "releasing" in text.lower() or "steering" in text.lower() else "regular"
-            if "announcing" in text.lower():
+            if "reset" in text.lower():
+                dtype = "regular"
+            elif any(k in text.lower() for k in ["day ", "releasing", "steering"]):
+                dtype = "release"
+            elif "announcing" in text.lower():
                 dtype = "announcement"
+            else:
+                dtype = "regular"
             incoming_posts[tid] = {
                 "id": tid,
                 "at": at,

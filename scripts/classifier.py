@@ -41,6 +41,11 @@ def classify_heuristics(text: str) -> dict:
         r"resetting rate limits so you can keep building",
         r"resetting the limits again",
         r"allowed codex to reset its own rate limits",
+        r"day \d+\s*[/:]\s*reset",
+        r"day 6/ reset",
+        r"put the reset in the bag",
+        r"all propagated",
+        r"global reset by eod",
     ]
     for pat in confirmed_strong:
         if re.search(pat, t):
@@ -129,12 +134,13 @@ def classify_heuristics(text: str) -> dict:
 
     # 6. Product releases & announcements
     if any(k in t for k in ["day 1", "day 2", "day 3", "day 4", "day 5", "day 6", "releasing", "announcing", "optimized the default speed", "decisions api", "auto-review", "composer predictions"]):
-        return {
-            "category": "product_release",
-            "is_reset": False,
-            "confidence": 0.92,
-            "reason": "Feature shipment or engineering release update."
-        }
+        if not any(rw in t for rw in ["reset", "quota", "limit"]):
+            return {
+                "category": "product_release",
+                "is_reset": False,
+                "confidence": 0.92,
+                "reason": "Feature shipment or engineering release update."
+            }
 
     if "reset" in t:
         return {

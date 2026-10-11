@@ -30,10 +30,22 @@ avg_all = round(sum(gaps)/len(gaps), 1) if gaps else 6.8
 def calc_probability(d, has_pending_reset=False):
     if has_pending_reset:
         return 99
+    # If a reset occurred within the last 24h, enter post-reset cooldown
+    if d <= 1.0:
+        return 11
     p_val = 11.0 + (74.0 / (1.0 + math.exp(-1.8 * (max(0.0, d) - 2.0))))
     return max(10, min(85, int(round(p_val))))
 
-has_pending = any(k in recs[-1].get("text", "").lower() or (len(recs) > 1 and k in recs[-2].get("text", "").lower()) for k in ["global reset by eod", "day 6/ reset", "reset by eod"]) ; prob = calc_probability(days_since, has_pending)
+# Pending announcement is only active if an unfulfilled reset is scheduled for the future
+has_pending = False
+if days_since > 1.0:
+    for r in recs[-3:]:
+        txt = r.get("text", "").lower()
+        if any(k in txt for k in ["landing tomorrow", "incoming reset", "will reset in", "propagating in"]):
+            has_pending = True
+            break
+
+prob = calc_probability(days_since, has_pending)
 
 # Count months only for actual quota reset events
 months = Counter(r["at"][:7] for r in reset_recs)
@@ -50,8 +62,8 @@ while (y, m) <= (2026, 10):
         m = 1; y += 1
 
 out = {
-    "total": len(recs),  # Total monitored posts across all categories (60)
-    "reset_count": len(reset_recs), # Total actual resets (58)
+    "total": len(recs),
+    "reset_count": len(reset_recs),
     "regular": regular,
     "banked": banked,
     "last_reset_at": last["at"],
@@ -70,4 +82,4 @@ out_file = DATA_DIR / "radar_stats.json"
 with open(out_file, "w", encoding="utf-8") as f:
     json.dump(out, f, ensure_ascii=False, indent=2)
 
-print(f"Computed stats: total={len(recs)}, resets={len(reset_recs)}, days_since={days_since}d, prob={prob}%")
+print(f"Computed stats: total={len(recs)}, resets={len(reset_recs)}, last={last['at']}, days_since={days_since}d, prob={prob}%")

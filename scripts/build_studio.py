@@ -274,8 +274,18 @@ def get_cal_js(code):
   var resetMap = {{}};
   for(var i=0; i<resets.length; i++){{
     var r = resets[i];
-    if(!resetMap[r.d]) resetMap[r.d] = [];
-    resetMap[r.d].push(r);
+    var dKey = r.d;
+    if (r.at) {{
+      try {{
+        var ldt = new Date(r.at);
+        var yr = ldt.getFullYear();
+        var mo = String(ldt.getMonth() + 1).padStart(2, '0');
+        var dy = String(ldt.getDate()).padStart(2, '0');
+        dKey = yr + "-" + mo + "-" + dy;
+      }} catch(e){{}}
+    }}
+    if(!resetMap[dKey]) resetMap[dKey] = [];
+    resetMap[dKey].push(r);
   }}
 
   var minYear = 2025, minMonth = 8;
@@ -441,7 +451,7 @@ def render_direct_ans_raw(code):
     now_u = datetime.now(timezone.utc)
     h_diff = max(0.1, (now_u - l_dt).total_seconds() / 3600.0)
     # Check if a real verified reset occurred within today (last 18h on same UTC date)
-    is_today_reset = (h_diff < 18.0 and now_u.date() == l_dt.date())
+    is_today_reset = (h_diff < 24.0)
     h_round = int(round(h_diff))
     l_type = l_rec.get("type", "banked").upper()
     badge_cls = l_rec.get("type", "banked")
@@ -524,7 +534,7 @@ def render_direct_ans_raw(code):
     <div class="dab-p">最新一次官方额度注入发生在 <strong data-ago-utc="{l_rec['at']}">{h_round} 小时前</strong>。额度已补充完毕，无需再等待！</div>
     <div class="dab-rec-line">
       <span>最近一次记录：</span>
-      <span class="dab-rec-dt" data-local-dt="{l_rec['at']}">2026年10月8日周四 03:19</span>
+      <span class="dab-rec-dt" data-local-dt="{l_rec['at']}">{l_rec["at"][:10]} {l_rec["at"][11:16]} UTC</span>
       <span class="dab-rec-tz">(本地时间)</span>
       {type_badge}
     </div>
@@ -543,7 +553,7 @@ def render_direct_ans_raw(code):
     <div class="dab-p">直近の公式リセットは <strong data-ago-utc="{l_rec['at']}">{h_round} 時間前</strong> に完了しました。利用枠は回復済みです。</div>
     <div class="dab-rec-line">
       <span>直近の記録：</span>
-      <span class="dab-rec-dt" data-local-dt="{l_rec['at']}">2026年10月8日(木) 03:19</span>
+      <span class="dab-rec-dt" data-local-dt="{l_rec['at']}">{l_rec["at"][:10]} {l_rec["at"][11:16]} UTC</span>
       <span class="dab-rec-tz">(現地時間)</span>
       {type_badge}
     </div>
@@ -562,7 +572,7 @@ def render_direct_ans_raw(code):
     <div class="dab-p">Latest recorded reset landed <strong data-ago-utc="{l_rec['at']}">{h_round} hours ago</strong>. Global quotas have been replenished today — build with confidence.</div>
     <div class="dab-rec-line">
       <span>Latest recorded reset:</span>
-      <span class="dab-rec-dt" data-local-dt="{l_rec['at']}">Thu, Oct 8, 2026, 03:19</span>
+      <span class="dab-rec-dt" data-local-dt="{l_rec['at']}">{l_rec["at"][:10]} {l_rec["at"][11:16]} UTC</span>
       <span class="dab-rec-tz">(your time)</span>
       {type_badge}
     </div>

@@ -755,6 +755,63 @@ __FOOTER_DIR_HTML__
   setInterval(updateLiveEngine, 30000);
   
   // Single Native Pulse Wave Activated (No Duplication)
+  // G. Live Runtime Hydration via Cloudflare Edge API (/api/radar)
+  function hydrateLiveSignals() {
+    fetch('/api/radar')
+      .then(function(res){ return res.ok ? res.json() : null; })
+      .then(function(data){
+        if (!data) return;
+        var p48 = data.probability48h;
+        if (typeof p48 === 'number') {
+          if (window.CODEX_RADAR) {
+            window.CODEX_RADAR.probability = p48;
+          }
+          document.querySelectorAll('.live-prob-val, #stampProbNum').forEach(function(el){
+            el.textContent = p48;
+          });
+          var chartProb = document.getElementById('chartNowProbText');
+          if (chartProb) chartProb.textContent = 'Now ' + p48 + '%';
+          var stampText = document.querySelector('.stamp-center text[letter-spacing="2"]');
+          if (stampText && p48 >= 80) stampText.textContent = 'CONFIRMED';
+          updateLiveEngine();
+        }
+
+        var streamBox = document.querySelector('.stream-box');
+        if (!streamBox || !data.posts || !data.posts.length) return;
+        var firstPost = data.posts[0];
+        var existingFirstFoot = streamBox.querySelector('.pm-foot span[data-utc]');
+        var existingLatestUtc = existingFirstFoot ? existingFirstFoot.getAttribute('data-utc') : '';
+
+        if (firstPost && firstPost.at && (!existingLatestUtc || firstPost.at > existingLatestUtc)) {
+          var newMini = document.createElement('div');
+          newMini.className = 'post-mini';
+          newMini.style.borderColor = 'var(--primary)';
+          var badgeCls = 'badge ' + (firstPost.type || 'regular');
+          var timeStr = (firstPost.at || '').slice(0, 16).replace('T', ' ') + ' UTC';
+          var textSafe = (firstPost.text || '').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+          var urlSafe = (firstPost.url || 'https://x.com/thsottiaux');
+          newMini.innerHTML = '<div class="pm-head"><span class="pm-author">Tibo <span style="font-weight:400;color:var(--muted)">@thsottiaux</span></span><span class="' + badgeCls + '">' + (firstPost.type || 'REGULAR').toUpperCase() + '</span></div>' +
+            '<div class="pm-quote">' + textSafe + '</div>' +
+            '<div class="pm-foot"><span data-utc="' + firstPost.at + '">' + timeStr + '</span><a href="' + urlSafe + '" target="_blank" rel="noopener nofollow" style="color:var(--primary);font-weight:600">View on X &#x2197;</a></div>';
+          streamBox.insertBefore(newMini, streamBox.firstChild);
+
+          var moveList = document.querySelector('.move-list');
+          if (moveList) {
+            var newMove = document.createElement('div');
+            newMove.className = 'move-item';
+            newMove.style.borderColor = 'var(--primary)';
+            newMove.innerHTML = '<div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>' +
+              '<div class="move-body"><div class="move-head"><span class="move-tag">Live Edge Signal</span><span class="move-pts up num">+45 pts</span></div>' +
+              '<div class="move-time num">' + timeStr + '</div>' +
+              '<div class="move-text">' + textSafe + '</div>' +
+              '<div class="move-reason">Realtime Edge Ingestion: Live signal detected via Cloudflare Edge.</div></div>';
+            moveList.insertBefore(newMove, moveList.firstChild);
+          }
+        }
+      })
+      .catch(function(){});
+  }
+
   hydrateLiveSignals();
   setInterval(hydrateLiveSignals, 30000);
 
