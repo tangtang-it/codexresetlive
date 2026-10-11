@@ -26,12 +26,14 @@ recent_gaps = gaps[-14:] if len(gaps) >= 14 else gaps
 avg_recent = round(sum(recent_gaps)/len(recent_gaps), 1) if recent_gaps else 3.4
 avg_all = round(sum(gaps)/len(gaps), 1) if gaps else 6.8
 
-# Continuous smooth hazard sigmoid model
-def calc_probability(d):
+# Continuous smooth hazard sigmoid model + Pending Announcement Override
+def calc_probability(d, has_pending_reset=False):
+    if has_pending_reset:
+        return 99
     p_val = 11.0 + (74.0 / (1.0 + math.exp(-1.8 * (max(0.0, d) - 2.0))))
     return max(10, min(85, int(round(p_val))))
 
-prob = calc_probability(days_since)
+has_pending = any(k in recs[-1].get("text", "").lower() or (len(recs) > 1 and k in recs[-2].get("text", "").lower()) for k in ["global reset by eod", "day 6/ reset", "reset by eod"]) ; prob = calc_probability(days_since, has_pending)
 
 # Count months only for actual quota reset events
 months = Counter(r["at"][:7] for r in reset_recs)

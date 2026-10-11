@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 61,
+  "total": 79,
   "records": [
     {
       "id": "1968163721034994139",
@@ -440,12 +440,108 @@
       "url": "https://x.com/thsottiaux/status/2106131810921136451"
     },
     {
+      "id": "2107158998495748264",
+      "at": "2026-10-05T17:20:29.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "Day 1/\n\nWe have optimized the default speed to be ~50% faster across GPT-6 Astra and GPT-6.1 Sol through the subscription across all our products and partners using Sign in With ChatGPT (including OpenCode, Pi, Amp, Devin, ...).\n\nNo changes needed on your end and this should be felt within the next two hours.",
+      "url": "https://x.com/thsottiaux/status/2107158998495748264"
+    },
+    {
+      "id": "2107159119107146237",
+      "at": "2026-10-05T17:20:57.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "Reaching 50 TPS instead of 30TPS, with also the most optimized tokenizer out there. And the models are quite the efficient ones in terms of number of tokens needed to get things done!",
+      "url": "https://x.com/thsottiaux/status/2107159119107146237"
+    },
+    {
+      "id": "2107311729768353844",
+      "at": "2026-10-06T03:27:22.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "This might have been my best day so far at oai. Ridiculous amounts of fun and intensity. Future is bright",
+      "url": "https://x.com/thsottiaux/status/2107311729768353844"
+    },
+    {
+      "id": "2107368734981517634",
+      "at": "2026-10-06T07:13:54.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "Day 2.1/\n\nWe have made Auto-review free for all users signed in through a ChatGPT account. You can enable it in settings > permissions > auto-review. Auto-review improves upon the default sandbox setting that requires you to approve everything, which is prone to decision fatigue unless you spend a lot of time configuring specific rules.\n\nIt allows you to run long tasks while having a second agent review all actions taken by the primary agent. Its only goal is to prevent high-risk actions from being taken and to protect against unwanted actions that are not aligned with the original user intent. This  Auto-review feature is now free and does not draw usage from your plan.",
+      "url": "https://x.com/thsottiaux/status/2107368734981517634"
+    },
+    {
+      "id": "2107548725359104441",
+      "at": "2026-10-06T19:09:07.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "Day 2.2/\n\nOK this one is smaller, but we removed some friction for when building on the API. Happy building. https://t.co/hfi2655wyW",
+      "url": "https://x.com/thsottiaux/status/2107548725359104441"
+    },
+    {
+      "id": "2107573405553938664",
+      "at": "2026-10-06T20:47:11.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "Day 2.3/\n\nNever worry about remembering what you were saying with that colleague. Just talk your heart out and build up the context to load up into codex to get it all done. https://t.co/Nsyknop4O7",
+      "url": "https://x.com/thsottiaux/status/2107573405553938664"
+    },
+    {
+      "id": "2107574912349303197",
+      "at": "2026-10-06T20:53:10.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "Day 2.4/\n\nDecisions API is live. We will use this ourselves to improve the experience for everyone in many fun ways. Realtime general classifier does open some great possibilities. https://t.co/acVDfnvOvU",
+      "url": "https://x.com/thsottiaux/status/2107574912349303197"
+    },
+    {
+      "id": "2107575657014468879",
+      "at": "2026-10-06T20:56:08.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "Roundup of Day 2/\n\n2.1/ Approve for me (auto-review) is now included and does not use usage. Can be between 2-10% of plan when used. Also better for you.\n2.2/ Simplified API for builders.\n2.3/ Meeting notes integrated.\n2.4/ Decisions API live for builders. Will use in the app to improve the experience.",
+      "url": "https://x.com/thsottiaux/status/2107575657014468879"
+    },
+    {
+      "id": "2107577536779870210",
+      "at": "2026-10-06T21:03:36.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "@The_Alex I do like giving resets",
+      "url": "https://x.com/thsottiaux/status/2107577536779870210"
+    },
+    {
+      "id": "2107578625419866469",
+      "at": "2026-10-06T21:07:55.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "Four updates or a reset. Or both. How was day 2. https://t.co/s8HNYAaVjH",
+      "url": "https://x.com/thsottiaux/status/2107578625419866469"
+    },
+    {
+      "id": "2107597780352950624",
+      "at": "2026-10-06T22:24:02.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "Completely unrelated to the rest of the ships today, but our models did solve some important math problems and the team documented it in the following blogpost. Remarkable new era of scientific progress.\n\nhttps://t.co/AYSuteVNiA",
+      "url": "https://x.com/thsottiaux/status/2107597780352950624"
+    },
+    {
       "id": "2107676072871600470",
       "at": "2026-10-07T03:35:09.000Z",
       "type": "regular",
       "status": "confirmed",
       "text": "We shipped four things that were deemed good to great and some math proofs, but the vote is clear and the community demands a reset. I did calibrate it and it *seems* that the game is rigged in reset&#39;s favor, but such are the rules at the moment.Therefore ... the reset has been processed. Enjoy!",
       "url": "https://x.com/thsottiaux/status/2107676072871600470"
+    },
+    {
+      "id": "2107676261099426030",
+      "at": "2026-10-07T03:35:54.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "And we won't unship the improvements. You get to have your cake and eat it too. See you tomorrow for Day 3!",
+      "url": "https://x.com/thsottiaux/status/2107676261099426030"
     },
     {
       "id": "2107913674593644711",
@@ -464,6 +560,14 @@
       "url": "https://x.com/thsottiaux/status/2108084615349170480"
     },
     {
+      "id": "2108086116683526498",
+      "at": "2026-10-08T06:44:31.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "@Angaisb_ Ah.. spoiled my Day 17",
+      "url": "https://x.com/thsottiaux/status/2108086116683526498"
+    },
+    {
       "id": "2108275041276420573",
       "at": "2026-10-08T19:15:14.000Z",
       "type": "release",
@@ -480,6 +584,22 @@
       "url": "https://x.com/thsottiaux/status/2108349826727588000"
     },
     {
+      "id": "2108645667451318747",
+      "at": "2026-10-09T19:47:58.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "Day 5/\n\nComposer predictions in the desktop app. Often leads to a double take with how on point they are. Included in the Pro plans without consuming usage. https://t.co/02dqoClrWn",
+      "url": "https://x.com/thsottiaux/status/2108645667451318747"
+    },
+    {
+      "id": "2108646052178092403",
+      "at": "2026-10-09T19:49:30.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "Day 5 (dots edition)/\n\nYou can now create and text your dot entirely from the ChatGPT mobile app. Impressed so many created them via the desktop/web app previously. Time to scale! https://t.co/Im3fcNswPl",
+      "url": "https://x.com/thsottiaux/status/2108646052178092403"
+    },
+    {
       "id": "2108842183749873664",
       "at": "2026-10-09T20:38:12.000Z",
       "type": "release",
@@ -494,6 +614,30 @@
       "status": "confirmed",
       "text": "Day 5 (dots edition)/ You can now create and text your dot entirely from the ChatGPT mobile app. Impressed so many created them via the desktop/web app previously. Time to scale!",
       "url": "https://x.com/thsottiaux/status/2108845192084729856"
+    },
+    {
+      "id": "2109045220411351517",
+      "at": "2026-10-10T22:15:39.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "Day 6/ Reset",
+      "url": "https://x.com/thsottiaux/status/2109045220411351517"
+    },
+    {
+      "id": "2109045392684032299",
+      "at": "2026-10-10T22:16:20.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "Global reset by EOD. May the tokens do good things for you.",
+      "url": "https://x.com/thsottiaux/status/2109045392684032299"
+    },
+    {
+      "id": "2109090080497508356",
+      "at": "2026-10-11T01:13:54.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "The day we reach perfection it will be resets from there onwards https://t.co/I6A9WHOjXT",
+      "url": "https://x.com/thsottiaux/status/2109090080497508356"
     }
   ]
 }
