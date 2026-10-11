@@ -1256,8 +1256,8 @@ svg:not([width]):not([height]) {
 </div>
 </div>
 <div class="chart-svg-wrap" style="position:relative;width:100%;height:190px;">
-  <div id="pulseEchartsContainer" style="width:100%;height:100%;"></div>
-  <noscript>
+  <div id="pulseEchartsContainer" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:2;pointer-events:none;"></div>
+  <div id="pulseSvgContainer" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;">
 <svg viewBox="0 0 740 180" fill="none" xmlns="http://www.w3.org/2000/svg">
   <!-- Horizontal Grid Lines -->
   <line x1="40" y1="30" x2="710" y2="30" stroke="#2b3139" stroke-width="1" stroke-dasharray="3 3"/>
@@ -1310,7 +1310,7 @@ svg:not([width]):not([height]) {
   <rect id="chartNowBadgeRect" x="490" y="-16.8" width="50" height="16" rx="3" fill="#0ecb81"/>
   <text id="chartNowProbText" x="515" y="-5.8" fill="#0b0e11" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Now 99%</text>
 </svg>
-  </noscript>
+  </div>
 </div>
 </div>
 </div>
@@ -2176,14 +2176,14 @@ Composer predictions in the desktop app. Often leads to a double take with how o
 
     var yNow = 130 - (liveProb * 1.25);
     var chartDot = document.getElementById("chartNowDot");
-    if(chartDot) chartDot.setAttribute("cy", yNow); chartDot.setAttribute("cx", "515");
+    if(chartDot) { chartDot.setAttribute("cy", yNow); chartDot.setAttribute("cx", "515"); }
     var chartRing = document.getElementById("chartNowRing");
-    if(chartRing) chartRing.setAttribute("cy", yNow); chartRing.setAttribute("cx", "515");
+    if(chartRing) { chartRing.setAttribute("cy", yNow); chartRing.setAttribute("cx", "515"); }
     var chartStem = document.getElementById("chartNowStem");
-    if(chartStem) chartStem.setAttribute("y1", yNow); chartStem.setAttribute("x1", "515"); chartStem.setAttribute("x2", "515");
+    if(chartStem) { chartStem.setAttribute("y1", yNow); chartStem.setAttribute("x1", "515"); }
     var chartBadgeRect = document.getElementById("chartNowBadgeRect");
-    if(chartBadgeRect) chartBadgeRect.setAttribute("y", (yNow - 23)); chartBadgeRect.setAttribute("x", "490");
-    if(chartProbTxt) chartProbTxt.setAttribute("y", (yNow - 12)); chartProbTxt.setAttribute("x", "515");
+    if(chartBadgeRect) { chartBadgeRect.setAttribute("y", (yNow - 23)); chartBadgeRect.setAttribute("x", "490"); }
+    if(chartProbTxt) { chartProbTxt.setAttribute("y", (yNow - 12)); chartProbTxt.setAttribute("x", "515"); }
 
     // G. SF Work Window (Pacific Time HQ)
     try {
