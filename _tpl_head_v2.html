@@ -960,6 +960,112 @@ svg:not([width]):not([height]) {
   }
 }
 
+
+/* ---------- Mobile Viewport Enhancements (Max-Width: 640px) ---------- */
+@media (max-width: 640px) {
+  .site-wrap {
+    padding: 0 14px !important;
+  }
+  .hero-h1 {
+    font-size: 28px !important;
+    line-height: 1.15 !important;
+    letter-spacing: -0.6px !important;
+  }
+  .card-box {
+    padding: 16px 14px !important;
+  }
+  .dual-cards {
+    gap: 14px !important;
+    margin-bottom: 20px !important;
+  }
+  
+  /* Forecast Pulse Header & Legend Wrap */
+  .pulse-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 10px !important;
+  }
+  .pulse-badges {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 6px !important;
+    width: 100% !important;
+  }
+  .badge-sm {
+    font-size: 10px !important;
+    padding: 3px 8px !important;
+  }
+  
+  /* SVG Chart Fluid Scaling */
+  .chart-svg-wrap {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 740 / 180 !important;
+    min-height: 130px !important;
+    overflow: hidden !important;
+  }
+  .chart-svg-wrap svg {
+    width: 100% !important;
+    height: auto !important;
+    display: block !important;
+  }
+  
+  /* Alert Strip (Email Subscription) */
+  .alert-strip {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 14px !important;
+    padding: 16px 14px !important;
+  }
+  .alert-actions {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 8px !important;
+  }
+  .alert-input {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .alert-actions .btn {
+    width: 100% !important;
+  }
+  .channel-pills {
+    justify-content: flex-start !important;
+    flex-wrap: wrap !important;
+    margin-top: 4px !important;
+  }
+  
+  /* 4-Item Readout Strip */
+  .readout {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .readout-item {
+    padding: 12px 14px !important;
+  }
+  .ro-v {
+    font-size: 15px !important;
+  }
+  
+  /* Studio Workboard Scroll Containers */
+  .studio-col > .move-list,
+  .studio-col > .stream-box {
+    max-height: 380px !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .readout {
+    grid-template-columns: 1fr !important;
+  }
+  .hero-h1 {
+    font-size: 24px !important;
+  }
+  .dab-stamp {
+    width: 76px !important;
+    height: 76px !important;
+  }
+}
+
 </style>
-<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js"></script>
 </head>

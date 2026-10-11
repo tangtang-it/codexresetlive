@@ -1,5 +1,12 @@
 # MEMORY.md - Project State & Architecture Log
 
+## 3. Phase: Global Variable Unification, Single Native Pulse Wave & Mobile Optimization (2026-10-11)
+- Problem Solved:
+  - Global probability divergence fixed: Resolved inconsistency where Direct Answer Banner & Stamp displayed 99% while the circular gauge displayed 79% (due to unaligned client formula clamp). Unified probability authoritative state via window.CODEX_RADAR.probability.
+  - Chart duplicate line eliminated: Completely purged redundant ECharts injection and duplicate X-axis labels, restoring the single, clean, custom native SVG pulse wave with historical badges and 48-hour projection.
+  - Mobile responsiveness perfected: Added fluid aspect-ratio scaling for chart SVG, wrapped legend badges and alert email inputs, and fine-tuned card paddings for viewports under 640px and 420px.
+- Verification: All 40 multilingual pages recompiled and passed verify_site.py 100%.
+
 ## 2. Phase: Intelligent Tweet Classifier & Reset Banner Guard (2026-10-11)
 - Problem Solved: Fixed False Positive where Direct Answer Banner reported reset completed due to substring match on humorous community reply.
 - Architecture Delivered: Implemented scripts/classifier.py (Open-Source LLM + Heuristics + Cache).
