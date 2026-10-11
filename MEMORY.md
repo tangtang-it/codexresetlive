@@ -1,5 +1,13 @@
 # MEMORY.md - Project State & Architecture Log
 
+## 4. Phase: Circular Gauge Caption Typography & Layout Optimization (2026-10-11)
+- Problem Solved:
+  - Repositioned gauge caption (`.gauge-cap`, e.g. "Elevated — Approaching average reset gap") from inside the narrow circle chord to sit cleanly below `.gauge-wrap`, completely eliminating visual overlap and occlusion from the circular arc and stroke glow.
+  - Upgraded caption into a high-visibility telemetry pill badge (`#f0f6fc` on frosted-glass badge with glowing status dot `::before`, dynamic color states: `.high` gold `#FCD535`, `.mod` blue `#60a5fa`, `.low` green `#0ecb81`).
+  - Removed accidental square card border (`border: 1px solid #23272e !important`) from `.gauge-wrap` so the circular gauge renders borderless and clean against the card.
+  - Extended dynamic client-side translations across all 10 site locales (zh-hans, zh-hant, ja, ko, es, de, fr, pt-br, ru, en).
+- Verification: All 40 multilingual pages compiled via `scripts/build_studio.py` and passed `scripts/verify_site.py` 100%.
+
 ## 3. Phase: Global Variable Unification, Single Native Pulse Wave & Mobile Optimization (2026-10-11)
 - Problem Solved:
   - Global probability divergence fixed: Resolved inconsistency where Direct Answer Banner & Stamp displayed 99% while the circular gauge displayed 79% (due to unaligned client formula clamp). Unified probability authoritative state via window.CODEX_RADAR.probability.

@@ -269,17 +269,21 @@ box-shadow:inset 0 0 60px rgba(252,213,53,.04)}
 .gauge-lbl{font-size:11px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);font-weight:700}
 .gauge-tag{padding:3px 9px;border-radius:var(--r-pill);font-size:10px;font-weight:700;
 background:rgba(14,203,129,.12);color:var(--up);border:1px solid rgba(14,203,129,.3)}
-.gauge-wrap{position:relative;width:190px;height:190px;margin:8px auto 4px}
+.gauge-wrap{position:relative;width:176px;height:176px;margin:6px auto 8px;border:none!important;box-shadow:none!important;background:transparent!important}
 .gauge-wrap svg{width:100%;height:100%;transform:rotate(-90deg)}
 .gauge-track{fill:none;stroke:#2b3139;stroke-width:11}
 .gauge-arc{fill:none;stroke:var(--primary);stroke-width:11;stroke-linecap:round;
 filter:drop-shadow(0 0 10px rgba(252,213,53,.55));
 transition:stroke-dashoffset 1.8s cubic-bezier(.16,1,.3,1)}
-.gauge-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.gauge-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none}
 .gauge-num{font-family:var(--mono);font-size:48px;font-weight:700;letter-spacing:-2px;color:var(--on-dark);line-height:1}
 .gauge-num span{font-size:22px;color:var(--primary)}
-.gauge-cap{font-size:11px;color:var(--muted);margin-top:4px;text-align:center;padding:0 8px}
-.gauge-foot{margin-top:14px;padding-top:14px;border-top:1px solid var(--hairline);
+.gauge-cap{display:flex;align-items:center;justify-content:center;width:fit-content;max-width:96%;margin:6px auto 10px;padding:6px 14px;font-size:12px;font-weight:600;line-height:1.35;text-align:center;letter-spacing:-.01em;border-radius:var(--r-pill);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);color:#f0f6fc;box-shadow:0 2px 8px rgba(0,0,0,.25);transition:all .25s ease}
+.gauge-cap::before{content:"";display:inline-block;width:6.5px;height:6.5px;border-radius:50%;margin-right:7px;background:currentColor;box-shadow:0 0 7px currentColor;flex-shrink:0}
+.gauge-cap.high{background:rgba(252,213,53,.1)!important;border-color:rgba(252,213,53,.32)!important;color:#FCD535!important;box-shadow:0 2px 10px rgba(252,213,53,.12)!important}
+.gauge-cap.mod{background:rgba(59,130,246,.1)!important;border-color:rgba(59,130,246,.32)!important;color:#60a5fa!important;box-shadow:0 2px 10px rgba(59,130,246,.12)!important}
+.gauge-cap.low{background:rgba(14,203,129,.1)!important;border-color:rgba(14,203,129,.32)!important;color:#0ecb81!important;box-shadow:0 2px 10px rgba(14,203,129,.12)!important}
+.gauge-foot{margin-top:12px;padding-top:12px;border-top:1px solid var(--hairline);
 display:flex;justify-content:space-between;font-size:11px;color:var(--muted)}
 .gauge-foot b{color:var(--body);font-weight:600}
 @keyframes flare{0%{transform:scale(.6);opacity:.9}100%{transform:scale(2.2);opacity:0}}
@@ -788,7 +792,7 @@ h1, h2, h3, .h1, .h2, .h3 {
 }
 
 /* Card Clean Hairlines (No cheap heavy glow) */
-.card-box, .gauge-wrap, .chart-svg-wrap, .studio-col, .calc, .cal-grid-card, .direct-ans-banner {
+.card-box, .chart-svg-wrap, .studio-col, .calc, .cal-grid-card, .direct-ans-banner {
   border: 1px solid #23272e !important;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
   transition: border-color 0.2s ease;
@@ -1283,9 +1287,9 @@ svg:not([width]):not([height]) {
 </svg>
 <div class="gauge-center">
 <div class="gauge-num"><span id="gaugeNum">0</span><span>%</span></div>
+</div>
+</div>
 <div class="gauge-cap">низкая — сброс только что был</div>
-</div>
-</div>
 <div class="gauge-foot">
 <span>Последний сброс <b class="num" data-local-date-only="2026-10-07T19:19:17.000Z">2026-10-07</b></span>
 <span>Дней прошло <b class="num" data-days-since-utc="2026-10-07T19:19:17.000Z">3.3d</b></span>
@@ -2129,6 +2133,12 @@ Composer predictions in the desktop app. Often leads to a double take with how o
   var lang = document.documentElement.lang || "en";
   var isZh = lang.indexOf("zh") === 0;
   var isJa = lang === "ja";
+  var isKo = lang === "ko";
+  var isEs = lang === "es";
+  var isDe = lang === "de";
+  var isFr = lang === "fr";
+  var isPt = lang === "pt" || lang === "pt-br";
+  var isRu = lang === "ru";
 
   var arc = document.getElementById("gaugeArc");
   var numEl = document.getElementById("gaugeNum");
@@ -2167,12 +2177,40 @@ Composer predictions in the desktop app. Often leads to a double take with how o
 
     // Gauge Caption Sync
     if (capEl) {
+      capEl.classList.remove("low", "mod", "high");
       if (liveProb < 30) {
-        capEl.textContent = isZh ? "偏低 —— 刚刚完成一次重置" : (isJa ? "低め —— 直近にリセット完了" : "Low — Recent reset cooldown");
+        capEl.classList.add("low");
+        if (isZh) capEl.textContent = "偏低 —— 刚刚完成一次重置";
+        else if (isJa) capEl.textContent = "低め —— 直近にリセット完了";
+        else if (isKo) capEl.textContent = "낮음 —— 최근 리셋 쿨다운";
+        else if (isEs) capEl.textContent = "Baja — Reciente enfriamiento de reinicio";
+        else if (isDe) capEl.textContent = "Niedrig — Kürzlicher Reset-Cooldown";
+        else if (isFr) capEl.textContent = "Faible — Période de refroidissement récente";
+        else if (isPt) capEl.textContent = "Baixa — Cooldown recente de reset";
+        else if (isRu) capEl.textContent = "Низкая — Недавний сброс (охлаждение)";
+        else capEl.textContent = "Low — Recent reset cooldown";
       } else if (liveProb < 60) {
-        capEl.textContent = isZh ? "适中 —— 进入常规等待窗口" : (isJa ? "中程度 —— 通常待機サイクル突入" : "Moderate — Normal replenishment cadence");
+        capEl.classList.add("mod");
+        if (isZh) capEl.textContent = "适中 —— 进入常规等待窗口";
+        else if (isJa) capEl.textContent = "中程度 —— 通常待機サイクル突入";
+        else if (isKo) capEl.textContent = "보통 —— 일반 대기 윈도우 진입";
+        else if (isEs) capEl.textContent = "Moderada — Ventana normal de recarga";
+        else if (isDe) capEl.textContent = "Moderat — Normales Auffüllfenster";
+        else if (isFr) capEl.textContent = "Modérée — Fenêtre normale de recharge";
+        else if (isPt) capEl.textContent = "Moderada — Janela normal de recarga";
+        else if (isRu) capEl.textContent = "Умеренная — Обычное окно пополнения";
+        else capEl.textContent = "Moderate — Normal replenishment cadence";
       } else {
-        capEl.textContent = isZh ? "偏高 —— 接近平均补水周期" : (isJa ? "高め —— 平均間隔到達・高確率期" : "Elevated — Approaching average reset gap");
+        capEl.classList.add("high");
+        if (isZh) capEl.textContent = "偏高 —— 接近平均补水周期";
+        else if (isJa) capEl.textContent = "高め —— 平均間隔到達・高確率期";
+        else if (isKo) capEl.textContent = "높음 —— 평균 리셋 주기 도달";
+        else if (isEs) capEl.textContent = "Elevada — Acercándose al ciclo promedio";
+        else if (isDe) capEl.textContent = "Erhöht — Durchschnittlicher Zyklus naht";
+        else if (isFr) capEl.textContent = "Élevée — Approche du cycle moyen";
+        else if (isPt) capEl.textContent = "Elevada — Aproximando-se do ciclo médio";
+        else if (isRu) capEl.textContent = "Повышенная — Приближение среднего цикла";
+        else capEl.textContent = "Elevated — Approaching average reset gap";
       }
     }
 

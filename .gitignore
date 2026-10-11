@@ -17,3 +17,6 @@ studio_compact_full.png
 tibo_avatar_*.png
 _tpl_head_v2_orig.html
 scripts/test_chunk.txt
+
+__pycache__/
+*.pyc
