@@ -1171,6 +1171,358 @@ svg:not([width]):not([height]) {
   }
 }
 
+
+/* ==========================================================================
+   VIRAL SHARE BUTTON & FORECAST SHARE MODAL (Linear/Binance Dark Edition)
+   ========================================================================== */
+.dab-share-btn {
+  position: absolute !important;
+  top: 16px !important;
+  right: 18px !important;
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  background: rgba(30, 35, 41, 0.75) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  color: #eaecef !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  z-index: 10 !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  padding: 0 !important;
+  outline: none !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+.dab-share-btn:hover {
+  background: rgba(43, 49, 57, 0.95) !important;
+  border-color: #FCD535 !important;
+  color: #FCD535 !important;
+  transform: scale(1.08) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45) !important;
+}
+.dab-share-btn:active {
+  transform: scale(0.96) !important;
+}
+.dab-share-ico {
+  width: 17px !important;
+  height: 17px !important;
+  display: block !important;
+  pointer-events: none !important;
+}
+
+/* Modal Overlay */
+.share-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+  padding: 16px;
+}
+.share-modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Modal Dialog Card */
+.share-modal {
+  background: #181a20;
+  border: 1px solid #2b3139;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 500px;
+  padding: 24px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transform: translateY(14px) scale(0.97);
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.share-modal-overlay.open .share-modal {
+  transform: translateY(0) scale(1);
+}
+.share-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+.share-modal-title {
+  font-size: 19px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.015em;
+  margin: 0 0 4px;
+}
+.share-modal-sub {
+  font-size: 13px;
+  color: #707a8a;
+  margin: 0;
+  line-height: 1.45;
+}
+.share-modal-close {
+  background: #1e2329;
+  border: 1px solid #2b3139;
+  color: #a0a6b2;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+  padding: 0;
+  margin-left: 12px;
+}
+.share-modal-close:hover {
+  background: #2b3139;
+  color: #ffffff;
+  border-color: #474d57;
+}
+
+/* Forecast Card Preview */
+.share-preview-card {
+  background: radial-gradient(circle at 85% 25%, rgba(14, 203, 129, 0.16) 0%, rgba(20, 24, 30, 0.98) 60%), #12151b;
+  border: 1px solid rgba(14, 203, 129, 0.28);
+  border-radius: 16px;
+  padding: 20px 22px;
+  margin-bottom: 16px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+.share-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.share-card-brand {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  font-style: italic;
+}
+.share-card-brand span {
+  color: #FCD535;
+  font-style: normal;
+}
+.share-card-tag {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: #0ecb81;
+  text-transform: uppercase;
+  font-family: var(--mono);
+}
+.share-card-body {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.share-card-prob {
+  font-size: 48px;
+  font-weight: 900;
+  color: #0ecb81;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.share-card-meta {
+  font-size: 12px;
+  color: #a0a6b2;
+  font-weight: 600;
+}
+.share-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 10px;
+  font-size: 11px;
+}
+.share-card-cadence {
+  color: #707a8a;
+  font-family: var(--mono);
+}
+.share-card-url {
+  color: #FCD535;
+  font-family: var(--mono);
+  font-weight: 700;
+}
+
+/* 3 Main Action Buttons */
+.share-actions-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.share-act-btn {
+  background: #1e2329;
+  border: 1px solid #2b3139;
+  color: #eaecef;
+  border-radius: 10px;
+  padding: 10px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.share-act-btn:hover {
+  background: #2b3139;
+  border-color: #FCD535;
+  color: #FCD535;
+  transform: translateY(-1px);
+}
+.share-act-btn:active {
+  transform: translateY(0);
+}
+.share-act-btn svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+/* Social Grid (3x3) */
+.share-social-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.share-soc-btn {
+  background: #181a20;
+  border: 1px solid #23272e;
+  color: #a0a6b2;
+  border-radius: 10px;
+  padding: 9px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+.share-soc-btn:hover {
+  background: #1e2329;
+  border-color: #353c48;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+.share-soc-btn svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* WeChat Popover / Tip Box */
+.share-wechat-box {
+  display: none;
+  background: #1e2329;
+  border: 1px solid #2b3139;
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 14px;
+  text-align: center;
+}
+.share-wechat-box.open {
+  display: block;
+}
+.share-wechat-box-tip {
+  font-size: 12px;
+  color: #0ecb81;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.share-wechat-qr {
+  width: 120px;
+  height: 120px;
+  background: #ffffff;
+  padding: 6px;
+  border-radius: 8px;
+  margin: 0 auto 8px;
+  display: block;
+}
+.share-wechat-sub {
+  font-size: 11px;
+  color: #707a8a;
+}
+
+/* Modal Footer Close */
+.share-modal-footer {
+  text-align: center;
+  border-top: 1px solid #23272e;
+  padding-top: 14px;
+}
+.share-modal-foot-close {
+  background: none;
+  border: none;
+  color: #707a8a;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.15s ease;
+  padding: 4px 12px;
+}
+.share-modal-foot-close:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .dab-share-btn {
+    top: 14px !important;
+    right: 14px !important;
+    width: 34px !important;
+    height: 34px !important;
+  }
+  .share-modal {
+    padding: 18px 16px;
+    border-radius: 16px;
+  }
+  .share-preview-card {
+    padding: 16px 16px;
+  }
+  .share-card-prob {
+    font-size: 38px;
+  }
+  .share-actions-row {
+    gap: 6px;
+  }
+  .share-act-btn {
+    padding: 8px 4px;
+    font-size: 11px;
+  }
+  .share-soc-btn {
+    padding: 8px 4px;
+    font-size: 11px;
+  }
+}
+
 </style>
 </head>
 
@@ -1225,10 +1577,11 @@ svg:not([width]):not([height]) {
 <!-- Hero Head -->
 <section class="hero" style="padding-bottom:18px">
 <div class="direct-ans-banner">
+  <button class="dab-share-btn" id="shareForecastBtn" aria-label="分享此預測" title="分享此預測" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dab-share-ico"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
   <div class="dab-left">
     <span class="dab-badge"><span class="dot"></span> 实时状态判定：HIGH SIGNAL · PROBABLE</span>
     <div class="dab-h">Codex 今天会全网重置吗？ <strong>今日放水概率较高 (<span class='live-prob-val'>99</span>% 预测)</strong></div>
-    <div class="dab-p">今日尚未监测到官方全量重置记录。最近一次官方放水发生在 <strong data-days-since-utc="2026-10-07T19:19:17.000Z">3.3d 前</strong>（<span data-local-date-only="2026-10-07T19:19:17.000Z">2026-10-07</span>）。建议保持正常开发节奏，下方可测算个人 5 小时解锁倒计时。</div>
+    <div class="dab-p">今日尚未监测到官方全量重置记录。最近一次官方放水发生在 <strong data-days-since-utc="2026-10-07T19:19:17.000Z">3.4d 前</strong>（<span data-local-date-only="2026-10-07T19:19:17.000Z">2026-10-07</span>）。建议保持正常开发节奏，下方可测算个人 5 小时解锁倒计时。</div>
   </div>
   <div class="dab-right-wrap">
     <div class="openthe-stamp-wrap soon">
@@ -1292,7 +1645,7 @@ svg:not([width]):not([height]) {
 <div class="gauge-cap">偏低 —— 剛剛完成一次重置</div>
 <div class="gauge-foot">
 <span>最近重置 <b class="num" data-local-date-only="2026-10-07T19:19:17.000Z">2026-10-07</b></span>
-<span>距今 <b class="num" data-days-since-utc="2026-10-07T19:19:17.000Z">3.3d</b></span>
+<span>距今 <b class="num" data-days-since-utc="2026-10-07T19:19:17.000Z">3.4d</b></span>
 </div>
 </div>
 
@@ -1406,7 +1759,7 @@ svg:not([width]):not([height]) {
 </div>
 <div class="readout-item">
 <div class="ro-l">Days Since Reset</div>
-<div class="ro-v num" data-days-since-utc="2026-10-07T19:19:17.000Z">3.3d</div>
+<div class="ro-v num" data-days-since-utc="2026-10-07T19:19:17.000Z">3.4d</div>
 <div class="ro-s">Last: <span data-local-date-only="2026-10-07T19:19:17.000Z">2026-10-07</span></div>
 </div>
 <div class="readout-item">
@@ -1741,7 +2094,7 @@ Composer predictions in the desktop app. Often leads to a double take with how o
   </div>
   <div class="sr-right">
     <span class="sr-dot yellow"></span>
-    <span class="sr-status"><span data-cooldown-utc="2026-10-07T19:19:17.000Z">Cooldown active (3.3d)</span></span>
+    <span class="sr-status"><span data-cooldown-utc="2026-10-07T19:19:17.000Z">Cooldown active (3.4d)</span></span>
   </div>
 </div><div class="switch-row">
   <div class="sr-left">
@@ -2093,6 +2446,109 @@ Composer predictions in the desktop app. Often leads to a double take with how o
 </div>
 </footer>
 
+
+<!-- Viral Forecast Share Modal -->
+<div class="share-modal-overlay" id="shareModalOverlay" aria-hidden="true">
+  <div class="share-modal" role="dialog" aria-modal="true" aria-labelledby="shareModalTitle">
+    <div class="share-modal-header">
+      <div>
+        <h3 class="share-modal-title" id="shareModalTitle">分享此預測</h3>
+        <p class="share-modal-sub">分享連結或下載當前預測卡片圖片。</p>
+      </div>
+      <button class="share-modal-close" id="shareModalClose" type="button" aria-label="關閉">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <!-- Forecast Card Preview -->
+    <div class="share-preview-card" id="sharePreviewCard">
+      <div class="share-card-top">
+        <div class="share-card-brand">CodexReset<span>.live</span></div>
+        <div class="share-card-tag">● 未來 48 小時</div>
+      </div>
+      <div class="share-card-body">
+        <div class="share-card-prob" id="shareCardProb">99%</div>
+        <div class="share-card-meta">
+          <div style="font-weight:700;color:#eaecef">放水機率</div>
+          <div style="font-size:11px;color:#707a8a">Verified Quota Radar</div>
+        </div>
+      </div>
+      <div class="share-card-footer">
+        <span class="share-card-cadence">Live Verdict &bull; 48h Window</span>
+        <span class="share-card-url">codexresetlive.com</span>
+      </div>
+    </div>
+
+    <!-- WeChat Popover / Tip Box -->
+    <div class="share-wechat-box" id="shareWeChatBox">
+      <div class="share-wechat-box-tip">✓ 連結已複製！打開微信直接貼上發送給好友或群聊。</div>
+      <img class="share-wechat-qr" id="shareWeChatQr" alt="WeChat QR Code" src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&amp;data=https%3A%2F%2Fcodexresetlive.com%2F" />
+      <div class="share-wechat-sub">扫码或粘贴链接分享至微信群聊与好友</div>
+    </div>
+
+    <!-- Primary Action Buttons (Row 1) -->
+    <div class="share-actions-row">
+      <button class="share-act-btn" id="shareCopyLinkBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        <span>複製連結</span>
+      </button>
+      <button class="share-act-btn" id="shareCopyCardBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        <span>複製卡片</span>
+      </button>
+      <button class="share-act-btn" id="shareDownloadBtn" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>下載圖片</span>
+      </button>
+    </div>
+
+    <!-- Social Media Grid (3x3) -->
+    <div class="share-social-grid">
+      <a class="share-soc-btn" id="shareSocX" target="_blank" rel="noopener nofollow">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        <span>X</span>
+      </a>
+      <a class="share-soc-btn" id="shareSocFb" target="_blank" rel="noopener nofollow">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        <span>Facebook</span>
+      </a>
+      <a class="share-soc-btn" id="shareSocLi" target="_blank" rel="noopener nofollow">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+        <span>LinkedIn</span>
+      </a>
+      <a class="share-soc-btn" id="shareSocWa" target="_blank" rel="noopener nofollow">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+        <span>WhatsApp</span>
+      </a>
+      <a class="share-soc-btn" id="shareSocTg" target="_blank" rel="noopener nofollow">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.458c.538-.196 1.006.128.832.941z"/></svg>
+        <span>Telegram</span>
+      </a>
+      <a class="share-soc-btn" id="shareSocRd" target="_blank" rel="noopener nofollow">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6.066 13.345c.066.242.1.494.1.751 0 2.56-3.064 4.636-6.845 4.636-3.78 0-6.844-2.076-6.844-4.636 0-.253.033-.5.097-.738-.727-.478-1.174-1.29-1.174-2.179 0-1.474 1.206-2.671 2.693-2.671.748 0 1.425.308 1.914.806 1.408-.944 3.254-1.547 5.289-1.619l1.109-3.504 2.997.643c.174-.632.748-1.096 1.439-1.096.825 0 1.494.669 1.494 1.494s-.669 1.494-1.494 1.494c-.722 0-1.317-.514-1.458-1.199l-2.485-.533-.923 2.915c2.083.059 3.974.664 5.412 1.625.494-.509 1.18-.823 1.938-.823 1.488 0 2.694 1.197 2.694 2.671 0 .894-.452 1.711-1.187 2.189z"/></svg>
+        <span>Reddit</span>
+      </a>
+      <button class="share-soc-btn" id="shareSocWc" type="button">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.5 2C4.36 2 1 4.91 1 8.5c0 2.01 1.05 3.8 2.69 4.96L3 17.5l4.31-1.44c.4.07.79.1 1.19.1.28 0 .55-.02.82-.05-.44-.92-.68-1.94-.68-3.02 0-3.97 3.58-7.19 8-7.19.46 0 .91.04 1.35.11C16.81 3.73 12.98 2 8.5 2zm-2.25 4.5c.69 0 1.25.56 1.25 1.25s-.56 1.25-1.25 1.25-1.25-.56-1.25-1.25.56-1.25 1.25-1.25zm5 0c.69 0 1.25.56 1.25 1.25s-.56 1.25-1.25 1.25-1.25-.56-1.25-1.25.56-1.25 1.25-1.25zM15.5 8c-3.59 0-6.5 2.46-6.5 5.5 0 1.76.98 3.32 2.5 4.31l-.81 3.19 3.44-1.15c.44.1 1 .15 1.37.15 3.59 0 6.5-2.46 6.5-5.5S19.09 8 15.5 8zm-2 3c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm4 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1z"/></svg>
+        <span>微信 / WeChat</span>
+      </button>
+      <a class="share-soc-btn" id="shareSocWb" target="_blank" rel="noopener nofollow">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10.09 17.53c-3.79.44-7.07-1.39-7.33-4.08-.26-2.7 2.6-5.24 6.39-5.68 3.79-.44 7.07 1.39 7.33 4.09.26 2.69-2.6 5.23-6.39 5.67zm12.35-8.48c-.46-1.57-1.78-2.8-3.37-3.18-.73-.18-1.5-.16-2.22.06-.44.13-.69.6-.56 1.04.13.44.6.69 1.04.56.46-.14.96-.15 1.43-.04 1.02.24 1.87 1.03 2.16 2.04.13.44.6.69 1.04.56.44-.13.69-.6.48-1.04zm-3.08 1.04c-.2-.68-.77-1.22-1.46-1.38-.32-.08-.65-.07-.97.03-.44.13-.69.6-.56 1.04.13.44.6.69 1.04.56.1-.03.21-.03.31 0 .22.05.41.22.47.44.12.44.59.7 1.03.58.44-.12.7-.59.14-2.27z"/></svg>
+        <span>微博 / Weibo</span>
+      </a>
+      <a class="share-soc-btn" id="shareSocEm" target="_blank" rel="noopener nofollow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <span>Email</span>
+      </a>
+    </div>
+
+    <!-- Modal Footer Close -->
+    <div class="share-modal-footer">
+      <button class="share-modal-foot-close" id="shareModalFootClose" type="button">關閉</button>
+    </div>
+  </div>
+</div>
+
 <div id="toast"><span id="toastI" style="display:flex;align-items:center"></span><span id="toastM"></span></div>
 
 <script>
@@ -2126,7 +2582,7 @@ Composer predictions in the desktop app. Often leads to a double take with how o
   window.CODEX_RADAR = {
     probability: 99,
     lastResetUtc: "2026-10-07T19:19:17.000Z",
-    daysSinceStr: "3.3d"
+    daysSinceStr: "3.4d"
   };
 
   var LAST_RESET_UTC = "2026-10-07T19:19:17.000Z";
@@ -2448,7 +2904,270 @@ Composer predictions in the desktop app. Often leads to a double take with how o
     if(em&&em.value.indexOf("@")>0){toast("Subscribed successfully! You will be notified on reset.","check");em.value="";}
     else{toast("Please enter a valid email address.","warn");}
   });
-})();
+
+  // 6. Viral Share Modal Engine
+  var shareBtn = document.getElementById("shareForecastBtn");
+  var shareModal = document.getElementById("shareModalOverlay");
+  var shareClose = document.getElementById("shareModalClose");
+  var shareFootClose = document.getElementById("shareModalFootClose");
+  var copyLinkBtn = document.getElementById("shareCopyLinkBtn");
+  var copyCardBtn = document.getElementById("shareCopyCardBtn");
+  var downloadBtn = document.getElementById("shareDownloadBtn");
+  var shareWcBtn = document.getElementById("shareSocWc");
+  var wechatBox = document.getElementById("shareWeChatBox");
+  var wechatQr = document.getElementById("shareWeChatQr");
+
+  function openShareModal() {
+    if(!shareModal) return;
+    var liveProb = (window.CODEX_RADAR && typeof window.CODEX_RADAR.probability === 'number') ? window.CODEX_RADAR.probability : 99;
+    var pEl = document.getElementById("shareCardProb");
+    if(pEl) pEl.textContent = liveProb + "%";
+
+    var curUrl = window.location.href.split("#")[0];
+    var shareTitle = isZh ? ("Codex 今天会全网重置放水吗？最新放水概率 " + liveProb + "% 预测，一手推文信号与个人 5 小时解锁雷达：") :
+                     (isJa ? ("Codexは本日リセットされますか？現在のリセット確率: " + liveProb + "%。最新シグナルと個人用5時間回復レーダー：") :
+                     ("Will Codex reset today? 48h reset probability currently at " + liveProb + "%. Live signals & rolling recovery calculator:"));
+
+    var xLink = document.getElementById("shareSocX");
+    if(xLink) xLink.href = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(shareTitle) + "&url=" + encodeURIComponent(curUrl);
+
+    var fbLink = document.getElementById("shareSocFb");
+    if(fbLink) fbLink.href = "https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(curUrl);
+
+    var liLink = document.getElementById("shareSocLi");
+    if(liLink) liLink.href = "https://www.linkedin.com/sharing/share-offsite/?url=" + encodeURIComponent(curUrl);
+
+    var waLink = document.getElementById("shareSocWa");
+    if(waLink) waLink.href = "https://api.whatsapp.com/send?text=" + encodeURIComponent(shareTitle + " " + curUrl);
+
+    var tgLink = document.getElementById("shareSocTg");
+    if(tgLink) tgLink.href = "https://t.me/share/url?url=" + encodeURIComponent(curUrl) + "&text=" + encodeURIComponent(shareTitle);
+
+    var rdLink = document.getElementById("shareSocRd");
+    if(rdLink) rdLink.href = "https://reddit.com/submit?url=" + encodeURIComponent(curUrl) + "&title=" + encodeURIComponent(shareTitle);
+
+    var wbLink = document.getElementById("shareSocWb");
+    if(wbLink) wbLink.href = "https://service.weibo.com/share/share.php?url=" + encodeURIComponent(curUrl) + "&title=" + encodeURIComponent(shareTitle);
+
+    var emLink = document.getElementById("shareSocEm");
+    if(emLink) emLink.href = "mailto:?subject=" + encodeURIComponent("Codex Reset Forecast | CodexReset.live") + "&body=" + encodeURIComponent(shareTitle + "\n\n" + curUrl);
+
+    if(wechatQr) {
+      wechatQr.src = "https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=" + encodeURIComponent(curUrl);
+    }
+    if(wechatBox) wechatBox.classList.remove("open");
+
+    shareModal.classList.add("open");
+    shareModal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeShareModal() {
+    if(!shareModal) return;
+    shareModal.classList.remove("open");
+    shareModal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+    if(wechatBox) wechatBox.classList.remove("open");
+  }
+
+  // Attach listener dynamically (can handle dynamic elements)
+  document.addEventListener("click", function(e) {
+    var t = e.target.closest("#shareForecastBtn, .dab-share-btn");
+    if(t) {
+      e.preventDefault();
+      openShareModal();
+    }
+  });
+
+  if(shareClose) shareClose.addEventListener("click", closeShareModal);
+  if(shareFootClose) shareFootClose.addEventListener("click", closeShareModal);
+  if(shareModal) {
+    shareModal.addEventListener("click", function(e) {
+      if(e.target === shareModal) closeShareModal();
+    });
+  }
+  document.addEventListener("keydown", function(e) {
+    if(e.key === "Escape" && shareModal && shareModal.classList.contains("open")) {
+      closeShareModal();
+    }
+  });
+
+  // Copy Link Action
+  function fallbackCopyText(text) {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.left = "-9999px";
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand("copy");
+      toast(isZh ? "分享链接已复制到剪贴板！" : (isJa ? "リンクをクリップボードにコピーしました！" : "Share link copied to clipboard!"), "plane");
+    } catch(e) {}
+    document.body.removeChild(ta);
+  }
+
+  if(copyLinkBtn) {
+    copyLinkBtn.addEventListener("click", function() {
+      var curUrl = window.location.href.split("#")[0];
+      if(navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(curUrl).then(function() {
+          toast(isZh ? "分享链接已复制到剪贴板！" : (isJa ? "リンクをクリップボードにコピーしました！" : "Share link copied to clipboard!"), "plane");
+        }).catch(function() {
+          fallbackCopyText(curUrl);
+        });
+      } else {
+        fallbackCopyText(curUrl);
+      }
+    });
+  }
+
+  // High-Res Retina Card Canvas Generator
+  function renderCardCanvas(callback) {
+    var liveProb = (window.CODEX_RADAR && typeof window.CODEX_RADAR.probability === 'number') ? window.CODEX_RADAR.probability : 99;
+    var canvas = document.createElement("canvas");
+    var dpr = 2;
+    var width = 640, height = 360;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    var ctx = canvas.getContext("2d");
+    ctx.scale(dpr, dpr);
+
+    var bg = ctx.createLinearGradient(0, 0, width, height);
+    bg.addColorStop(0, "#12151b");
+    bg.addColorStop(0.5, "#181a20");
+    bg.addColorStop(1, "#0d1117");
+    ctx.fillStyle = bg;
+    if(ctx.roundRect) ctx.roundRect(0, 0, width, height, 16);
+    else ctx.rect(0, 0, width, height);
+    ctx.fill();
+
+    var glow = ctx.createRadialGradient(width - 90, 90, 10, width - 90, 90, 240);
+    glow.addColorStop(0, "rgba(14, 203, 129, 0.25)");
+    glow.addColorStop(1, "rgba(14, 203, 129, 0)");
+    ctx.fillStyle = glow;
+    ctx.beginPath();
+    ctx.arc(width - 90, 90, 240, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.strokeStyle = "#2b3139";
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.035)";
+    ctx.lineWidth = 1;
+    for(var x = 40; x < width; x += 60) {
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, height); ctx.stroke();
+    }
+    for(var y = 40; y < height; y += 60) {
+      ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(width, y); ctx.stroke();
+    }
+
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "bold 22px Inter, system-ui, -apple-system, sans-serif";
+    ctx.fillText("CodexReset", 40, 52);
+    var bw = ctx.measureText("CodexReset").width;
+    ctx.fillStyle = "#FCD535";
+    ctx.fillText(".live", 40 + bw, 52);
+
+    ctx.fillStyle = "#0ecb81";
+    ctx.font = "bold 11px ui-monospace, monospace";
+    ctx.fillText("● NEXT 48 HOURS · VERIFIED FORECAST RADAR", 40, 88);
+
+    ctx.fillStyle = "#0ecb81";
+    ctx.font = "900 78px Inter, system-ui, -apple-system, sans-serif";
+    ctx.fillText(liveProb + "%", 40, 180);
+    var pw = ctx.measureText(liveProb + "%").width;
+
+    ctx.fillStyle = "#eaecef";
+    ctx.font = "bold 14px Inter, system-ui, -apple-system, sans-serif";
+    ctx.fillText(isZh ? "48 小时放水概率预测" : (isJa ? "48時間リセット確率" : "RESET PROBABILITY"), 54 + pw, 145);
+    ctx.fillStyle = "#707a8a";
+    ctx.font = "12px Inter, system-ui, -apple-system, sans-serif";
+    ctx.fillText(isZh ? "基于 Tibo 历史信号与容量恢复窗口" : (isJa ? "Tibo氏の確定シグナルと配分サイクル" : "Source-first radar for public quota flushes"), 54 + pw, 170);
+
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.08)";
+    ctx.beginPath(); ctx.moveTo(40, 222); ctx.lineTo(width - 40, 222); ctx.stroke();
+
+    ctx.fillStyle = "#a0a6b2";
+    ctx.font = "12px ui-monospace, monospace";
+    var dateStr = new Date().toISOString().slice(0, 10);
+    ctx.fillText("Live Status Archive &bull; " + dateStr, 40, 268);
+
+    ctx.fillStyle = "#707a8a";
+    ctx.font = "11px Inter, system-ui, -apple-system, sans-serif";
+    ctx.fillText(isZh ? "实时监控 OpenAI 额度重置与个人 5 小时恢复窗口" : "Live monitoring OpenAI quota flushes & 5h rolling recovery", 40, 292);
+
+    ctx.fillStyle = "#FCD535";
+    ctx.font = "bold 13px ui-monospace, monospace";
+    ctx.textAlign = "right";
+    ctx.fillText("https://codexresetlive.com", width - 40, 280);
+    ctx.textAlign = "left";
+
+    callback(canvas);
+  }
+
+  // Download Card Action
+  if(downloadBtn) {
+    downloadBtn.addEventListener("click", function() {
+      renderCardCanvas(function(canvas) {
+        var a = document.createElement("a");
+        a.download = "codex-reset-forecast.png";
+        a.href = canvas.toDataURL("image/png");
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        toast(isZh ? "预测卡片图片已开始下载！" : (isJa ? "予測カード画像を保存しました！" : "Forecast card downloaded!"), "plane");
+      });
+    });
+  }
+
+  // Copy Card Action
+  if(copyCardBtn) {
+    copyCardBtn.addEventListener("click", function() {
+      renderCardCanvas(function(canvas) {
+        if(canvas.toBlob && navigator.clipboard && navigator.clipboard.write) {
+          canvas.toBlob(function(blob) {
+            try {
+              var item = new ClipboardItem({ "image/png": blob });
+              navigator.clipboard.write([item]).then(function() {
+                toast(isZh ? "预测卡片图片已复制到剪贴板！" : (isJa ? "カード画像をクリップボードにコピーしました！" : "Card image copied to clipboard!"), "plane");
+              }).catch(function() {
+                fallbackCopyCardSummary();
+              });
+            } catch(e) {
+              fallbackCopyCardSummary();
+            }
+          });
+        } else {
+          fallbackCopyCardSummary();
+        }
+      });
+    });
+  }
+
+  function fallbackCopyCardSummary() {
+    var liveProb = (window.CODEX_RADAR && typeof window.CODEX_RADAR.probability === 'number') ? window.CODEX_RADAR.probability : 99;
+    var summaryText = isZh ? ("🔥 Codex 配额重置预测：未来 48 小时放水概率 " + liveProb + "%。实时信号雷达与 5 小时解锁倒计时：https://codexresetlive.com/") :
+                             ("🔥 Codex Reset Forecast: " + liveProb + "% probability in next 48h. Track live signals & rolling recovery: https://codexresetlive.com/");
+    fallbackCopyText(summaryText);
+  }
+
+  // WeChat Action
+  if(shareWcBtn) {
+    shareWcBtn.addEventListener("click", function() {
+      var curUrl = window.location.href.split("#")[0];
+      if(navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(curUrl);
+      }
+      if(wechatBox) {
+        wechatBox.classList.toggle("open");
+      }
+      toast(isZh ? "链接已复制！可在微信中直接粘贴或扫码分享" : "Link copied! Share in WeChat or scan QR", "chat");
+    });
+  }
+
+  })();
 </script>
 
 <!-- E-E-A-T Compliance Modals -->

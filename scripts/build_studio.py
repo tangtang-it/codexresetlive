@@ -429,7 +429,7 @@ CAL_TABLE_HTML = '''<table class="cal-table">
   </tbody>
 </table>'''
 
-def render_direct_ans(code):
+def render_direct_ans_raw(code):
     # Check if a reset occurred within the last 24 hours (or today)
     # Use semantic classifier: only confirmed or banked resets trigger YES banner
     verified_resets = [
@@ -611,6 +611,11 @@ def render_direct_ans(code):
   </div>
 </div>'''
 
+
+def render_direct_ans(code):
+    raw = render_direct_ans_raw(code)
+    share_btn = '''<button class="dab-share-btn" id="shareForecastBtn" aria-label="__SHARE_BTN_TITLE__" title="__SHARE_BTN_TITLE__" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dab-share-ico"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>'''
+    return raw.replace('<div class="direct-ans-banner">', f'<div class="direct-ans-banner">\n  {share_btn}')
 
 def render_guides(code):
     if "zh" in code:
@@ -1023,6 +1028,16 @@ for code, d, name, loc, base_url in LANGS:
     p1_body = p1_body.replace("__LANG_ITEMS__", build_lang_items(code, ""))
 
     p1_body = p1_body.replace("__DIRECT_ANS_BANNER__", render_direct_ans(code))
+    p1_body = p1_body.replace("__SHARE_BTN_TITLE__", esc(t["share_btn_title"]))
+    p1_body = p1_body.replace("__SHARE_MODAL_TITLE__", esc(t["share_modal_title"]))
+    p1_body = p1_body.replace("__SHARE_MODAL_SUB__", esc(t["share_modal_sub"]))
+    p1_body = p1_body.replace("__SHARE_CARD_TAG__", esc(t["share_card_tag"]))
+    p1_body = p1_body.replace("__SHARE_CARD_CHANCE__", esc(t["share_card_chance"]))
+    p1_body = p1_body.replace("__SHARE_COPY_LINK__", esc(t["share_copy_link"]))
+    p1_body = p1_body.replace("__SHARE_COPY_CARD__", esc(t["share_copy_card"]))
+    p1_body = p1_body.replace("__SHARE_DOWNLOAD__", esc(t["share_download"]))
+    p1_body = p1_body.replace("__SHARE_CLOSE__", esc(t["share_close"]))
+    p1_body = p1_body.replace("__SHARE_WECHAT_HINT__", esc(t["share_wechat_hint"]))
     p1_body = p1_body.replace("__BADGE__", esc(t["badge"])).replace("__H1_A__", esc(t["h1_a"])).replace("__H1_B__", esc(t["h1_b"])).replace("__HERO_P__", esc(t["hero_p"]))
     p1_body = p1_body.replace("__GAUGE_LBL__", esc(t["gauge_lbl"])).replace("__GAUGE_TAG__", esc(t["gauge_tag"])).replace("__GAUGE_CAP__", esc(t["gauge_cap"]))
     p1_body = p1_body.replace("__GF_1__", esc(t["gf_1"])).replace("__GF_2__", esc(t["gf_2"])).replace("__LAST_DATE__", esc(last_date)).replace("__DAYS_SINCE__", esc(days_since_str)).replace("__LAST_RESET_UTC__", esc(last["at"]))

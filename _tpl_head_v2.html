@@ -1071,5 +1071,357 @@ svg:not([width]):not([height]) {
   }
 }
 
+
+/* ==========================================================================
+   VIRAL SHARE BUTTON & FORECAST SHARE MODAL (Linear/Binance Dark Edition)
+   ========================================================================== */
+.dab-share-btn {
+  position: absolute !important;
+  top: 16px !important;
+  right: 18px !important;
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  background: rgba(30, 35, 41, 0.75) !important;
+  border: 1px solid rgba(255, 255, 255, 0.14) !important;
+  color: #eaecef !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  z-index: 10 !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  padding: 0 !important;
+  outline: none !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+.dab-share-btn:hover {
+  background: rgba(43, 49, 57, 0.95) !important;
+  border-color: #FCD535 !important;
+  color: #FCD535 !important;
+  transform: scale(1.08) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45) !important;
+}
+.dab-share-btn:active {
+  transform: scale(0.96) !important;
+}
+.dab-share-ico {
+  width: 17px !important;
+  height: 17px !important;
+  display: block !important;
+  pointer-events: none !important;
+}
+
+/* Modal Overlay */
+.share-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.78);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+  padding: 16px;
+}
+.share-modal-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Modal Dialog Card */
+.share-modal {
+  background: #181a20;
+  border: 1px solid #2b3139;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 500px;
+  padding: 24px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transform: translateY(14px) scale(0.97);
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.share-modal-overlay.open .share-modal {
+  transform: translateY(0) scale(1);
+}
+.share-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+.share-modal-title {
+  font-size: 19px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.015em;
+  margin: 0 0 4px;
+}
+.share-modal-sub {
+  font-size: 13px;
+  color: #707a8a;
+  margin: 0;
+  line-height: 1.45;
+}
+.share-modal-close {
+  background: #1e2329;
+  border: 1px solid #2b3139;
+  color: #a0a6b2;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+  padding: 0;
+  margin-left: 12px;
+}
+.share-modal-close:hover {
+  background: #2b3139;
+  color: #ffffff;
+  border-color: #474d57;
+}
+
+/* Forecast Card Preview */
+.share-preview-card {
+  background: radial-gradient(circle at 85% 25%, rgba(14, 203, 129, 0.16) 0%, rgba(20, 24, 30, 0.98) 60%), #12151b;
+  border: 1px solid rgba(14, 203, 129, 0.28);
+  border-radius: 16px;
+  padding: 20px 22px;
+  margin-bottom: 16px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+.share-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.share-card-brand {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  font-style: italic;
+}
+.share-card-brand span {
+  color: #FCD535;
+  font-style: normal;
+}
+.share-card-tag {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  color: #0ecb81;
+  text-transform: uppercase;
+  font-family: var(--mono);
+}
+.share-card-body {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.share-card-prob {
+  font-size: 48px;
+  font-weight: 900;
+  color: #0ecb81;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+.share-card-meta {
+  font-size: 12px;
+  color: #a0a6b2;
+  font-weight: 600;
+}
+.share-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 10px;
+  font-size: 11px;
+}
+.share-card-cadence {
+  color: #707a8a;
+  font-family: var(--mono);
+}
+.share-card-url {
+  color: #FCD535;
+  font-family: var(--mono);
+  font-weight: 700;
+}
+
+/* 3 Main Action Buttons */
+.share-actions-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.share-act-btn {
+  background: #1e2329;
+  border: 1px solid #2b3139;
+  color: #eaecef;
+  border-radius: 10px;
+  padding: 10px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+.share-act-btn:hover {
+  background: #2b3139;
+  border-color: #FCD535;
+  color: #FCD535;
+  transform: translateY(-1px);
+}
+.share-act-btn:active {
+  transform: translateY(0);
+}
+.share-act-btn svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+/* Social Grid (3x3) */
+.share-social-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.share-soc-btn {
+  background: #181a20;
+  border: 1px solid #23272e;
+  color: #a0a6b2;
+  border-radius: 10px;
+  padding: 9px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+.share-soc-btn:hover {
+  background: #1e2329;
+  border-color: #353c48;
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+.share-soc-btn svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* WeChat Popover / Tip Box */
+.share-wechat-box {
+  display: none;
+  background: #1e2329;
+  border: 1px solid #2b3139;
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 14px;
+  text-align: center;
+}
+.share-wechat-box.open {
+  display: block;
+}
+.share-wechat-box-tip {
+  font-size: 12px;
+  color: #0ecb81;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.share-wechat-qr {
+  width: 120px;
+  height: 120px;
+  background: #ffffff;
+  padding: 6px;
+  border-radius: 8px;
+  margin: 0 auto 8px;
+  display: block;
+}
+.share-wechat-sub {
+  font-size: 11px;
+  color: #707a8a;
+}
+
+/* Modal Footer Close */
+.share-modal-footer {
+  text-align: center;
+  border-top: 1px solid #23272e;
+  padding-top: 14px;
+}
+.share-modal-foot-close {
+  background: none;
+  border: none;
+  color: #707a8a;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.15s ease;
+  padding: 4px 12px;
+}
+.share-modal-foot-close:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+@media (max-width: 640px) {
+  .dab-share-btn {
+    top: 14px !important;
+    right: 14px !important;
+    width: 34px !important;
+    height: 34px !important;
+  }
+  .share-modal {
+    padding: 18px 16px;
+    border-radius: 16px;
+  }
+  .share-preview-card {
+    padding: 16px 16px;
+  }
+  .share-card-prob {
+    font-size: 38px;
+  }
+  .share-actions-row {
+    gap: 6px;
+  }
+  .share-act-btn {
+    padding: 8px 4px;
+    font-size: 11px;
+  }
+  .share-soc-btn {
+    padding: 8px 4px;
+    font-size: 11px;
+  }
+}
+
 </style>
 </head>
