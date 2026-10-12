@@ -168,3 +168,22 @@ u.
   - Native Placement 1: Multilingual responsive `.sponsor-banner` positioned between `#calculator` and `#guides` with `rel="noopener nofollow sponsored"`.
   - Native Placement 2: Global `foot-links` partner anchor (`Partner Deals ↗`).
   - Recompiled all 40 multilingual and historical pages; verified 100% pass via `scripts/verify_site.py`.
+
+## 9. 48-Hour Forecast Pulse SVG Chart Oct 11 Desync Fix (Completed 2026-10-12)
+- **Problem Root-Caused**:
+  1. Direct answer stamp & cards correctly stated 'Latest reset 2026-10-11' (Day 6 hard reset confirmed on 2026-10-11 04:01 UTC).
+  2. However, the SVG line chart ('48-Hour Forecast Pulse') retained static 10-09 layout: hardcoded 'Oct 8' event marker at x=425, missing Oct 11 event marker, and plotted a 4-day continuous drop directly from Oct 8 to Oct 12 Now (1%), contradicting the 11th reset.
+  3. Client-side SWR hydration updated 'Now' anchor point coordinates to y=128.8 (1%) but did not update the SVG curve path endpoints, leaving a visual line disconnect.
+- **Implemented Fixes**:
+  1. **Dynamic SVG Generation (scripts/build_studio.py)**:
+     - Dynamically formatted last_lbl (e.g. Oct 11) and time string from last_dt.
+     - Updated Event Marker 4 at x=425 to last_lbl Confirmed Hard Reset (04:01 UTC) with Reset badge.
+     - Updated X-axis date marker at x=425 to last_lbl (Oct 11).
+     - Corrected Bezier curve trajectory (chartHistPath): from Oct 7 double event (330, 36), through Oct 8-10 lull (y=85), rising to Oct 11 hard reset peak (425, 40), then smoothly dropping down to Oct 12 Now cooldown level (515, y_now).
+     - Added Day 6 reset to MOVES_DATA across English, Chinese, and Japanese.
+  2. **Client-Side Live Hydration Coupling (_tpl_body_v2.html)**:
+     - Bound chartHistPath and chartProjPath endpoints dynamically to yNow in updateLiveEngine(), eliminating line-to-dot disconnect.
+     - Bound chartLastResetDate to lastReset date dynamically.
+  3. **Hazard Cooldown Tuning (scripts/compute_stats.py)**:
+     - Set initial post-reset cooldown (d <= 1.5d) to 1% baseline to match upstream radar signal.
+- **Verification**: 40/40 multilingual pages recompiled; 100% passed verify_site.py integrity, schema, and section audit.

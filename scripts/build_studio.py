@@ -50,6 +50,8 @@ last_dt = datetime.strptime(last["at"][:19], "%Y-%m-%dT%H:%M:%S").replace(tzinfo
 days_since = max(0.0, (now_dt - last_dt).total_seconds() / 86400.0)
 days_since_str = ("%.1f" % days_since) + "d"
 last_date = last["at"][:10]
+last_lbl = f"{last_dt.strftime('%b')} {last_dt.day}"
+last_time_str = f"{last_dt.strftime('%H:%M')} UTC"
 p_now_lbl = f"{now_dt.strftime('%b')} {now_dt.day} (Now)"
 p_t1_lbl = f"{(now_dt + timedelta(days=1)).strftime('%b')} {(now_dt + timedelta(days=1)).day}"
 p_t2_lbl = f"{(now_dt + timedelta(days=2)).strftime('%b')} {(now_dt + timedelta(days=2)).day}"
@@ -73,14 +75,14 @@ pulse_svg = f'''<svg viewBox="0 0 740 180" fill="none" xmlns="http://www.w3.org/
   <text x="140" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 2</text>
   <text x="220" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 4</text>
   <text x="330" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 7</text>
-  <text x="425" y="156" fill="#0ecb81" font-family="ui-monospace" font-size="10" font-weight="600" text-anchor="middle">Oct 8</text>
+  <text id="chartLastResetDate" x="425" y="156" fill="#0ecb81" font-family="ui-monospace" font-size="10" font-weight="600" text-anchor="middle">{last_lbl}</text>
   <text id="chartNowDate" x="515" y="156" fill="#0ecb81" font-family="ui-monospace" font-size="10" font-weight="bold" text-anchor="middle">{p_now_lbl}</text>
   <text id="chartT1Date" x="605" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">{p_t1_lbl}</text>
   <text id="chartT2Date" x="690" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">{p_t2_lbl}</text>
-  <!-- Verified Historical Trajectory (Cubic Bezier across all verified resets including Oct 8) -->
-  <path d="M 60 48 C 90 70, 110 50, 140 38 C 170 38, 195 95, 220 95 C 255 95, 295 40, 330 36 C 365 36, 395 65, 425 40 C 455 40, 485 105, 515 {y_now}" stroke="#0ecb81" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+  <!-- Verified Historical Trajectory (Cubic Bezier across all verified resets including {last_lbl}) -->
+  <path id="chartHistPath" d="M 60 48 C 90 70, 110 50, 140 38 C 170 38, 195 95, 220 95 C 255 95, 295 40, 330 36 C 360 85, 395 85, 425 40 C 455 40, 485 105, 515 {y_now}" stroke="#0ecb81" stroke-width="2.6" fill="none" stroke-linecap="round"/>
   <!-- 48-Hour Projection Line (Yellow Dash reaching edge) -->
-  <path d="M 515 {y_now} C 545 {y_now}, 575 84, 605 74 C 635 64, 665 54, 690 50" stroke="#FCD535" stroke-width="2.2" stroke-dasharray="5 4" fill="none" stroke-linecap="round"/>
+  <path id="chartProjPath" d="M 515 {y_now} C 545 {y_now}, 575 84, 605 74 C 635 64, 665 54, 690 50" stroke="#FCD535" stroke-width="2.2" stroke-dasharray="5 4" fill="none" stroke-linecap="round"/>
   <!-- Event Marker 1: Sep 30 Banked Reset -->
   <line x1="60" y1="48" x2="60" y2="130" stroke="#FCD535" stroke-width="1.2" stroke-opacity="0.4"/>
   <circle cx="60" cy="48" r="4.5" fill="#FCD535"/>
@@ -99,12 +101,12 @@ pulse_svg = f'''<svg viewBox="0 0 740 180" fill="none" xmlns="http://www.w3.org/
   <text x="312" y="24" fill="#0ecb81" font-family="ui-monospace" font-size="8" font-weight="bold" text-anchor="middle">Reset</text>
   <text x="330" y="24" fill="#707a8a" font-family="ui-monospace" font-size="8" text-anchor="middle">+</text>
   <text x="354" y="24" fill="#FCD535" font-family="ui-monospace" font-size="8" font-weight="bold" text-anchor="middle">Banked</text>
-  <!-- Event Marker 4: Oct 8 Confirmed Hard Reset (04:30 UTC) -->
-  <line x1="425" y1="40" x2="425" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.4"/>
-  <circle cx="425" cy="40" r="4.5" fill="#0ecb81"/>
-  <rect x="407" y="17" width="36" height="15" rx="3" fill="#1e2329" stroke="#0ecb81" stroke-width="1"/>
-  <text x="425" y="28" fill="#0ecb81" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Reset</text>
-  <!-- Current Status Anchor: Live Now Point (Oct 9) -->
+  <!-- Event Marker 4: {last_lbl} Confirmed Hard Reset ({last_time_str}) -->
+  <line id="chartLastResetStem" x1="425" y1="40" x2="425" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.4"/>
+  <circle id="chartLastResetDot" cx="425" cy="40" r="4.5" fill="#0ecb81"/>
+  <rect id="chartLastResetBadge" x="407" y="17" width="36" height="15" rx="3" fill="#1e2329" stroke="#0ecb81" stroke-width="1"/>
+  <text id="chartLastResetText" x="425" y="28" fill="#0ecb81" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Reset</text>
+  <!-- Current Status Anchor: Live Now Point ({p_now_lbl}) -->
   <line id="chartNowStem" x1="515" y1="{y_now}" x2="515" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.7"/>
   <circle id="chartNowDot" cx="515" cy="{y_now}" r="5" fill="#0ecb81"/>
   <circle id="chartNowRing" cx="515" cy="{y_now}" r="8" stroke="#0ecb81" stroke-width="1.5" stroke-opacity="0.5"/>
@@ -114,6 +116,7 @@ pulse_svg = f'''<svg viewBox="0 0 740 180" fill="none" xmlns="http://www.w3.org/
 
 MOVES_DATA = {
     "en": [
+        ("Oct 11 · 04:01 UTC", "Day 6 / Global Reset Propagated", "Tibo confirmed Day 6 global reset fully completed and propagated to all subscribers worldwide.", "+38 pts", "up", "Execution: Global usage caps cleared and replenished; quota refresh complete."),
         ("Oct 9 · 20:38 UTC", "Day 5 / Composer Predictions & Dots", "Tibo announced Day 5: Composer predictions in Codex desktop app without consuming usage, and mobile dot creation launched.", "+30 pts", "up", "Capacity and Efficiency: Free composer suggestions reduce prompt trial tokens; mobile dots expand ecosystem access."),
         ("Oct 8 · 19:24 UTC", "Day 4 / Instant Steering & GPT-6.1 Sol", "Tibo announced Day 4: instant model steering for real-time course correction, and released GPT-6.1 Sol ultrafast.", "+25 pts", "up", "Model Architecture: Dual-engine workflow and instant steering reduce token waste."),
         ("Oct 8 · 07:30 UTC", "Codex Cloud & Tailscale", "Tibo confirmed Day 3 (encore) silent rollout of Codex Cloud Tailnet integration.", "+20 pts", "up", "Infrastructure Boost: Official multi-cloud developer networking landed."),
@@ -126,6 +129,7 @@ MOVES_DATA = {
         ("Sep 22 · 18:23 UTC", "GPT-6 Sol & Luna Launch", "New flagship models rolled out alongside 50% permanent API price drop.", "+28 pts", "up", "Milestone Catalyst: Major model releases consistently trigger account-wide flushes.")
     ],
     "zh": [
+        ("10月11日 · 12:01", "Day 6 / 全球额度重置全量生效", "Tibo 发推确认 Day 6 全球额度重置全部生效下发（Put the reset in the bag. All propagated.），全员额度已回满。", "+38 分", "up", "【发版放水】官方确认全球付费账户配额全量清零回满，无需再等待。"),
         ("10月10日 · 04:38", "Day 5 / Composer 预测免额度上线", "Tibo 宣布 Day 5 重磅更新：桌面端 Composer 预测功能面向 Pro 用户免费开放（不消耗额度），同步上线 ChatGPT 手机端 Dot 交互。", "+30 分", "up", "【效率与免额度】桌面端补全免耗额度大幅降低无效交互，移动端 Dot 正式规模化放量。原推确认不计入日常额度消耗。"),
         ("10月8日 · 19:24 UTC", "Day 4 / Instant Steering 极速转向", "Tibo 宣布 Day 4 重磅更新：即时指令转向大幅降低废词消耗，同步上线 GPT-6.1 Sol 极速版。", "+25 分", "up", "【模型与架构】连续第 4 天大促上新，双模型协同与极速交互就绪。"),
         ("10月8日 · 07:30 UTC", "Codex Cloud 与 Tailscale 联调上线", "Tibo 确认 Day 3 (encore) 静默上线 Codex Cloud 的 Tailnet 安全互联支持。", "+20 分", "up", "【基建上新】官方发推确认全量落地多环境网络互联，服务稳定性增强。"),
@@ -138,6 +142,7 @@ MOVES_DATA = {
         ("9月22日 · 18:23 UTC", "GPT-6 Sol / Luna 双模型发版", "新模型上线并大幅下调 API 定价，全员账户注入一次完整重置额度。", "+28 分", "up", "【里程碑激励】重大模型换代上线时的标准操作，伴随额度翻倍或重置以促成调用增长。")
     ],
     "ja": [
+        ("10月11日 · 13:01", "Day 6 / グローバルリセット反映完了", "TiboがDay 6としてグローバル利用枠リセットの全ユーザー反映完了を発表。", "+38 pts", "up", "【全体反映】全有料アカウントの利用枠が全量回復、制限が解除されました。"),
         ("10月10日 · 04:38", "Day 5 / Composer 予測・モバイルDot公開", "TiboがDay 5としてデスクトップ版Composer予測（Pro枠の消費なし）とChatGPTモバイル版Dot作成・テキスト機能の提供開始を発表。", "+30 pts", "up", "【効率向上】予測機能の枠無消費化により試行トークンを削減、モバイルDot展開でエコシステムを拡大。"),
         ("10月8日 · 19:24 UTC", "Day 4 / Instant Steering・GPT-6.1 Sol公開", "TiboがDay 4として即時ステアリング改善とGPT-6.1 Sol ultrafastの同時リリースを発表。", "+25 pts", "up", "【モデル拡充】対話修正のリアルタイム反映と高速推論モデルを投入。"),
         ("10月8日 · 07:30 UTC", "Codex Cloud・Tailscale連携開始", "TiboがDay 3 (encore) としてCodex CloudとTailscaleの連携完了を発表。", "+20 pts", "up", "【インフラ拡充】公式によるクラウド環境間セキュア接続の展開完了。"),

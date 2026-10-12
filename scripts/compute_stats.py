@@ -30,11 +30,13 @@ avg_all = round(sum(gaps)/len(gaps), 1) if gaps else 6.8
 def calc_probability(d, has_pending_reset=False):
     if has_pending_reset:
         return 99
-    # If a reset occurred within the last 24h, enter post-reset cooldown
-    if d <= 1.0:
+    # If a reset occurred within the last 36h, enter post-reset cooldown (1%)
+    if d <= 1.5:
+        return 1
+    elif d <= 2.0:
         return 11
-    p_val = 11.0 + (74.0 / (1.0 + math.exp(-1.8 * (max(0.0, d) - 2.0))))
-    return max(10, min(85, int(round(p_val))))
+    p_val = 11.0 + (74.0 / (1.0 + math.exp(-1.8 * (max(0.0, d) - 2.5))))
+    return max(1, min(85, int(round(p_val))))
 
 # Pending announcement is only active if an unfulfilled reset is scheduled for the future
 has_pending = False

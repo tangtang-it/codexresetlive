@@ -1627,8 +1627,8 @@ svg:not([width]):not([height]) {
   <button class="dab-share-btn" id="shareForecastBtn" aria-label="分享此预测" title="分享此预测" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dab-share-ico"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
   <div class="dab-left">
     <span class="dab-badge"><span class="dot"></span> 实时状态判定：LOW SIGNAL · WATCHING</span>
-    <div class="dab-h">Codex 今天会全网重置吗？ <strong>今日暂无放水迹象 (<span class='live-prob-val'>23</span>% 概率)</strong></div>
-    <div class="dab-p">今日尚未监测到官方全量重置记录。最近一次官方放水发生在 <strong data-days-since-utc="2026-10-11T04:01:09.000Z">1.1d 前</strong>（<span data-local-date-only="2026-10-11T04:01:09.000Z">2026-10-11</span>）。建议保持正常开发节奏，下方可测算个人 5 小时解锁倒计时。</div>
+    <div class="dab-h">Codex 今天会全网重置吗？ <strong>今日暂无放水迹象 (<span class='live-prob-val'>1</span>% 概率)</strong></div>
+    <div class="dab-p">今日尚未监测到官方全量重置记录。最近一次官方放水发生在 <strong data-days-since-utc="2026-10-11T04:01:09.000Z">1.3d 前</strong>（<span data-local-date-only="2026-10-11T04:01:09.000Z">2026-10-11</span>）。建议保持正常开发节奏，下方可测算个人 5 小时解锁倒计时。</div>
   </div>
   <div class="dab-right-wrap">
     <div class="openthe-stamp-wrap soon">
@@ -1656,7 +1656,7 @@ svg:not([width]):not([height]) {
         </g>
 
         <g class="stamp-center" filter="url(#glowGoldBig)">
-          <text x="110" y="118" fill="#FCD535" font-size="44" font-weight="900" text-anchor="middle" font-family="'Inter', system-ui, -apple-system, sans-serif" letter-spacing="-1"><tspan id="stampProbNum">23</tspan>%</text>
+          <text x="110" y="118" fill="#FCD535" font-size="44" font-weight="900" text-anchor="middle" font-family="'Inter', system-ui, -apple-system, sans-serif" letter-spacing="-1"><tspan id="stampProbNum">1</tspan>%</text>
           <line x1="68" y1="132" x2="152" y2="132" stroke="#FCD535" stroke-width="2" stroke-dasharray="3 3" stroke-opacity="0.85"/>
           <text x="110" y="148" fill="#FCD535" font-size="9.5" font-weight="800" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" letter-spacing="2">PROBABLE</text>
         </g>
@@ -1692,7 +1692,7 @@ svg:not([width]):not([height]) {
 <div class="gauge-cap">偏低 —— 刚刚完成一次重置</div>
 <div class="gauge-foot">
 <span>最近重置 <b class="num" data-local-date-only="2026-10-11T04:01:09.000Z">2026-10-11</b></span>
-<span>距今 <b class="num" data-days-since-utc="2026-10-11T04:01:09.000Z">1.1d</b></span>
+<span>距今 <b class="num" data-days-since-utc="2026-10-11T04:01:09.000Z">1.3d</b></span>
 </div>
 </div>
 
@@ -1733,14 +1733,14 @@ svg:not([width]):not([height]) {
   <text x="140" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 2</text>
   <text x="220" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 4</text>
   <text x="330" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 7</text>
-  <text x="425" y="156" fill="#0ecb81" font-family="ui-monospace" font-size="10" font-weight="600" text-anchor="middle">Oct 8</text>
+  <text id="chartLastResetDate" x="425" y="156" fill="#0ecb81" font-family="ui-monospace" font-size="10" font-weight="600" text-anchor="middle">Oct 11</text>
   <text id="chartNowDate" x="515" y="156" fill="#0ecb81" font-family="ui-monospace" font-size="10" font-weight="bold" text-anchor="middle">Oct 12 (Now)</text>
   <text id="chartT1Date" x="605" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 13</text>
   <text id="chartT2Date" x="690" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 14</text>
-  <!-- Verified Historical Trajectory (Cubic Bezier across all verified resets including Oct 8) -->
-  <path d="M 60 48 C 90 70, 110 50, 140 38 C 170 38, 195 95, 220 95 C 255 95, 295 40, 330 36 C 365 36, 395 65, 425 40 C 455 40, 485 105, 515 101.2" stroke="#0ecb81" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+  <!-- Verified Historical Trajectory (Cubic Bezier across all verified resets including Oct 11) -->
+  <path id="chartHistPath" d="M 60 48 C 90 70, 110 50, 140 38 C 170 38, 195 95, 220 95 C 255 95, 295 40, 330 36 C 360 85, 395 85, 425 40 C 455 40, 485 105, 515 128.8" stroke="#0ecb81" stroke-width="2.6" fill="none" stroke-linecap="round"/>
   <!-- 48-Hour Projection Line (Yellow Dash reaching edge) -->
-  <path d="M 515 101.2 C 545 101.2, 575 84, 605 74 C 635 64, 665 54, 690 50" stroke="#FCD535" stroke-width="2.2" stroke-dasharray="5 4" fill="none" stroke-linecap="round"/>
+  <path id="chartProjPath" d="M 515 128.8 C 545 128.8, 575 84, 605 74 C 635 64, 665 54, 690 50" stroke="#FCD535" stroke-width="2.2" stroke-dasharray="5 4" fill="none" stroke-linecap="round"/>
   <!-- Event Marker 1: Sep 30 Banked Reset -->
   <line x1="60" y1="48" x2="60" y2="130" stroke="#FCD535" stroke-width="1.2" stroke-opacity="0.4"/>
   <circle cx="60" cy="48" r="4.5" fill="#FCD535"/>
@@ -1759,17 +1759,17 @@ svg:not([width]):not([height]) {
   <text x="312" y="24" fill="#0ecb81" font-family="ui-monospace" font-size="8" font-weight="bold" text-anchor="middle">Reset</text>
   <text x="330" y="24" fill="#707a8a" font-family="ui-monospace" font-size="8" text-anchor="middle">+</text>
   <text x="354" y="24" fill="#FCD535" font-family="ui-monospace" font-size="8" font-weight="bold" text-anchor="middle">Banked</text>
-  <!-- Event Marker 4: Oct 8 Confirmed Hard Reset (04:30 UTC) -->
-  <line x1="425" y1="40" x2="425" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.4"/>
-  <circle cx="425" cy="40" r="4.5" fill="#0ecb81"/>
-  <rect x="407" y="17" width="36" height="15" rx="3" fill="#1e2329" stroke="#0ecb81" stroke-width="1"/>
-  <text x="425" y="28" fill="#0ecb81" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Reset</text>
-  <!-- Current Status Anchor: Live Now Point (Oct 9) -->
-  <line id="chartNowStem" x1="515" y1="101.2" x2="515" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.7"/>
-  <circle id="chartNowDot" cx="515" cy="101.2" r="5" fill="#0ecb81"/>
-  <circle id="chartNowRing" cx="515" cy="101.2" r="8" stroke="#0ecb81" stroke-width="1.5" stroke-opacity="0.5"/>
-  <rect id="chartNowBadgeRect" x="490" y="78.2" width="50" height="16" rx="3" fill="#0ecb81"/>
-  <text id="chartNowProbText" x="515" y="89.2" fill="#0b0e11" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Now 23%</text>
+  <!-- Event Marker 4: Oct 11 Confirmed Hard Reset (04:01 UTC) -->
+  <line id="chartLastResetStem" x1="425" y1="40" x2="425" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.4"/>
+  <circle id="chartLastResetDot" cx="425" cy="40" r="4.5" fill="#0ecb81"/>
+  <rect id="chartLastResetBadge" x="407" y="17" width="36" height="15" rx="3" fill="#1e2329" stroke="#0ecb81" stroke-width="1"/>
+  <text id="chartLastResetText" x="425" y="28" fill="#0ecb81" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Reset</text>
+  <!-- Current Status Anchor: Live Now Point (Oct 12 (Now)) -->
+  <line id="chartNowStem" x1="515" y1="128.8" x2="515" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.7"/>
+  <circle id="chartNowDot" cx="515" cy="128.8" r="5" fill="#0ecb81"/>
+  <circle id="chartNowRing" cx="515" cy="128.8" r="8" stroke="#0ecb81" stroke-width="1.5" stroke-opacity="0.5"/>
+  <rect id="chartNowBadgeRect" x="490" y="105.8" width="50" height="16" rx="3" fill="#0ecb81"/>
+  <text id="chartNowProbText" x="515" y="116.8" fill="#0b0e11" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Now 1%</text>
 </svg>
 </div>
 </div>
@@ -1806,7 +1806,7 @@ svg:not([width]):not([height]) {
 </div>
 <div class="readout-item">
 <div class="ro-l">Days Since Reset</div>
-<div class="ro-v num" data-days-since-utc="2026-10-11T04:01:09.000Z">1.1d</div>
+<div class="ro-v num" data-days-since-utc="2026-10-11T04:01:09.000Z">1.3d</div>
 <div class="ro-s">Last: <span data-local-date-only="2026-10-11T04:01:09.000Z">2026-10-11</span></div>
 </div>
 <div class="readout-item">
@@ -1837,12 +1837,12 @@ svg:not([width]):not([height]) {
   <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
   <div class="move-body">
     <div class="move-head">
-      <span class="move-tag">Put the reset in the bag. All propag</span>
-      <span class="move-pts neutral num">+20 分</span>
+      <span class="move-tag">Day 6 / 全球额度重置全量生效</span>
+      <span class="move-pts up num">+38 分</span>
     </div>
-    <div class="move-time num">2026-10-11 · 04:01 UTC</div>
-    <div class="move-text">Put the reset in the bag. All propagated.</div>
-    <div class="move-reason">【官方信号自适应联动】实时解析自 Tibo 官方推文，雷达因子自动对齐最新放水动态。</div>
+    <div class="move-time num">10月11日 · 12:01</div>
+    <div class="move-text">Tibo 发推确认 Day 6 全球额度重置全部生效下发（Put the reset in the bag. All propagated.），全员额度已回满。</div>
+    <div class="move-reason">【发版放水】官方确认全球付费账户配额全量清零回满，无需再等待。</div>
   </div>
 </div><div class="move-item">
   <div class="move-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
@@ -2141,7 +2141,7 @@ Composer predictions in the desktop app. Often leads to a double take with how o
   </div>
   <div class="sr-right">
     <span class="sr-dot yellow"></span>
-    <span class="sr-status"><span data-cooldown-utc="2026-10-11T04:01:09.000Z">Cooldown active (1.1d)</span></span>
+    <span class="sr-status"><span data-cooldown-utc="2026-10-11T04:01:09.000Z">Cooldown active (1.3d)</span></span>
   </div>
 </div><div class="switch-row">
   <div class="sr-left">
@@ -2514,7 +2514,7 @@ Composer predictions in the desktop app. Often leads to a double take with how o
         <div class="share-card-tag">● 未来 48 小时</div>
       </div>
       <div class="share-card-body">
-        <div class="share-card-prob" id="shareCardProb">23%</div>
+        <div class="share-card-prob" id="shareCardProb">1%</div>
         <div class="share-card-meta">
           <div style="font-weight:700;color:#eaecef">放水概率</div>
           <div style="font-size:11px;color:#707a8a">Verified Quota Radar</div>
@@ -2627,9 +2627,9 @@ Composer predictions in the desktop app. Often leads to a double take with how o
 
   // 3. Mathematical Probability & Time Synchronization Engine (Single Source of Truth)
   window.CODEX_RADAR = {
-    probability: 23,
+    probability: 1,
     lastResetUtc: "2026-10-11T04:01:09.000Z",
-    daysSinceStr: "1.1d"
+    daysSinceStr: "1.3d"
   };
 
   var LAST_RESET_UTC = "2026-10-11T04:01:09.000Z";
@@ -2656,7 +2656,7 @@ Composer predictions in the desktop app. Often leads to a double take with how o
     var diffHours = diffMs / 3600000;
     var diffMin = diffMs / 60000;
     // Authoritative Unified Probability across Banner, Stamp, Gauge, and Wave Chart
-    var liveProb = (window.CODEX_RADAR && typeof window.CODEX_RADAR.probability === 'number') ? window.CODEX_RADAR.probability : 23;
+    var liveProb = (window.CODEX_RADAR && typeof window.CODEX_RADAR.probability === 'number') ? window.CODEX_RADAR.probability : 1;
 
     // A. Update Gauge
     var offset = 540.35 * (1 - liveProb / 100);
@@ -2769,19 +2769,34 @@ Composer predictions in the desktop app. Often leads to a double take with how o
     var chartT2D = document.getElementById("chartT2Date");
     if(chartT2D) chartT2D.textContent = t2Label;
 
+    var chartLastD = document.getElementById("chartLastResetDate");
+    if(chartLastD && !isNaN(lastReset.getTime())) {
+      chartLastD.textContent = months[lastReset.getMonth()] + " " + lastReset.getDate();
+    }
+
     var chartProbTxt = document.getElementById("chartNowProbText");
     if(chartProbTxt) chartProbTxt.textContent = "Now " + liveProb + "%";
 
-    var yNow = 130 - (liveProb * 1.25);
+    var yNow = Math.round((130 - (liveProb * 1.25)) * 10) / 10;
     var chartDot = document.getElementById("chartNowDot");
     if(chartDot) { chartDot.setAttribute("cy", yNow); chartDot.setAttribute("cx", "515"); }
     var chartRing = document.getElementById("chartNowRing");
     if(chartRing) { chartRing.setAttribute("cy", yNow); chartRing.setAttribute("cx", "515"); }
     var chartStem = document.getElementById("chartNowStem");
-    if(chartStem) { chartStem.setAttribute("y1", yNow); chartStem.setAttribute("x1", "515"); }
+    if(chartStem) { chartStem.setAttribute("y1", yNow); chartStem.setAttribute("x1", "515"); chartStem.setAttribute("x2", "515"); }
     var chartBadgeRect = document.getElementById("chartNowBadgeRect");
     if(chartBadgeRect) { chartBadgeRect.setAttribute("y", (yNow - 23)); chartBadgeRect.setAttribute("x", "490"); }
     if(chartProbTxt) { chartProbTxt.setAttribute("y", (yNow - 12)); chartProbTxt.setAttribute("x", "515"); }
+
+    // Dynamic SVG Curve Connection to Live yNow
+    var chartHist = document.getElementById("chartHistPath");
+    if(chartHist) {
+      chartHist.setAttribute("d", "M 60 48 C 90 70, 110 50, 140 38 C 170 38, 195 95, 220 95 C 255 95, 295 40, 330 36 C 360 85, 395 85, 425 40 C 455 40, 485 105, 515 " + yNow);
+    }
+    var chartProj = document.getElementById("chartProjPath");
+    if(chartProj) {
+      chartProj.setAttribute("d", "M 515 " + yNow + " C 545 " + yNow + ", 575 84, 605 74 C 635 64, 665 54, 690 50");
+    }
 
     // G. SF Work Window (Pacific Time HQ)
     try {
@@ -3023,7 +3038,7 @@ Composer predictions in the desktop app. Often leads to a double take with how o
 
   function openShareModal() {
     if(!shareModal) return;
-    var liveProb = (window.CODEX_RADAR && typeof window.CODEX_RADAR.probability === 'number') ? window.CODEX_RADAR.probability : 23;
+    var liveProb = (window.CODEX_RADAR && typeof window.CODEX_RADAR.probability === 'number') ? window.CODEX_RADAR.probability : 1;
     var pEl = document.getElementById("shareCardProb");
     if(pEl) pEl.textContent = liveProb + "%";
 
@@ -3128,7 +3143,7 @@ Composer predictions in the desktop app. Often leads to a double take with how o
 
   // High-Res Retina Card Canvas Generator
   function renderCardCanvas(callback) {
-    var liveProb = (window.CODEX_RADAR && typeof window.CODEX_RADAR.probability === 'number') ? window.CODEX_RADAR.probability : 23;
+    var liveProb = (window.CODEX_RADAR && typeof window.CODEX_RADAR.probability === 'number') ? window.CODEX_RADAR.probability : 1;
     var canvas = document.createElement("canvas");
     var dpr = 2;
     var width = 640, height = 360;
@@ -3251,7 +3266,7 @@ Composer predictions in the desktop app. Often leads to a double take with how o
   }
 
   function fallbackCopyCardSummary() {
-    var liveProb = (window.CODEX_RADAR && typeof window.CODEX_RADAR.probability === 'number') ? window.CODEX_RADAR.probability : 23;
+    var liveProb = (window.CODEX_RADAR && typeof window.CODEX_RADAR.probability === 'number') ? window.CODEX_RADAR.probability : 1;
     var summaryText = isZh ? ("🔥 Codex 配额重置预测：未来 48 小时放水概率 " + liveProb + "%。实时信号雷达与 5 小时解锁倒计时：https://codexresetlive.com/") :
                              ("🔥 Codex Reset Forecast: " + liveProb + "% probability in next 48h. Track live signals & rolling recovery: https://codexresetlive.com/");
     fallbackCopyText(summaryText);
