@@ -1,15 +1,15 @@
 {
-  "total": 81,
-  "reset_count": 64,
-  "regular": 55,
+  "total": 86,
+  "reset_count": 68,
+  "regular": 59,
   "banked": 7,
-  "last_reset_at": "2026-10-11T04:01:09.000Z",
-  "last_reset_text": "Put the reset in the bag. All propagated.",
-  "last_reset_url": "https://x.com/thsottiaux/status/2109132167112782291",
+  "last_reset_at": "2026-10-12T19:40:41.000Z",
+  "last_reset_text": "Solid step towards world peace",
+  "last_reset_url": "https://x.com/thsottiaux/status/2109730998867112161",
   "first_reset_at": "2025-09-17T04:02:52.000Z",
-  "days_since_last_reset": 1.5,
-  "avg_gap_days_all": 6.2,
-  "avg_gap_days_recent": 2.1,
+  "days_since_last_reset": 0.1,
+  "avg_gap_days_all": 5.8,
+  "avg_gap_days_recent": 0.7,
   "probability_48h": 1,
   "monthly_series": [
     {
@@ -66,8 +66,8 @@
     },
     {
       "month": "2026-10",
-      "count": 12
+      "count": 16
     }
   ],
-  "monthly_max": 12
+  "monthly_max": 16
 }
