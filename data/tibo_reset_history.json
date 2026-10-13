@@ -1,11 +1,11 @@
 {
   "source": "https://willcodexquotareset.com/ + https://opentherank.com/",
-  "scraped_at_utc": "2026-10-12",
+  "scraped_at_utc": "2026-10-13",
   "author": {
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 86,
+  "total": 87,
   "records": [
     {
       "id": "1968163721034994139",
@@ -694,6 +694,14 @@
       "status": "confirmed",
       "text": "Solid step towards world peace",
       "url": "https://x.com/thsottiaux/status/2109730998867112161"
+    },
+    {
+      "id": "2109812216212099456",
+      "at": "2026-10-13T01:03:25.000Z",
+      "type": "regular",
+      "status": "announced",
+      "text": "Day 8/ Reset",
+      "url": "https://x.com/thsottiaux/status/2109812216212099456"
     }
   ]
 }
