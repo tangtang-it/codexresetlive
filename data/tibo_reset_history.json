@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 87,
+  "total": 92,
   "records": [
     {
       "id": "1968163721034994139",
@@ -699,9 +699,49 @@
       "id": "2109812216212099456",
       "at": "2026-10-13T01:03:25.000Z",
       "type": "regular",
-      "status": "announced",
+      "status": "confirmed",
       "text": "Day 8/ Reset",
       "url": "https://x.com/thsottiaux/status/2109812216212099456"
+    },
+    {
+      "id": "2109812360596865224",
+      "at": "2026-10-13T01:03:59.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "Global reset landing by EOD PST time. Enjoy",
+      "url": "https://x.com/thsottiaux/status/2109812360596865224"
+    },
+    {
+      "id": "2109819517325205735",
+      "at": "2026-10-13T01:32:26.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "No worries. Cooking up a solution",
+      "url": "https://x.com/thsottiaux/status/2109819517325205735"
+    },
+    {
+      "id": "2109831908620390553",
+      "at": "2026-10-13T02:21:40.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "Perhaps I shall try to explain. There are significant differences between the 6.1 generation and prior models and therefore the optimal defaults are different between GPT-6 Astra and GPT-6.1 Sol. \n\nAnd even for 6.1 Sol we wanted to be careful with the change and make sure we felt good about the results. We do now and therefore we changed it.",
+      "url": "https://x.com/thsottiaux/status/2109831908620390553"
+    },
+    {
+      "id": "2109832216029352391",
+      "at": "2026-10-13T02:22:53.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "I think we could ship absolutely nothing and be fine. But we will ship pretty insane things instead.",
+      "url": "https://x.com/thsottiaux/status/2109832216029352391"
+    },
+    {
+      "id": "2109873287853707513",
+      "at": "2026-10-13T05:06:06.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "What would you like with your side of reset? It's done.",
+      "url": "https://x.com/thsottiaux/status/2109873287853707513"
     }
   ]
 }
