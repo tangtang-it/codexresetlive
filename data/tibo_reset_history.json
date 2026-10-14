@@ -1,6 +1,6 @@
 {
   "source": "https://willcodexquotareset.com/ + https://opentherank.com/",
-  "scraped_at_utc": "2026-10-13",
+  "scraped_at_utc": "2026-10-14",
   "author": {
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
@@ -699,7 +699,7 @@
       "id": "2109812216212099456",
       "at": "2026-10-13T01:03:25.000Z",
       "type": "regular",
-      "status": "confirmed",
+      "status": "announced",
       "text": "Day 8/ Reset",
       "url": "https://x.com/thsottiaux/status/2109812216212099456"
     },
@@ -737,10 +737,10 @@
     },
     {
       "id": "2109873287853707513",
-      "at": "2026-10-13T05:06:06.000Z",
+      "at": "2026-10-13T05:06:06.031Z",
       "type": "regular",
       "status": "confirmed",
-      "text": "What would you like with your side of reset? It's done.",
+      "text": "What would you like with your side of reset? It&#39;s done.",
       "url": "https://x.com/thsottiaux/status/2109873287853707513"
     }
   ]
