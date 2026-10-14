@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 92,
+  "total": 93,
   "records": [
     {
       "id": "1968163721034994139",
@@ -699,7 +699,7 @@
       "id": "2109812216212099456",
       "at": "2026-10-13T01:03:25.000Z",
       "type": "regular",
-      "status": "announced",
+      "status": "confirmed",
       "text": "Day 8/ Reset",
       "url": "https://x.com/thsottiaux/status/2109812216212099456"
     },
@@ -737,11 +737,19 @@
     },
     {
       "id": "2109873287853707513",
-      "at": "2026-10-13T05:06:06.031Z",
+      "at": "2026-10-13T05:06:06.000Z",
       "type": "regular",
       "status": "confirmed",
-      "text": "What would you like with your side of reset? It&#39;s done.",
+      "text": "What would you like with your side of reset? It's done.",
       "url": "https://x.com/thsottiaux/status/2109873287853707513"
+    },
+    {
+      "id": "2110151780478927344",
+      "at": "2026-10-13T23:32:43.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "Day 9/\n\nWe've rolled out optimizations to how we store state on disk for the chatgpt &amp; codex desktop app that should reduce the amount stored on disk by 60%. Small ship but we've heard enough feedback about power users running out of disk space.",
+      "url": "https://x.com/thsottiaux/status/2110151780478927344"
     }
   ]
 }
