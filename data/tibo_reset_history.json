@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 94,
+  "total": 95,
   "records": [
     {
       "id": "1968163721034994139",
@@ -758,6 +758,14 @@
       "status": "confirmed",
       "text": "The reports of my reset button being lost are greatly exaggerated\n\nDay 10/ Reset",
       "url": "https://x.com/thsottiaux/status/2110595484180214059"
+    },
+    {
+      "id": "2110750421367287996",
+      "at": "2026-10-15T15:11:30.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "Day 11/\n\nWe've landed a series of changes and more compute to very significantly decrease the occurrence of the disruptive \"Selected model is at capacity. Please try a different model\". When it does happen, it should also eventually just continue by itself and not just block on it.\n\nLet us know if you still see it out there in the wild and we'll take a look.",
+      "url": "https://x.com/thsottiaux/status/2110750421367287996"
     }
   ]
 }

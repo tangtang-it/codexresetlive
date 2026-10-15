@@ -705,5 +705,12 @@
     "confidence": 0.99,
     "reason": "Strong transactional reset execution confirmation: day \\d+\\s*[/:]\\s*reset",
     "source": "heuristic_engine"
+  },
+  "2110750421367287996": {
+    "category": "product_release",
+    "is_reset": false,
+    "confidence": 0.92,
+    "reason": "Feature shipment or engineering release update.",
+    "source": "heuristic_engine"
   }
 }
