@@ -698,5 +698,12 @@
     "confidence": 0.85,
     "reason": "General engineering tweet or conversational reply.",
     "source": "heuristic_engine"
+  },
+  "2110595484180214059": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.99,
+    "reason": "Strong transactional reset execution confirmation: day \\d+\\s*[/:]\\s*reset",
+    "source": "heuristic_engine"
   }
 }

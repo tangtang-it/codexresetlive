@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 93,
+  "total": 94,
   "records": [
     {
       "id": "1968163721034994139",
@@ -750,6 +750,14 @@
       "status": "confirmed",
       "text": "Day 9/\n\nWe've rolled out optimizations to how we store state on disk for the chatgpt &amp; codex desktop app that should reduce the amount stored on disk by 60%. Small ship but we've heard enough feedback about power users running out of disk space.",
       "url": "https://x.com/thsottiaux/status/2110151780478927344"
+    },
+    {
+      "id": "2110595484180214059",
+      "at": "2026-10-15T04:55:51.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "The reports of my reset button being lost are greatly exaggerated\n\nDay 10/ Reset",
+      "url": "https://x.com/thsottiaux/status/2110595484180214059"
     }
   ]
 }
