@@ -1,16 +1,16 @@
 {
-  "total": 95,
-  "reset_count": 75,
-  "regular": 66,
+  "total": 98,
+  "reset_count": 77,
+  "regular": 68,
   "banked": 7,
-  "last_reset_at": "2026-10-15T04:55:51.053Z",
-  "last_reset_text": "The reports of my reset button being lost are greatly exaggeratedDay 10/ Reset",
-  "last_reset_url": "https://x.com/thsottiaux/status/2110595484180214059",
+  "last_reset_at": "2026-10-17T05:09:12.000Z",
+  "last_reset_text": "",
+  "last_reset_url": "https://x.com/thsottiaux/status/2111323620471632217",
   "first_reset_at": "2025-09-17T04:02:52.000Z",
-  "days_since_last_reset": 1.8,
-  "avg_gap_days_all": 5.3,
-  "avg_gap_days_recent": 0.3,
-  "probability_48h": 11,
+  "days_since_last_reset": 0.0,
+  "avg_gap_days_all": 5.2,
+  "avg_gap_days_recent": 0.4,
+  "probability_48h": 1,
   "monthly_series": [
     {
       "month": "2025-09",
@@ -66,8 +66,8 @@
     },
     {
       "month": "2026-10",
-      "count": 23
+      "count": 25
     }
   ],
-  "monthly_max": 23
+  "monthly_max": 25
 }

@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 95,
+  "total": 98,
   "records": [
     {
       "id": "1968163721034994139",
@@ -753,10 +753,10 @@
     },
     {
       "id": "2110595484180214059",
-      "at": "2026-10-15T04:55:51.053Z",
+      "at": "2026-10-15T04:55:51.000Z",
       "type": "regular",
       "status": "confirmed",
-      "text": "The reports of my reset button being lost are greatly exaggeratedDay 10/ Reset",
+      "text": "The reports of my reset button being lost are greatly exaggerated\n\nDay 10/ Reset",
       "url": "https://x.com/thsottiaux/status/2110595484180214059"
     },
     {
@@ -766,6 +766,30 @@
       "status": "confirmed",
       "text": "Day 11/\n\nWe've landed a series of changes and more compute to very significantly decrease the occurrence of the disruptive \"Selected model is at capacity. Please try a different model\". When it does happen, it should also eventually just continue by itself and not just block on it.\n\nLet us know if you still see it out there in the wild and we'll take a look.",
       "url": "https://x.com/thsottiaux/status/2110750421367287996"
+    },
+    {
+      "id": "2111244596131111253",
+      "at": "2026-10-16T23:55:11.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "Day 12/\n\nWe’ve made improvements to Codex &amp; Work that increase the effective usage you get. We achieved this by reusing context across subagents, keeping context cached longer, and improved request routing that allows us to increase cache hits.",
+      "url": "https://x.com/thsottiaux/status/2111244596131111253"
+    },
+    {
+      "id": "2111249534072529256",
+      "at": "2026-10-17T00:14:48.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "What is ChatGPT Space, that is the question. Endearingly awkward at times because it's the actual team working on it. What would you like to see next?",
+      "url": "https://x.com/thsottiaux/status/2111249534072529256"
+    },
+    {
+      "id": "2111323620471632217",
+      "at": "2026-10-17T05:09:12.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "",
+      "url": "https://x.com/thsottiaux/status/2111323620471632217"
     }
   ]
 }
