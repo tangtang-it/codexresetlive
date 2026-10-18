@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 100,
+  "total": 101,
   "records": [
     {
       "id": "1968163721034994139",
@@ -806,6 +806,14 @@
       "status": "confirmed",
       "text": "Landing sometime today by EOD PST",
       "url": "https://x.com/thsottiaux/status/2111492738025959922"
+    },
+    {
+      "id": "2111918768733753664",
+      "at": "2026-10-18T20:34:06.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "People have escaped the TL and are asking me for resets on the street now. I’ll make little cards to hand out",
+      "url": "https://x.com/thsottiaux/status/2111918768733753664"
     }
   ]
 }
