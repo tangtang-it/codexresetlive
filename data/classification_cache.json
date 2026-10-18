@@ -733,5 +733,19 @@
     "confidence": 0.85,
     "reason": "General engineering tweet or conversational reply.",
     "source": "heuristic_engine"
+  },
+  "2111492673890824348": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.7,
+    "reason": "Mentions reset without clear transactional confirmation; treated as chatter.",
+    "source": "heuristic_engine"
+  },
+  "2111492738025959922": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.85,
+    "reason": "General engineering tweet or conversational reply.",
+    "source": "heuristic_engine"
   }
 }

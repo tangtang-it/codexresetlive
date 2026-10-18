@@ -1,15 +1,15 @@
 {
-  "total": 98,
-  "reset_count": 77,
-  "regular": 68,
+  "total": 100,
+  "reset_count": 78,
+  "regular": 69,
   "banked": 7,
-  "last_reset_at": "2026-10-17T05:09:12.000Z",
-  "last_reset_text": "",
-  "last_reset_url": "https://x.com/thsottiaux/status/2111323620471632217",
+  "last_reset_at": "2026-10-17T16:20:57.000Z",
+  "last_reset_text": "Day 13/ Le limit reset",
+  "last_reset_url": "https://x.com/thsottiaux/status/2111492673890824348",
   "first_reset_at": "2025-09-17T04:02:52.000Z",
-  "days_since_last_reset": 0.7,
-  "avg_gap_days_all": 5.2,
-  "avg_gap_days_recent": 0.4,
+  "days_since_last_reset": 0.3,
+  "avg_gap_days_all": 5.1,
+  "avg_gap_days_recent": 0.5,
   "probability_48h": 1,
   "monthly_series": [
     {
@@ -66,8 +66,8 @@
     },
     {
       "month": "2026-10",
-      "count": 25
+      "count": 26
     }
   ],
-  "monthly_max": 25
+  "monthly_max": 26
 }
