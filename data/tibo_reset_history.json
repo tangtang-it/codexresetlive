@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 102,
+  "total": 103,
   "records": [
     {
       "id": "1968163721034994139",
@@ -822,6 +822,14 @@
       "status": "confirmed",
       "text": "Day 14/\n\nSmall quality of life improvement. You can now edit previous messages within a thread in the desktop app. Long time requested, and took way too long to get that one out.",
       "url": "https://x.com/thsottiaux/status/2111990254408434095"
+    },
+    {
+      "id": "2112268918681485431",
+      "at": "2026-10-19T19:45:28.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "Day 15/ We're cooked",
+      "url": "https://x.com/thsottiaux/status/2112268918681485431"
     }
   ]
 }
