@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 101,
+  "total": 102,
   "records": [
     {
       "id": "1968163721034994139",
@@ -814,6 +814,14 @@
       "status": "confirmed",
       "text": "People have escaped the TL and are asking me for resets on the street now. I’ll make little cards to hand out",
       "url": "https://x.com/thsottiaux/status/2111918768733753664"
+    },
+    {
+      "id": "2111990254408434095",
+      "at": "2026-10-19T01:18:10.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "Day 14/\n\nSmall quality of life improvement. You can now edit previous messages within a thread in the desktop app. Long time requested, and took way too long to get that one out.",
+      "url": "https://x.com/thsottiaux/status/2111990254408434095"
     }
   ]
 }
