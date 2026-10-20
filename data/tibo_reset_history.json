@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 103,
+  "total": 104,
   "records": [
     {
       "id": "1968163721034994139",
@@ -830,6 +830,14 @@
       "status": "confirmed",
       "text": "Day 15/ We're cooked",
       "url": "https://x.com/thsottiaux/status/2112268918681485431"
+    },
+    {
+      "id": "2112432076767289678",
+      "at": "2026-10-20T06:33:48.848Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "Day 15/ Nevermind, we&#39;re still cooking... and reset. Enjoy.",
+      "url": "https://x.com/thsottiaux/status/2112432076767289678"
     }
   ]
 }
