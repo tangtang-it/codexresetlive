@@ -61,57 +61,105 @@ y_badge_rect = round(y_now - 23, 1)
 y_badge_text = round(y_now - 12, 1)
 
 # --- Shared UI Components ---
-pulse_svg = f'''<svg viewBox="0 0 740 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Horizontal Grid Lines -->
-  <line x1="40" y1="30" x2="710" y2="30" stroke="#2b3139" stroke-width="1" stroke-dasharray="3 3"/>
-  <line x1="40" y1="80" x2="710" y2="80" stroke="#2b3139" stroke-width="1" stroke-dasharray="3 3"/>
-  <line x1="40" y1="130" x2="710" y2="130" stroke="#2b3139" stroke-width="1"/>
-  <!-- Y-Axis Labels -->
-  <text x="15" y="34" fill="#707a8a" font-family="ui-monospace" font-size="10">80%</text>
-  <text x="15" y="84" fill="#707a8a" font-family="ui-monospace" font-size="10">40%</text>
-  <text x="15" y="134" fill="#707a8a" font-family="ui-monospace" font-size="10">0%</text>
-  <!-- X-Axis Date Labels -->
-  <text x="60" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Sep 30</text>
-  <text x="140" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 2</text>
-  <text x="220" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 4</text>
-  <text x="330" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">Oct 7</text>
-  <text id="chartLastResetDate" x="425" y="156" fill="#0ecb81" font-family="ui-monospace" font-size="10" font-weight="600" text-anchor="middle">{last_lbl}</text>
-  <text id="chartNowDate" x="515" y="156" fill="#0ecb81" font-family="ui-monospace" font-size="10" font-weight="bold" text-anchor="middle">{p_now_lbl}</text>
-  <text id="chartT1Date" x="605" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">{p_t1_lbl}</text>
-  <text id="chartT2Date" x="690" y="156" fill="#707a8a" font-family="ui-monospace" font-size="10" text-anchor="middle">{p_t2_lbl}</text>
-  <!-- Verified Historical Trajectory (Cubic Bezier across all verified resets including {last_lbl}) -->
-  <path id="chartHistPath" d="M 60 48 C 90 70, 110 50, 140 38 C 170 38, 195 95, 220 95 C 255 95, 295 40, 330 36 C 360 85, 395 85, 425 40 C 455 40, 485 105, 515 {y_now}" stroke="#0ecb81" stroke-width="2.6" fill="none" stroke-linecap="round"/>
-  <!-- 48-Hour Projection Line (Yellow Dash reaching edge) -->
-  <path id="chartProjPath" d="M 515 {y_now} C 545 {y_now}, 575 84, 605 74 C 635 64, 665 54, 690 50" stroke="#FCD535" stroke-width="2.2" stroke-dasharray="5 4" fill="none" stroke-linecap="round"/>
-  <!-- Event Marker 1: Sep 30 Banked Reset -->
-  <line x1="60" y1="48" x2="60" y2="130" stroke="#FCD535" stroke-width="1.2" stroke-opacity="0.4"/>
-  <circle cx="60" cy="48" r="4.5" fill="#FCD535"/>
-  <rect x="39" y="24" width="42" height="15" rx="3" fill="#1e2329" stroke="#FCD535" stroke-width="1"/>
-  <text x="60" y="35" fill="#FCD535" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Banked</text>
-  <!-- Event Marker 2: Oct 2 Hard Reset -->
-  <line x1="140" y1="38" x2="140" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.4"/>
-  <circle cx="140" cy="38" r="4.5" fill="#0ecb81"/>
-  <rect x="122" y="15" width="36" height="15" rx="3" fill="#1e2329" stroke="#0ecb81" stroke-width="1"/>
-  <text x="140" y="26" fill="#0ecb81" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Reset</text>
-  <!-- Event Marker 3: Oct 7 Double Event (Hard Reset + Banked Credit) -->
-  <line x1="330" y1="36" x2="330" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.4"/>
-  <circle cx="330" cy="36" r="6.5" stroke="#FCD535" stroke-width="1.5" fill="none"/>
-  <circle cx="330" cy="36" r="4" fill="#0ecb81"/>
-  <rect x="287" y="13" width="86" height="15" rx="3" fill="#1e2329" stroke="#0ecb81" stroke-width="1"/>
-  <text x="312" y="24" fill="#0ecb81" font-family="ui-monospace" font-size="8" font-weight="bold" text-anchor="middle">Reset</text>
-  <text x="330" y="24" fill="#707a8a" font-family="ui-monospace" font-size="8" text-anchor="middle">+</text>
-  <text x="354" y="24" fill="#FCD535" font-family="ui-monospace" font-size="8" font-weight="bold" text-anchor="middle">Banked</text>
-  <!-- Event Marker 4: {last_lbl} Confirmed Hard Reset ({last_time_str}) -->
-  <line id="chartLastResetStem" x1="425" y1="40" x2="425" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.4"/>
-  <circle id="chartLastResetDot" cx="425" cy="40" r="4.5" fill="#0ecb81"/>
-  <rect id="chartLastResetBadge" x="407" y="17" width="36" height="15" rx="3" fill="#1e2329" stroke="#0ecb81" stroke-width="1"/>
-  <text id="chartLastResetText" x="425" y="28" fill="#0ecb81" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Reset</text>
-  <!-- Current Status Anchor: Live Now Point ({p_now_lbl}) -->
-  <line id="chartNowStem" x1="515" y1="{y_now}" x2="515" y2="130" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.7"/>
-  <circle id="chartNowDot" cx="515" cy="{y_now}" r="5" fill="#0ecb81"/>
-  <circle id="chartNowRing" cx="515" cy="{y_now}" r="8" stroke="#0ecb81" stroke-width="1.5" stroke-opacity="0.5"/>
-  <rect id="chartNowBadgeRect" x="490" y="{y_badge_rect}" width="50" height="16" rx="3" fill="#0ecb81"/>
-  <text id="chartNowProbText" x="515" y="{y_badge_text}" fill="#0b0e11" font-family="ui-monospace" font-size="8.5" font-weight="bold" text-anchor="middle">Now {prob}%</text>
+pulse_svg = f'''<svg viewBox="0 0 740 185" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Bloomberg Neon Glow & Gradient Fills -->
+    <linearGradient id="emeraldSpikeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0ecb81" stop-opacity="1"/>
+      <stop offset="60%" stop-color="#0ecb81" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#0ecb81" stop-opacity="0.0"/>
+    </linearGradient>
+    <linearGradient id="waveAreaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0ecb81" stop-opacity="0.22"/>
+      <stop offset="80%" stop-color="#0ecb81" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#0ecb81" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="neonGlowSpike" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="badgeShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+  </defs>
+
+  <!-- Precision Horizontal Grid Lines -->
+  <line x1="40" y1="35" x2="710" y2="35" stroke="#2b3139" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>
+  <line x1="40" y1="85" x2="710" y2="85" stroke="#2b3139" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>
+  <line x1="40" y1="135" x2="710" y2="135" stroke="#2b3139" stroke-width="1"/>
+
+  <!-- Y-Axis Ticks -->
+  <text x="14" y="39" fill="#707a8a" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9.5">80%</text>
+  <text x="14" y="89" fill="#707a8a" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9.5">40%</text>
+  <text x="14" y="139" fill="#707a8a" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9.5">0%</text>
+
+  <!-- Rolling 12-Day X-Axis Labels -->
+  <text x="60" y="160" fill="#707a8a" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" text-anchor="middle">Oct 11</text>
+  <text x="135" y="160" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="bold" text-anchor="middle">Oct 13</text>
+  <text x="215" y="160" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="bold" text-anchor="middle">Oct 15</text>
+  <text x="295" y="160" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="bold" text-anchor="middle">Oct 17</text>
+  <text x="370" y="160" fill="#707a8a" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" text-anchor="middle">Oct 18</text>
+  <text x="445" y="160" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="bold" text-anchor="middle">Oct 20</text>
+  <text id="chartNowDate" x="525" y="160" fill="#FCD535" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="bold" text-anchor="middle">{p_now_lbl}</text>
+  <text id="chartT1Date" x="610" y="160" fill="#707a8a" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" text-anchor="middle">{p_t1_lbl}</text>
+  <text id="chartT2Date" x="685" y="160" fill="#707a8a" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" text-anchor="middle">{p_t2_lbl}</text>
+
+  <!-- Area Fill Under Probability Curve -->
+  <path d="M 60 135 L 60 115 Q 100 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 370 70, 445 32 L 445 130 Q 485 105, 525 {y_now} L 525 135 Z" fill="url(#waveAreaGrad)"/>
+
+  <!-- Smooth Historical Probability Waveform -->
+  <path id="chartHistPath" d="M 60 115 Q 100 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 370 70, 445 32 L 445 130 Q 485 105, 525 {y_now}" stroke="#0ecb81" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- Future 48-Hour Projection Curve (Yellow Dash to edge) -->
+  <path id="chartProjPath" d="M 525 {y_now} C 565 {y_now}, 610 70, 685 45" stroke="#FCD535" stroke-width="2.2" stroke-dasharray="5 4" fill="none" stroke-linecap="round"/>
+
+  <!-- ================= SPIKE 1: Oct 13 ================= -->
+  <rect x="133" y="32" width="4" height="103" fill="url(#emeraldSpikeGrad)"/>
+  <line x1="135" y1="32" x2="135" y2="135" stroke="#0ecb81" stroke-width="1.8" filter="url(#neonGlowSpike)"/>
+  <circle cx="135" cy="32" r="4.5" fill="#0ecb81"/>
+  <g filter="url(#badgeShadow)">
+    <rect x="115" y="11" width="40" height="16" rx="3.5" fill="#1e2329" stroke="#0ecb81" stroke-width="1.2"/>
+    <text x="135" y="22.5" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="8.5" font-weight="bold" text-anchor="middle">RESET</text>
+  </g>
+
+  <!-- ================= SPIKE 2: Oct 15 ================= -->
+  <rect x="213" y="32" width="4" height="103" fill="url(#emeraldSpikeGrad)"/>
+  <line x1="215" y1="32" x2="215" y2="135" stroke="#0ecb81" stroke-width="1.8" filter="url(#neonGlowSpike)"/>
+  <circle cx="215" cy="32" r="4.5" fill="#0ecb81"/>
+  <g filter="url(#badgeShadow)">
+    <rect x="195" y="11" width="40" height="16" rx="3.5" fill="#1e2329" stroke="#0ecb81" stroke-width="1.2"/>
+    <text x="215" y="22.5" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="8.5" font-weight="bold" text-anchor="middle">RESET</text>
+  </g>
+
+  <!-- ================= SPIKE 3: Oct 17 ================= -->
+  <rect x="293" y="32" width="4" height="103" fill="url(#emeraldSpikeGrad)"/>
+  <line x1="295" y1="32" x2="295" y2="135" stroke="#0ecb81" stroke-width="1.8" filter="url(#neonGlowSpike)"/>
+  <circle cx="295" cy="32" r="4.5" fill="#0ecb81"/>
+  <g filter="url(#badgeShadow)">
+    <rect x="275" y="11" width="40" height="16" rx="3.5" fill="#1e2329" stroke="#0ecb81" stroke-width="1.2"/>
+    <text x="295" y="22.5" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="8.5" font-weight="bold" text-anchor="middle">RESET</text>
+  </g>
+
+  <!-- ================= SPIKE 4: Oct 20 ================= -->
+  <rect x="443" y="32" width="4" height="103" fill="url(#emeraldSpikeGrad)"/>
+  <line id="chartLastResetStem" x1="445" y1="32" x2="445" y2="135" stroke="#0ecb81" stroke-width="2" filter="url(#neonGlowSpike)"/>
+  <circle id="chartLastResetDot" cx="445" cy="32" r="5" fill="#0ecb81"/>
+  <g filter="url(#badgeShadow)">
+    <rect id="chartLastResetBadge" x="424" y="11" width="42" height="16" rx="3.5" fill="#1e2329" stroke="#0ecb81" stroke-width="1.4"/>
+    <text id="chartLastResetText" x="445" y="22.5" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" font-weight="bold" text-anchor="middle">RESET</text>
+  </g>
+
+  <!-- ================= CURRENT ANCHOR: Now ================= -->
+  <line id="chartNowStem" x1="525" y1="{y_now}" x2="525" y2="135" stroke="#FCD535" stroke-width="1.5" stroke-opacity="0.8"/>
+  <circle id="chartNowRing" cx="525" cy="{y_now}" r="9" stroke="#FCD535" stroke-width="1.5" stroke-opacity="0.4"/>
+  <circle id="chartNowDot" cx="525" cy="{y_now}" r="5" fill="#FCD535"/>
+  <g filter="url(#badgeShadow)">
+    <rect id="chartNowBadgeRect" x="498" y="{y_badge_rect}" width="54" height="17" rx="3.5" fill="#FCD535"/>
+    <text id="chartNowProbText" x="525" y="{y_badge_text}" fill="#0b0e11" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" font-weight="bold" text-anchor="middle">Now {prob}%</text>
+  </g>
 </svg>'''
 
 MOVES_DATA = {
