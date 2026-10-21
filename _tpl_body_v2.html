@@ -538,7 +538,42 @@ __FOOTER_DIR_HTML__
   var arc = document.getElementById("gaugeArc");
   var numEl = document.getElementById("gaugeNum");
   var capEl = document.querySelector(".gauge-cap");
-  var gaugeAnimated = false;
+  var currentGaugeVal = 0;
+  var gaugeAnimationId = null;
+
+  function animateGaugeTo(targetProb, duration) {
+    if (!numEl) return;
+    targetProb = Math.max(0, Math.min(100, Math.round(targetProb)));
+    var startVal = currentGaugeVal;
+    var startTime = null;
+    var dur = duration || 1000;
+
+    var offset = 540.35 * (1 - targetProb / 100);
+    if (arc) {
+      arc.style.transition = 'stroke-dashoffset ' + (dur / 1000) + 's cubic-bezier(0.16, 1, 0.3, 1)';
+      arc.style.strokeDashoffset = offset;
+    }
+
+    if (gaugeAnimationId) cancelAnimationFrame(gaugeAnimationId);
+
+    function frame(now) {
+      if (!startTime) startTime = now;
+      var elapsed = now - startTime;
+      var progress = Math.min(1, elapsed / dur);
+      var ease = 1 - Math.pow(1 - progress, 4);
+      var val = Math.round(startVal + (targetProb - startVal) * ease);
+      numEl.textContent = val;
+      currentGaugeVal = val;
+      if (progress < 1) {
+        gaugeAnimationId = requestAnimationFrame(frame);
+      } else {
+        numEl.textContent = targetProb;
+        currentGaugeVal = targetProb;
+        gaugeAnimationId = null;
+      }
+    }
+    gaugeAnimationId = requestAnimationFrame(frame);
+  }
 
   function updateLiveEngine() {
     var now = new Date();
@@ -547,28 +582,10 @@ __FOOTER_DIR_HTML__
     var diffDays = diffMs / 86400000;
     var diffHours = diffMs / 3600000;
     var diffMin = diffMs / 60000;
-    // Authoritative Unified Probability across Banner, Stamp, Gauge, and Wave Chart
     var liveProb = (window.CODEX_RADAR && typeof window.CODEX_RADAR.probability === 'number') ? window.CODEX_RADAR.probability : __PROB_NUM__;
 
-    // A. Update Gauge
-    var offset = 540.35 * (1 - liveProb / 100);
-    if (!gaugeAnimated) {
-      gaugeAnimated = true;
-      if(arc) arc.style.strokeDashoffset = offset;
-      var t0 = null, dur = 1400;
-      function step(ts){
-        if(t0===null) t0=ts;
-        var p = Math.min(1, (ts-t0)/dur);
-        var e = 1 - Math.pow(1-p, 4);
-        if(numEl) numEl.textContent = Math.round(liveProb * e);
-        if(p < 1) requestAnimationFrame(step);
-        else if(numEl) numEl.textContent = liveProb;
-      }
-      requestAnimationFrame(step);
-    } else {
-      if(arc) arc.style.strokeDashoffset = offset;
-      if(numEl) numEl.textContent = liveProb;
-    }
+    // A. Smooth Transition Gauge
+    animateGaugeTo(liveProb, 1000);
 
     // Gauge Caption Sync
     if (capEl) {

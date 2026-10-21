@@ -1,16 +1,16 @@
 {
   "total": 107,
-  "reset_count": 82,
-  "regular": 73,
-  "banked": 7,
-  "last_reset_at": "2026-10-21T06:49:29.000Z",
-  "last_reset_text": "I demand a reset",
-  "last_reset_url": "https://x.com/thsottiaux/status/2112798407928713717",
+  "reset_count": 39,
+  "regular": 33,
+  "banked": 5,
+  "last_reset_at": "2026-10-20T06:33:48.000Z",
+  "last_reset_text": "Day 15/ Nevermind, we're still cooking... and reset. Enjoy.",
+  "last_reset_url": "https://x.com/thsottiaux/status/2112432076767289678",
   "first_reset_at": "2025-09-17T04:02:52.000Z",
-  "days_since_last_reset": 0.6,
-  "avg_gap_days_all": 4.9,
-  "avg_gap_days_recent": 0.6,
-  "probability_48h": 1,
+  "days_since_last_reset": 1.6,
+  "avg_gap_days_all": 10.5,
+  "avg_gap_days_recent": 5.2,
+  "probability_48h": 11,
   "monthly_series": [
     {
       "month": "2025-09",
@@ -26,7 +26,7 @@
     },
     {
       "month": "2025-12",
-      "count": 4
+      "count": 3
     },
     {
       "month": "2026-01",
@@ -38,36 +38,36 @@
     },
     {
       "month": "2026-03",
-      "count": 6
+      "count": 4
     },
     {
       "month": "2026-04",
-      "count": 6
+      "count": 4
     },
     {
       "month": "2026-05",
-      "count": 3
+      "count": 2
     },
     {
       "month": "2026-06",
-      "count": 5
+      "count": 3
     },
     {
       "month": "2026-07",
-      "count": 12
+      "count": 4
     },
     {
       "month": "2026-08",
-      "count": 8
+      "count": 4
     },
     {
       "month": "2026-09",
-      "count": 5
+      "count": 3
     },
     {
       "month": "2026-10",
-      "count": 30
+      "count": 9
     }
   ],
-  "monthly_max": 30
+  "monthly_max": 9
 }

@@ -16,7 +16,10 @@ def pt(ts):
     return datetime.strptime(ts[:19], "%Y-%m-%dT%H:%M:%S")
 
 # Only actual quota reset announcements (regular or banked)
-reset_recs = [r for r in recs if r.get("type") in ["regular", "banked", "both"]]
+import sys
+sys.path.insert(0, str(ROOT_DIR / "scripts"))
+from classifier import classify_tweet
+reset_recs = [r for r in recs if classify_tweet(r.get("id"), r.get("text")).get("category") in ["confirmed_reset", "banked_reset"]]
 last = reset_recs[-1] if reset_recs else recs[-1]
 now = datetime.now(timezone.utc).replace(tzinfo=None)
 days_since = round((now - pt(last["at"])).total_seconds() / 86400, 1)
