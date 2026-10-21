@@ -607,6 +607,10 @@ def render_direct_ans_raw(code):
     <span class="dab-badge"><span class="dot"></span> 实时状态判定：{badge_str}</span>
     <div class="dab-h">{zh_title}</div>
     <div class="dab-p">今日尚未监测到官方全量重置记录。最近一次官方放水发生在 <strong data-days-since-utc="{last['at']}">{days_since_str} 前</strong>（<span data-local-date-only="{last['at']}">{last_date}</span>）。建议保持正常开发节奏，下方可测算个人 5 小时解锁倒计时。</div>
+    <div class="dab-tz-pills">
+      <div class="tz-pill"><span class="tz-dot green"></span>旧金山 HQ (Tibo): <strong data-sf-clock>--:-- (PT)</strong></div>
+      <div class="tz-pill"><span class="tz-dot yellow"></span>你的本地时间: <strong data-local-clock>--:--</strong></div>
+    </div>
   </div>
   <div class="dab-right-wrap">
     {stamp}
@@ -619,6 +623,10 @@ def render_direct_ans_raw(code):
     <span class="dab-badge"><span class="dot"></span> LIVE VERDICT: {badge_str}</span>
     <div class="dab-h">{en_title}</div>
     <div class="dab-p">No global reset recorded today. The last verified reset was <strong data-days-since-utc="{last['at']}">{days_since_str} ago</strong> (<span data-local-date-only="{last['at']}">{last_date}</span>). Normal building conditions — calculate your personal 5-hour rolling window below.</div>
+    <div class="dab-tz-pills">
+      <div class="tz-pill"><span class="tz-dot green"></span>San Francisco HQ (Tibo): <strong data-sf-clock>--:-- (PT)</strong></div>
+      <div class="tz-pill"><span class="tz-dot yellow"></span>Your Local Time: <strong data-local-clock>--:--</strong></div>
+    </div>
   </div>
   <div class="dab-right-wrap">
     {stamp}
@@ -960,8 +968,19 @@ for code, d, name, loc, base_url in LANGS:
     # =========================================================================
     p1_path = out_dir / "index.html"
     p1_canon = f"https://codexresetlive.com/{d}/" if d else "https://codexresetlive.com/"
-    p1_title = f"{t['h1_a'].rstrip('?')} {t['h1_b']} | Codex Reset Radar"
-    p1_desc = t["hero_p"]
+    
+    if code == "en":
+        p1_title = "Codex Rate Limit Reset: Today's Quota & Recovery Countdown"
+        p1_desc = "Check live OpenAI Codex rate limit reset status and quota lifting signals. Calculate your 5-hour rolling limit recovery countdown and track outage updates."
+    elif "zh" in code:
+        p1_title = "OpenAI Codex 配额重置监控：今日限流解除状态与5小时恢复倒计时"
+        p1_desc = "实时监控 OpenAI Codex 官方配额重置与限流解除信号。提供个人5小时滚动额度恢复计算器、历史放水日历及服务故障排查，免费在线即时查询。"
+    elif code == "ja":
+        p1_title = "Codex利用制限リセット速報：本日の枠解除判定と5時間回復計算機"
+        p1_desc = "OpenAI Codexのレート制限・クォータ解除シグナルをリアルタイム監視。個人枠の5時間ローリング回復カウントダウンと障害ステータスを即時判定。"
+    else:
+        p1_title = f"Codex Rate Limit Reset ({name}): Quota & Recovery Countdown"
+        p1_desc = t["hero_p"]
     
     p1_schema = {
         "@context":"https://schema.org",

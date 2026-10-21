@@ -1523,7 +1523,79 @@ svg:not([width]):not([height]) {
   }
 }
 
+
+:root[data-theme="light"] {
+  --canvas: #f4f5f8;
+  --card: #ffffff;
+  --elevated: #eaedf2;
+  --hairline: #dbe0e8;
+  --body: #181a20;
+  --ink: #ffffff;
+  --muted: #647082;
+  --muted-strong: #2c333e;
+  --on-dark: #0b0e11;
+  --primary: #d99a00;
+  --primary-active: #b88300;
+  --on-primary: #ffffff;
+}
+:root[data-theme="light"] .hdr { background: rgba(244, 245, 248, 0.94); border-bottom-color: var(--hairline); }
+:root[data-theme="light"] .direct-ans-banner { background: #ffffff; border-color: rgba(217, 154, 0, 0.35); box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+:root[data-theme="light"] .card-box { background: #ffffff; border-color: var(--hairline); }
+:root[data-theme="light"] .theme-btn { border-color: var(--hairline); color: var(--body); background: #ffffff; }
+
+/* Dual Timezone Pill in Direct Answer Banner */
+.dab-tz-pills { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.tz-pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--r-pill); font-size: 11px; font-family: var(--mono); color: var(--muted-strong); }
+:root[data-theme="light"] .tz-pill { background: #edf0f5; border-color: #d2d8e2; color: #333a42; }
+.tz-pill .tz-dot { width: 6px; height: 6px; border-radius: 50%; }
+.tz-pill .tz-dot.green { background: var(--up); box-shadow: 0 0 6px rgba(14,203,129,0.5); }
+.tz-pill .tz-dot.yellow { background: var(--primary); }
+.tz-pill .tz-dot.gray { background: #707a8a; }
+.tz-pill strong { color: var(--on-dark); font-weight: 600; }
+
+/* Theme Toggle Button */
+.theme-btn { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: var(--r-md); border: 1px solid var(--hairline); background: var(--card); color: var(--body); transition: .15s; cursor: pointer; }
+.theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+.theme-btn svg { width: 16px; height: 16px; }
+
 </style>
+
+<script>
+(function(){
+  var saved = localStorage.getItem('codex_theme') || 'dark';
+  if (saved === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+function toggleCodexTheme() {
+  var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  var next = isLight ? 'dark' : 'light';
+  if (next === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    var sun = document.querySelector('.sun-ico');
+    var moon = document.querySelector('.moon-ico');
+    if (sun) sun.style.display = 'block';
+    if (moon) moon.style.display = 'none';
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    var sun = document.querySelector('.sun-ico');
+    var moon = document.querySelector('.moon-ico');
+    if (sun) sun.style.display = 'none';
+    if (moon) moon.style.display = 'block';
+  }
+  localStorage.setItem('codex_theme', next);
+}
+document.addEventListener('DOMContentLoaded', function(){
+  var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  var sun = document.querySelector('.sun-ico');
+  var moon = document.querySelector('.moon-ico');
+  if (sun && moon) {
+    sun.style.display = isLight ? 'block' : 'none';
+    moon.style.display = isLight ? 'none' : 'block';
+  }
+});
+</script>
+
 </head>
 
 <body>
@@ -1554,6 +1626,7 @@ svg:not([width]):not([height]) {
 </nav>
 
 <div style="display:flex;align-items:center;gap:14px">
+<button class="theme-btn" id="themeToggleBtn" onclick="toggleCodexTheme()" aria-label="Toggle Theme" title="Toggle Theme (Light / Dark)"><svg class="sun-ico" style="display:none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg><svg class="moon-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
 <span class="live-pill">
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/><circle cx="12" cy="12" r="2" fill="currentColor"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/><path d="M19.1 4.9C23 8.8 23 15.2 19.1 19.1"/></svg>
 实时
@@ -1581,7 +1654,11 @@ svg:not([width]):not([height]) {
   <div class="dab-left">
     <span class="dab-badge"><span class="dot"></span> 实时状态判定：LOW SIGNAL · WATCHING</span>
     <div class="dab-h">Codex 今天会全网重置吗？ <strong>今日暂无放水迹象 (<span class='live-prob-val'>1</span>% 概率)</strong></div>
-    <div class="dab-p">今日尚未监测到官方全量重置记录。最近一次官方放水发生在 <strong data-days-since-utc="2026-10-15T04:55:51.053Z">6.2d 前</strong>（<span data-local-date-only="2026-10-15T04:55:51.053Z">2026-10-15</span>）。建议保持正常开发节奏，下方可测算个人 5 小时解锁倒计时。</div>
+    <div class="dab-p">今日尚未监测到官方全量重置记录。最近一次官方放水发生在 <strong data-days-since-utc="2026-10-15T04:55:51.053Z">6.4d 前</strong>（<span data-local-date-only="2026-10-15T04:55:51.053Z">2026-10-15</span>）。建议保持正常开发节奏，下方可测算个人 5 小时解锁倒计时。</div>
+    <div class="dab-tz-pills">
+      <div class="tz-pill"><span class="tz-dot green"></span>旧金山 HQ (Tibo): <strong data-sf-clock>--:-- (PT)</strong></div>
+      <div class="tz-pill"><span class="tz-dot yellow"></span>你的本地时间: <strong data-local-clock>--:--</strong></div>
+    </div>
   </div>
   <div class="dab-right-wrap">
     <div class="openthe-stamp-wrap soon">
@@ -1645,7 +1722,7 @@ svg:not([width]):not([height]) {
 <div class="gauge-cap">偏低 —— 刚刚完成一次重置</div>
 <div class="gauge-foot">
 <span>最近重置 <b class="num" data-local-date-only="2026-10-15T04:55:51.053Z">2026-10-15</b></span>
-<span>距今 <b class="num" data-days-since-utc="2026-10-15T04:55:51.053Z">6.2d</b></span>
+<span>距今 <b class="num" data-days-since-utc="2026-10-15T04:55:51.053Z">6.4d</b></span>
 </div>
 </div>
 
@@ -1759,7 +1836,7 @@ svg:not([width]):not([height]) {
 </div>
 <div class="readout-item">
 <div class="ro-l">Days Since Reset</div>
-<div class="ro-v num" data-days-since-utc="2026-10-15T04:55:51.053Z">6.2d</div>
+<div class="ro-v num" data-days-since-utc="2026-10-15T04:55:51.053Z">6.4d</div>
 <div class="ro-s">Last: <span data-local-date-only="2026-10-15T04:55:51.053Z">2026-10-15</span></div>
 </div>
 <div class="readout-item">
@@ -2107,7 +2184,7 @@ Small quality of life improvement. You can now edit previous messages within a t
   </div>
   <div class="sr-right">
     <span class="sr-dot yellow"></span>
-    <span class="sr-status"><span data-cooldown-utc="2026-10-15T04:55:51.053Z">Cooldown active (6.2d)</span></span>
+    <span class="sr-status"><span data-cooldown-utc="2026-10-15T04:55:51.053Z">Cooldown active (6.4d)</span></span>
   </div>
 </div><div class="switch-row">
   <div class="sr-left">
@@ -2595,7 +2672,7 @@ Small quality of life improvement. You can now edit previous messages within a t
   window.CODEX_RADAR = {
     probability: 1,
     lastResetUtc: "2026-10-15T04:55:51.053Z",
-    daysSinceStr: "6.2d"
+    daysSinceStr: "6.4d"
   };
 
   var LAST_RESET_UTC = "2026-10-15T04:55:51.053Z";
@@ -2686,7 +2763,11 @@ Small quality of life improvement. You can now edit previous messages within a t
     // B. Live Days-Since Synchronizer (Gauge footer & bottom stats)
     var daysStr = diffDays.toFixed(1) + "d";
     document.querySelectorAll("[data-days-since-utc]").forEach(function(el){
-      el.textContent = daysStr;
+      if (el.closest('.dab-p')) {
+        el.textContent = isZh ? (daysStr + " 前") : (isJa ? (daysStr + " 前") : (daysStr + " ago"));
+      } else {
+        el.textContent = daysStr;
+      }
     });
 
     // C. Live Relative Time Synchronizer ([data-ago-utc])
@@ -2842,6 +2923,64 @@ Small quality of life improvement. You can now edit previous messages within a t
 
   // Initialize Live Engine
   updateLiveEngine();
+
+  // Theme Toggle Controller
+  (function(){
+    var savedTheme = localStorage.getItem('codex_theme') || 'dark';
+    function applyTheme(t) {
+      if (t === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        var sun = document.querySelector('.sun-ico');
+        var moon = document.querySelector('.moon-ico');
+        if (sun) sun.style.display = 'block';
+        if (moon) moon.style.display = 'none';
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        var sun = document.querySelector('.sun-ico');
+        var moon = document.querySelector('.moon-ico');
+        if (sun) sun.style.display = 'none';
+        if (moon) moon.style.display = 'block';
+      }
+      localStorage.setItem('codex_theme', t);
+    }
+    applyTheme(savedTheme);
+
+    window.addEventListener('DOMContentLoaded', function(){
+      var themeBtn = document.getElementById('themeToggleBtn');
+      if (themeBtn) {
+        themeBtn.addEventListener('click', function(){
+          var curr = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+          applyTheme(curr === 'light' ? 'dark' : 'light');
+        });
+      }
+    });
+
+    // Also run immediately in case DOM is already parsed
+    var themeBtn = document.getElementById('themeToggleBtn');
+    if (themeBtn) {
+      themeBtn.addEventListener('click', function(){
+        var curr = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+        applyTheme(curr === 'light' ? 'dark' : 'light');
+      });
+    }
+  })();
+
+  // Live Dual Clocks (SF HQ vs Local)
+  function updateDualClocks() {
+    var now = new Date();
+    try {
+      var sfTime = now.toLocaleTimeString("en-US", { timeZone: "America/Los_Angeles", hour: "2-digit", minute: "2-digit", hour12: false });
+      var localTime = now.toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit", hour12: false });
+      var uTz = (Intl.DateTimeFormat().resolvedOptions().timeZone || "Local").split('/').pop().replace('_', ' ');
+      
+      document.querySelectorAll("[data-sf-clock]").forEach(function(el){ el.textContent = sfTime + " (PT)"; });
+      document.querySelectorAll("[data-local-clock]").forEach(function(el){ el.textContent = localTime + " (" + uTz + ")"; });
+    } catch(e){}
+  }
+  updateDualClocks();
+  setInterval(updateDualClocks, 1000);
+
+
   setInterval(updateLiveEngine, 30000);
   
   // Single Native Pulse Wave Activated (No Duplication)
@@ -2864,6 +3003,7 @@ Small quality of life improvement. You can now edit previous messages within a t
           var stampText = document.querySelector('.stamp-center text[letter-spacing="2"]');
           if (stampText && p48 >= 80) stampText.textContent = 'CONFIRMED';
           updateLiveEngine();
+
         }
 
         var streamBox = document.querySelector('.stream-box');
@@ -2911,6 +3051,7 @@ Small quality of life improvement. You can now edit previous messages within a t
       en.forEach(function(x){
         if(x.isIntersecting){
           updateLiveEngine();
+
           ob.disconnect();
         }
       });
@@ -3284,7 +3425,6 @@ Small quality of life improvement. You can now edit previous messages within a t
     <p class="modal-p"><strong>Affiliate Disclosure:</strong> Recommended developer tools (such as Cursor or Windsurf) may include referral identifiers that support our server infrastructure at no additional cost to you.</p>
   </div>
 </div>
-
 
 <script>
 (function(){

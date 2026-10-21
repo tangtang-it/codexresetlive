@@ -7,7 +7,7 @@
   "last_reset_text": "There were reports of usage draining faster than anticipated for some users over the weekend. We've identified approximately 40,000 accounts that had an inconsistency on which usage limits where the actual usage that was applied did not correspond to their actual selected plan. We are reaching out individually to all these users and have corrected the issue. If this affected you, we'll add credits to your account. Sorry we got this wrong.",
   "last_reset_url": "https://x.com/thsottiaux/status/2112592264686149749",
   "first_reset_at": "2025-09-17T04:02:52.000Z",
-  "days_since_last_reset": 0.7,
+  "days_since_last_reset": 0.9,
   "avg_gap_days_all": 5.0,
   "avg_gap_days_recent": 0.6,
   "probability_48h": 1,

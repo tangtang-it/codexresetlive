@@ -1423,5 +1423,77 @@ svg:not([width]):not([height]) {
   }
 }
 
+
+:root[data-theme="light"] {
+  --canvas: #f4f5f8;
+  --card: #ffffff;
+  --elevated: #eaedf2;
+  --hairline: #dbe0e8;
+  --body: #181a20;
+  --ink: #ffffff;
+  --muted: #647082;
+  --muted-strong: #2c333e;
+  --on-dark: #0b0e11;
+  --primary: #d99a00;
+  --primary-active: #b88300;
+  --on-primary: #ffffff;
+}
+:root[data-theme="light"] .hdr { background: rgba(244, 245, 248, 0.94); border-bottom-color: var(--hairline); }
+:root[data-theme="light"] .direct-ans-banner { background: #ffffff; border-color: rgba(217, 154, 0, 0.35); box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+:root[data-theme="light"] .card-box { background: #ffffff; border-color: var(--hairline); }
+:root[data-theme="light"] .theme-btn { border-color: var(--hairline); color: var(--body); background: #ffffff; }
+
+/* Dual Timezone Pill in Direct Answer Banner */
+.dab-tz-pills { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+.tz-pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--r-pill); font-size: 11px; font-family: var(--mono); color: var(--muted-strong); }
+:root[data-theme="light"] .tz-pill { background: #edf0f5; border-color: #d2d8e2; color: #333a42; }
+.tz-pill .tz-dot { width: 6px; height: 6px; border-radius: 50%; }
+.tz-pill .tz-dot.green { background: var(--up); box-shadow: 0 0 6px rgba(14,203,129,0.5); }
+.tz-pill .tz-dot.yellow { background: var(--primary); }
+.tz-pill .tz-dot.gray { background: #707a8a; }
+.tz-pill strong { color: var(--on-dark); font-weight: 600; }
+
+/* Theme Toggle Button */
+.theme-btn { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: var(--r-md); border: 1px solid var(--hairline); background: var(--card); color: var(--body); transition: .15s; cursor: pointer; }
+.theme-btn:hover { border-color: var(--primary); color: var(--primary); }
+.theme-btn svg { width: 16px; height: 16px; }
+
 </style>
+
+<script>
+(function(){
+  var saved = localStorage.getItem('codex_theme') || 'dark';
+  if (saved === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+  }
+})();
+function toggleCodexTheme() {
+  var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  var next = isLight ? 'dark' : 'light';
+  if (next === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    var sun = document.querySelector('.sun-ico');
+    var moon = document.querySelector('.moon-ico');
+    if (sun) sun.style.display = 'block';
+    if (moon) moon.style.display = 'none';
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    var sun = document.querySelector('.sun-ico');
+    var moon = document.querySelector('.moon-ico');
+    if (sun) sun.style.display = 'none';
+    if (moon) moon.style.display = 'block';
+  }
+  localStorage.setItem('codex_theme', next);
+}
+document.addEventListener('DOMContentLoaded', function(){
+  var isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  var sun = document.querySelector('.sun-ico');
+  var moon = document.querySelector('.moon-ico');
+  if (sun && moon) {
+    sun.style.display = isLight ? 'block' : 'none';
+    moon.style.display = isLight ? 'none' : 'block';
+  }
+});
+</script>
+
 </head>
