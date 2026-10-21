@@ -223,6 +223,50 @@ for r in merged.values():
     else:
         valid_records.append(r)
 
+
+def sync_competitor_probe():
+    otr_probe_url = "https://opentherank.com/codex-reset/"
+    try:
+        req = urllib.request.Request(
+            otr_probe_url,
+            headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
+        )
+        opener = get_opener()
+        with opener.open(req, timeout=12) as r:
+            html = r.read().decode("utf-8", errors="replace")
+        m = re.search(r'data-last="([^"]+)"', html)
+        if m:
+            last_ts = m.group(1)
+            print(f"[SIDECAR] OpenTheRank data-last verified timestamp: {last_ts}")
+            vfile = DATA_DIR / "verified_resets.json"
+            vdata = {}
+            if vfile.exists():
+                try:
+                    with open(vfile, "r", encoding="utf-8") as f:
+                        vdata = json.load(f)
+                except Exception:
+                    vdata = {}
+            found_tid = None
+            for tid, p in incoming_posts.items():
+                if p.get("at") == last_ts:
+                    found_tid = tid
+                    break
+            if found_tid and found_tid not in vdata:
+                vdata[found_tid] = {
+                    "category": "confirmed_reset",
+                    "is_reset": True,
+                    "confidence": 1.0,
+                    "reason": f"Auto-verified via OpenTheRank data-last probe ({last_ts})",
+                    "source": "sidecar_probe"
+                }
+                with open(vfile, "w", encoding="utf-8") as f:
+                    json.dump(vdata, f, indent=2, ensure_ascii=False)
+                print(f"[SIDECAR] Automatically registered override for tweet {found_tid} ({last_ts})!")
+    except Exception as e:
+        print(f"[SIDECAR] Competitor probe error: {e}")
+
+sync_competitor_probe()
+
 records = sorted(valid_records, key=lambda x: x["at"])
 print(f"Total merged verified records count: {len(records)}")
 

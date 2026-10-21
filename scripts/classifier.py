@@ -16,10 +16,33 @@ from pathlib import Path
 ROOT_DIR = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT_DIR / "data"
 CACHE_FILE = DATA_DIR / "classification_cache.json"
+OVERRIDES_FILE = DATA_DIR / "verified_resets.json"
+
+def get_overrides():
+    if OVERRIDES_FILE.exists():
+        try:
+            with open(OVERRIDES_FILE, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except Exception:
+            return {}
+    return {}
+
 
 def classify_heuristics(text: str) -> dict:
     t = text.lower().strip()
+    # 0. High-Recall Action Signatures
+    if "reset" in t:
+        affirmative = any(w in t for w in ["and reset", "enjoy", "propagated", "lifted", "refilled", "done", "cooking", "live", "pressed", "granted", "gave"])
+        negative = any(w in t for w in ["no reset", "didn't reset", "did not reset", "without reset", "fake reset", "nightmare"])
+        if affirmative and not negative:
+            return {
+                "category": "confirmed_reset",
+                "is_reset": True,
+                "confidence": 0.98,
+                "reason": "Broad affirmative reset action detected."
+            }
 
+    # (rest of heuristics)
     # 1. High-Priority Confirmed Reset Signatures (Overrides conversational tone)
     confirmed_strong = [
         r"reset has been processed",
@@ -251,6 +274,11 @@ def save_cache():
             json.dump(_cache, f, ensure_ascii=False, indent=2)
 
 def classify_tweet(tweet_id: str, text: str) -> dict:
+    # 0. Manual / Competitor Sidecar Overrides (Highest Authority)
+    overrides = get_overrides()
+    if tweet_id and str(tweet_id) in overrides:
+        return overrides[str(tweet_id)]
+
     cache = load_cache()
     if tweet_id and tweet_id in cache:
         return cache[tweet_id]

@@ -1,0 +1,9 @@
+{
+  "2112432076767289678": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 1.0,
+    "reason": "Verified Day 15/ reset confirmation by Tibo Sottiaux (Cross-verified with OpenTheRank & WillCodexReset)",
+    "source": "sidecar_competitor_verified"
+  }
+}
