@@ -1,14 +1,14 @@
 {
-  "total": 106,
-  "reset_count": 81,
-  "regular": 72,
+  "total": 107,
+  "reset_count": 82,
+  "regular": 73,
   "banked": 7,
-  "last_reset_at": "2026-10-20T17:10:20.000Z",
-  "last_reset_text": "There were reports of usage draining faster than anticipated for some users over the weekend. We've identified approximately 40,000 accounts that had an inconsistency on which usage limits where the actual usage that was applied did not correspond to their actual selected plan. We are reaching out individually to all these users and have corrected the issue. If this affected you, we'll add credits to your account. Sorry we got this wrong.",
-  "last_reset_url": "https://x.com/thsottiaux/status/2112592264686149749",
+  "last_reset_at": "2026-10-21T06:49:29.000Z",
+  "last_reset_text": "I demand a reset",
+  "last_reset_url": "https://x.com/thsottiaux/status/2112798407928713717",
   "first_reset_at": "2025-09-17T04:02:52.000Z",
-  "days_since_last_reset": 0.9,
-  "avg_gap_days_all": 5.0,
+  "days_since_last_reset": 0.3,
+  "avg_gap_days_all": 4.9,
   "avg_gap_days_recent": 0.6,
   "probability_48h": 1,
   "monthly_series": [
@@ -66,8 +66,8 @@
     },
     {
       "month": "2026-10",
-      "count": 29
+      "count": 30
     }
   ],
-  "monthly_max": 29
+  "monthly_max": 30
 }

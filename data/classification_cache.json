@@ -789,5 +789,12 @@
     "confidence": 0.92,
     "reason": "Feature shipment or engineering release update.",
     "source": "heuristic_engine"
+  },
+  "2112798407928713717": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.7,
+    "reason": "Mentions reset without clear transactional confirmation; treated as chatter.",
+    "source": "heuristic_engine"
   }
 }

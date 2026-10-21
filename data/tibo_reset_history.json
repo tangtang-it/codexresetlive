@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 106,
+  "total": 107,
   "records": [
     {
       "id": "1968163721034994139",
@@ -833,10 +833,10 @@
     },
     {
       "id": "2112432076767289678",
-      "at": "2026-10-20T06:33:48.848Z",
+      "at": "2026-10-20T06:33:48.000Z",
       "type": "regular",
       "status": "confirmed",
-      "text": "Day 15/ Nevermind, we&#39;re still cooking... and reset. Enjoy.",
+      "text": "Day 15/ Nevermind, we're still cooking... and reset. Enjoy.",
       "url": "https://x.com/thsottiaux/status/2112432076767289678"
     },
     {
@@ -854,6 +854,14 @@
       "status": "confirmed",
       "text": "Day 16/\n\nYou can now cache for 12h in the API and for logged in users across Codex &amp; Work we keep cache forever and you don’t have any penalty for coming back to an old conversation or resuming after a few hours and are now guaranteed to hit the cache.",
       "url": "https://x.com/thsottiaux/status/2112712984644784534"
+    },
+    {
+      "id": "2112798407928713717",
+      "at": "2026-10-21T06:49:29.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "I demand a reset",
+      "url": "https://x.com/thsottiaux/status/2112798407928713717"
     }
   ]
 }
