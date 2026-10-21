@@ -3047,8 +3047,8 @@ Small quality of life improvement. You can now edit previous messages within a t
           if (chartProb) chartProb.textContent = 'Now ' + p48 + '%';
           var stampText = document.querySelector('.stamp-center text[letter-spacing="2"]');
           if (stampText && p48 >= 80) stampText.textContent = 'CONFIRMED';
+          if (data.lastResetAt) { LAST_RESET_UTC = data.lastResetAt; if (window.CODEX_RADAR) window.CODEX_RADAR.lastResetUtc = data.lastResetAt; }
           updateLiveEngine();
-
         }
 
         var streamBox = document.querySelector('.stream-box');
