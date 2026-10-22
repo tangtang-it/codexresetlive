@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 107,
+  "total": 108,
   "records": [
     {
       "id": "1968163721034994139",
@@ -833,10 +833,10 @@
     },
     {
       "id": "2112432076767289678",
-      "at": "2026-10-20T06:33:48.848Z",
+      "at": "2026-10-20T06:33:48.000Z",
       "type": "regular",
       "status": "confirmed",
-      "text": "Day 15/ Nevermind, we&#39;re still cooking... and reset. Enjoy.",
+      "text": "Day 15/ Nevermind, we're still cooking... and reset. Enjoy.",
       "url": "https://x.com/thsottiaux/status/2112432076767289678"
     },
     {
@@ -862,6 +862,14 @@
       "status": "confirmed",
       "text": "I demand a reset",
       "url": "https://x.com/thsottiaux/status/2112798407928713717"
+    },
+    {
+      "id": "2113162277688070445",
+      "at": "2026-10-22T06:55:22.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "Day 17/ Bet you thought we forgot, but no, it’s reset day today.\n\nAlso good time to remind you to get Daybreak Blue access, it only takes 15 mins and you don’t want to have to do it in the middle of an incident.",
+      "url": "https://x.com/thsottiaux/status/2113162277688070445"
     }
   ]
 }
