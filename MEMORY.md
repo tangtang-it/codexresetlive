@@ -226,3 +226,6 @@ u.
 
 - **月度日历图标与档案布局**: Commit 6ba03f5. Calendar now uses consistent linear reset/banked icons, editorial serif month title, clearer legend, paper-grid cells, and less pill-like event labels. Runtime calendar data and navigation remain unchanged.
 
+
+- **信号统计卡与赞助横幅对比度**: Commit 3aaf753. Converted the remaining dark switchboard user-estimate card and sponsor banner to readable editorial paper surfaces with a primary-color edge marker; data and layout behavior unchanged.
+
