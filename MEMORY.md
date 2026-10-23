@@ -235,3 +235,6 @@ u.
 
 - **公开信号证据卡**: Commit c83e78d. Added a source-first Latest Public Signal card showing the original post, thread context, interpretation, expected window, status, and source link; it distinguishes scheduled signals from confirmed effects without changing the event data model.
 
+
+- **Tibo 头像与原文链接**: Commit b124a9a. Added the source author's avatar, handle, and direct original-post link to the confirmed reset summary in the hero area, with localized link labels and accessible image dimensions.
+
