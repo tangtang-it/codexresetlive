@@ -220,3 +220,6 @@ u.
 
 - **编辑部观测站视觉方向 A**: Commit b45ad32. Switched the generated site to warm paper, charcoal, editorial red, serif display headings, restrained borders, and source/archive-oriented hierarchy while preserving all functions and URLs. Rollback tag: ui-before-editorial-a.
 
+
+- **观测站圆顶品牌图标**: Commit e54d2c7. Replaced favicon and generated page brand marks with a unified observatory dome plus reset arc SVG. Preserved all runtime behavior and routes; QA screenshot: qa_observatory_icon.png.
+
