@@ -1623,6 +1623,20 @@ body { background: var(--canvas) !important; color: var(--body) !important; }
 .direct-ans-banner .dab-p, .direct-ans-banner .dab-rec-line, .direct-ans-banner .tz-indicator { color: var(--muted-strong) !important; }
 .direct-ans-banner .dab-badge, .direct-ans-banner .dab-rec-dt { color: var(--primary) !important; }
 .dab-stamp, .openthe-stamp-wrap { filter: none !important; }
+.openthe-stamp-wrap { width: 140px !important; height: 140px !important; transform: none !important; opacity: .84; }
+.openthe-stamp-wrap:hover { transform: scale(1.02) !important; }
+.gauge-wrap { width: 150px !important; height: 150px !important; margin: 12px auto 8px !important; }
+.gauge-track, .gauge-arc { stroke-width: 9 !important; }
+.gauge-arc { filter: none !important; }
+.gauge-flare { display: none !important; }
+.gauge-num { font-size: 40px !important; letter-spacing: -1px !important; }
+.gauge-num span { font-size: 18px !important; }
+.gauge-lbl { text-transform: none !important; letter-spacing: .04em !important; }
+.chart-svg-wrap svg rect[fill="#1e2329"] { fill: var(--card) !important; stroke: var(--up) !important; }
+.chart-svg-wrap svg rect[fill="#FCD535"] { fill: var(--primary) !important; }
+.chart-svg-wrap svg text[fill="#0ecb81"] { fill: var(--up) !important; }
+.chart-svg-wrap svg text[fill="#0b0e11"] { fill: var(--on-dark) !important; }
+.chart-svg-wrap svg text[fill="#FCD535"] { fill: var(--primary) !important; }
 .card-box, .studio-col, .calc, .cal-grid-card, .alert-strip, .readout, .chart-svg-wrap { background: var(--card) !important; border-color: var(--hairline) !important; }
 .studio-col, .card-box, .calc, .cal-grid-card, .alert-strip, .readout { box-shadow: 0 1px 0 rgba(71,54,35,.04) !important; }
 .sec-k, .sub-badge { color: var(--primary) !important; }
@@ -1839,7 +1853,7 @@ Live
 <div class="gauge-cap">low — a reset just landed</div>
 <div class="gauge-foot">
 <span>Latest reset <b class="num" data-local-date-only="2026-10-23T04:46:19.000Z">2026-10-23</b></span>
-<span>Days since <b class="num" data-days-since-utc="2026-10-23T04:46:19.000Z">0.3d</b></span>
+<span>Days since <b class="num" data-days-since-utc="2026-10-23T04:46:19.000Z">0.4d</b></span>
 </div>
 </div>
 
@@ -2012,7 +2026,7 @@ Projected 48h
 </div>
 <div class="readout-item">
 <div class="ro-l">Days Since Reset</div>
-<div class="ro-v num" data-days-since-utc="2026-10-23T04:46:19.000Z">0.3d</div>
+<div class="ro-v num" data-days-since-utc="2026-10-23T04:46:19.000Z">0.4d</div>
 <div class="ro-s">Last: <span data-local-date-only="2026-10-23T04:46:19.000Z">2026-10-23</span></div>
 </div>
 <div class="readout-item">
@@ -2360,7 +2374,7 @@ Small quality of life improvement. You can now edit previous messages within a t
   </div>
   <div class="sr-right">
     <span class="sr-dot yellow"></span>
-    <span class="sr-status"><span data-cooldown-utc="2026-10-23T04:46:19.000Z">Cooldown active (0.3d)</span></span>
+    <span class="sr-status"><span data-cooldown-utc="2026-10-23T04:46:19.000Z">Cooldown active (0.4d)</span></span>
   </div>
 </div><div class="switch-row">
   <div class="sr-left">
@@ -2849,7 +2863,7 @@ Small quality of life improvement. You can now edit previous messages within a t
   window.CODEX_RADAR = {
     probability: 99,
     lastResetUtc: "2026-10-23T04:46:19.000Z",
-    daysSinceStr: "0.3d"
+    daysSinceStr: "0.4d"
   };
 
   var LAST_RESET_UTC = "2026-10-23T04:46:19.000Z";
