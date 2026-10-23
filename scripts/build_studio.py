@@ -1123,13 +1123,7 @@ for code, d, name, loc, base_url in LANGS:
                     "priceCurrency":"USD",
                     "availability":"https://schema.org/InStock"
                 },
-                "aggregateRating":{
-                    "@type":"AggregateRating",
-                    "ratingValue":"4.9",
-                    "bestRating":"5",
-                    "ratingCount":"342",
-                    "reviewCount":"128"
-                },
+
                 "isBasedOn":[
                     "https://x.com/thsottiaux",
                     "https://status.openai.com/"
