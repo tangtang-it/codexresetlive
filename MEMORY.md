@@ -229,3 +229,6 @@ u.
 
 - **信号统计卡与赞助横幅对比度**: Commit 3aaf753. Converted the remaining dark switchboard user-estimate card and sponsor banner to readable editorial paper surfaces with a primary-color edge marker; data and layout behavior unchanged.
 
+
+- **顶部状态印章仪表盘与预测图表层级**: Commit c1b4758. Reduced the confirmed-reset stamp, simplified the 99% gauge, and normalized chart marker fills to editorial paper/green/red/amber colors so current reset and next forecast read as separate states.
+
