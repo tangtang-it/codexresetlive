@@ -3,14 +3,14 @@
   "reset_count": 39,
   "regular": 33,
   "banked": 5,
-  "last_reset_at": "2026-10-20T06:33:48.000Z",
-  "last_reset_text": "Day 15/ Nevermind, we're still cooking... and reset. Enjoy.",
+  "last_reset_at": "2026-10-20T06:33:48.848Z",
+  "last_reset_text": "Day 15/ Nevermind, we&#39;re still cooking... and reset. Enjoy.",
   "last_reset_url": "https://x.com/thsottiaux/status/2112432076767289678",
   "first_reset_at": "2025-09-17T04:02:52.000Z",
-  "days_since_last_reset": 2.9,
+  "days_since_last_reset": 3.2,
   "avg_gap_days_all": 10.5,
   "avg_gap_days_recent": 5.2,
-  "probability_48h": 61,
+  "probability_48h": 69,
   "monthly_series": [
     {
       "month": "2025-09",
