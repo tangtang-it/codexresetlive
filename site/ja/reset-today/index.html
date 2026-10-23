@@ -1928,7 +1928,7 @@ document.addEventListener('DOMContentLoaded', function(){
   <div class="dab-left">
     <span class="dab-badge yes"><span class="dot"></span> リアルタイム判定：本日リセット完了 (YES)</span>
     <div class="dab-h">Codexは今日リセットされましたか？ <strong>はい、本日リセットされました (Yes.)</strong></div>
-    <div class="dab-p">直近の公式リセットは <strong data-ago-utc="2026-10-23T04:46:19.007Z">18 時間前</strong> に <a class="dab-author-badge" href="https://x.com/thsottiaux/status/2113492187770175603" target="_blank" rel="noopener nofollow"><img class="dab-inline-avatar" src="/assets/avatars/tibo.jpg" alt="Tibo Sottiaux" width="18" height="18"><span>Tibo Sottiaux (@thsottiaux)</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;vertical-align:-1px"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a> により完了しました。利用枠は回復済みです。</div>
+    <div class="dab-p">直近の公式リセットは <strong data-ago-utc="2026-10-23T04:46:19.007Z">19 時間前</strong> に <a class="dab-author-badge" href="https://x.com/thsottiaux/status/2113492187770175603" target="_blank" rel="noopener nofollow"><img class="dab-inline-avatar" src="/assets/avatars/tibo.jpg" alt="Tibo Sottiaux" width="18" height="18"><span>Tibo Sottiaux (@thsottiaux)</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;vertical-align:-1px"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a> により完了しました。利用枠は回復済みです。</div>
     <div class="dab-rec-line">
       <span>直近の記録：</span>
       <span class="dab-rec-dt" data-local-dt="2026-10-23T04:46:19.007Z">2026-10-23 04:46 UTC</span>
@@ -2001,7 +2001,7 @@ document.addEventListener('DOMContentLoaded', function(){
 <div class="gauge-cap">低め — 直前にリセット済み</div>
 <div class="gauge-foot">
 <span>最新リセット <b class="num" data-local-date-only="2026-10-23T04:46:19.007Z">2026-10-23</b></span>
-<span>経過日数 <b class="num" data-days-since-utc="2026-10-23T04:46:19.007Z">0.7d</b></span>
+<span>経過日数 <b class="num" data-days-since-utc="2026-10-23T04:46:19.007Z">0.8d</b></span>
 </div>
 </div>
 
@@ -2174,7 +2174,7 @@ document.addEventListener('DOMContentLoaded', function(){
 </div>
 <div class="readout-item">
 <div class="ro-l">Days Since Reset</div>
-<div class="ro-v num" data-days-since-utc="2026-10-23T04:46:19.007Z">0.7d</div>
+<div class="ro-v num" data-days-since-utc="2026-10-23T04:46:19.007Z">0.8d</div>
 <div class="ro-s">Last: <span data-local-date-only="2026-10-23T04:46:19.007Z">2026-10-23</span></div>
 </div>
 <div class="readout-item">
@@ -2527,7 +2527,7 @@ Small quality of life improvement. You can now edit previous messages within a t
   </div>
   <div class="sr-right">
     <span class="sr-dot yellow"></span>
-    <span class="sr-status"><span data-cooldown-utc="2026-10-23T04:46:19.007Z">Cooldown active (0.7d)</span></span>
+    <span class="sr-status"><span data-cooldown-utc="2026-10-23T04:46:19.007Z">Cooldown active (0.8d)</span></span>
   </div>
 </div><div class="switch-row">
   <div class="sr-left">
@@ -3016,7 +3016,7 @@ Small quality of life improvement. You can now edit previous messages within a t
   window.CODEX_RADAR = {
     probability: 99,
     lastResetUtc: "2026-10-23T04:46:19.007Z",
-    daysSinceStr: "0.7d"
+    daysSinceStr: "0.8d"
   };
 
   var LAST_RESET_UTC = "2026-10-23T04:46:19.007Z";
@@ -3198,7 +3198,7 @@ Small quality of life improvement. You can now edit previous messages within a t
     var yNow = pClamped <= 80 
       ? Math.round((130.0 - (pClamped * 1.1875)) * 10) / 10 
       : Math.round((35.0 - ((pClamped - 80.0) * 0.25)) * 10) / 10;
-    var yBadgeRect = Math.max(11.0, Math.round((yNow - 20.0) * 10) / 10);
+    var yBadgeRect = resetOccurredToday ? 11.0 : Math.max(11.0, Math.round((yNow - 20.0) * 10) / 10);
     var yBadgeText = Math.round((yBadgeRect + 11.5) * 10) / 10;
 
     var chartDot = document.getElementById("chartNowDot");
