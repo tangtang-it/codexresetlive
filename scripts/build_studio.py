@@ -56,9 +56,14 @@ p_now_lbl = f"{now_dt.strftime('%b')} {now_dt.day} (Now)"
 p_t1_lbl = f"{(now_dt + timedelta(days=1)).strftime('%b')} {(now_dt + timedelta(days=1)).day}"
 p_t2_lbl = f"{(now_dt + timedelta(days=2)).strftime('%b')} {(now_dt + timedelta(days=2)).day}"
 
-y_now = round(130 - (prob * 1.25), 1)
-y_badge_rect = round(y_now - 23, 1)
-y_badge_text = round(y_now - 12, 1)
+prob_clamped = min(100.0, max(0.0, float(prob)))
+if prob_clamped <= 80.0:
+    y_now = round(130.0 - (prob_clamped * 1.1875), 1)
+else:
+    y_now = round(35.0 - ((prob_clamped - 80.0) * 0.25), 1)
+
+y_badge_rect = max(11.0, round(y_now - 20.0, 1))
+y_badge_text = round(y_badge_rect + 11.5, 1)
 
 # --- Shared UI Components ---
 pulse_svg = f'''<svg viewBox="0 0 740 185" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -108,7 +113,7 @@ pulse_svg = f'''<svg viewBox="0 0 740 185" fill="none" xmlns="http://www.w3.org/
   <text id="chartT2Date" x="685" y="160" fill="#707a8a" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" text-anchor="middle">{p_t2_lbl}</text>
 
   <!-- Area Fill Under Probability Curve -->
-  <path d="M 60 135 L 60 115 Q 100 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 370 70, 445 32 L 445 130 Q 485 105, 525 {y_now} L 525 135 Z" fill="url(#waveAreaGrad)"/>
+  <path id="chartAreaPath" d="M 60 135 L 60 115 Q 100 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 370 70, 445 32 L 445 130 Q 485 105, 525 {y_now} L 525 135 Z" fill="url(#waveAreaGrad)"/>
 
   <!-- Smooth Historical Probability Waveform -->
   <path id="chartHistPath" d="M 60 115 Q 100 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 370 70, 445 32 L 445 130 Q 485 105, 525 {y_now}" stroke="#0ecb81" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.8"/>
@@ -157,7 +162,7 @@ pulse_svg = f'''<svg viewBox="0 0 740 185" fill="none" xmlns="http://www.w3.org/
   <circle id="chartNowRing" cx="525" cy="{y_now}" r="9" stroke="#FCD535" stroke-width="1.5" stroke-opacity="0.4"/>
   <circle id="chartNowDot" cx="525" cy="{y_now}" r="5" fill="#FCD535"/>
   <g filter="url(#badgeShadow)">
-    <rect id="chartNowBadgeRect" x="498" y="{y_badge_rect}" width="54" height="17" rx="3.5" fill="#FCD535"/>
+    <rect id="chartNowBadgeRect" x="498" y="{y_badge_rect}" width="54" height="16" rx="3.5" fill="#FCD535"/>
     <text id="chartNowProbText" x="525" y="{y_badge_text}" fill="#0b0e11" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" font-weight="bold" text-anchor="middle">Now {prob}%</text>
   </g>
 </svg>'''

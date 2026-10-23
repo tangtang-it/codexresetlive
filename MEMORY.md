@@ -187,3 +187,20 @@ u.
   3. **Hazard Cooldown Tuning (scripts/compute_stats.py)**:
      - Set initial post-reset cooldown (d <= 1.5d) to 1% baseline to match upstream radar signal.
 - **Verification**: 40/40 multilingual pages recompiled; 100% passed verify_site.py integrity, schema, and section audit.
+
+## 10. 48-Hour Forecast Pulse High Probability Clipping & Anchor Alignment Fix (2026-10-22)
+- **Problem Root-Caused**:
+  1. **Top Clipping Bug on High Probability**: When probability reached >= 80% (e.g. 99% in live window), the legacy linear formula `yNow = 130 - prob * 1.25` computed `yNow = 6.25`. Placing the badge at `yNow - 23` pushed `yBadgeRect = -16.75` and text to `y = -5.75` (negative coordinates). The SVG `viewBox="0 0 740 185"` and `.chart-svg-wrap { overflow: hidden; }` truncated the badge horizontally, leaving only a 0.2px sliver at the top boundary.
+  2. **Anchor Coordinate & Path Desync**: In `_tpl_body_v2.html`, client-side SWR hydration previously hardcoded `cx="515"` and an obsolete 3-spike Bezier curve from October 11, whereas the compiled SVG in `build_studio.py` placed the 'Now' date and anchor at `x="525"` with 4 verified historical reset spikes (Oct 13, 15, 17, 20).
+- **Implemented Fixes**:
+  1. **Bounded Coordinate Mapping**:
+     - Below 80%: Maps linearly from baseline `y = 130.0` (0%) to `y = 35.0` (80% grid line).
+     - Above 80%: Smoothly compresses into the event crest zone from `y = 35.0` to `y = 30.0` (100%), matching confirmed reset levels (`y = 32`).
+     - Hard Floor: Enforced `yBadgeRect = max(11.0, round(yNow - 20.0, 1))` and `yBadgeText = yBadgeRect + 11.5` in both Python (`scripts/build_studio.py`) and JS (`_tpl_body_v2.html`), ensuring the badge perfectly aligns on the horizontal row of RESET badges (`y = 11.0`, `y = 22.5`) with 11px headroom.
+  2. **Synchronized SWR Hydration**:
+     - Aligned all client-side anchor elements (`chartDot`, `chartRing`, `chartStem`, `chartProbTxt`) to `x = 525`, `chartBadgeRect` to `x = 498` (width 54, centered at 525).
+     - Updated `chartHistPath`, `chartProjPath`, and added `chartAreaPath` dynamic endpoint coupling.
+- **Verification**:
+  - Recompiled all 40 multilingual and historical pages via `scripts/build_studio.py`.
+  - 100% passed `scripts/verify_site.py` integrity, schema, and section audit.
+  - Headless Chrome QA verified clean rendering and zero clipping under 99% probability.
