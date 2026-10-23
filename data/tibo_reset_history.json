@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 108,
+  "total": 109,
   "records": [
     {
       "id": "1968163721034994139",
@@ -870,6 +870,14 @@
       "status": "confirmed",
       "text": "Day 17/ Bet you thought we forgot, but no, it’s reset day today.\n\nAlso good time to remind you to get Daybreak Blue access, it only takes 15 mins and you don’t want to have to do it in the middle of an incident.",
       "url": "https://x.com/thsottiaux/status/2113162277688070445"
+    },
+    {
+      "id": "2113492187770175603",
+      "at": "2026-10-23T04:46:19.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "Day 18/ Decisions API is GA, OpenResponses joined the Linux Foundation, we shipped some performance improvements and Uber is going all-in on codex &amp; work. But yes… that’s a reset!",
+      "url": "https://x.com/thsottiaux/status/2113492187770175603"
     }
   ]
 }
