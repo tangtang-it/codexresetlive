@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 110,
+  "total": 109,
   "records": [
     {
       "id": "1968163721034994139",
@@ -878,14 +878,6 @@
       "status": "confirmed",
       "text": "Day 18/ Decisions API is GA, OpenResponses joined the Linux Foundation, we shipped some performance improvements and Uber is going all-in on codex &amp; work. But yes… that’s a reset!",
       "url": "https://x.com/thsottiaux/status/2113492187770175603"
-    },
-    {
-      "id": "2113492502355562875",
-      "at": "2026-10-23T04:47:34.000Z",
-      "type": "regular",
-      "status": "announced",
-      "text": "Landing tomorrow before 10am PST together with a small ship.",
-      "url": "https://x.com/thsottiaux/status/2113492502355562875"
     }
   ]
 }
