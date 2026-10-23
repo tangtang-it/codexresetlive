@@ -108,7 +108,7 @@ pulse_svg = f'''<svg viewBox="0 0 740 185" fill="none" xmlns="http://www.w3.org/
   <text x="295" y="160" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="bold" text-anchor="middle">Oct 17</text>
   <text x="370" y="160" fill="#707a8a" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" text-anchor="middle">Oct 18</text>
   <text x="445" y="160" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="bold" text-anchor="middle">Oct 20</text>
-  <text id="chartNowDate" x="525" y="160" fill="#FCD535" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="bold" text-anchor="middle">{p_now_lbl}</text>
+  <text id="chartNowDate" x="525" y="160" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="bold" text-anchor="middle">{p_now_lbl}</text>
   <text id="chartT1Date" x="610" y="160" fill="#707a8a" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" text-anchor="middle">{p_t1_lbl}</text>
   <text id="chartT2Date" x="685" y="160" fill="#707a8a" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" text-anchor="middle">{p_t2_lbl}</text>
 
@@ -157,13 +157,22 @@ pulse_svg = f'''<svg viewBox="0 0 740 185" fill="none" xmlns="http://www.w3.org/
     <text id="chartLastResetText" x="445" y="22.5" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" font-weight="bold" text-anchor="middle">RESET</text>
   </g>
 
-  <!-- ================= CURRENT ANCHOR: Now ================= -->
-  <line id="chartNowStem" x1="525" y1="{y_now}" x2="525" y2="135" stroke="#FCD535" stroke-width="1.5" stroke-opacity="0.8"/>
-  <circle id="chartNowRing" cx="525" cy="{y_now}" r="9" stroke="#FCD535" stroke-width="1.5" stroke-opacity="0.4"/>
-  <circle id="chartNowDot" cx="525" cy="{y_now}" r="5" fill="#FCD535"/>
+  <!-- ================= CURRENT RESET EVENT: Now ================= -->
+  <line id="chartNowStem" x1="525" y1="32" x2="525" y2="135" stroke="#0ecb81" stroke-width="1.8" stroke-opacity="0.9"/>
+  <circle id="chartNowRing" cx="525" cy="32" r="9" stroke="#0ecb81" stroke-width="1.5" stroke-opacity="0.4"/>
+  <circle id="chartNowDot" cx="525" cy="32" r="5" fill="#0ecb81"/>
   <g filter="url(#badgeShadow)">
-    <rect id="chartNowBadgeRect" x="498" y="{y_badge_rect}" width="54" height="16" rx="3.5" fill="#FCD535"/>
-    <text id="chartNowProbText" x="525" y="{y_badge_text}" fill="#0b0e11" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" font-weight="bold" text-anchor="middle">Now {prob}%</text>
+    <rect id="chartNowBadgeRect" x="503" y="11" width="44" height="16" rx="3.5" fill="#1e2329" stroke="#0ecb81" stroke-width="1.4"/>
+    <text id="chartNowProbText" x="525" y="22.5" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" font-weight="bold" text-anchor="middle">RESET</text>
+  </g>
+
+  <!-- ================= NEXT RESET FORECAST: Tomorrow ================= -->
+  <line id="chartNextStem" x1="610" y1="{y_now}" x2="610" y2="135" stroke="#FCD535" stroke-width="1.5" stroke-opacity="0.8" stroke-dasharray="4 3"/>
+  <circle id="chartNextRing" cx="610" cy="{y_now}" r="9" stroke="#FCD535" stroke-width="1.5" stroke-opacity="0.4"/>
+  <circle id="chartNextDot" cx="610" cy="{y_now}" r="5" fill="#FCD535"/>
+  <g filter="url(#badgeShadow)">
+    <rect id="chartNextBadgeRect" x="581" y="{y_badge_rect}" width="58" height="16" rx="3.5" fill="#FCD535"/>
+    <text id="chartNextProbText" x="610" y="{y_badge_text}" fill="#0b0e11" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="8.5" font-weight="bold" text-anchor="middle">NEXT {prob}%</text>
   </g>
 </svg>'''
 
@@ -877,7 +886,7 @@ def render_footer_dir(code, base_href):
 
 FAQS_DATA = {
     "en": [
-        ("Will Codex reset today?", "There is currently a low probability (around 30%) of a spontaneous global reset today. No announcement has been posted by OpenAI or Tibo yet. The last verified reset was 2 days ago. We recommend relying on your personal 5-hour rolling recovery window."),
+        ("Will Codex reset today?", "Reset probabilities are dynamically calculated by the radar above based on verified leadership signals from @thsottiaux, release cadences, and platform outages. When official leadership announces an upcoming or active quota flush, probability surges up to 99%. Check the real-time probability gauge at the top of this page for the active 48-hour outlook."),
         ("Is there an official schedule for Codex resets?", "No. Global resets are irregular and non-guaranteed. They are manually triggered by OpenAI leadership (chiefly Tibo Sottiaux) to celebrate user milestones, deploy major model architecture upgrades, or compensate for prolonged cluster outages."),
         ("What is the difference between a regular reset and a banked reset?", "A regular (hard) reset immediately clears token usage limits for every paid user on the platform. A banked reset provides a stored daily credit voucher that you can manually activate whenever you hit a quota wall."),
         ("Do banked resets expire?", "Banked resets generally persist across multiple days during promotional rollout periods, but OpenAI reserves the right to expire unused promotional tokens upon general availability of the relevant feature."),
@@ -886,7 +895,7 @@ FAQS_DATA = {
         ("How can I keep coding without waiting for quota to recover?", "You can instantly switch to alternative top-tier agentic IDEs such as Cursor IDE, Windsurf, or Claude Code. Each maintains an independent monthly usage pool and provides generous free tier credits.")
     ],
     "zh": [
-        ("Codex 今天会全网重置吗？", "目前今日全网放水的概率偏低（约 30%）。OpenAI 官方或 Tibo 尚未发布放水通知。最近一次全量重置发生在 2 天前。建议优先关注个人 5 小时滑动恢复倒计时。"),
+        ("Codex 今天会全网重置吗？", "Codex 重置雷达根据 Tibo Sottiaux 官方推文、发版节奏与系统故障动态计算概率。当官方发布即将放水或确认重置信号时，预测概率将自动提升至 99%。请直接查看本页面顶部的实时概率仪表盘获取最新 48 小时动态。"),
         ("官方是否有固定的 Codex 重置时间表？", "没有。全网公共重置没有固定排期，完全由 OpenAI 核心团队（主要是 Tibo Sottiaux）视工程与公关节点手动触发，例如重大模型上线、活跃用户突破里程碑或大规模集群故障后的补偿。"),
         ("常规硬重置（Hard Reset）与存续额度（Banked Reset）有什么区别？", "常规硬重置会瞬间清空全体付费用户的限流状态；而存续额度（Banked Reset）相当于一张存放在账户里的额度抵扣券，在你触发限流时可随时手动点击抵扣。"),
         ("存续额度（Banked Reset）会过期失效吗？", "在特定功能灰度期内，存续额度通常可以跨天累积；但在新架构全量开放后，官方通常会清空未使用的活动存续额度。"),
@@ -895,7 +904,7 @@ FAQS_DATA = {
         ("额度打满等不及恢复时，如何继续高效写代码？", "建议无缝切换至 Cursor IDE、Windsurf 或 Claude Code 等顶尖备用 AI 编程工具。这些工具拥有独立的免费调用池与专属额度，无需干等。")
     ],
     "ja": [
-        ("Codexは今日リセットされますか？", "本日の全体リセット確率は約30%と低めです。公式やTiboからの告知はまだありません。直近のリセットは2日前です。個人向けの5時間ローリング枠回復を優先してご確認ください。"),
+        ("Codexは今日リセットされますか？", "Codexリセットレーダーは、Tibo公式シグナル、リリース周期、サーバー稼働状況に基づいてリアルタイムに確率を算出します。公式からリセット予告や反映が発表されると確率は最大99%まで急上昇します。最新の48時間予測はページ最上部のリアルタイムメーターをご確認ください。"),
         ("Codexのリセットに決まったスケジュールはありますか？", "ありません。全体リセットは定例ではなく、OpenAIのCodex責任者Tiboの裁量により、新モデル公開やユーザー数達成、大規模障害のお詫びとして不定期に発動されます。"),
         ("通常リセットとバンク枠（Banked Reset）の違いは何ですか？", "通常リセットは全有料ユーザーの利用枠を即座に満タンに戻します。バンク枠はアカウントに付与される保存型チケットで、制限到達時に任意で使用可能です。"),
         ("バンク枠に有効期限はありますか？", "特定の機能テスト期間中は保持されますが、正式リリース時に未使用のボーナス枠が失効する場合があります。"),
@@ -1343,9 +1352,10 @@ for code, d, name, loc, base_url in LANGS:
 <div class="wrap foot-in">
 {render_footer_dir(code, f"/{d}/" if d else "/")}
 <div class="foot-links">
-<a href="#about">About</a>
-<a href="#privacy">Privacy Policy</a>
-<a href="#terms">Terms of Service</a>
+<a href="/about/">About</a>
+<a href="/privacy/">Privacy Policy</a>
+<a href="/terms/">Terms of Service</a>
+<a href="/contact/">Contact</a>
 <a href="https://github.com/tangtang-it/codexresetlive" target="_blank" rel="noopener nofollow">GitHub ↗</a>
 <a href="/llms.txt">llms.txt</a>
 <a href="/llms-full.txt">llms-full.txt</a>
@@ -1469,9 +1479,10 @@ P(t) = Baseline(t) + W_tibo · S_tibo + W_status · S_status + W_cadence · S_ca
 <div class="wrap foot-in">
 {render_footer_dir(code, f"/{d}/" if d else "/")}
 <div class="foot-links">
-<a href="#about">About</a>
-<a href="#privacy">Privacy Policy</a>
-<a href="#terms">Terms of Service</a>
+<a href="/about/">About</a>
+<a href="/privacy/">Privacy Policy</a>
+<a href="/terms/">Terms of Service</a>
+<a href="/contact/">Contact</a>
 <a href="https://github.com/tangtang-it/codexresetlive" target="_blank" rel="noopener nofollow">GitHub ↗</a>
 <a href="/llms.txt">llms.txt</a>
 <a href="/llms-full.txt">llms-full.txt</a>
@@ -1492,7 +1503,16 @@ document.addEventListener('click',function(e){{if(!lp.contains(e.target)&&!lb.co
 
     print(f"Generated 4 pages for [{code:7s}]: / | /reset-today/ | /history/ | /methodology/")
 
-# --- WRITE COMPREHENSIVE SITEMAP.XML (ALL 40 URLS) ---
+# --- BUILD COMPLIANCE PAGES AND WRITE SITEMAP ---
+import subprocess
+try:
+    subprocess.run(["python", str(ROOT_DIR / "scripts/build_compliance_pages.py")], check=True)
+    for c_slug in ["about", "privacy", "terms", "contact"]:
+        SITEMAP_URLS.append((f"https://codexresetlive.com/{c_slug}/", "0.6"))
+except Exception as e:
+    print(f"Compliance build error: {e}")
+
+# --- WRITE COMPREHENSIVE SITEMAP.XML ---
 sitemap_items = []
 for url, prio in SITEMAP_URLS:
     sitemap_items.append(f'''  <url>

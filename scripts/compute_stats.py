@@ -41,12 +41,13 @@ def calc_probability(d, has_pending_reset=False):
     p_val = 11.0 + (74.0 / (1.0 + math.exp(-1.8 * (max(0.0, d) - 2.5))))
     return max(1, min(85, int(round(p_val))))
 
-# Pending announcement is only active if an unfulfilled reset is scheduled for the future
+# Pending announcement is active if an unfulfilled reset is scheduled for the future
 has_pending = False
-if days_since > 1.0:
-    for r in recs[-3:]:
-        txt = r.get("text", "").lower()
-        if any(k in txt for k in ["landing tomorrow", "incoming reset", "will reset in", "propagating in"]):
+for r in recs[-4:]:
+    txt = r.get("text", "").lower()
+    if any(k in txt for k in ["landing tomorrow", "incoming reset", "will reset in", "propagating in", "landing by eod"]):
+        # Verify this announcement is later than or equal to the last confirmed reset
+        if r.get("at", "") >= last.get("at", ""):
             has_pending = True
             break
 

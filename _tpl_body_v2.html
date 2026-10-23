@@ -113,11 +113,13 @@ __PULSE_SVG__
 <div class="alert-desc">__ALERT_D__</div>
 </div>
 <div class="alert-actions">
-<input type="email" id="alertEmail" class="alert-input" placeholder="you@developer.com">
-<button class="btn btn-primary" id="alertSubBtn" style="height:36px;padding:0 16px;font-size:12px">__NOTIFY_ME__</button>
+<a class="btn btn-primary" href="https://x.com/thsottiaux" target="_blank" rel="noopener nofollow" style="height:36px;padding:0 16px;font-size:12px;display:inline-flex;align-items:center;gap:6px;text-decoration:none">
+  <svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+  <span>Follow Tibo on X ↗</span>
+</a>
 <div class="channel-pills">
-<button class="ch-btn" id="tgBtn"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg> <span>Telegram</span></button>
-<button class="ch-btn" id="wxBtn"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> <span>WeChat</span></button>
+<a class="ch-btn" href="https://status.openai.com" target="_blank" rel="noopener nofollow" style="text-decoration:none"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4"/><path d="m4.93 4.93 2.83 2.83"/><path d="M2 12h4"/><path d="m4.93 19.07 2.83-2.83"/><path d="M12 22v-4"/><path d="m19.07 19.07-2.83-2.83"/><path d="M22 12h-4"/><path d="m19.07 4.93-2.83 2.83"/></svg> <span>OpenAI Status ↗</span></a>
+<button class="ch-btn" id="bookmarkBtn"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg> <span>Bookmark Radar</span></button>
 <span style="font-size:11px;font-family:var(--mono);color:var(--primary);display:inline-flex;align-items:center;padding:0 6px">__SUBSCRIBER_COUNT__</span>
 </div>
 </div>
@@ -371,9 +373,10 @@ __GUIDES_HTML__
 <div class="wrap foot-in">
 __FOOTER_DIR_HTML__
 <div class="foot-links">
-<a href="#about">About</a>
-<a href="#privacy">Privacy Policy</a>
-<a href="#terms">Terms of Service</a>
+<a href="/about/">About</a>
+<a href="/privacy/">Privacy Policy</a>
+<a href="/terms/">Terms of Service</a>
+<a href="/contact/">Contact</a>
 <a href="https://github.com/tangtang-it/codexresetlive" target="_blank" rel="noopener nofollow">GitHub ↗</a>
 <a href="https://uplcm.com/4/12002462" target="_blank" rel="noopener nofollow sponsored" style="color:var(--primary)">Partner Deals ↗</a>
 <a href="/llms.txt">llms.txt</a>
@@ -582,6 +585,7 @@ __FOOTER_DIR_HTML__
     var diffDays = diffMs / 86400000;
     var diffHours = diffMs / 3600000;
     var diffMin = diffMs / 60000;
+    var resetOccurredToday = diffDays < 1.0;
     var liveProb = (window.CODEX_RADAR && typeof window.CODEX_RADAR.probability === 'number') ? window.CODEX_RADAR.probability : __PROB_NUM__;
 
     // A. Smooth Transition Gauge
@@ -590,7 +594,13 @@ __FOOTER_DIR_HTML__
     // Gauge Caption Sync
     if (capEl) {
       capEl.classList.remove("low", "mod", "high");
-      if (liveProb < 30) {
+      if (resetOccurredToday) {
+        capEl.classList.add("high");
+        if (isZh) capEl.textContent = "刚刚完成重置 —— 下一次信号偏高";
+        else if (isJa) capEl.textContent = "直近リセット完了 —— 次回シグナルは高め";
+        else if (isKo) capEl.textContent = "최근 리셋 완료 — 다음 신호 높음";
+        else capEl.textContent = "Recent reset complete — next reset signal elevated";
+      } else if (liveProb < 30) {
         capEl.classList.add("low");
         if (isZh) capEl.textContent = "偏低 —— 刚刚完成一次重置";
         else if (isJa) capEl.textContent = "低め —— 直近にリセット完了";
@@ -688,7 +698,9 @@ __FOOTER_DIR_HTML__
     }
 
     var chartProbTxt = document.getElementById("chartNowProbText");
-    if(chartProbTxt) chartProbTxt.textContent = "Now " + liveProb + "%";
+    if(chartProbTxt) chartProbTxt.textContent = resetOccurredToday ? "RESET" : "NOW " + liveProb + "%";
+    var chartNextProbTxt = document.getElementById("chartNextProbText");
+    if(chartNextProbTxt) chartNextProbTxt.textContent = "NEXT " + liveProb + "%";
 
     var pClamped = Math.min(100, Math.max(0, liveProb));
     var yNow = pClamped <= 80 
@@ -698,11 +710,22 @@ __FOOTER_DIR_HTML__
     var yBadgeText = Math.round((yBadgeRect + 11.5) * 10) / 10;
 
     var chartDot = document.getElementById("chartNowDot");
-    if(chartDot) { chartDot.setAttribute("cy", yNow); chartDot.setAttribute("cx", "525"); }
+    if(chartDot) { chartDot.setAttribute("cy", resetOccurredToday ? "32" : yNow); chartDot.setAttribute("cx", "525"); chartDot.setAttribute("fill", resetOccurredToday ? "#0ecb81" : "#FCD535"); }
     var chartRing = document.getElementById("chartNowRing");
-    if(chartRing) { chartRing.setAttribute("cy", yNow); chartRing.setAttribute("cx", "525"); }
+    if(chartRing) { chartRing.setAttribute("cy", resetOccurredToday ? "32" : yNow); chartRing.setAttribute("cx", "525"); chartRing.setAttribute("stroke", resetOccurredToday ? "#0ecb81" : "#FCD535"); }
     var chartStem = document.getElementById("chartNowStem");
-    if(chartStem) { chartStem.setAttribute("y1", yNow); chartStem.setAttribute("x1", "525"); chartStem.setAttribute("x2", "525"); }
+    if(chartStem) { chartStem.setAttribute("y1", resetOccurredToday ? "32" : yNow); chartStem.setAttribute("x1", "525"); chartStem.setAttribute("x2", "525"); chartStem.setAttribute("stroke", resetOccurredToday ? "#0ecb81" : "#FCD535"); }
+
+    var nextY = yNow;
+    var chartNextDot = document.getElementById("chartNextDot");
+    if(chartNextDot) { chartNextDot.setAttribute("cy", nextY); }
+    var chartNextRing = document.getElementById("chartNextRing");
+    if(chartNextRing) { chartNextRing.setAttribute("cy", nextY); }
+    var chartNextStem = document.getElementById("chartNextStem");
+    if(chartNextStem) { chartNextStem.setAttribute("y1", nextY); }
+    var chartNextBadge = document.getElementById("chartNextBadgeRect");
+    if(chartNextBadge) { chartNextBadge.setAttribute("y", Math.max(11.0, nextY - 20.0)); }
+    if(chartNextProbTxt) { chartNextProbTxt.setAttribute("y", Math.max(22.5, nextY - 8.5)); }
     var chartBadgeRect = document.getElementById("chartNowBadgeRect");
     if(chartBadgeRect) { chartBadgeRect.setAttribute("y", yBadgeRect); chartBadgeRect.setAttribute("x", "498"); }
     if(chartProbTxt) { chartProbTxt.setAttribute("y", yBadgeText); chartProbTxt.setAttribute("x", "525"); }
@@ -710,7 +733,7 @@ __FOOTER_DIR_HTML__
     // Dynamic SVG Curve Connection to Live yNow
     var chartHist = document.getElementById("chartHistPath");
     if(chartHist) {
-      chartHist.setAttribute("d", "M 60 115 Q 100 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 370 70, 445 32 L 445 130 Q 485 105, 525 " + yNow);
+      chartHist.setAttribute("d", resetOccurredToday ? "M 60 115 Q 100 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 370 70, 445 32 L 445 130 Q 485 105, 525 32" : "M 60 115 Q 100 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 370 70, 445 32 L 445 130 Q 485 105, 525 " + yNow);
     }
     var chartProj = document.getElementById("chartProjPath");
     if(chartProj) {
@@ -771,20 +794,24 @@ __FOOTER_DIR_HTML__
       document.querySelectorAll("[data-local-dt]").forEach(function(el){
         var d = new Date(el.getAttribute("data-local-dt"));
         if(isNaN(d.getTime())) return;
+        var utcLabel = d.getUTCFullYear() + "-" + String(d.getUTCMonth()+1).padStart(2, "0") + "-" + String(d.getUTCDate()).padStart(2, "0") + " " + String(d.getUTCHours()).padStart(2, "0") + ":" + String(d.getUTCMinutes()).padStart(2, "0") + " UTC";
+        var localLabel = "";
         if(isZh){
           var days = ["周日","周一","周二","周三","周四","周五","周六"];
           var y = d.getFullYear(), m = d.getMonth()+1, day = d.getDate();
           var hh = String(d.getHours()).padStart(2, "0"), mm = String(d.getMinutes()).padStart(2, "0");
-          el.textContent = y + "年" + m + "月" + day + "日" + days[d.getDay()] + " " + hh + ":" + mm;
+          localLabel = y + "年" + m + "月" + day + "日" + days[d.getDay()] + " " + hh + ":" + mm;
         } else if(isJa){
           var daysJ = ["(日)","(月)","(火)","(水)","(木)","(金)","(土)"];
           var y = d.getFullYear(), m = d.getMonth()+1, day = d.getDate();
           var hh = String(d.getHours()).padStart(2, "0"), mm = String(d.getMinutes()).padStart(2, "0");
-          el.textContent = y + "年" + m + "月" + day + "日" + daysJ[d.getDay()] + " " + hh + ":" + mm;
+          localLabel = y + "年" + m + "月" + day + "日" + daysJ[d.getDay()] + " " + hh + ":" + mm;
         } else {
           var opts = { weekday: "short", year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit", hour12: false };
-          el.textContent = new Intl.DateTimeFormat("en-US", opts).format(d);
+          localLabel = new Intl.DateTimeFormat("en-US", opts).format(d);
         }
+        var localTitle = isZh ? "本地" : (isJa ? "現地" : "Local");
+        el.innerHTML = '<span class="time-chip time-chip-utc">Tibo/UTC: ' + utcLabel + '</span><span class="time-chip time-chip-local">' + localTitle + ': ' + localLabel + '</span>';
       });
     } catch(e){}
 
@@ -878,8 +905,20 @@ __FOOTER_DIR_HTML__
           if (chartProb) chartProb.textContent = 'Now ' + p48 + '%';
           var stampText = document.querySelector('.stamp-center text[letter-spacing="2"]');
           if (stampText && p48 >= 80) stampText.textContent = 'CONFIRMED';
-          if (data.lastResetAt) { LAST_RESET_UTC = data.lastResetAt; if (window.CODEX_RADAR) window.CODEX_RADAR.lastResetUtc = data.lastResetAt; }
-          updateLiveEngine();
+          if (data.lastResetAt) {
+            LAST_RESET_UTC = data.lastResetAt;
+            if (window.CODEX_RADAR) window.CODEX_RADAR.lastResetUtc = data.lastResetAt;
+            document.querySelectorAll('[data-days-since-utc]').forEach(function(el){
+              el.setAttribute('data-days-since-utc', data.lastResetAt);
+            });
+            document.querySelectorAll('[data-local-date-only]').forEach(function(el){
+              el.setAttribute('data-local-date-only', data.lastResetAt);
+            });
+            document.querySelectorAll('[data-local-dt]').forEach(function(el){
+              el.setAttribute('data-local-dt', data.lastResetAt);
+            });
+            updateLiveEngine();
+          }
         }
 
         var streamBox = document.querySelector('.stream-box');
@@ -996,15 +1035,14 @@ __FOOTER_DIR_HTML__
   });
 
   // 5. Channels and Subscriptions
-  var tg=document.getElementById("tgBtn");
-  if(tg) tg.addEventListener("click",function(){toast("Telegram Bot alerts coming soon!","plane");});
-  var wx=document.getElementById("wxBtn");
-  if(wx) wx.addEventListener("click",function(){toast("WeChat notification channel active!","chat");});
-  var sub=document.getElementById("alertSubBtn");
-  if(sub) sub.addEventListener("click",function(){
-    var em=document.getElementById("alertEmail");
-    if(em&&em.value.indexOf("@")>0){toast("Subscribed successfully! You will be notified on reset.","check");em.value="";}
-    else{toast("Please enter a valid email address.","warn");}
+  var bookmarkBtn = document.getElementById("bookmarkBtn");
+  if(bookmarkBtn) bookmarkBtn.addEventListener("click", function(){
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(window.location.href);
+      toast("URL copied! Press Ctrl+D to bookmark.", "check");
+    } else {
+      toast("Press Ctrl+D (Cmd+D) to bookmark CodexReset.live", "star");
+    }
   });
 
   // 6. Viral Share Modal Engine

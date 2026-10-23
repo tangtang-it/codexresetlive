@@ -25,30 +25,49 @@ export default {
           const raw = await upstreamRes.json();
           const data = raw.data || raw;
 
+          // Extract posts from tiboPosts
           const tiboPosts = (data.tiboPosts || []).map(p => ({
             id: String(p.id || '').replace(/^tibo-/, ''),
             at: p.occurredAt || p.at || new Date().toISOString(),
             type: (p.detail || p.title || '').toLowerCase().includes('reset') ? 'release' : 'regular',
             status: 'confirmed',
             text: p.detail || p.title || '',
-            url: p.url || `https://x.com/thsottiaux/status/${String(p.id || '').replace(/^tibo-/, '')}`
+            url: p.url || ('https://x.com/thsottiaux/status/' + String(p.id || '').replace(/^tibo-/, ''))
           }));
 
           const relevantPosts = (data.tiboRelevantPosts || []).map(p => ({
             id: String(p.id || '').replace(/^tibo-/, ''),
             at: p.occurredAt || p.at,
             text: p.detail || p.title || '',
-            url: p.url || `https://x.com/thsottiaux/status/${String(p.id || '').replace(/^tibo-/, '')}`,
+            url: p.url || ('https://x.com/thsottiaux/status/' + String(p.id || '').replace(/^tibo-/, '')),
             rationale: p.resetCandidateRationale || ''
           }));
+
+          // Extract verified reset events (e.g. manual or automated verified resets)
+          let latestReset = null;
+          if (Array.isArray(data.events)) {
+            const resets = data.events.filter(e => e && (e.kind === 'reset' || e.resetType) && e.verified !== false);
+            if (resets.length > 0) {
+              const r = resets[0];
+              latestReset = {
+                id: String(r.id || ''),
+                at: r.occurredAt || r.at || '',
+                title: r.title || 'Direct quota reset',
+                detail: r.detail || '',
+                verified: Boolean(r.verified),
+                type: r.resetType || 'usage'
+              };
+            }
+          }
 
           const payload = {
             code: 0,
             source: 'edge-live',
             updatedAt: data.updatedAt || new Date().toISOString(),
-            probability48h: data.probability48h ?? 50,
+            probability48h: typeof data.probability48h === 'number' ? data.probability48h : null,
             verdict: data.verdict || 'watching',
-            currentUsers: data.currentUsers || 46500000,
+            latestReset: latestReset,
+            lastResetAt: latestReset ? latestReset.at : null,
             latestRelevant: relevantPosts[0] || null,
             posts: tiboPosts.slice(0, 15)
           };
@@ -56,14 +75,16 @@ export default {
           return new Response(JSON.stringify(payload), { status: 200, headers });
         }
       } catch (err) {
-        // fallback gracefully
+        // Fallback gracefully without throwing
       }
 
+      // Safe fallback when upstream is unavailable - do not invent false probability or user numbers
       return new Response(JSON.stringify({
         code: 0,
         source: 'edge-fallback',
         updatedAt: new Date().toISOString(),
-        probability48h: 51,
+        probability48h: null,
+        verdict: 'unavailable',
         posts: []
       }), { status: 200, headers });
     }

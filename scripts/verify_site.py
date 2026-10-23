@@ -58,6 +58,18 @@ for hf in sorted(html_files):
                 if "WebPage" not in types:
                     print(f"FAILED: {hf} reset-today schema missing WebPage: {types}")
                     all_ok = False
+            elif "about" in rel_path:
+                if "AboutPage" not in types:
+                    print(f"FAILED: {hf} about schema missing AboutPage: {types}")
+                    all_ok = False
+            elif "contact" in rel_path:
+                if "ContactPage" not in types:
+                    print(f"FAILED: {hf} contact schema missing ContactPage: {types}")
+                    all_ok = False
+            elif any(c in rel_path for c in ["privacy", "terms"]):
+                if "WebPage" not in types:
+                    print(f"FAILED: {hf} compliance schema missing WebPage: {types}")
+                    all_ok = False
             else:
                 if "FAQPage" not in types or "WebApplication" not in types:
                     print(f"FAILED: {hf} home schema missing FAQPage or WebApplication: {types}")
@@ -74,7 +86,7 @@ for hf in sorted(html_files):
             all_ok = False
 
     # 5. Check key sections for main landing pages
-    if not any(sub in rel_path for sub in ["history", "methodology", "reset-today"]):
+    if not any(sub in rel_path for sub in ["history", "methodology", "reset-today", "about", "privacy", "terms", "contact"]):
         has_banner = "direct-ans-banner" in content
         has_gauge = "gauge-wrap" in content
         has_pulse = "chart-svg-wrap" in content

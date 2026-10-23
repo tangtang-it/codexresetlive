@@ -33,24 +33,42 @@ export async function onRequest(context) {
         type: (p.detail || p.title || '').toLowerCase().includes('reset') ? 'release' : 'regular',
         status: 'confirmed',
         text: p.detail || p.title || '',
-        url: p.url || `https://x.com/thsottiaux/status/${String(p.id || '').replace(/^tibo-/, '')}`
+        url: p.url || ('https://x.com/thsottiaux/status/' + String(p.id || '').replace(/^tibo-/, ''))
       }));
 
       const relevantPosts = (data.tiboRelevantPosts || []).map(p => ({
         id: String(p.id || '').replace(/^tibo-/, ''),
         at: p.occurredAt || p.at,
         text: p.detail || p.title || '',
-        url: p.url || `https://x.com/thsottiaux/status/${String(p.id || '').replace(/^tibo-/, '')}`,
+        url: p.url || ('https://x.com/thsottiaux/status/' + String(p.id || '').replace(/^tibo-/, '')),
         rationale: p.resetCandidateRationale || ''
       }));
+
+      // Extract verified reset events
+      let latestReset = null;
+      if (Array.isArray(data.events)) {
+        const resets = data.events.filter(e => e && (e.kind === 'reset' || e.resetType) && e.verified !== false);
+        if (resets.length > 0) {
+          const r = resets[0];
+          latestReset = {
+            id: String(r.id || ''),
+            at: r.occurredAt || r.at || '',
+            title: r.title || 'Direct quota reset',
+            detail: r.detail || '',
+            verified: Boolean(r.verified),
+            type: r.resetType || 'usage'
+          };
+        }
+      }
 
       const payload = {
         code: 0,
         source: 'edge-live',
         updatedAt: data.updatedAt || new Date().toISOString(),
-        probability48h: data.probability48h ?? 50,
+        probability48h: typeof data.probability48h === 'number' ? data.probability48h : null,
         verdict: data.verdict || 'watching',
-        currentUsers: data.currentUsers || 46500000,
+        latestReset: latestReset,
+        lastResetAt: latestReset ? latestReset.at : null,
         latestRelevant: relevantPosts[0] || null,
         posts: tiboPosts.slice(0, 15)
       };
@@ -61,14 +79,13 @@ export async function onRequest(context) {
     // Safe fallback if upstream is down
   }
 
-  // Fallback response
+  // Fallback response without inventing false probability numbers or user counts
   const fallback = {
     code: 0,
     source: 'edge-fallback',
     updatedAt: new Date().toISOString(),
-    probability48h: 51,
-    verdict: 'watching',
-    currentUsers: 46500000,
+    probability48h: null,
+    verdict: 'unavailable',
     posts: []
   };
   return new Response(JSON.stringify(fallback), { status: 200, headers });

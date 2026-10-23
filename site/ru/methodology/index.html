@@ -422,6 +422,11 @@ footer{border-top:1px solid var(--hairline);background:var(--canvas);padding:36p
 .foot-links a{font-size:12px;color:var(--muted);transition:.12s}
 .foot-links a:hover{color:var(--primary)}
 .foot-c{font-size:11px;color:var(--muted);max-width:680px;line-height:1.6}
+.dab-rec-line .dab-rec-dt{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}
+.time-chip{display:inline-flex;align-items:center;min-height:24px;padding:3px 8px;border:1px solid var(--hairline);border-radius:6px;background:var(--canvas);font-family:var(--mono);font-size:11px;line-height:1.25;white-space:nowrap}
+.time-chip-utc{color:var(--primary);border-color:rgba(252,213,53,.38);background:rgba(252,213,53,.07)}
+.time-chip-local{color:var(--on-dark);border-color:rgba(14,203,129,.38);background:rgba(14,203,129,.07)}
+@media(max-width:640px){.time-chip{white-space:normal}.dab-rec-line .dab-rec-dt{width:100%}}
 
 /* ---------- Toast ---------- */
 #toast{position:fixed;right:20px;bottom:20px;z-index:90;display:flex;align-items:center;gap:9px;
@@ -1671,9 +1676,10 @@ P(t) = Baseline(t) + W_tibo · S_tibo + W_status · S_status + W_cadence · S_ca
   </div>
 </div>
 <div class="foot-links">
-<a href="#about">About</a>
-<a href="#privacy">Privacy Policy</a>
-<a href="#terms">Terms of Service</a>
+<a href="/about/">About</a>
+<a href="/privacy/">Privacy Policy</a>
+<a href="/terms/">Terms of Service</a>
+<a href="/contact/">Contact</a>
 <a href="https://github.com/tangtang-it/codexresetlive" target="_blank" rel="noopener nofollow">GitHub ↗</a>
 <a href="/llms.txt">llms.txt</a>
 <a href="/llms-full.txt">llms-full.txt</a>

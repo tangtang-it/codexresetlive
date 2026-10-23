@@ -1,5 +1,14 @@
 # MEMORY.md - Project State & Architecture Log
 
+## 11. Phase: Oct 23 Day 18 Reset Event Sync & AdSense Pre-Audit Remediation (2026-10-23)
+- Problem Solved & Root Causes Fixed:
+  1. Classifier Rule Flaw (scripts/classifier.py): Day 18 tweet 2113492187770175603 was misclassified as chatter due to missing pattern for that's a reset. Added pattern and verified reset record.
+  2. Cloudflare Edge Ingestion Gap (functions/api/radar.js & src/worker.js): Upstream data.events array was dropped. Now parses verified resets, extracts latestReset/lastResetAt, and removed fake fallback numbers.
+  3. Stats Recalibration (scripts/compute_stats.py): Added follow-up tweet 2113492502355562875. Stats: 41 resets (11 in Oct), last reset 2026-10-23T04:46:19Z (0.3d ago), probability 99%.
+  4. AdSense Compliance Pages (scripts/build_compliance_pages.py): Built dedicated /about/, /privacy/, /terms/, /contact/ pages with Google AdSense/DoubleClick cookie disclosures, edge logging facts, CCPA/GDPR clauses, and real contact channels.
+  5. Harmonized Content & Removed Mock Email: Replaced fake email toast with real official source links and bookmark action. Harmonized FAQ text with active radar state.
+  6. Sitemap & Verification: Updated sitemap.xml to 44 URLs and verified 100% pass via scripts/verify_site.py.
+
 ## 10. Phase: Day 6 Global Reset Pipeline Sync & Cooldown State Transition (2026-10-11)
 - **Problem Solved & Root Causes Fixed**:
   - Investigated user report comparing competitor WillCodexReset.com against CodexReset.live.
@@ -204,3 +213,4 @@ u.
   - Recompiled all 40 multilingual and historical pages via `scripts/build_studio.py`.
   - 100% passed `scripts/verify_site.py` integrity, schema, and section audit.
   - Headless Chrome QA verified clean rendering and zero clipping under 99% probability.
+- **Chart Reset vs Next Forecast UI**: When a reset occurred within 24h, the chart renders the current date as a green RESET event and places the next probability on the following date as yellow NEXT N%. The direct-answer timestamp renders both Tibo UTC and the visitor local timezone.

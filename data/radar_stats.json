@@ -1,16 +1,16 @@
 {
-  "total": 109,
-  "reset_count": 39,
-  "regular": 33,
+  "total": 110,
+  "reset_count": 41,
+  "regular": 35,
   "banked": 5,
-  "last_reset_at": "2026-10-20T06:33:48.848Z",
-  "last_reset_text": "Day 15/ Nevermind, we&#39;re still cooking... and reset. Enjoy.",
-  "last_reset_url": "https://x.com/thsottiaux/status/2112432076767289678",
+  "last_reset_at": "2026-10-23T04:46:19.000Z",
+  "last_reset_text": "Day 18/ Decisions API is GA, OpenResponses joined the Linux Foundation, we shipped some performance improvements and Uber is going all-in on codex &amp; work. But yes… that’s a reset!",
+  "last_reset_url": "https://x.com/thsottiaux/status/2113492187770175603",
   "first_reset_at": "2025-09-17T04:02:52.000Z",
-  "days_since_last_reset": 3.2,
-  "avg_gap_days_all": 10.5,
-  "avg_gap_days_recent": 5.2,
-  "probability_48h": 69,
+  "days_since_last_reset": 0.3,
+  "avg_gap_days_all": 10.0,
+  "avg_gap_days_recent": 3.9,
+  "probability_48h": 99,
   "monthly_series": [
     {
       "month": "2025-09",
@@ -66,8 +66,8 @@
     },
     {
       "month": "2026-10",
-      "count": 9
+      "count": 11
     }
   ],
-  "monthly_max": 9
+  "monthly_max": 11
 }

@@ -67,6 +67,12 @@ def classify_heuristics(text: str) -> dict:
         r"day \d+\s*[/:]\s*reset",
         r"day 6/ reset",
         r"put the reset in the bag",
+        r"that[’']s a reset",
+        r"that is a reset",
+        r"it[’']s reset day",
+        r"it is reset day",
+        r"day \d+[/:\s].*?that[’']s a reset",
+        r"day \d+[/:\s].*?reset day",
         r"all propagated",
         r"global reset by eod",
     ]
