@@ -223,3 +223,6 @@ u.
 
 - **观测站圆顶品牌图标**: Commit e54d2c7. Replaced favicon and generated page brand marks with a unified observatory dome plus reset arc SVG. Preserved all runtime behavior and routes; QA screenshot: qa_observatory_icon.png.
 
+
+- **月度日历图标与档案布局**: Commit 6ba03f5. Calendar now uses consistent linear reset/banked icons, editorial serif month title, clearer legend, paper-grid cells, and less pill-like event labels. Runtime calendar data and navigation remain unchanged.
+
