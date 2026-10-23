@@ -232,3 +232,6 @@ u.
 
 - **顶部状态印章仪表盘与预测图表层级**: Commit c1b4758. Reduced the confirmed-reset stamp, simplified the 99% gauge, and normalized chart marker fills to editorial paper/green/red/amber colors so current reset and next forecast read as separate states.
 
+
+- **公开信号证据卡**: Commit c83e78d. Added a source-first Latest Public Signal card showing the original post, thread context, interpretation, expected window, status, and source link; it distinguishes scheduled signals from confirmed effects without changing the event data model.
+
