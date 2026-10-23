@@ -217,3 +217,6 @@ u.
 
 - **降低首页视觉模板感**: Commit 955b75d. Removed heavy gradients/shadows, reduced uniform rounded-card treatment, normalized label casing, reduced stamp emphasis, and clarified reset-versus-next-forecast hierarchy. Baseline rollback commit: f07cd1f.
 
+
+- **编辑部观测站视觉方向 A**: Commit b45ad32. Switched the generated site to warm paper, charcoal, editorial red, serif display headings, restrained borders, and source/archive-oriented hierarchy while preserving all functions and URLs. Rollback tag: ui-before-editorial-a.
+
