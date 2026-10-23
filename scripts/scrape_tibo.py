@@ -175,6 +175,30 @@ verified_recent = [
         "status": "confirmed",
         "text": "This was all client-side + network for playground only. Shipped optimized rendering logic that can keep up with ultrafast, try again",
         "url": "https://x.com/thsottiaux/status/2108428560822424062"
+    },
+    {
+        "id": "2113162277688070445",
+        "at": "2026-10-22T06:55:22.000Z",
+        "type": "regular",
+        "status": "confirmed",
+        "text": "Day 17/ Bet you thought we forgot, but no, it's reset day today. Also good time to remind you to get Daybreak Blue access, it only takes 15 mins and you don't want to have to do it in the middle of an incident.",
+        "url": "https://x.com/thsottiaux/status/2113162277688070445"
+    },
+    {
+        "id": "2113492187770175603",
+        "at": "2026-10-23T04:46:19.000Z",
+        "type": "regular",
+        "status": "confirmed",
+        "text": "Day 18/ Decisions API is GA, OpenResponses joined the Linux Foundation, we shipped some performance improvements and Uber is going all-in on codex & work. But yes… that’s a reset!",
+        "url": "https://x.com/thsottiaux/status/2113492187770175603"
+    },
+    {
+        "id": "2113492502355562875",
+        "at": "2026-10-23T04:47:34.000Z",
+        "type": "regular",
+        "status": "announced",
+        "text": "Landing tomorrow before 10am PST together with a small ship.",
+        "url": "https://x.com/thsottiaux/status/2113492502355562875"
     }
 ]
 
@@ -214,7 +238,7 @@ for tid, item in incoming_posts.items():
         merged[tid] = item
 
 valid_records = []
-reset_keywords = ["reset", "quota", "limit", "refill", "banked", "cleared", "propagated", "bonus", "capacity", "day ", "chatgpt", "steering", "release", "announcing", "model", "cloud", "sol"]
+reset_keywords = ["reset", "quota", "limit", "refill", "banked", "cleared", "propagated", "bonus", "capacity", "day ", "chatgpt", "steering", "release", "announcing", "model", "cloud", "sol", "landing", "tomorrow", "ship"]
 for r in merged.values():
     t = r.get("text", "").lower()
     if t:

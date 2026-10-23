@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 110,
+  "total": 112,
   "records": [
     {
       "id": "1968163721034994139",
@@ -584,6 +584,14 @@
       "url": "https://x.com/thsottiaux/status/2108349826727588000"
     },
     {
+      "id": "2108428560822424062",
+      "at": "2026-10-09T05:25:16.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "This was all client-side + network for playground only. Shipped optimized rendering logic that can keep up with ultrafast, try again",
+      "url": "https://x.com/thsottiaux/status/2108428560822424062"
+    },
+    {
       "id": "2108645667451318747",
       "at": "2026-10-09T19:47:58.000Z",
       "type": "release",
@@ -872,6 +880,14 @@
       "url": "https://x.com/thsottiaux/status/2113162277688070445"
     },
     {
+      "id": "2113162413008884099",
+      "at": "2026-10-22T06:55:54.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "Lands tomorrow before 10am PST.",
+      "url": "https://x.com/thsottiaux/status/2113162413008884099"
+    },
+    {
       "id": "2113492187770175603",
       "at": "2026-10-23T04:46:19.000Z",
       "type": "regular",
@@ -883,7 +899,7 @@
       "id": "2113492502355562875",
       "at": "2026-10-23T04:47:34.000Z",
       "type": "regular",
-      "status": "announced",
+      "status": "confirmed",
       "text": "Landing tomorrow before 10am PST together with a small ship.",
       "url": "https://x.com/thsottiaux/status/2113492502355562875"
     }

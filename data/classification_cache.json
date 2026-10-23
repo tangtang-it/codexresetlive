@@ -810,5 +810,19 @@
     "confidence": 0.85,
     "reason": "General engineering tweet or conversational reply.",
     "source": "heuristic_engine"
+  },
+  "2108428560822424062": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.85,
+    "reason": "General engineering tweet or conversational reply.",
+    "source": "heuristic_engine"
+  },
+  "2113162413008884099": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.85,
+    "reason": "General engineering tweet or conversational reply.",
+    "source": "heuristic_engine"
   }
 }
