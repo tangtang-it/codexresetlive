@@ -1448,6 +1448,30 @@ svg:not([width]):not([height]) {
 :root[data-theme="light"] .card-box { background: #ffffff; border-color: var(--hairline); }
 :root[data-theme="light"] .theme-btn { border-color: var(--hairline); color: var(--body); background: #ffffff; }
 
+/* Human editorial pass: reduce dashboard chrome and generated-template cues. */
+body { letter-spacing: 0; }
+.direct-ans-banner {
+  background: var(--card) !important;
+  border-color: var(--hairline) !important;
+  box-shadow: none !important;
+}
+.dab-badge, .sec-k, .sec-t, .dir-title, .sub-badge, .col-title {
+  text-transform: none !important;
+  letter-spacing: .02em !important;
+}
+.dab-badge { font-size: 11px !important; }
+.dab-h { letter-spacing: -.02em; }
+.dab-right-wrap { transform: scale(.88); transform-origin: center right; }
+.stamp-svg { filter: none !important; }
+.studio-col, .card-box, .calc, .cal-grid-card, .alert-strip, .readout {
+  box-shadow: none !important;
+}
+.studio-col { border-radius: 14px !important; }
+.card-box, .calc, .cal-grid-card { border-radius: 12px !important; }
+.move-item, .post-mini, .switch-row, .faq-i { border-radius: 8px !important; }
+.guide-title, .faq-q, .monitor-name { letter-spacing: 0 !important; }
+:root[data-theme="light"] .direct-ans-banner { box-shadow: none !important; }
+
 /* Dual Timezone Pill in Direct Answer Banner */
 .dab-tz-pills { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
 .tz-pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--r-pill); font-size: 11px; font-family: var(--mono); color: var(--muted-strong); }
