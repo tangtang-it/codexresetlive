@@ -1580,10 +1580,36 @@ body { letter-spacing: 0; }
   --down: #b34c48;
   --info: #496c87;
   --cyan: #4e7f80;
+  --hdr-bg: rgba(244, 240, 232, 0.94);
+  --card-subtle: rgba(255, 253, 248, 0.72);
   --font: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
+:root[data-theme="dark"] {
+  --primary: #e0684f;
+  --primary-active: #f27c65;
+  --primary-disabled: #543229;
+  --ink: #fbf7ee;
+  --body: #d5cbbe;
+  --muted: #8c8275;
+  --muted-strong: #b8ac9c;
+  --hairline: #38322c;
+  --canvas: #151311;
+  --card: #1f1c18;
+  --elevated: #2a2520;
+  --on-primary: #151311;
+  --on-dark: #fbf7ee;
+  --up: #34a87a;
+  --down: #e05d59;
+  --info: #6496bc;
+  --cyan: #5da3a4;
+  --hdr-bg: rgba(21, 19, 17, 0.94);
+  --card-subtle: rgba(31, 28, 24, 0.85);
+}
 body { background: var(--canvas) !important; color: var(--body) !important; }
-.hdr { background: rgba(244,240,232,.94) !important; border-bottom-color: var(--hairline) !important; }
+.hdr { background: var(--hdr-bg) !important; border-bottom-color: var(--hairline) !important; }
+html, body, .hdr, .direct-ans-banner, .card-box, .studio-col, .calc, .cal-grid-card, .alert-strip, .readout, .signal-evidence-card, .sponsor-banner, .theme-btn, .nav-item {
+  transition: background-color 0.22s ease, border-color 0.22s ease, color 0.22s ease !important;
+}
 .brand-name, .hdr-nav .nav-item, .sec-t, .sub-h1, h1, h2, h3 { color: var(--on-dark); }
 .brand-sub, .nav-item, .sec-s, .sub-p, .foot-c, .dir-list a { color: var(--muted-strong) !important; }
 .brand-mark svg path, .brand-mark svg circle { stroke: var(--primary) !important; }
@@ -1625,13 +1651,52 @@ body { background: var(--canvas) !important; color: var(--body) !important; }
 .dab-stamp, .openthe-stamp-wrap { filter: none !important; }
 .openthe-stamp-wrap { width: 140px !important; height: 140px !important; transform: none !important; opacity: .84; }
 .openthe-stamp-wrap:hover { transform: scale(1.02) !important; }
-.gauge-wrap { width: 150px !important; height: 150px !important; margin: 12px auto 8px !important; }
-.gauge-track, .gauge-arc { stroke-width: 9 !important; }
-.gauge-arc { filter: none !important; }
+/* Instrument Telemetry Breathing Motion on Gauge SVG */
+@keyframes gaugeInstrumentBreathe {
+  0%, 100% {
+    transform: rotate(-90deg) scale(1);
+    filter: drop-shadow(0 0 0 rgba(199, 84, 61, 0));
+  }
+  50% {
+    transform: rotate(-90deg) scale(1.025);
+    filter: drop-shadow(0 2px 10px rgba(199, 84, 61, 0.24));
+  }
+}
+.gauge-wrap {
+  position: relative !important;
+  width: 150px !important;
+  height: 150px !important;
+  margin: 12px auto 8px !important;
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+.gauge-wrap svg {
+  width: 100% !important;
+  height: 100% !important;
+  transform: rotate(-90deg);
+  transform-origin: center center;
+  animation: gaugeInstrumentBreathe 4.2s ease-in-out infinite;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), filter 0.3s ease;
+}
+.gauge-wrap:hover svg {
+  animation-play-state: paused;
+  transform: rotate(-90deg) scale(1.045);
+  filter: drop-shadow(0 4px 16px rgba(199, 84, 61, 0.32));
+}
+.gauge-track { fill: none; stroke: var(--hairline); stroke-width: 9 !important; }
+.gauge-arc {
+  fill: none;
+  stroke: var(--primary) !important;
+  stroke-width: 9 !important;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 1.4s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.3s ease;
+}
 .gauge-flare { display: none !important; }
-.gauge-num { font-size: 40px !important; letter-spacing: -1px !important; }
-.gauge-num span { font-size: 18px !important; }
-.gauge-lbl { text-transform: none !important; letter-spacing: .04em !important; }
+.gauge-num { font-size: 40px !important; letter-spacing: -1px !important; color: var(--on-dark) !important; transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+.gauge-num span { font-size: 18px !important; color: var(--primary) !important; }
+.gauge-wrap:hover .gauge-num { transform: scale(1.06); }
+.gauge-lbl { text-transform: none !important; letter-spacing: .04em !important; color: var(--muted-strong) !important; }
 .chart-svg-wrap svg rect[fill="#1e2329"] { fill: var(--card) !important; stroke: var(--up) !important; }
 .chart-svg-wrap svg rect[fill="#FCD535"] { fill: var(--primary) !important; }
 .chart-svg-wrap svg text[fill="#0ecb81"] { fill: var(--up) !important; }
@@ -1705,37 +1770,34 @@ body { background: var(--canvas) !important; color: var(--body) !important; }
 
 <script>
 (function(){
-  var saved = localStorage.getItem('codex_theme') || 'dark';
-  if (saved === 'light') {
+  var saved = localStorage.getItem('codex_theme') || 'light';
+  if (saved === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  } else {
     document.documentElement.setAttribute('data-theme', 'light');
   }
 })();
 function toggleCodexTheme() {
-  var isLight = document.documentElement.getAttribute('data-theme') === 'light';
-  var next = isLight ? 'dark' : 'light';
-  if (next === 'light') {
-    document.documentElement.setAttribute('data-theme', 'light');
-    var sun = document.querySelector('.sun-ico');
-    var moon = document.querySelector('.moon-ico');
-    if (sun) sun.style.display = 'block';
-    if (moon) moon.style.display = 'none';
-  } else {
-    document.documentElement.removeAttribute('data-theme');
-    var sun = document.querySelector('.sun-ico');
-    var moon = document.querySelector('.moon-ico');
-    if (sun) sun.style.display = 'none';
-    if (moon) moon.style.display = 'block';
-  }
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  var next = isDark ? 'light' : 'dark';
+  applyThemeState(next);
   localStorage.setItem('codex_theme', next);
 }
-document.addEventListener('DOMContentLoaded', function(){
-  var isLight = document.documentElement.getAttribute('data-theme') === 'light';
-  var sun = document.querySelector('.sun-ico');
-  var moon = document.querySelector('.moon-ico');
-  if (sun && moon) {
-    sun.style.display = isLight ? 'block' : 'none';
-    moon.style.display = isLight ? 'none' : 'block';
+function applyThemeState(theme) {
+  var isDark = theme === 'dark';
+  if (isDark) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+  } else {
+    document.documentElement.setAttribute('data-theme', 'light');
   }
+  var sunIcons = document.querySelectorAll('.sun-ico');
+  var moonIcons = document.querySelectorAll('.moon-ico');
+  sunIcons.forEach(function(el){ el.style.display = isDark ? 'block' : 'none'; });
+  moonIcons.forEach(function(el){ el.style.display = isDark ? 'none' : 'block'; });
+}
+document.addEventListener('DOMContentLoaded', function(){
+  var saved = localStorage.getItem('codex_theme') || 'light';
+  applyThemeState(saved);
 });
 </script>
 

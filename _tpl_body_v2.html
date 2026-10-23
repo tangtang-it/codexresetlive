@@ -829,46 +829,7 @@ __FOOTER_DIR_HTML__
   // Initialize Live Engine
   updateLiveEngine();
 
-  // Theme Toggle Controller
-  (function(){
-    var savedTheme = localStorage.getItem('codex_theme') || 'dark';
-    function applyTheme(t) {
-      if (t === 'light') {
-        document.documentElement.setAttribute('data-theme', 'light');
-        var sun = document.querySelector('.sun-ico');
-        var moon = document.querySelector('.moon-ico');
-        if (sun) sun.style.display = 'block';
-        if (moon) moon.style.display = 'none';
-      } else {
-        document.documentElement.removeAttribute('data-theme');
-        var sun = document.querySelector('.sun-ico');
-        var moon = document.querySelector('.moon-ico');
-        if (sun) sun.style.display = 'none';
-        if (moon) moon.style.display = 'block';
-      }
-      localStorage.setItem('codex_theme', t);
-    }
-    applyTheme(savedTheme);
-
-    window.addEventListener('DOMContentLoaded', function(){
-      var themeBtn = document.getElementById('themeToggleBtn');
-      if (themeBtn) {
-        themeBtn.addEventListener('click', function(){
-          var curr = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-          applyTheme(curr === 'light' ? 'dark' : 'light');
-        });
-      }
-    });
-
-    // Also run immediately in case DOM is already parsed
-    var themeBtn = document.getElementById('themeToggleBtn');
-    if (themeBtn) {
-      themeBtn.addEventListener('click', function(){
-        var curr = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
-        applyTheme(curr === 'light' ? 'dark' : 'light');
-      });
-    }
-  })();
+  // Theme is controlled by toggleCodexTheme() in head
 
   // Live Dual Clocks (SF HQ vs Local)
   function updateDualClocks() {
