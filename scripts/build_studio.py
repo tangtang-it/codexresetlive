@@ -526,6 +526,8 @@ def render_direct_ans_raw(code):
     l_type = l_rec.get("type", "banked").upper()
     badge_cls = l_rec.get("type", "banked")
     type_badge = render_banked_badge(code, l_type) if badge_cls == "banked" else f'<span class="badge {badge_cls}">{l_type}</span>'
+    source_label = "View original post ↗" if code == "en" else ("查看原始推文 ↗" if "zh" in code else ("原文を見る ↗" if code == "ja" else "View source ↗"))
+    source_line = f'<div class="dab-source-line"><img class="dab-source-avatar" src="/assets/avatars/tibo.jpg" alt="Tibo Sottiaux" width="22" height="22"><span class="dab-source-name">Tibo Sottiaux</span><span>@thsottiaux</span><a class="dab-source-link" href="{esc(l_rec.get("url", "https://x.com/thsottiaux"))}" target="_blank" rel="noopener nofollow">{source_label}</a></div>'
 
     # YES Stamp Badge SVG (Inspired by OpenTheRank)
     yes_stamp = f"""<div class="openthe-stamp-wrap yes">
@@ -602,6 +604,7 @@ def render_direct_ans_raw(code):
     <span class="dab-badge yes"><span class="dot"></span> 实时状态判定：今日已完成放水 (YES)</span>
     <div class="dab-h">Codex 今天重置了吗？ <strong>是的，今日已重置！(Yes.)</strong></div>
     <div class="dab-p">最新一次官方额度注入发生在 <strong data-ago-utc="{l_rec['at']}">{h_round} 小时前</strong>。额度已补充完毕，无需再等待！</div>
+    {source_line}
     <div class="dab-rec-line">
       <span>最近一次记录：</span>
       <span class="dab-rec-dt" data-local-dt="{l_rec['at']}">{l_rec["at"][:10]} {l_rec["at"][11:16]} UTC</span>
@@ -621,6 +624,7 @@ def render_direct_ans_raw(code):
     <span class="dab-badge yes"><span class="dot"></span> リアルタイム判定：本日リセット完了 (YES)</span>
     <div class="dab-h">Codexは今日リセットされましたか？ <strong>はい、本日リセットされました (Yes.)</strong></div>
     <div class="dab-p">直近の公式リセットは <strong data-ago-utc="{l_rec['at']}">{h_round} 時間前</strong> に完了しました。利用枠は回復済みです。</div>
+    {source_line}
     <div class="dab-rec-line">
       <span>直近の記録：</span>
       <span class="dab-rec-dt" data-local-dt="{l_rec['at']}">{l_rec["at"][:10]} {l_rec["at"][11:16]} UTC</span>
@@ -640,6 +644,7 @@ def render_direct_ans_raw(code):
     <span class="dab-badge yes"><span class="dot"></span> LIVE VERDICT: RESET CONFIRMED TODAY (YES)</span>
     <div class="dab-h">Will Codex reset today? <strong>Yes. The latest reset landed <span data-ago-utc="{l_rec['at']}">{h_round}h ago</span>.</strong></div>
     <div class="dab-p">Latest recorded reset landed <strong data-ago-utc="{l_rec['at']}">{h_round} hours ago</strong>. Global quotas have been replenished today — build with confidence.</div>
+    {source_line}
     <div class="dab-rec-line">
       <span>Latest recorded reset:</span>
       <span class="dab-rec-dt" data-local-dt="{l_rec['at']}">{l_rec["at"][:10]} {l_rec["at"][11:16]} UTC</span>

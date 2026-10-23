@@ -1720,6 +1720,11 @@ body { background: var(--canvas) !important; color: var(--body) !important; }
 .signal-evidence-foot strong{color:var(--on-dark)}
 .signal-evidence-source{color:var(--primary);font-weight:600;white-space:nowrap}
 @media(max-width:640px){.signal-evidence-head,.signal-evidence-foot{align-items:flex-start;flex-direction:column}.signal-evidence-source{white-space:normal}}
+.dab-source-line{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:11px;color:var(--muted-strong)}
+.dab-source-avatar{width:22px;height:22px;border-radius:50%;object-fit:cover;border:1px solid var(--hairline)}
+.dab-source-name{font-weight:600;color:var(--on-dark)}
+.dab-source-link{color:var(--primary);font-weight:600;margin-left:4px}
+@media(max-width:640px){.dab-source-line{flex-wrap:wrap}}
 .sp-kicker { color: var(--primary) !important; }
 .sp-title { color: var(--on-dark) !important; }
 .sp-desc { color: var(--muted-strong) !important; }
@@ -1839,6 +1844,7 @@ document.addEventListener('DOMContentLoaded', function(){
     <span class="dab-badge yes"><span class="dot"></span> リアルタイム判定：本日リセット完了 (YES)</span>
     <div class="dab-h">Codexは今日リセットされましたか？ <strong>はい、本日リセットされました (Yes.)</strong></div>
     <div class="dab-p">直近の公式リセットは <strong data-ago-utc="2026-10-23T04:46:19.000Z">9 時間前</strong> に完了しました。利用枠は回復済みです。</div>
+    <div class="dab-source-line"><img class="dab-source-avatar" src="/assets/avatars/tibo.jpg" alt="Tibo Sottiaux" width="22" height="22"><span class="dab-source-name">Tibo Sottiaux</span><span>@thsottiaux</span><a class="dab-source-link" href="https://x.com/thsottiaux/status/2113492187770175603" target="_blank" rel="noopener nofollow">原文を見る ↗</a></div>
     <div class="dab-rec-line">
       <span>直近の記録：</span>
       <span class="dab-rec-dt" data-local-dt="2026-10-23T04:46:19.000Z">2026-10-23 04:46 UTC</span>
