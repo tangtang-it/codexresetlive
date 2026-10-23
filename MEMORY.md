@@ -214,3 +214,6 @@ u.
   - 100% passed `scripts/verify_site.py` integrity, schema, and section audit.
   - Headless Chrome QA verified clean rendering and zero clipping under 99% probability.
 - **Chart Reset vs Next Forecast UI**: When a reset occurred within 24h, the chart renders the current date as a green RESET event and places the next probability on the following date as yellow NEXT N%. The direct-answer timestamp renders both Tibo UTC and the visitor local timezone.
+
+- **降低首页视觉模板感**: Commit 955b75d. Removed heavy gradients/shadows, reduced uniform rounded-card treatment, normalized label casing, reduced stamp emphasis, and clarified reset-versus-next-forecast hierarchy. Baseline rollback commit: f07cd1f.
+
