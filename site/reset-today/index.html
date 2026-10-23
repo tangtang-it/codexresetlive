@@ -1662,6 +1662,17 @@ body { background: var(--canvas) !important; color: var(--body) !important; }
   border-radius: 10px !important;
   box-shadow: 0 1px 0 rgba(71,54,35,.04) !important;
 }
+.signal-evidence-card{margin:0 0 28px;padding:18px 20px;background:var(--card);border:1px solid var(--hairline);border-left:3px solid var(--primary);border-radius:10px;box-shadow:0 1px 0 rgba(71,54,35,.04)}
+.signal-evidence-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.signal-evidence-kicker{font-family:var(--mono);font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--primary);font-weight:700}
+.signal-evidence-status{font-family:var(--mono);font-size:10px;color:var(--muted-strong);border:1px solid var(--hairline);border-radius:999px;padding:4px 8px}
+.signal-evidence-body{font-size:15px;line-height:1.55;color:var(--on-dark);max-width:900px}
+.signal-evidence-body blockquote{margin:0;padding-left:12px;border-left:2px solid var(--primary);font-style:italic}
+.signal-evidence-context{margin-top:10px;padding:10px 12px;background:rgba(199,84,61,.05);border:1px solid rgba(199,84,61,.16);border-radius:7px;color:var(--muted-strong);font-size:12px;line-height:1.55}
+.signal-evidence-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-top:12px;padding-top:10px;border-top:1px solid var(--hairline);font-size:12px;color:var(--muted-strong)}
+.signal-evidence-foot strong{color:var(--on-dark)}
+.signal-evidence-source{color:var(--primary);font-weight:600;white-space:nowrap}
+@media(max-width:640px){.signal-evidence-head,.signal-evidence-foot{align-items:flex-start;flex-direction:column}.signal-evidence-source{white-space:normal}}
 .sp-kicker { color: var(--primary) !important; }
 .sp-title { color: var(--on-dark) !important; }
 .sp-desc { color: var(--muted-strong) !important; }
@@ -1779,8 +1790,8 @@ Live
   <button class="dab-share-btn" id="shareForecastBtn" aria-label="Share forecast" title="Share forecast" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dab-share-ico"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
   <div class="dab-left">
     <span class="dab-badge yes"><span class="dot"></span> LIVE VERDICT: RESET CONFIRMED TODAY (YES)</span>
-    <div class="dab-h">Did Codex Reset reset today? <strong>Yes. The latest reset landed <span data-ago-utc="2026-10-23T04:46:19.000Z">8h ago</span>.</strong></div>
-    <div class="dab-p">Latest recorded reset landed <strong data-ago-utc="2026-10-23T04:46:19.000Z">8 hours ago</strong>. Global quotas have been replenished today — build with confidence.</div>
+    <div class="dab-h">Did Codex Reset reset today? <strong>Yes. The latest reset landed <span data-ago-utc="2026-10-23T04:46:19.000Z">9h ago</span>.</strong></div>
+    <div class="dab-p">Latest recorded reset landed <strong data-ago-utc="2026-10-23T04:46:19.000Z">9 hours ago</strong>. Global quotas have been replenished today — build with confidence.</div>
     <div class="dab-rec-line">
       <span>Latest recorded reset:</span>
       <span class="dab-rec-dt" data-local-dt="2026-10-23T04:46:19.000Z">2026-10-23 04:46 UTC</span>
@@ -2036,6 +2047,13 @@ Projected 48h
 </div>
 </div>
 </section>
+
+<!-- Latest Public Signal Evidence -->
+<article class="signal-evidence-card" aria-label="Latest public signal">
+<div class="signal-evidence-head"><span class="signal-evidence-kicker">Latest public signal</span><span class="signal-evidence-status">Scheduled signal</span></div>
+<div class="signal-evidence-body"><blockquote>Landing tomorrow before 10am PST together with a small ship.</blockquote><div class="signal-evidence-context"><strong>Context:</strong> Day 18/ Decisions API is GA, OpenResponses joined the Linux Foundation, we shipped some performance improvements and Uber is going all-in on codex &amp; work. But yes… that’s a reset!</div></div>
+<div class="signal-evidence-foot"><span><strong>Possible reset signal — not a firm announcement.</strong><br>Expected window: <strong>Before 10am Pacific</strong></span><a class="signal-evidence-source" href="https://x.com/thsottiaux/status/2113492502355562875" target="_blank" rel="noopener nofollow">Read Tibo&#x27;s original post ↗</a></div>
+</article>
 
 <!-- Studio Workspace: 3 Columns -->
 <section id="studio">

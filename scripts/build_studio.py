@@ -682,6 +682,7 @@ def render_direct_ans_raw(code):
     <a href="#calculator" class="dab-btn">测算个人解锁 ↓</a>
   </div>
 </div>'''
+
         else:
             return f'''<div class="direct-ans-banner">
   <div class="dab-left">
@@ -699,6 +700,39 @@ def render_direct_ans_raw(code):
   </div>
 </div>'''
 
+
+
+def render_latest_signal_card(code):
+    latest = recs[-1] if recs else None
+    context = recs[-2] if len(recs) > 1 else None
+    if not latest:
+        return ""
+    text = latest.get("text", "").replace("&amp;", "&")
+    context_text = context.get("text", "").replace("&amp;", "&") if context else ""
+    lower = text.lower()
+    if any(k in lower for k in ["landing tomorrow", "landing by eod", "will reset", "incoming"]):
+        status_en, status_zh, status_ja = "Scheduled signal", "已安排信号", "予定シグナル"
+        reading_en, reading_zh, reading_ja = "Possible reset signal — not a firm announcement.", "可能是重置信号，但还不是明确的完成公告。", "リセットの可能性を示すシグナルですが、完了の明確な発表ではありません。"
+        expected_en, expected_zh, expected_ja = "Before 10am Pacific", "太平洋时间上午 10 点前", "太平洋時間の午前10時前"
+    else:
+        status_en, status_zh, status_ja = "Public signal", "公开信号", "公開シグナル"
+        reading_en, reading_zh, reading_ja = "Public developer signal captured for review.", "已捕获公开开发者信号，等待进一步核验。", "確認のために取得した公開開発者シグナルです。"
+        expected_en, expected_zh, expected_ja = "See source context", "请查看来源上下文", "ソースの文脈を確認"
+    if "zh" in code:
+        kicker, status, reading, expected, source = "最新公开信号", status_zh, reading_zh, expected_zh, "查看 Tibo 原文 ↗"
+        context_label = "上下文"
+    elif code == "ja":
+        kicker, status, reading, expected, source = "最新の公開シグナル", status_ja, reading_ja, expected_ja, "Tiboの原文を見る ↗"
+        context_label = "文脈"
+    else:
+        kicker, status, reading, expected, source = "Latest public signal", status_en, reading_en, expected_en, "Read Tibo's original post ↗"
+        context_label = "Context"
+    context_html = f'<div class="signal-evidence-context"><strong>{context_label}:</strong> {esc(context_text[:420])}</div>' if context_text else ""
+    return f'''<article class="signal-evidence-card" aria-label="{esc(kicker)}">
+<div class="signal-evidence-head"><span class="signal-evidence-kicker">{esc(kicker)}</span><span class="signal-evidence-status">{esc(status)}</span></div>
+<div class="signal-evidence-body"><blockquote>{esc(text[:420])}</blockquote>{context_html}</div>
+<div class="signal-evidence-foot"><span><strong>{esc(reading)}</strong><br>Expected window: <strong>{esc(expected)}</strong></span><a class="signal-evidence-source" href="{esc(latest.get('url','https://x.com/thsottiaux'))}" target="_blank" rel="noopener nofollow">{esc(source)}</a></div>
+</article>'''
 
 def render_direct_ans(code):
     raw = render_direct_ans_raw(code)
@@ -1127,6 +1161,7 @@ for code, d, name, loc, base_url in LANGS:
     p1_body = p1_body.replace("__LANG_ITEMS__", build_lang_items(code, ""))
 
     p1_body = p1_body.replace("__DIRECT_ANS_BANNER__", render_direct_ans(code))
+    p1_body = p1_body.replace("__LATEST_SIGNAL_CARD__", render_latest_signal_card(code))
     p1_body = p1_body.replace("__SHARE_BTN_TITLE__", esc(t["share_btn_title"]))
     p1_body = p1_body.replace("__SHARE_MODAL_TITLE__", esc(t["share_modal_title"]))
     p1_body = p1_body.replace("__SHARE_MODAL_SUB__", esc(t["share_modal_sub"]))

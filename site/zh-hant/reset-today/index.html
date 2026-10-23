@@ -1662,6 +1662,17 @@ body { background: var(--canvas) !important; color: var(--body) !important; }
   border-radius: 10px !important;
   box-shadow: 0 1px 0 rgba(71,54,35,.04) !important;
 }
+.signal-evidence-card{margin:0 0 28px;padding:18px 20px;background:var(--card);border:1px solid var(--hairline);border-left:3px solid var(--primary);border-radius:10px;box-shadow:0 1px 0 rgba(71,54,35,.04)}
+.signal-evidence-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.signal-evidence-kicker{font-family:var(--mono);font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--primary);font-weight:700}
+.signal-evidence-status{font-family:var(--mono);font-size:10px;color:var(--muted-strong);border:1px solid var(--hairline);border-radius:999px;padding:4px 8px}
+.signal-evidence-body{font-size:15px;line-height:1.55;color:var(--on-dark);max-width:900px}
+.signal-evidence-body blockquote{margin:0;padding-left:12px;border-left:2px solid var(--primary);font-style:italic}
+.signal-evidence-context{margin-top:10px;padding:10px 12px;background:rgba(199,84,61,.05);border:1px solid rgba(199,84,61,.16);border-radius:7px;color:var(--muted-strong);font-size:12px;line-height:1.55}
+.signal-evidence-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:18px;margin-top:12px;padding-top:10px;border-top:1px solid var(--hairline);font-size:12px;color:var(--muted-strong)}
+.signal-evidence-foot strong{color:var(--on-dark)}
+.signal-evidence-source{color:var(--primary);font-weight:600;white-space:nowrap}
+@media(max-width:640px){.signal-evidence-head,.signal-evidence-foot{align-items:flex-start;flex-direction:column}.signal-evidence-source{white-space:normal}}
 .sp-kicker { color: var(--primary) !important; }
 .sp-title { color: var(--on-dark) !important; }
 .sp-desc { color: var(--muted-strong) !important; }
@@ -1780,7 +1791,7 @@ document.addEventListener('DOMContentLoaded', function(){
   <div class="dab-left">
     <span class="dab-badge yes"><span class="dot"></span> 实时状态判定：今日已完成放水 (YES)</span>
     <div class="dab-h">Codex 今天重置了吗？ <strong>是的，今日已重置！(Yes.)</strong></div>
-    <div class="dab-p">最新一次官方额度注入发生在 <strong data-ago-utc="2026-10-23T04:46:19.000Z">8 小时前</strong>。额度已补充完毕，无需再等待！</div>
+    <div class="dab-p">最新一次官方额度注入发生在 <strong data-ago-utc="2026-10-23T04:46:19.000Z">9 小时前</strong>。额度已补充完毕，无需再等待！</div>
     <div class="dab-rec-line">
       <span>最近一次记录：</span>
       <span class="dab-rec-dt" data-local-dt="2026-10-23T04:46:19.000Z">2026-10-23 04:46 UTC</span>
@@ -2036,6 +2047,13 @@ document.addEventListener('DOMContentLoaded', function(){
 </div>
 </div>
 </section>
+
+<!-- Latest Public Signal Evidence -->
+<article class="signal-evidence-card" aria-label="最新公开信号">
+<div class="signal-evidence-head"><span class="signal-evidence-kicker">最新公开信号</span><span class="signal-evidence-status">已安排信号</span></div>
+<div class="signal-evidence-body"><blockquote>Landing tomorrow before 10am PST together with a small ship.</blockquote><div class="signal-evidence-context"><strong>上下文:</strong> Day 18/ Decisions API is GA, OpenResponses joined the Linux Foundation, we shipped some performance improvements and Uber is going all-in on codex &amp; work. But yes… that’s a reset!</div></div>
+<div class="signal-evidence-foot"><span><strong>可能是重置信号，但还不是明确的完成公告。</strong><br>Expected window: <strong>太平洋时间上午 10 点前</strong></span><a class="signal-evidence-source" href="https://x.com/thsottiaux/status/2113492502355562875" target="_blank" rel="noopener nofollow">查看 Tibo 原文 ↗</a></div>
+</article>
 
 <!-- Studio Workspace: 3 Columns -->
 <section id="studio">
