@@ -238,3 +238,6 @@ u.
 
 - **Tibo 头像与原文链接**: Commit b124a9a. Added the source author's avatar, handle, and direct original-post link to the confirmed reset summary in the hero area, with localized link labels and accessible image dimensions.
 
+
+- **重置判定内联嵌入 Tibo 头像与链接**: Commit e4377dc. Fixed low-contrast white-on-cream text in direct answer banner by assigning var(--on-dark) to strong elements, and seamlessly embedded Tibo's avatar with direct link to the original X post into the primary verdict paragraph.
+
