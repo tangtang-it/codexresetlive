@@ -444,7 +444,10 @@ def get_cal_js(code):
     var out = '';
     for(var i=0; i<list.length; i++){{
       var item = list[i];
-      out += '<span class="day-stamp ' + item.t + '">' + item.l + '</span>';
+      var stampIcon = item.t === 'banked'
+        ? '<svg class="cal-stamp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/><path d="M8 14h3"/></svg>'
+        : '<svg class="cal-stamp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16a8 8 0 0 1 16 0"/><path d="M7 16a5 5 0 0 1 10 0"/><path d="M5 19h14"/></svg>';
+      out += '<span class="day-stamp ' + item.t + '">' + stampIcon + '<span>' + item.l + '</span></span>';
     }}
     return out;
   }}
