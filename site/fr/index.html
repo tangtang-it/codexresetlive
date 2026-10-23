@@ -922,28 +922,59 @@ svg:not([width]):not([height]) {
 .dab-h {
   font-size: 26px !important;
   font-weight: 700 !important;
-  color: #ffffff !important;
+  color: var(--on-dark) !important;
   letter-spacing: -0.02em !important;
   margin: 6px 0 8px !important;
   line-height: 1.25 !important;
 }
 .dab-h strong {
-  color: #0ecb81 !important;
+  color: var(--up) !important;
 }
 
 .dab-p {
   font-size: 14px !important;
-  color: #a0a6b2 !important;
-  line-height: 1.55 !important;
+  color: var(--muted-strong) !important;
+  line-height: 1.65 !important;
   margin-bottom: 12px !important;
 }
 .dab-p strong {
-  color: #ffffff !important;
+  color: var(--on-dark) !important;
+  font-weight: 700 !important;
+}
+
+.dab-author-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  padding: 1px 7px 1px 5px !important;
+  background: rgba(199, 84, 61, 0.08) !important;
+  border: 1px solid rgba(199, 84, 61, 0.28) !important;
+  border-radius: 6px !important;
+  color: var(--on-dark) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  vertical-align: middle !important;
+  transition: all 0.15s ease !important;
+  margin: 0 3px !important;
+}
+.dab-author-badge:hover {
+  background: rgba(199, 84, 61, 0.16) !important;
+  border-color: var(--primary) !important;
+  color: var(--primary) !important;
+}
+.dab-author-badge .dab-inline-avatar {
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
 }
 
 .dab-rec-line {
   font-size: 12.5px !important;
-  color: #707a8a !important;
+  color: var(--muted-strong) !important;
   display: flex !important;
   align-items: center !important;
   gap: 8px !important;
@@ -1669,6 +1700,37 @@ body { background: var(--canvas) !important; color: var(--body) !important; }
 .direct-ans-banner .dab-h { color: var(--on-dark) !important; }
 .direct-ans-banner .dab-p, .direct-ans-banner .dab-rec-line, .direct-ans-banner .tz-indicator { color: var(--muted-strong) !important; }
 .direct-ans-banner .dab-badge, .direct-ans-banner .dab-rec-dt { color: var(--primary) !important; }
+.direct-ans-banner .dab-p strong { color: var(--on-dark) !important; font-weight: 700 !important; }
+.dab-author-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  padding: 1px 7px 1px 5px !important;
+  background: rgba(199, 84, 61, 0.08) !important;
+  border: 1px solid rgba(199, 84, 61, 0.28) !important;
+  border-radius: 6px !important;
+  color: var(--on-dark) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  vertical-align: middle !important;
+  transition: all 0.15s ease !important;
+  margin: 0 4px !important;
+}
+.dab-author-badge:hover {
+  background: rgba(199, 84, 61, 0.16) !important;
+  border-color: var(--primary) !important;
+  color: var(--primary) !important;
+}
+.dab-author-badge .dab-inline-avatar {
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  border: 1px solid var(--hairline) !important;
+}
 .dab-stamp, .openthe-stamp-wrap { filter: none !important; }
 .openthe-stamp-wrap { width: 140px !important; height: 140px !important; transform: none !important; opacity: .84; }
 .openthe-stamp-wrap:hover { transform: scale(1.02) !important; }
@@ -1842,9 +1904,8 @@ En direct
   <button class="dab-share-btn" id="shareForecastBtn" aria-label="Partager la prévision" title="Partager la prévision" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dab-share-ico"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
   <div class="dab-left">
     <span class="dab-badge yes"><span class="dot"></span> LIVE VERDICT: RESET CONFIRMED TODAY (YES)</span>
-    <div class="dab-h">Will Codex reset today? <strong>Yes. The latest reset landed <span data-ago-utc="2026-10-23T04:46:19.000Z">9h ago</span>.</strong></div>
-    <div class="dab-p">Latest recorded reset landed <strong data-ago-utc="2026-10-23T04:46:19.000Z">9 hours ago</strong>. Global quotas have been replenished today — build with confidence.</div>
-    <div class="dab-source-line"><img class="dab-source-avatar" src="/assets/avatars/tibo.jpg" alt="Tibo Sottiaux" width="22" height="22"><span class="dab-source-name">Tibo Sottiaux</span><span>@thsottiaux</span><a class="dab-source-link" href="https://x.com/thsottiaux/status/2113492187770175603" target="_blank" rel="noopener nofollow">View source ↗</a></div>
+    <div class="dab-h">Will Codex reset today? <strong>Yes. The latest reset landed <span data-ago-utc="2026-10-23T04:46:19.000Z">10h ago</span>.</strong></div>
+    <div class="dab-p">Latest recorded reset landed <strong data-ago-utc="2026-10-23T04:46:19.000Z">10 hours ago</strong> via <a class="dab-author-badge" href="https://x.com/thsottiaux/status/2113492187770175603" target="_blank" rel="noopener nofollow"><img class="dab-inline-avatar" src="/assets/avatars/tibo.jpg" alt="Tibo Sottiaux" width="18" height="18"><span>Tibo Sottiaux (@thsottiaux)</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;vertical-align:-1px"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>. Global quotas have been replenished today — build with confidence.</div>
     <div class="dab-rec-line">
       <span>Latest recorded reset:</span>
       <span class="dab-rec-dt" data-local-dt="2026-10-23T04:46:19.000Z">2026-10-23 04:46 UTC</span>

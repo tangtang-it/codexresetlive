@@ -817,28 +817,59 @@ svg:not([width]):not([height]) {
 .dab-h {
   font-size: 26px !important;
   font-weight: 700 !important;
-  color: #ffffff !important;
+  color: var(--on-dark) !important;
   letter-spacing: -0.02em !important;
   margin: 6px 0 8px !important;
   line-height: 1.25 !important;
 }
 .dab-h strong {
-  color: #0ecb81 !important;
+  color: var(--up) !important;
 }
 
 .dab-p {
   font-size: 14px !important;
-  color: #a0a6b2 !important;
-  line-height: 1.55 !important;
+  color: var(--muted-strong) !important;
+  line-height: 1.65 !important;
   margin-bottom: 12px !important;
 }
 .dab-p strong {
-  color: #ffffff !important;
+  color: var(--on-dark) !important;
+  font-weight: 700 !important;
+}
+
+.dab-author-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  padding: 1px 7px 1px 5px !important;
+  background: rgba(199, 84, 61, 0.08) !important;
+  border: 1px solid rgba(199, 84, 61, 0.28) !important;
+  border-radius: 6px !important;
+  color: var(--on-dark) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  vertical-align: middle !important;
+  transition: all 0.15s ease !important;
+  margin: 0 3px !important;
+}
+.dab-author-badge:hover {
+  background: rgba(199, 84, 61, 0.16) !important;
+  border-color: var(--primary) !important;
+  color: var(--primary) !important;
+}
+.dab-author-badge .dab-inline-avatar {
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
 }
 
 .dab-rec-line {
   font-size: 12.5px !important;
-  color: #707a8a !important;
+  color: var(--muted-strong) !important;
   display: flex !important;
   align-items: center !important;
   gap: 8px !important;
@@ -1564,6 +1595,37 @@ body { background: var(--canvas) !important; color: var(--body) !important; }
 .direct-ans-banner .dab-h { color: var(--on-dark) !important; }
 .direct-ans-banner .dab-p, .direct-ans-banner .dab-rec-line, .direct-ans-banner .tz-indicator { color: var(--muted-strong) !important; }
 .direct-ans-banner .dab-badge, .direct-ans-banner .dab-rec-dt { color: var(--primary) !important; }
+.direct-ans-banner .dab-p strong { color: var(--on-dark) !important; font-weight: 700 !important; }
+.dab-author-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 5px !important;
+  padding: 1px 7px 1px 5px !important;
+  background: rgba(199, 84, 61, 0.08) !important;
+  border: 1px solid rgba(199, 84, 61, 0.28) !important;
+  border-radius: 6px !important;
+  color: var(--on-dark) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  vertical-align: middle !important;
+  transition: all 0.15s ease !important;
+  margin: 0 4px !important;
+}
+.dab-author-badge:hover {
+  background: rgba(199, 84, 61, 0.16) !important;
+  border-color: var(--primary) !important;
+  color: var(--primary) !important;
+}
+.dab-author-badge .dab-inline-avatar {
+  width: 18px !important;
+  height: 18px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  border: 1px solid var(--hairline) !important;
+}
 .dab-stamp, .openthe-stamp-wrap { filter: none !important; }
 .openthe-stamp-wrap { width: 140px !important; height: 140px !important; transform: none !important; opacity: .84; }
 .openthe-stamp-wrap:hover { transform: scale(1.02) !important; }
