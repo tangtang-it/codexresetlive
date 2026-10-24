@@ -560,7 +560,7 @@ def render_direct_ans_raw(code):
 
         <!-- 超大醒目的 Yes. 与下划虚线 -->
         <g class="stamp-center" filter="url(#glowGreenBig)">
-          <text x="110" y="118" fill="#0ecb81" font-size="35" font-weight="900" text-anchor="middle" font-family="'Inter', system-ui, -apple-system, sans-serif" letter-spacing="-1">POST</text>
+          <text x="110" y="118" fill="#0ecb81" font-size="42" font-weight="900" text-anchor="middle" font-family="'Inter', system-ui, -apple-system, sans-serif" letter-spacing="-1">YES</text>
           <line x1="68" y1="132" x2="152" y2="132" stroke="#0ecb81" stroke-width="2" stroke-dasharray="3 3" stroke-opacity="0.85"/>
           <text x="110" y="148" fill="#0ecb81" font-size="9.5" font-weight="800" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" letter-spacing="2">RECORDED</text>
         </g>

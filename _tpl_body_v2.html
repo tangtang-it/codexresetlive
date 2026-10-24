@@ -57,7 +57,7 @@ __DIRECT_ANS_BANNER__
 <!-- Left Card: Probability Gauge -->
 <div class="card-box">
 <div class="gauge-top">
-<span class="gauge-lbl">__GAUGE_LBL__</span>
+<span class="gauge-lbl" id="gaugeLabel">__GAUGE_LBL__</span>
 <span class="gauge-tag">__GAUGE_TAG__</span>
 </div>
 <div class="gauge-wrap">
@@ -611,8 +611,11 @@ __FOOTER_DIR_HTML__
         stamp.classList.add('yes');
         stamp.querySelectorAll('[fill="#FCD535"]').forEach(function(el){ el.setAttribute('fill', '#0ecb81'); });
         stamp.querySelectorAll('[stroke="#FCD535"]').forEach(function(el){ el.setAttribute('stroke', '#0ecb81'); });
-        var stampNumber = stamp.querySelector('#stampProbNum');
-        if (stampNumber) stampNumber.textContent = 'YES';
+        var stampNumber = stamp.querySelector('.stamp-center text');
+        if (stampNumber) {
+          stampNumber.textContent = 'YES';
+          stampNumber.removeAttribute('id');
+        }
         var stampLabel = stamp.querySelector('.stamp-center text[letter-spacing="2"]');
         if (stampLabel) stampLabel.textContent = 'RECORDED';
       }
@@ -658,6 +661,15 @@ __FOOTER_DIR_HTML__
     var liveProb = (window.CODEX_RADAR && typeof window.CODEX_RADAR.probability === 'number') ? window.CODEX_RADAR.probability : __PROB_NUM__;
 
     syncDirectAnswerStatus(now, lastReset, liveProb);
+
+    var gaugeLabel = document.getElementById("gaugeLabel");
+    if (gaugeLabel) {
+      if (resetOccurredToday) {
+        gaugeLabel.textContent = isZh ? "未来 48 小时再次重置概率" : "Chance of another reset in the next 48h";
+      } else {
+        gaugeLabel.textContent = isZh ? "未来 48 小时重置概率" : "Chance of a reset in the next 48h";
+      }
+    }
 
     // A. Smooth Transition Gauge
     animateGaugeTo(liveProb, 1000);
@@ -743,8 +755,8 @@ __FOOTER_DIR_HTML__
       }
     });
 
-    // E. Live Prob Badges in Banner / Stamp
-    document.querySelectorAll(".live-prob-val, #stampProbNum").forEach(function(el){
+    // E. Update forecast values only; a green confirmation stamp never carries a probability.
+    document.querySelectorAll(".live-prob-val, .openthe-stamp-wrap.soon #stampProbNum").forEach(function(el){
       el.textContent = liveProb;
     });
 
@@ -932,7 +944,7 @@ __FOOTER_DIR_HTML__
             window.CODEX_RADAR.probability = p48;
           }
           needsLiveRefresh = true;
-          document.querySelectorAll('.live-prob-val, #stampProbNum').forEach(function(el){
+          document.querySelectorAll('.live-prob-val, .openthe-stamp-wrap.soon #stampProbNum').forEach(function(el){
             el.textContent = p48;
           });
           var stampText = document.querySelector('.stamp-center text[letter-spacing="2"]');
