@@ -45,12 +45,13 @@ __LIVE__
 
 <!-- Hero Head -->
 <section class="hero" style="padding-bottom:18px">
-__DIRECT_ANS_BANNER__
 <div class="hero-hdr">
 <span class="eyebrow"><span class="dot"></span>__BADGE__</span>
-<h1>__H1_A__ <br><em>__H1_B__</em></h1>
+<h1>__H1_A__ <br><em>__H1_B__</em><span class="hero-h1-support">__H1_SUPPORT__</span></h1>
 <p class="hero-p">__HERO_P__</p>
 </div>
+__DIRECT_ANS_BANNER__
+<h2 class="forecast-section-heading">__FORECAST_H2__</h2>
 
 <!-- Hero Dual Cards (Gauge + Pulse Chart) -->
 <div class="dual-cards">
@@ -596,12 +597,12 @@ __FOOTER_DIR_HTML__
     if (resetToday) {
       badge.classList.add('yes');
       if (isZh) {
-        badge.innerHTML = '<span class="dot"></span> 状态：今天已记录公开重置公告';
-        title.innerHTML = 'Codex 今天重置了吗？ <strong>是：今天记录到一条公开重置公告。</strong>';
+        badge.innerHTML = '<span class="dot"></span> 今日重置状态已核验';
+        title.innerHTML = '<strong>是：今天已记录到一次公开重置。</strong>';
         liveNote.textContent = '未来 48 小时信号估计下一次公开重置（当前 ' + liveProb + '%），不影响今天已记录的事实。';
       } else {
-        badge.innerHTML = '<span class="dot"></span> STATUS: PUBLIC RESET NOTICE RECORDED TODAY';
-        title.innerHTML = 'Did Codex reset today? <strong>Yes — a public reset notice was recorded today.</strong>';
+        badge.innerHTML = '<span class="dot"></span> TODAY\'S VERIFIED RESET STATUS';
+        title.innerHTML = '<strong>YES — A public reset was recorded today.</strong>';
         liveNote.textContent = 'The 48-hour signal estimates another public reset (currently ' + liveProb + '%); today\'s recorded notice is shown above.';
       }
 
@@ -622,12 +623,12 @@ __FOOTER_DIR_HTML__
     } else {
       badge.classList.remove('yes');
       if (isZh) {
-        badge.innerHTML = '<span class="dot"></span> 状态：今天尚未记录公开重置公告';
-        title.innerHTML = 'Codex 今天重置了吗？ <strong>尚未记录到公开重置公告。</strong>';
+        badge.innerHTML = '<span class="dot"></span> 今日重置状态';
+        title.innerHTML = '<strong>今天尚未记录到公开重置。</strong>';
         liveNote.textContent = '今天尚无公开重置记录。' + liveProb + '% 是未来 48 小时内下一次公开重置的启发式信号。';
       } else {
-        badge.innerHTML = '<span class="dot"></span> STATUS: NO PUBLIC RESET NOTICE RECORDED TODAY';
-        title.innerHTML = 'Did Codex reset today? <strong>No public reset notice has been recorded yet.</strong>';
+        badge.innerHTML = '<span class="dot"></span> TODAY\'S RESET STATUS';
+        title.innerHTML = '<strong>No public reset has been recorded today.</strong>';
         liveNote.textContent = 'No public reset notice is recorded for today. The ' + liveProb + '% signal estimates the next public reset in the next 48 hours.';
       }
 

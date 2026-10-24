@@ -606,8 +606,8 @@ def render_direct_ans_raw(code):
         if "zh" in code:
             return f'''<div class="direct-ans-banner">
   <div class="dab-left">
-    <span class="dab-badge yes" data-direct-answer-badge><span class="dot"></span> 状态：今天已记录公开重置公告</span>
-    <div class="dab-h" data-direct-answer-title>Codex 今天重置了吗？ <strong>是：今天记录到一条公开重置公告。</strong></div>
+    <span class="dab-badge yes" data-direct-answer-badge><span class="dot"></span> 今日重置状态已核验</span>
+    <div class="dab-h" data-direct-answer-title><strong>是：今天已记录到一次公开重置。</strong></div>
     <div class="dab-p" data-direct-answer-copy>已验证重置发生在 <strong data-ago-utc="{l_rec['at']}">{h_round} 小时前</strong>。关联的 Tibo 公告：{author_badge}。公告适用范围可能因账号和额度而异；请在 OpenAI Usage 页面确认个人额度状态。<span class="dab-live-note" data-dab-live-note>未来 48 小时信号仅估计下一次公开重置。</span></div>
     <div class="dab-rec-line">
       <span>最近一次记录：</span>
@@ -625,9 +625,9 @@ def render_direct_ans_raw(code):
         elif code == "ja":
             return f'''<div class="direct-ans-banner">
   <div class="dab-left">
-    <span class="dab-badge yes"><span class="dot"></span> 状態：公開リセット告知を記録</span>
-    <div class="dab-h">Codexは今日リセットされましたか？ <strong>本日、公開リセット告知を記録しました。</strong></div>
-    <div class="dab-p">直近の公開リセット記録は <strong data-ago-utc="{l_rec['at']}">{h_round} 時間前</strong>に{author_badge}が投稿しました。対象アカウントや利用枠は異なる場合があります。個人の状態はOpenAI Usage設定で確認してください。</div>
+    <span class="dab-badge yes" data-direct-answer-badge><span class="dot"></span> 本日のリセット確認済み</span>
+    <div class="dab-h" data-direct-answer-title><strong>本日、公開リセットが記録されました。</strong></div>
+    <div class="dab-p" data-direct-answer-copy>確認済みのリセットは <strong data-ago-utc="{l_rec['at']}">{h_round} 時間前</strong>に発生しました。関連するTiboの告知：{author_badge}。対象アカウントや利用枠は異なる場合があります。個人の状態はOpenAI Usage設定で確認してください。<span class="dab-live-note" data-dab-live-note>48時間シグナルは次回の公開リセットを推定します。</span></div>
     <div class="dab-rec-line">
       <span>直近の記録：</span>
       <span class="dab-rec-dt" data-local-dt="{l_rec['at']}">{l_rec["at"][:10]} {l_rec["at"][11:16]} UTC</span>
@@ -644,8 +644,8 @@ def render_direct_ans_raw(code):
         else:
             return f'''<div class="direct-ans-banner">
   <div class="dab-left">
-    <span class="dab-badge yes" data-direct-answer-badge><span class="dot"></span> STATUS: PUBLIC RESET NOTICE RECORDED TODAY</span>
-    <div class="dab-h" data-direct-answer-title>Did Codex reset today? <strong>Yes — a public reset notice was recorded today.</strong></div>
+    <span class="dab-badge yes" data-direct-answer-badge><span class="dot"></span> TODAY'S VERIFIED RESET STATUS</span>
+    <div class="dab-h" data-direct-answer-title><strong>YES — A public reset was recorded today.</strong></div>
     <div class="dab-p" data-direct-answer-copy>A verified reset occurred <strong data-ago-utc="{l_rec['at']}">{h_round} hours ago</strong>. Related Tibo announcement: {author_badge}. Coverage can vary by account and allowance; check OpenAI Usage for your personal status. <span class="dab-live-note" data-dab-live-note>The 48-hour signal estimates the next public reset.</span></div>
     <div class="dab-rec-line">
       <span>Latest recorded reset:</span>
@@ -665,18 +665,18 @@ def render_direct_ans_raw(code):
         if prob >= 60:
             stamp = soon_stamp
             badge_str = "HIGH SIGNAL · ESTIMATE"
-            zh_title = f"Codex 今天会全网重置吗？ <strong>模型信号值 <span class='live-prob-val'>{prob}</span>%（估算）</strong>"
-            en_title = f"Will Codex reset today? <strong>Signal score: <span class='live-prob-val'>{prob}</span>%</strong>"
+            zh_title = f"今天尚未记录到公开重置。<span class='forecast-inline'>48小时信号：<span class='live-prob-val'>{prob}</span>%</span>"
+            en_title = f"No public reset has been recorded today. <span class='forecast-inline'>48-hour signal: <span class='live-prob-val'>{prob}</span>%</span>"
         else:
             stamp = soon_stamp
             badge_str = "LOW SIGNAL · ESTIMATE"
-            zh_title = f"Codex 今天会全网重置吗？ <strong>模型信号值 <span class='live-prob-val'>{prob}</span>%（估算）</strong>"
-            en_title = f"Will Codex reset today? <strong>Signal score: <span class='live-prob-val'>{prob}</span>%</strong>"
+            zh_title = f"今天尚未记录到公开重置。<span class='forecast-inline'>48小时信号：<span class='live-prob-val'>{prob}</span>%</span>"
+            en_title = f"No public reset has been recorded today. <span class='forecast-inline'>48-hour signal: <span class='live-prob-val'>{prob}</span>%</span>"
 
         if "zh" in code:
             return f'''<div class="direct-ans-banner">
   <div class="dab-left">
-    <span class="dab-badge" data-direct-answer-badge><span class="dot"></span> 实时状态判定：{badge_str}</span>
+    <span class="dab-badge" data-direct-answer-badge><span class="dot"></span> 今日重置状态：{badge_str}</span>
     <div class="dab-h" data-direct-answer-title>{zh_title}</div>
     <div class="dab-p" data-direct-answer-copy><span class="dab-live-note" data-dab-live-note>今日尚未监测到已确认的公开全局重置。模型百分比是未来 48 小时内下一次公开重置的启发式信号，不是官方或校准概率。</span> 最近一次已验证重置发生在 <strong data-ago-utc="{last['at']}">{h_round} 小时前</strong>；关联公告：{author_badge}。建议保持正常开发节奏，下方可测算个人 5 小时解锁倒计时。</div>
     <div class="dab-tz-pills">
@@ -693,7 +693,7 @@ def render_direct_ans_raw(code):
         else:
             return f'''<div class="direct-ans-banner">
   <div class="dab-left">
-    <span class="dab-badge" data-direct-answer-badge><span class="dot"></span> LIVE VERDICT: {badge_str}</span>
+    <span class="dab-badge" data-direct-answer-badge><span class="dot"></span> TODAY'S RESET STATUS: {badge_str}</span>
     <div class="dab-h" data-direct-answer-title>{en_title}</div>
     <div class="dab-p" data-direct-answer-copy><span class="dab-live-note" data-dab-live-note>No confirmed public reset notice has been recorded today. The model percentage is a heuristic signal for the next public reset in the next 48 hours, not an official or calibrated probability.</span> The latest verified reset occurred <strong data-ago-utc="{last['at']}">{h_round} hours ago</strong>; related Tibo announcement: {author_badge}. Normal building conditions — calculate your personal 5-hour rolling window below.</div>
     <div class="dab-tz-pills">
@@ -1076,29 +1076,29 @@ for code, d, name, loc, base_url in LANGS:
     p1_canon = f"https://codexresetlive.com/{d}/" if d else "https://codexresetlive.com/"
     
     if code == "en":
-        p1_title = "Codex Reset Today? Verified Status & Quota Recovery"
-        p1_desc = "Check sourced Codex reset announcements, distinguish global resets from personal quota refreshes, and estimate your 5-hour recovery window. Independent tracker."
+        p1_title = "Will Codex Reset Today? Live Status & 48-Hour Forecast"
+        p1_desc = "Track verified public Codex reset notices, today's status, and the next 48-hour forecast. Independent tracker with source links."
     elif "zh" in code:
-        p1_title = "Codex 今天重置了吗？官方状态与个人额度恢复"
-        p1_desc = "查看有来源的 Codex 全局重置公告，区分全局重置与个人额度刷新，并估算 5 小时恢复时间。独立工具，非 OpenAI 官方产品。"
+        p1_title = "Codex 今天重置了吗？实时状态与48小时预测"
+        p1_desc = "查看已核验的 Codex 公开重置公告、今日状态与未来48小时预测。独立追踪工具，提供来源链接。"
     elif code == "ja":
-        p1_title = "Codexは今日リセットされた？確認済み状況と回復時間"
-        p1_desc = "出典付きのCodex全体リセット情報を確認し、個人の利用枠更新と区別できます。5時間の回復時間も目安として計算する独立ツールです。"
+        p1_title = "Codexは今日リセットされる？ライブ状況と48時間予測"
+        p1_desc = "確認済みの公開リセット告知、今日の状況、今後48時間の予測を確認できます。出典リンク付きの独立トラッカーです。"
     elif code == "es":
-        p1_title = "¿Se reinició Codex hoy? Estado verificado y cuotas"
-        p1_desc = "Consulta anuncios públicos verificados, distingue los resets globales de tu cuota personal y estima la recuperación de 5 horas. Rastreador independiente."
+        p1_title = "¿Se reiniciará Codex hoy? Estado y pronóstico de 48 h"
+        p1_desc = "Consulta avisos públicos verificados, el estado de hoy y el pronóstico para las próximas 48 horas. Rastreador independiente con fuentes."
     elif code == "de":
-        p1_title = "Codex-Reset heute? Bestätigter Status und Kontingent"
-        p1_desc = "Prüfe belegte öffentliche Reset-Meldungen, unterscheide globale Resets von deinem persönlichen Limit und schätze die 5-Stunden-Erholung. Unabhängiger Tracker."
+        p1_title = "Codex-Reset heute? Live-Status und 48-Stunden-Prognose"
+        p1_desc = "Sieh bestätigte öffentliche Reset-Meldungen, den heutigen Status und die Prognose für die nächsten 48 Stunden. Unabhängiger Tracker mit Quellen."
     elif code == "fr":
-        p1_title = "Codex réinitialisé aujourd’hui ? Statut vérifié"
-        p1_desc = "Consultez les annonces publiques sourcées, distinguez les resets globaux de votre quota personnel et estimez la récupération sur 5 heures. Outil indépendant."
+        p1_title = "Codex sera-t-il réinitialisé aujourd’hui ? Statut et prévision 48 h"
+        p1_desc = "Consultez les annonces vérifiées, le statut du jour et les prévisions des prochaines 48 heures. Suivi indépendant avec liens sources."
     elif code == "pt-br":
-        p1_title = "Codex resetou hoje? Status verificado e cota pessoal"
-        p1_desc = "Consulte anúncios públicos com fontes, diferencie resets globais da cota pessoal e estime a recuperação de 5 horas. Rastreador independente."
+        p1_title = "Codex vai resetar hoje? Status e previsão de 48 horas"
+        p1_desc = "Veja avisos públicos verificados, o status de hoje e a previsão para as próximas 48 horas. Rastreador independente com fontes."
     elif code == "ru":
-        p1_title = "Сброс Codex сегодня? Проверенный статус и лимит"
-        p1_desc = "Проверяйте публичные сбросы Codex по источникам, отличайте их от личного лимита и оценивайте восстановление за 5 часов. Независимый сервис."
+        p1_title = "Сброс Codex сегодня? Статус и прогноз на 48 часов"
+        p1_desc = "Проверяйте подтвержденные публичные сбросы, статус на сегодня и прогноз на ближайшие 48 часов. Независимый сервис со ссылками на источники."
     else:
         p1_title = f"Codex Reset Today? Verified Status ({name})"
         p1_desc = t["hero_p"]
@@ -1188,10 +1188,62 @@ for code, d, name, loc, base_url in LANGS:
     p1_body = p1_body.replace("__SHARE_DOWNLOAD__", esc(t["share_download"]))
     p1_body = p1_body.replace("__SHARE_CLOSE__", esc(t["share_close"]))
     p1_body = p1_body.replace("__SHARE_WECHAT_HINT__", esc(t["share_wechat_hint"]))
-    p1_body = p1_body.replace("__BADGE__", esc(t["badge"])).replace("__H1_A__", esc(t["h1_a"])).replace("__H1_B__", esc(t["h1_b"])).replace("__HERO_P__", esc(t["hero_p"]))
+    if code == "en":
+        h1_support = "Live Status & 48-Hour Forecast"
+        hero_copy = "Track verified public reset notices, today's status, and the next 48-hour outlook."
+        forecast_h2 = "48-Hour Reset Forecast"
+        pulse_title = "Forecast timeline"
+    elif code == "zh-hans":
+        h1_support = "实时状态与未来48小时预测"
+        hero_copy = "查看已核验的公开重置公告、今日状态与未来48小时预测。"
+        forecast_h2 = "未来48小时重置预测"
+        pulse_title = "预测时间线"
+    elif code == "zh-hant":
+        h1_support = "即時狀態與未來48小時預測"
+        hero_copy = "查看已核驗的公開重置公告、今日狀態與未來48小時預測。"
+        forecast_h2 = "未來48小時重置預測"
+        pulse_title = "預測時間線"
+    elif code == "ja":
+        h1_support = "リアルタイム状況と48時間予測"
+        hero_copy = "確認済みの公開リセット告知、今日の状況、今後48時間の予測を確認できます。"
+        forecast_h2 = "今後48時間のリセット予測"
+        pulse_title = "予測タイムライン"
+    elif code == "ko":
+        h1_support = "실시간 상태 및 48시간 예측"
+        hero_copy = "확인된 공개 리셋 공지와 오늘 상태, 향후 48시간 예측을 확인하세요."
+        forecast_h2 = "향후 48시간 리셋 예측"
+        pulse_title = "예측 타임라인"
+    elif code == "es":
+        h1_support = "Estado en vivo y pronóstico de 48 horas"
+        hero_copy = "Consulta avisos públicos verificados, el estado de hoy y el pronóstico para las próximas 48 horas."
+        forecast_h2 = "Pronóstico de reinicio a 48 horas"
+        pulse_title = "Cronología del pronóstico"
+    elif code == "de":
+        h1_support = "Live-Status und 48-Stunden-Prognose"
+        hero_copy = "Sieh bestätigte öffentliche Reset-Meldungen, den heutigen Status und die Prognose für die nächsten 48 Stunden."
+        forecast_h2 = "Reset-Prognose für 48 Stunden"
+        pulse_title = "Prognose-Zeitachse"
+    elif code == "fr":
+        h1_support = "Statut en direct et prévision sur 48 heures"
+        hero_copy = "Consultez les annonces publiques vérifiées, le statut du jour et les prévisions des prochaines 48 heures."
+        forecast_h2 = "Prévision de réinitialisation sur 48 heures"
+        pulse_title = "Chronologie des prévisions"
+    elif code == "pt-br":
+        h1_support = "Status ao vivo e previsão para 48 horas"
+        hero_copy = "Veja avisos públicos verificados, o status de hoje e a previsão para as próximas 48 horas."
+        forecast_h2 = "Previsão de reset para 48 horas"
+        pulse_title = "Linha do tempo da previsão"
+    else:
+        h1_support = "Статус и прогноз на 48 часов"
+        hero_copy = "Проверяйте подтвержденные публичные сообщения о сбросе, статус на сегодня и прогноз на ближайшие 48 часов."
+        forecast_h2 = "Прогноз сброса на 48 часов"
+        pulse_title = "Шкала прогноза"
+
+    p1_body = p1_body.replace("__BADGE__", esc(t["badge"])).replace("__H1_A__", esc(t["h1_a"])).replace("__H1_B__", esc(t["h1_b"]))
+    p1_body = p1_body.replace("__H1_SUPPORT__", esc(h1_support)).replace("__HERO_P__", esc(hero_copy)).replace("__FORECAST_H2__", esc(forecast_h2))
     p1_body = p1_body.replace("__GAUGE_LBL__", esc(t["gauge_lbl"])).replace("__GAUGE_TAG__", esc(t["gauge_tag"])).replace("__GAUGE_CAP__", esc(t["gauge_cap"]))
     p1_body = p1_body.replace("__GF_1__", esc(t["gf_1"])).replace("__GF_2__", esc(t["gf_2"])).replace("__LAST_DATE__", esc(last_date)).replace("__DAYS_SINCE__", esc(days_since_str)).replace("__LAST_RESET_UTC__", esc(last["at"]))
-    p1_body = p1_body.replace("__PULSE_T__", "48-Hour Forecast Pulse" if code=="en" else ("未来48小时预测脉冲曲线" if "zh" in code else "48時間予測パルス曲線"))
+    p1_body = p1_body.replace("__PULSE_T__", esc(pulse_title))
     p1_body = p1_body.replace("__PULSE_SUB__", "Realtime probability trajectory & verified event markers" if code=="en" else ("实时概率推演轨迹与已确认事件标记" if "zh" in code else "リアルタイム確率軌跡と確認済みイベント"))
     p1_body = p1_body.replace("__PULSE_SVG__", pulse_svg)
     if "zh" in code:

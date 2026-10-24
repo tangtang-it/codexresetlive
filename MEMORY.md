@@ -12,6 +12,11 @@
 - Eliminated duplicated `NEXT N%` anchor on the projection curve so only a single `NOW N%` forecast point is rendered alongside the green event spike.
 - Edge runtime source selection now avoids fabricated X status URLs for `manual-*` events and chooses a matching reset announcement from the preceding 48 hours, otherwise Tibo's profile.
 
+## 15. Phase: Homepage H1, Status Answer & Forecast Hierarchy (2026-10-24)
+- Reordered the home hero so the static H1/supporting intro appears before the live reset status card. The H1 now reads “Will Codex Reset Today? Live Status & 48-Hour Forecast” on English, with localized support lines on other language homepages.
+- Changed the status card to a factual answer (recorded today / no reset recorded today), removed the repeated question from its headline, and added an H2 “48-Hour Reset Forecast” before the gauge and timeline. Simplified the chart title to “Forecast timeline”.
+- Updated English title and meta description to match the page's two intents. Rebuilt 44 pages and visually checked the refreshed local desktop first screen.
+
 ## 12. Phase: Local-Day Reset Status and Forecast Separation (2026-10-24)
 - Fixed the stale-banner divergence where `/api/radar` could hydrate the chart and latest-reset fields with a new reset while the direct-answer banner retained the static build's “no reset today” conclusion.
 - Direct-answer status is now derived from the visitor's local calendar day after API hydration. It distinguishes the factual public-reset notice from the heuristic probability of a subsequent public reset in the next 48 hours.
