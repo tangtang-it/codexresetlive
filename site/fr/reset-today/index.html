@@ -1926,9 +1926,9 @@ En direct
 <div class="direct-ans-banner">
   <button class="dab-share-btn" id="shareForecastBtn" aria-label="Partager la prévision" title="Partager la prévision" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dab-share-ico"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
   <div class="dab-left">
-    <span class="dab-badge"><span class="dot"></span> LIVE VERDICT: HIGH SIGNAL · ESTIMATE</span>
-    <div class="dab-h">Will Codex reset today? <strong>Signal score: <span class='live-prob-val'>99</span>%</strong></div>
-    <div class="dab-p">No confirmed public global reset has been recorded today. The model percentage is a heuristic signal score, not an official or calibrated probability. The latest public record was <strong data-days-since-utc="2026-10-23T04:46:19.000Z">1.3d ago</strong> (<span data-local-date-only="2026-10-23T04:46:19.000Z">2026-10-23</span>). Normal building conditions — calculate your personal 5-hour rolling window below.</div>
+    <span class="dab-badge" data-direct-answer-badge><span class="dot"></span> LIVE VERDICT: HIGH SIGNAL · ESTIMATE</span>
+    <div class="dab-h" data-direct-answer-title>Will Codex reset today? <strong>Signal score: <span class='live-prob-val'>99</span>%</strong></div>
+    <div class="dab-p" data-direct-answer-copy>No confirmed public reset notice has been recorded today. The model percentage is a heuristic signal for the next public reset in the next 48 hours, not an official or calibrated probability. The latest public record was <strong data-days-since-utc="2026-10-23T04:46:19.000Z">1.3d ago</strong> (<span data-local-date-only="2026-10-23T04:46:19.000Z">2026-10-23</span>). Normal building conditions — calculate your personal 5-hour rolling window below.</div>
     <div class="dab-tz-pills">
       <div class="tz-pill"><span class="tz-dot green"></span>San Francisco HQ (Tibo): <strong data-sf-clock>--:-- (PT)</strong></div>
       <div class="tz-pill"><span class="tz-dot yellow"></span>Your Local Time: <strong data-local-clock>--:--</strong></div>
@@ -1954,7 +1954,7 @@ En direct
           <circle cx="110" cy="110" r="68" stroke="#FCD535" stroke-width="1.2" stroke-opacity="0.4"/>
           <text fill="#FCD535" font-size="9" font-family="'JetBrains Mono', ui-monospace, monospace" font-weight="700" letter-spacing="2.6" opacity="0.85">
             <textPath href="#circleTextPathSoon" startOffset="0%">
-              PREDICTION RADAR &bull; PROBABILITY PULSE &bull; 
+              PREDICTION RADAR &bull; PROBABILITY PULSE &bull;
             </textPath>
           </text>
         </g>
@@ -3069,6 +3069,73 @@ You can now cache for 12h in the API and for logged in users across Codex &amp;a
     gaugeAnimationId = requestAnimationFrame(frame);
   }
 
+  function isSameLocalCalendarDay(a, b) {
+    return a.getFullYear() === b.getFullYear() &&
+      a.getMonth() === b.getMonth() &&
+      a.getDate() === b.getDate();
+  }
+
+  function syncDirectAnswerStatus(now, lastReset, liveProb) {
+    var badge = document.querySelector('[data-direct-answer-badge]');
+    var title = document.querySelector('[data-direct-answer-title]');
+    var copy = document.querySelector('[data-direct-answer-copy]');
+    if (!badge || !title || !copy || isNaN(lastReset.getTime())) return;
+
+    var resetToday = isSameLocalCalendarDay(now, lastReset);
+    if (resetToday) {
+      badge.classList.add('yes');
+      if (isZh) {
+        badge.innerHTML = '<span class="dot"></span> 状态：今天已记录公开重置公告';
+        title.innerHTML = 'Codex 今天重置了吗？ <strong>是：今天记录到一条公开重置公告。</strong>';
+        copy.textContent = '今天的公开重置公告已记录。' + liveProb + '% 是未来 48 小时内下一次公开重置的启发式信号，不是对“今天是否已重置”的判断；个人额度请以 OpenAI Usage 页面为准。';
+      } else {
+        badge.innerHTML = '<span class="dot"></span> STATUS: PUBLIC RESET NOTICE RECORDED TODAY';
+        title.innerHTML = 'Did Codex reset today? <strong>Yes — a public reset notice was recorded today.</strong>';
+        copy.textContent = 'A public reset notice is on record for today. The ' + liveProb + '% signal estimates another public reset in the next 48 hours; it does not describe whether today\'s reset happened. Coverage can vary by account and allowance; check OpenAI Usage for your personal status.';
+      }
+
+      var stamp = document.querySelector('.openthe-stamp-wrap.soon');
+      if (stamp) {
+        stamp.classList.remove('soon');
+        stamp.classList.add('yes');
+        stamp.querySelectorAll('[fill="#FCD535"]').forEach(function(el){ el.setAttribute('fill', '#0ecb81'); });
+        stamp.querySelectorAll('[stroke="#FCD535"]').forEach(function(el){ el.setAttribute('stroke', '#0ecb81'); });
+        var stampNumber = stamp.querySelector('#stampProbNum');
+        if (stampNumber) stampNumber.textContent = 'YES';
+        var stampLabel = stamp.querySelector('.stamp-center text[letter-spacing="2"]');
+        if (stampLabel) stampLabel.textContent = 'RECORDED';
+      }
+    } else {
+      badge.classList.remove('yes');
+      if (isZh) {
+        badge.innerHTML = '<span class="dot"></span> 状态：今天尚未记录公开重置公告';
+        title.innerHTML = 'Codex 今天重置了吗？ <strong>尚未记录到公开重置公告。</strong>';
+        copy.textContent = liveProb + '% 是未来 48 小时内下一次公开重置的启发式信号，不是官方或校准概率；个人额度请以 OpenAI Usage 页面为准。';
+      } else {
+        badge.innerHTML = '<span class="dot"></span> STATUS: NO PUBLIC RESET NOTICE RECORDED TODAY';
+        title.innerHTML = 'Did Codex reset today? <strong>No public reset notice has been recorded yet.</strong>';
+        copy.textContent = 'The ' + liveProb + '% signal estimates the next public reset in the next 48 hours. It is not an official or calibrated probability; check OpenAI Usage for your personal status.';
+      }
+
+      var forecastStamp = document.querySelector('.openthe-stamp-wrap.yes');
+      if (forecastStamp) {
+        forecastStamp.classList.remove('yes');
+        forecastStamp.classList.add('soon');
+        forecastStamp.querySelectorAll('[fill="#0ecb81"]').forEach(function(el){ el.setAttribute('fill', '#FCD535'); });
+        forecastStamp.querySelectorAll('[stroke="#0ecb81"]').forEach(function(el){ el.setAttribute('stroke', '#FCD535'); });
+        var forecastOrbit = forecastStamp.querySelector('textPath');
+        if (forecastOrbit) forecastOrbit.textContent = 'PREDICTION RADAR • PROBABILITY PULSE •';
+        var forecastNumber = forecastStamp.querySelector('.stamp-center text');
+        if (forecastNumber) {
+          forecastNumber.textContent = liveProb + '%';
+          forecastNumber.id = 'stampProbNum';
+        }
+        var forecastLabel = forecastStamp.querySelector('.stamp-center text[letter-spacing="2"]');
+        if (forecastLabel) forecastLabel.textContent = 'PROBABLE';
+      }
+    }
+  }
+
   function updateLiveEngine() {
     var now = new Date();
     var lastReset = new Date(LAST_RESET_UTC);
@@ -3076,8 +3143,10 @@ You can now cache for 12h in the API and for logged in users across Codex &amp;a
     var diffDays = diffMs / 86400000;
     var diffHours = diffMs / 3600000;
     var diffMin = diffMs / 60000;
-    var resetOccurredToday = diffDays < 1.0;
+    var resetOccurredToday = isSameLocalCalendarDay(now, lastReset);
     var liveProb = (window.CODEX_RADAR && typeof window.CODEX_RADAR.probability === 'number') ? window.CODEX_RADAR.probability : 99;
+
+    syncDirectAnswerStatus(now, lastReset, liveProb);
 
     // A. Smooth Transition Gauge
     animateGaugeTo(liveProb, 1000);
@@ -3090,7 +3159,7 @@ You can now cache for 12h in the API and for logged in users across Codex &amp;a
         if (isZh) capEl.textContent = "刚刚完成重置 —— 下一次信号偏高";
         else if (isJa) capEl.textContent = "直近リセット完了 —— 次回シグナルは高め";
         else if (isKo) capEl.textContent = "최근 리셋 완료 — 다음 신호 높음";
-        else capEl.textContent = "Recent reset complete — next reset signal elevated";
+        else capEl.textContent = "Public reset recorded today — monitoring the next signal";
       } else if (liveProb < 30) {
         capEl.classList.add("low");
         if (isZh) capEl.textContent = "偏低 —— 刚刚完成一次重置";
@@ -3346,32 +3415,33 @@ You can now cache for 12h in the API and for logged in users across Codex &amp;a
       .then(function(data){
         if (!data) return;
         var p48 = data.probability48h;
+        var needsLiveRefresh = false;
         if (typeof p48 === 'number') {
           if (window.CODEX_RADAR) {
             window.CODEX_RADAR.probability = p48;
           }
+          needsLiveRefresh = true;
           document.querySelectorAll('.live-prob-val, #stampProbNum').forEach(function(el){
             el.textContent = p48;
           });
-          var chartProb = document.getElementById('chartNowProbText');
-          if (chartProb) chartProb.textContent = 'Now ' + p48 + '%';
           var stampText = document.querySelector('.stamp-center text[letter-spacing="2"]');
           if (stampText && p48 >= 80) stampText.textContent = 'CONFIRMED';
-          if (data.lastResetAt) {
-            LAST_RESET_UTC = data.lastResetAt;
-            if (window.CODEX_RADAR) window.CODEX_RADAR.lastResetUtc = data.lastResetAt;
-            document.querySelectorAll('[data-days-since-utc]').forEach(function(el){
-              el.setAttribute('data-days-since-utc', data.lastResetAt);
-            });
-            document.querySelectorAll('[data-local-date-only]').forEach(function(el){
-              el.setAttribute('data-local-date-only', data.lastResetAt);
-            });
-            document.querySelectorAll('[data-local-dt]').forEach(function(el){
-              el.setAttribute('data-local-dt', data.lastResetAt);
-            });
-            updateLiveEngine();
-          }
         }
+        if (data.lastResetAt) {
+          LAST_RESET_UTC = data.lastResetAt;
+          needsLiveRefresh = true;
+          if (window.CODEX_RADAR) window.CODEX_RADAR.lastResetUtc = data.lastResetAt;
+          document.querySelectorAll('[data-days-since-utc]').forEach(function(el){
+            el.setAttribute('data-days-since-utc', data.lastResetAt);
+          });
+          document.querySelectorAll('[data-local-date-only]').forEach(function(el){
+            el.setAttribute('data-local-date-only', data.lastResetAt);
+          });
+          document.querySelectorAll('[data-local-dt]').forEach(function(el){
+            el.setAttribute('data-local-dt', data.lastResetAt);
+          });
+        }
+        if (needsLiveRefresh) updateLiveEngine();
 
         var streamBox = document.querySelector('.stream-box');
         if (!streamBox || !data.posts || !data.posts.length) return;

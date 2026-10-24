@@ -510,7 +510,8 @@ CAL_TABLE_HTML = '''<table class="cal-table">
 </table>'''
 
 def render_direct_ans_raw(code):
-    # Check if a reset occurred within the last 24 hours (or today)
+    # The static build uses UTC only as an initial fallback. The client re-checks
+    # this against the visitor's local calendar date after live API hydration.
     # Use semantic classifier: only confirmed or banked resets trigger YES banner
     verified_resets = [
         r for r in recs 
@@ -520,10 +521,10 @@ def render_direct_ans_raw(code):
     l_dt = datetime.strptime(l_rec["at"][:19], "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc)
     now_u = datetime.now(timezone.utc)
     h_diff = max(0.1, (now_u - l_dt).total_seconds() / 3600.0)
-    # Check if a real verified reset occurred within today (last 18h on same UTC date)
+    # A "today" claim is a calendar-day claim, not a rolling 24-hour window.
     latest_category = classify_tweet(l_rec.get("id"), l_rec.get("text")).get("category")
     # A banked reset grant is not the same as a confirmed public quota reset.
-    is_today_reset = (latest_category == "confirmed_reset" and h_diff < 24.0)
+    is_today_reset = (latest_category == "confirmed_reset" and l_dt.date() == now_u.date())
     h_round = int(round(h_diff))
     l_type = l_rec.get("type", "banked").upper()
     badge_cls = l_rec.get("type", "banked")
@@ -585,7 +586,7 @@ def render_direct_ans_raw(code):
           <circle cx="110" cy="110" r="68" stroke="#FCD535" stroke-width="1.2" stroke-opacity="0.4"/>
           <text fill="#FCD535" font-size="9" font-family="'JetBrains Mono', ui-monospace, monospace" font-weight="700" letter-spacing="2.6" opacity="0.85">
             <textPath href="#circleTextPathSoon" startOffset="0%">
-              PREDICTION RADAR &bull; PROBABILITY PULSE &bull; 
+              PREDICTION RADAR &bull; PROBABILITY PULSE &bull;
             </textPath>
           </text>
         </g>
@@ -603,9 +604,9 @@ def render_direct_ans_raw(code):
         if "zh" in code:
             return f'''<div class="direct-ans-banner">
   <div class="dab-left">
-    <span class="dab-badge yes"><span class="dot"></span> 状态：已记录公开重置公告</span>
-    <div class="dab-h">Codex 今天重置了吗？ <strong>今天记录到一条公开重置公告。</strong></div>
-    <div class="dab-p">最近一次公开重置记录在 <strong data-ago-utc="{l_rec['at']}">{h_round} 小时前</strong>由 {author_badge} 发布。公告适用范围可能因账号和额度而异；请在 OpenAI Usage 页面确认个人额度状态。</div>
+    <span class="dab-badge yes" data-direct-answer-badge><span class="dot"></span> 状态：今天已记录公开重置公告</span>
+    <div class="dab-h" data-direct-answer-title>Codex 今天重置了吗？ <strong>是：今天记录到一条公开重置公告。</strong></div>
+    <div class="dab-p" data-direct-answer-copy>最近一次公开重置记录在 <strong data-ago-utc="{l_rec['at']}">{h_round} 小时前</strong>由 {author_badge} 发布。未来 48 小时信号仅估计下一次公开重置，不改变今天已经记录到的事实。公告适用范围可能因账号和额度而异；请在 OpenAI Usage 页面确认个人额度状态。</div>
     <div class="dab-rec-line">
       <span>最近一次记录：</span>
       <span class="dab-rec-dt" data-local-dt="{l_rec['at']}">{l_rec["at"][:10]} {l_rec["at"][11:16]} UTC</span>
@@ -641,9 +642,9 @@ def render_direct_ans_raw(code):
         else:
             return f'''<div class="direct-ans-banner">
   <div class="dab-left">
-    <span class="dab-badge yes"><span class="dot"></span> STATUS: PUBLIC RESET NOTICE RECORDED</span>
-    <div class="dab-h">Was Codex reset today? <strong>A public reset notice was recorded <span data-ago-utc="{l_rec['at']}">{h_round}h ago</span>.</strong></div>
-    <div class="dab-p">The latest public reset record was posted <strong data-ago-utc="{l_rec['at']}">{h_round} hours ago</strong> by {author_badge}. Coverage can vary by account and allowance; check OpenAI Usage for your personal status.</div>
+    <span class="dab-badge yes" data-direct-answer-badge><span class="dot"></span> STATUS: PUBLIC RESET NOTICE RECORDED TODAY</span>
+    <div class="dab-h" data-direct-answer-title>Did Codex reset today? <strong>Yes — a public reset notice was recorded today.</strong></div>
+    <div class="dab-p" data-direct-answer-copy>The latest public reset record was posted <strong data-ago-utc="{l_rec['at']}">{h_round} hours ago</strong> by {author_badge}. The 48-hour signal estimates the next public reset; it does not change the fact recorded for today. Coverage can vary by account and allowance; check OpenAI Usage for your personal status.</div>
     <div class="dab-rec-line">
       <span>Latest recorded reset:</span>
       <span class="dab-rec-dt" data-local-dt="{l_rec['at']}">{l_rec["at"][:10]} {l_rec["at"][11:16]} UTC</span>
@@ -673,9 +674,9 @@ def render_direct_ans_raw(code):
         if "zh" in code:
             return f'''<div class="direct-ans-banner">
   <div class="dab-left">
-    <span class="dab-badge"><span class="dot"></span> 实时状态判定：{badge_str}</span>
-    <div class="dab-h">{zh_title}</div>
-    <div class="dab-p">今日尚未监测到已确认的公开全局重置。模型百分比是基于公开信号的启发式估值，不是官方或校准概率。最近一次公开记录发生在 <strong data-days-since-utc="{last['at']}">{days_since_str} 前</strong>（<span data-local-date-only="{last['at']}">{last_date}</span>）。建议保持正常开发节奏，下方可测算个人 5 小时解锁倒计时。</div>
+    <span class="dab-badge" data-direct-answer-badge><span class="dot"></span> 实时状态判定：{badge_str}</span>
+    <div class="dab-h" data-direct-answer-title>{zh_title}</div>
+    <div class="dab-p" data-direct-answer-copy>今日尚未监测到已确认的公开全局重置。模型百分比是未来 48 小时内下一次公开重置的启发式信号，不是官方或校准概率。最近一次公开记录发生在 <strong data-days-since-utc="{last['at']}">{days_since_str} 前</strong>（<span data-local-date-only="{last['at']}">{last_date}</span>）。建议保持正常开发节奏，下方可测算个人 5 小时解锁倒计时。</div>
     <div class="dab-tz-pills">
       <div class="tz-pill"><span class="tz-dot green"></span>旧金山 HQ (Tibo): <strong data-sf-clock>--:-- (PT)</strong></div>
       <div class="tz-pill"><span class="tz-dot yellow"></span>你的本地时间: <strong data-local-clock>--:--</strong></div>
@@ -690,9 +691,9 @@ def render_direct_ans_raw(code):
         else:
             return f'''<div class="direct-ans-banner">
   <div class="dab-left">
-    <span class="dab-badge"><span class="dot"></span> LIVE VERDICT: {badge_str}</span>
-    <div class="dab-h">{en_title}</div>
-    <div class="dab-p">No confirmed public global reset has been recorded today. The model percentage is a heuristic signal score, not an official or calibrated probability. The latest public record was <strong data-days-since-utc="{last['at']}">{days_since_str} ago</strong> (<span data-local-date-only="{last['at']}">{last_date}</span>). Normal building conditions — calculate your personal 5-hour rolling window below.</div>
+    <span class="dab-badge" data-direct-answer-badge><span class="dot"></span> LIVE VERDICT: {badge_str}</span>
+    <div class="dab-h" data-direct-answer-title>{en_title}</div>
+    <div class="dab-p" data-direct-answer-copy>No confirmed public reset notice has been recorded today. The model percentage is a heuristic signal for the next public reset in the next 48 hours, not an official or calibrated probability. The latest public record was <strong data-days-since-utc="{last['at']}">{days_since_str} ago</strong> (<span data-local-date-only="{last['at']}">{last_date}</span>). Normal building conditions — calculate your personal 5-hour rolling window below.</div>
     <div class="dab-tz-pills">
       <div class="tz-pill"><span class="tz-dot green"></span>San Francisco HQ (Tibo): <strong data-sf-clock>--:-- (PT)</strong></div>
       <div class="tz-pill"><span class="tz-dot yellow"></span>Your Local Time: <strong data-local-clock>--:--</strong></div>

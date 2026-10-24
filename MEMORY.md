@@ -1,5 +1,11 @@
 # MEMORY.md - Project State & Architecture Log
 
+## 12. Phase: Local-Day Reset Status and Forecast Separation (2026-10-24)
+- Fixed the stale-banner divergence where `/api/radar` could hydrate the chart and latest-reset fields with a new reset while the direct-answer banner retained the static build's “no reset today” conclusion.
+- Direct-answer status is now derived from the visitor's local calendar day after API hydration. It distinguishes the factual public-reset notice from the heuristic probability of a subsequent public reset in the next 48 hours.
+- Replaced the rolling-24-hour “today” check with a calendar-date comparison in the static fallback and client chart logic. When a reset is recorded today, the banner and stamp report the completed status rather than displaying the forecast percentage as an answer to whether it happened.
+- Validation: `uv run python scripts/build_studio.py` and `uv run python scripts/verify_site.py` completed successfully across all 44 generated HTML pages.
+
 ## 11. Phase: Oct 23 Day 18 Reset Event Sync & AdSense Pre-Audit Remediation (2026-10-23)
 - Problem Solved & Root Causes Fixed:
   1. Classifier Rule Flaw (scripts/classifier.py): Day 18 tweet 2113492187770175603 was misclassified as chatter due to missing pattern for that's a reset. Added pattern and verified reset record.
