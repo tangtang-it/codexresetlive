@@ -2173,15 +2173,6 @@ Projected 48h
     <rect id="chartNowBadgeRect" x="501" y="108.8" width="48" height="16" rx="3.5" fill="#FCD535"/>
     <text id="chartNowProbText" x="525" y="120.3" fill="#0b0e11" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="8.5" font-weight="bold" text-anchor="middle">NOW 1%</text>
   </g>
-
-  <!-- ================= NEXT RESET FORECAST: Tomorrow ================= -->
-  <line id="chartNextStem" x1="610" y1="128.8" x2="610" y2="135" stroke="#FCD535" stroke-width="1.5" stroke-opacity="0.8" stroke-dasharray="4 3"/>
-  <circle id="chartNextRing" cx="610" cy="128.8" r="9" stroke="#FCD535" stroke-width="1.5" stroke-opacity="0.4"/>
-  <circle id="chartNextDot" cx="610" cy="128.8" r="5" fill="#FCD535"/>
-  <g filter="url(#badgeShadow)">
-    <rect id="chartNextBadgeRect" x="581" y="108.8" width="58" height="16" rx="3.5" fill="#FCD535"/>
-    <text id="chartNextProbText" x="610" y="120.3" fill="#0b0e11" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="8.5" font-weight="bold" text-anchor="middle">NEXT 1%</text>
-  </g>
 </svg>
 </div>
 </div>
@@ -3322,8 +3313,6 @@ You can now cache for 12h in the API and for logged in users across Codex &amp;a
 
     var chartProbTxt = document.getElementById("chartNowProbText");
     if(chartProbTxt) chartProbTxt.textContent = "NOW " + liveProb + "%";
-    var chartNextProbTxt = document.getElementById("chartNextProbText");
-    if(chartNextProbTxt) chartNextProbTxt.textContent = "NEXT " + liveProb + "%";
 
     var eventGroup = document.getElementById("chartTodayEvent");
     var eventTimeLabel = String(lastReset.getHours()).padStart(2, "0") + ":" + String(lastReset.getMinutes()).padStart(2, "0");
@@ -3356,16 +3345,6 @@ You can now cache for 12h in the API and for logged in users across Codex &amp;a
     if(chartEventBadge) chartEventBadge.setAttribute("x", eventX - 38);
     if(chartEventText) chartEventText.setAttribute("x", eventX);
 
-    var nextY = yNow;
-    var chartNextDot = document.getElementById("chartNextDot");
-    if(chartNextDot) { chartNextDot.setAttribute("cy", nextY); }
-    var chartNextRing = document.getElementById("chartNextRing");
-    if(chartNextRing) { chartNextRing.setAttribute("cy", nextY); }
-    var chartNextStem = document.getElementById("chartNextStem");
-    if(chartNextStem) { chartNextStem.setAttribute("y1", nextY); }
-    var chartNextBadge = document.getElementById("chartNextBadgeRect");
-    if(chartNextBadge) { chartNextBadge.setAttribute("y", Math.max(11.0, nextY - 20.0)); }
-    if(chartNextProbTxt) { chartNextProbTxt.setAttribute("y", Math.max(22.5, nextY - 8.5)); }
     var chartBadgeRect = document.getElementById("chartNowBadgeRect");
     if(chartBadgeRect) { chartBadgeRect.setAttribute("y", yBadgeRect); chartBadgeRect.setAttribute("x", "501"); }
     if(chartProbTxt) { chartProbTxt.setAttribute("y", yBadgeText); chartProbTxt.setAttribute("x", "525"); }

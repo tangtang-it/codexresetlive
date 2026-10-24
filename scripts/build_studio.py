@@ -176,15 +176,6 @@ pulse_svg = f'''<svg viewBox="0 0 740 185" fill="none" xmlns="http://www.w3.org/
     <rect id="chartNowBadgeRect" x="501" y="{y_badge_rect}" width="48" height="16" rx="3.5" fill="#FCD535"/>
     <text id="chartNowProbText" x="525" y="{y_badge_text}" fill="#0b0e11" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="8.5" font-weight="bold" text-anchor="middle">NOW {prob}%</text>
   </g>
-
-  <!-- ================= NEXT RESET FORECAST: Tomorrow ================= -->
-  <line id="chartNextStem" x1="610" y1="{y_now}" x2="610" y2="135" stroke="#FCD535" stroke-width="1.5" stroke-opacity="0.8" stroke-dasharray="4 3"/>
-  <circle id="chartNextRing" cx="610" cy="{y_now}" r="9" stroke="#FCD535" stroke-width="1.5" stroke-opacity="0.4"/>
-  <circle id="chartNextDot" cx="610" cy="{y_now}" r="5" fill="#FCD535"/>
-  <g filter="url(#badgeShadow)">
-    <rect id="chartNextBadgeRect" x="581" y="{y_badge_rect}" width="58" height="16" rx="3.5" fill="#FCD535"/>
-    <text id="chartNextProbText" x="610" y="{y_badge_text}" fill="#0b0e11" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="8.5" font-weight="bold" text-anchor="middle">NEXT {prob}%</text>
-  </g>
 </svg>'''
 
 MOVES_DATA = {

@@ -782,8 +782,6 @@ __FOOTER_DIR_HTML__
 
     var chartProbTxt = document.getElementById("chartNowProbText");
     if(chartProbTxt) chartProbTxt.textContent = "NOW " + liveProb + "%";
-    var chartNextProbTxt = document.getElementById("chartNextProbText");
-    if(chartNextProbTxt) chartNextProbTxt.textContent = "NEXT " + liveProb + "%";
 
     var eventGroup = document.getElementById("chartTodayEvent");
     var eventTimeLabel = String(lastReset.getHours()).padStart(2, "0") + ":" + String(lastReset.getMinutes()).padStart(2, "0");
@@ -816,16 +814,6 @@ __FOOTER_DIR_HTML__
     if(chartEventBadge) chartEventBadge.setAttribute("x", eventX - 38);
     if(chartEventText) chartEventText.setAttribute("x", eventX);
 
-    var nextY = yNow;
-    var chartNextDot = document.getElementById("chartNextDot");
-    if(chartNextDot) { chartNextDot.setAttribute("cy", nextY); }
-    var chartNextRing = document.getElementById("chartNextRing");
-    if(chartNextRing) { chartNextRing.setAttribute("cy", nextY); }
-    var chartNextStem = document.getElementById("chartNextStem");
-    if(chartNextStem) { chartNextStem.setAttribute("y1", nextY); }
-    var chartNextBadge = document.getElementById("chartNextBadgeRect");
-    if(chartNextBadge) { chartNextBadge.setAttribute("y", Math.max(11.0, nextY - 20.0)); }
-    if(chartNextProbTxt) { chartNextProbTxt.setAttribute("y", Math.max(22.5, nextY - 8.5)); }
     var chartBadgeRect = document.getElementById("chartNowBadgeRect");
     if(chartBadgeRect) { chartBadgeRect.setAttribute("y", yBadgeRect); chartBadgeRect.setAttribute("x", "501"); }
     if(chartProbTxt) { chartProbTxt.setAttribute("y", yBadgeText); chartProbTxt.setAttribute("x", "525"); }

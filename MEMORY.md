@@ -9,6 +9,7 @@
 ## 14. Phase: Reset Occurrence vs. Forecast Time Anchors (2026-10-24)
 - Top banner now says a verified reset "occurred" at the event time and calls its Tibo link a related announcement; it no longer falsely implies the announcement was posted at the effective reset timestamp.
 - Forecast Pulse now separates the green same-day event marker (`RESET HH:MM`) from the yellow current-probability marker (`NOW N%`). The direct chart no longer visually places an earlier reset at the current time.
+- Eliminated duplicated `NEXT N%` anchor on the projection curve so only a single `NOW N%` forecast point is rendered alongside the green event spike.
 - Edge runtime source selection now avoids fabricated X status URLs for `manual-*` events and chooses a matching reset announcement from the preceding 48 hours, otherwise Tibo's profile.
 
 ## 12. Phase: Local-Day Reset Status and Forecast Separation (2026-10-24)
