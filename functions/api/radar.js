@@ -50,12 +50,25 @@ export async function onRequest(context) {
         const resets = data.events.filter(e => e && (e.kind === 'reset' || e.resetType) && e.verified !== false);
         if (resets.length > 0) {
           const r = resets[0];
+          const resetAt = r.occurredAt || r.at || '';
+          const resetMs = Date.parse(resetAt);
+          const relatedPost = (data.tiboPosts || [])
+            .filter(p => {
+              const text = `${p.detail || ''} ${p.title || ''}`.toLowerCase();
+              const postMs = Date.parse(p.occurredAt || p.at || '');
+              return /reset|landing tomorrow|landing by eod|quota|usage limit/.test(text) &&
+                Number.isFinite(postMs) && Number.isFinite(resetMs) && postMs <= resetMs &&
+                resetMs - postMs <= 48 * 60 * 60 * 1000;
+            })
+            .sort((a, b) => Date.parse(b.occurredAt || b.at || '') - Date.parse(a.occurredAt || a.at || ''))[0];
+          const relatedUrl = relatedPost?.url || relatedPost?.link || 'https://x.com/thsottiaux';
           latestReset = {
             id: String(r.id || ''),
-            at: r.occurredAt || r.at || '',
+            at: resetAt,
             title: r.title || 'Direct quota reset',
             detail: r.detail || '',
-            url: r.url || (r.id ? 'https://x.com/thsottiaux/status/' + String(r.id).replace(/^tibo-/, '') : 'https://x.com/thsottiaux'),
+            url: r.url || relatedUrl,
+            sourceLabel: r.url ? 'Primary source' : 'Related Tibo announcement',
             verified: Boolean(r.verified),
             type: r.resetType || 'usage'
           };

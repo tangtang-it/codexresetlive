@@ -6,6 +6,11 @@
 - Data Alignment: Verified resets increased to 42, with latest confirmed reset at 2026-10-23T17:41:00Z (0.8d ago / Oct 24, 01:41 GMT+8), probability_48h at 1%.
 - Verification: Rebuilt and passed scripts/verify_site.py across 44 multilingual pages.
 
+## 14. Phase: Reset Occurrence vs. Forecast Time Anchors (2026-10-24)
+- Top banner now says a verified reset "occurred" at the event time and calls its Tibo link a related announcement; it no longer falsely implies the announcement was posted at the effective reset timestamp.
+- Forecast Pulse now separates the green same-day event marker (`RESET HH:MM`) from the yellow current-probability marker (`NOW N%`). The direct chart no longer visually places an earlier reset at the current time.
+- Edge runtime source selection now avoids fabricated X status URLs for `manual-*` events and chooses a matching reset announcement from the preceding 48 hours, otherwise Tibo's profile.
+
 ## 12. Phase: Local-Day Reset Status and Forecast Separation (2026-10-24)
 - Fixed the stale-banner divergence where `/api/radar` could hydrate the chart and latest-reset fields with a new reset while the direct-answer banner retained the static build's “no reset today” conclusion.
 - Direct-answer status is now derived from the visitor's local calendar day after API hydration. It distinguishes the factual public-reset notice from the heuristic probability of a subsequent public reset in the next 48 hours.

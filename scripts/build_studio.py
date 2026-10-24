@@ -157,13 +157,24 @@ pulse_svg = f'''<svg viewBox="0 0 740 185" fill="none" xmlns="http://www.w3.org/
     <text id="chartLastResetText" x="445" y="22.5" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" font-weight="bold" text-anchor="middle">RESET</text>
   </g>
 
-  <!-- ================= CURRENT RESET EVENT: Now ================= -->
-  <line id="chartNowStem" x1="525" y1="32" x2="525" y2="135" stroke="#0ecb81" stroke-width="1.8" stroke-opacity="0.9"/>
-  <circle id="chartNowRing" cx="525" cy="32" r="9" stroke="#0ecb81" stroke-width="1.5" stroke-opacity="0.4"/>
-  <circle id="chartNowDot" cx="525" cy="32" r="5" fill="#0ecb81"/>
+  <!-- ================= TODAY'S VERIFIED RESET EVENT ================= -->
+  <g id="chartTodayEvent">
+  <line id="chartEventStem" x1="500" y1="32" x2="500" y2="135" stroke="#0ecb81" stroke-width="1.8" stroke-opacity="0.9"/>
+  <circle id="chartEventRing" cx="500" cy="32" r="9" stroke="#0ecb81" stroke-width="1.5" stroke-opacity="0.4"/>
+  <circle id="chartEventDot" cx="500" cy="32" r="5" fill="#0ecb81"/>
   <g filter="url(#badgeShadow)">
-    <rect id="chartNowBadgeRect" x="503" y="11" width="44" height="16" rx="3.5" fill="#1e2329" stroke="#0ecb81" stroke-width="1.4"/>
-    <text id="chartNowProbText" x="525" y="22.5" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" font-weight="bold" text-anchor="middle">RESET</text>
+    <rect id="chartEventBadgeRect" x="462" y="11" width="76" height="16" rx="3.5" fill="#1e2329" stroke="#0ecb81" stroke-width="1.4"/>
+    <text id="chartEventText" x="500" y="22.5" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="8.5" font-weight="bold" text-anchor="middle">RESET</text>
+  </g>
+  </g>
+
+  <!-- ================= CURRENT FORECAST ANCHOR: Now ================= -->
+  <line id="chartNowStem" x1="525" y1="{y_now}" x2="525" y2="135" stroke="#FCD535" stroke-width="1.5" stroke-opacity="0.8" stroke-dasharray="4 3"/>
+  <circle id="chartNowRing" cx="525" cy="{y_now}" r="9" stroke="#FCD535" stroke-width="1.5" stroke-opacity="0.4"/>
+  <circle id="chartNowDot" cx="525" cy="{y_now}" r="5" fill="#FCD535"/>
+  <g filter="url(#badgeShadow)">
+    <rect id="chartNowBadgeRect" x="501" y="{y_badge_rect}" width="48" height="16" rx="3.5" fill="#FCD535"/>
+    <text id="chartNowProbText" x="525" y="{y_badge_text}" fill="#0b0e11" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="8.5" font-weight="bold" text-anchor="middle">NOW {prob}%</text>
   </g>
 
   <!-- ================= NEXT RESET FORECAST: Tomorrow ================= -->
@@ -606,7 +617,7 @@ def render_direct_ans_raw(code):
   <div class="dab-left">
     <span class="dab-badge yes" data-direct-answer-badge><span class="dot"></span> 状态：今天已记录公开重置公告</span>
     <div class="dab-h" data-direct-answer-title>Codex 今天重置了吗？ <strong>是：今天记录到一条公开重置公告。</strong></div>
-    <div class="dab-p" data-direct-answer-copy>最近一次公开重置记录在 <strong data-ago-utc="{l_rec['at']}">{h_round} 小时前</strong>由 {author_badge} 发布。公告适用范围可能因账号和额度而异；请在 OpenAI Usage 页面确认个人额度状态。<span class="dab-live-note" data-dab-live-note>未来 48 小时信号仅估计下一次公开重置。</span></div>
+    <div class="dab-p" data-direct-answer-copy>已验证重置发生在 <strong data-ago-utc="{l_rec['at']}">{h_round} 小时前</strong>。关联的 Tibo 公告：{author_badge}。公告适用范围可能因账号和额度而异；请在 OpenAI Usage 页面确认个人额度状态。<span class="dab-live-note" data-dab-live-note>未来 48 小时信号仅估计下一次公开重置。</span></div>
     <div class="dab-rec-line">
       <span>最近一次记录：</span>
       <span class="dab-rec-dt" data-local-dt="{l_rec['at']}">{l_rec["at"][:10]} {l_rec["at"][11:16]} UTC</span>
@@ -644,7 +655,7 @@ def render_direct_ans_raw(code):
   <div class="dab-left">
     <span class="dab-badge yes" data-direct-answer-badge><span class="dot"></span> STATUS: PUBLIC RESET NOTICE RECORDED TODAY</span>
     <div class="dab-h" data-direct-answer-title>Did Codex reset today? <strong>Yes — a public reset notice was recorded today.</strong></div>
-    <div class="dab-p" data-direct-answer-copy>The latest public reset record was posted <strong data-ago-utc="{l_rec['at']}">{h_round} hours ago</strong> by {author_badge}. Coverage can vary by account and allowance; check OpenAI Usage for your personal status. <span class="dab-live-note" data-dab-live-note>The 48-hour signal estimates the next public reset.</span></div>
+    <div class="dab-p" data-direct-answer-copy>A verified reset occurred <strong data-ago-utc="{l_rec['at']}">{h_round} hours ago</strong>. Related Tibo announcement: {author_badge}. Coverage can vary by account and allowance; check OpenAI Usage for your personal status. <span class="dab-live-note" data-dab-live-note>The 48-hour signal estimates the next public reset.</span></div>
     <div class="dab-rec-line">
       <span>Latest recorded reset:</span>
       <span class="dab-rec-dt" data-local-dt="{l_rec['at']}">{l_rec["at"][:10]} {l_rec["at"][11:16]} UTC</span>
@@ -676,7 +687,7 @@ def render_direct_ans_raw(code):
   <div class="dab-left">
     <span class="dab-badge" data-direct-answer-badge><span class="dot"></span> 实时状态判定：{badge_str}</span>
     <div class="dab-h" data-direct-answer-title>{zh_title}</div>
-    <div class="dab-p" data-direct-answer-copy><span class="dab-live-note" data-dab-live-note>今日尚未监测到已确认的公开全局重置。模型百分比是未来 48 小时内下一次公开重置的启发式信号，不是官方或校准概率。</span> 最近一条公开重置记录发布于 <strong data-ago-utc="{last['at']}">{h_round} 小时前</strong>，来源：{author_badge}。建议保持正常开发节奏，下方可测算个人 5 小时解锁倒计时。</div>
+    <div class="dab-p" data-direct-answer-copy><span class="dab-live-note" data-dab-live-note>今日尚未监测到已确认的公开全局重置。模型百分比是未来 48 小时内下一次公开重置的启发式信号，不是官方或校准概率。</span> 最近一次已验证重置发生在 <strong data-ago-utc="{last['at']}">{h_round} 小时前</strong>；关联公告：{author_badge}。建议保持正常开发节奏，下方可测算个人 5 小时解锁倒计时。</div>
     <div class="dab-tz-pills">
       <div class="tz-pill"><span class="tz-dot green"></span>旧金山 HQ (Tibo): <strong data-sf-clock>--:-- (PT)</strong></div>
       <div class="tz-pill"><span class="tz-dot yellow"></span>你的本地时间: <strong data-local-clock>--:--</strong></div>
@@ -693,7 +704,7 @@ def render_direct_ans_raw(code):
   <div class="dab-left">
     <span class="dab-badge" data-direct-answer-badge><span class="dot"></span> LIVE VERDICT: {badge_str}</span>
     <div class="dab-h" data-direct-answer-title>{en_title}</div>
-    <div class="dab-p" data-direct-answer-copy><span class="dab-live-note" data-dab-live-note>No confirmed public reset notice has been recorded today. The model percentage is a heuristic signal for the next public reset in the next 48 hours, not an official or calibrated probability.</span> The latest public reset notice was posted <strong data-ago-utc="{last['at']}">{h_round} hours ago</strong> by {author_badge}. Normal building conditions — calculate your personal 5-hour rolling window below.</div>
+    <div class="dab-p" data-direct-answer-copy><span class="dab-live-note" data-dab-live-note>No confirmed public reset notice has been recorded today. The model percentage is a heuristic signal for the next public reset in the next 48 hours, not an official or calibrated probability.</span> The latest verified reset occurred <strong data-ago-utc="{last['at']}">{h_round} hours ago</strong>; related Tibo announcement: {author_badge}. Normal building conditions — calculate your personal 5-hour rolling window below.</div>
     <div class="dab-tz-pills">
       <div class="tz-pill"><span class="tz-dot green"></span>San Francisco HQ (Tibo): <strong data-sf-clock>--:-- (PT)</strong></div>
       <div class="tz-pill"><span class="tz-dot yellow"></span>Your Local Time: <strong data-local-clock>--:--</strong></div>

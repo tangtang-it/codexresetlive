@@ -1928,7 +1928,7 @@ document.addEventListener('DOMContentLoaded', function(){
   <div class="dab-left">
     <span class="dab-badge" data-direct-answer-badge><span class="dot"></span> LIVE VERDICT: LOW SIGNAL · ESTIMATE</span>
     <div class="dab-h" data-direct-answer-title>Will Codex reset today? <strong>Signal score: <span class='live-prob-val'>1</span>%</strong></div>
-    <div class="dab-p" data-direct-answer-copy><span class="dab-live-note" data-dab-live-note>No confirmed public reset notice has been recorded today. The model percentage is a heuristic signal for the next public reset in the next 48 hours, not an official or calibrated probability.</span> The latest public reset notice was posted <strong data-ago-utc="2026-10-23T17:41:00.000Z">18 hours ago</strong> by <a class="dab-author-badge" data-reset-source-link href="https://x.com/thsottiaux/status/2113492502355562875" target="_blank" rel="noopener nofollow"><img class="dab-inline-avatar" src="/assets/avatars/tibo.jpg" alt="Tibo Sottiaux" width="18" height="18"><span>Tibo Sottiaux (@thsottiaux)</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;vertical-align:-1px"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>. Normal building conditions — calculate your personal 5-hour rolling window below.</div>
+    <div class="dab-p" data-direct-answer-copy><span class="dab-live-note" data-dab-live-note>No confirmed public reset notice has been recorded today. The model percentage is a heuristic signal for the next public reset in the next 48 hours, not an official or calibrated probability.</span> The latest verified reset occurred <strong data-ago-utc="2026-10-23T17:41:00.000Z">19 hours ago</strong>; related Tibo announcement: <a class="dab-author-badge" data-reset-source-link href="https://x.com/thsottiaux/status/2113492502355562875" target="_blank" rel="noopener nofollow"><img class="dab-inline-avatar" src="/assets/avatars/tibo.jpg" alt="Tibo Sottiaux" width="18" height="18"><span>Tibo Sottiaux (@thsottiaux)</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;vertical-align:-1px"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>. Normal building conditions — calculate your personal 5-hour rolling window below.</div>
     <div class="dab-tz-pills">
       <div class="tz-pill"><span class="tz-dot green"></span>San Francisco HQ (Tibo): <strong data-sf-clock>--:-- (PT)</strong></div>
       <div class="tz-pill"><span class="tz-dot yellow"></span>Your Local Time: <strong data-local-clock>--:--</strong></div>
@@ -2114,13 +2114,24 @@ Projected 48h
     <text id="chartLastResetText" x="445" y="22.5" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" font-weight="bold" text-anchor="middle">RESET</text>
   </g>
 
-  <!-- ================= CURRENT RESET EVENT: Now ================= -->
-  <line id="chartNowStem" x1="525" y1="32" x2="525" y2="135" stroke="#0ecb81" stroke-width="1.8" stroke-opacity="0.9"/>
-  <circle id="chartNowRing" cx="525" cy="32" r="9" stroke="#0ecb81" stroke-width="1.5" stroke-opacity="0.4"/>
-  <circle id="chartNowDot" cx="525" cy="32" r="5" fill="#0ecb81"/>
+  <!-- ================= TODAY'S VERIFIED RESET EVENT ================= -->
+  <g id="chartTodayEvent">
+  <line id="chartEventStem" x1="500" y1="32" x2="500" y2="135" stroke="#0ecb81" stroke-width="1.8" stroke-opacity="0.9"/>
+  <circle id="chartEventRing" cx="500" cy="32" r="9" stroke="#0ecb81" stroke-width="1.5" stroke-opacity="0.4"/>
+  <circle id="chartEventDot" cx="500" cy="32" r="5" fill="#0ecb81"/>
   <g filter="url(#badgeShadow)">
-    <rect id="chartNowBadgeRect" x="503" y="11" width="44" height="16" rx="3.5" fill="#1e2329" stroke="#0ecb81" stroke-width="1.4"/>
-    <text id="chartNowProbText" x="525" y="22.5" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" font-weight="bold" text-anchor="middle">RESET</text>
+    <rect id="chartEventBadgeRect" x="462" y="11" width="76" height="16" rx="3.5" fill="#1e2329" stroke="#0ecb81" stroke-width="1.4"/>
+    <text id="chartEventText" x="500" y="22.5" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="8.5" font-weight="bold" text-anchor="middle">RESET</text>
+  </g>
+  </g>
+
+  <!-- ================= CURRENT FORECAST ANCHOR: Now ================= -->
+  <line id="chartNowStem" x1="525" y1="128.8" x2="525" y2="135" stroke="#FCD535" stroke-width="1.5" stroke-opacity="0.8" stroke-dasharray="4 3"/>
+  <circle id="chartNowRing" cx="525" cy="128.8" r="9" stroke="#FCD535" stroke-width="1.5" stroke-opacity="0.4"/>
+  <circle id="chartNowDot" cx="525" cy="128.8" r="5" fill="#FCD535"/>
+  <g filter="url(#badgeShadow)">
+    <rect id="chartNowBadgeRect" x="501" y="108.8" width="48" height="16" rx="3.5" fill="#FCD535"/>
+    <text id="chartNowProbText" x="525" y="120.3" fill="#0b0e11" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="8.5" font-weight="bold" text-anchor="middle">NOW 1%</text>
   </g>
 
   <!-- ================= NEXT RESET FORECAST: Tomorrow ================= -->
@@ -3270,23 +3281,40 @@ You can now cache for 12h in the API and for logged in users across Codex &amp;a
     }
 
     var chartProbTxt = document.getElementById("chartNowProbText");
-    if(chartProbTxt) chartProbTxt.textContent = resetOccurredToday ? "RESET" : "NOW " + liveProb + "%";
+    if(chartProbTxt) chartProbTxt.textContent = "NOW " + liveProb + "%";
     var chartNextProbTxt = document.getElementById("chartNextProbText");
     if(chartNextProbTxt) chartNextProbTxt.textContent = "NEXT " + liveProb + "%";
+
+    var eventGroup = document.getElementById("chartTodayEvent");
+    var eventTimeLabel = String(lastReset.getHours()).padStart(2, "0") + ":" + String(lastReset.getMinutes()).padStart(2, "0");
+    var eventX = Math.max(490, Math.min(517, 525 - Math.min(diffHours, 24) * 1.1));
+    if(eventGroup) eventGroup.style.display = resetOccurredToday ? "" : "none";
+    var chartEventText = document.getElementById("chartEventText");
+    if(chartEventText) chartEventText.textContent = "RESET " + eventTimeLabel;
 
     var pClamped = Math.min(100, Math.max(0, liveProb));
     var yNow = pClamped <= 80 
       ? Math.round((130.0 - (pClamped * 1.1875)) * 10) / 10 
       : Math.round((35.0 - ((pClamped - 80.0) * 0.25)) * 10) / 10;
-    var yBadgeRect = resetOccurredToday ? 11.0 : Math.max(11.0, Math.round((yNow - 20.0) * 10) / 10);
+    var yBadgeRect = Math.max(11.0, Math.round((yNow - 20.0) * 10) / 10);
     var yBadgeText = Math.round((yBadgeRect + 11.5) * 10) / 10;
 
     var chartDot = document.getElementById("chartNowDot");
-    if(chartDot) { chartDot.setAttribute("cy", resetOccurredToday ? "32" : yNow); chartDot.setAttribute("cx", "525"); chartDot.setAttribute("fill", resetOccurredToday ? "#0ecb81" : "#FCD535"); }
+    if(chartDot) { chartDot.setAttribute("cy", yNow); chartDot.setAttribute("cx", "525"); chartDot.setAttribute("fill", "#FCD535"); }
     var chartRing = document.getElementById("chartNowRing");
-    if(chartRing) { chartRing.setAttribute("cy", resetOccurredToday ? "32" : yNow); chartRing.setAttribute("cx", "525"); chartRing.setAttribute("stroke", resetOccurredToday ? "#0ecb81" : "#FCD535"); }
+    if(chartRing) { chartRing.setAttribute("cy", yNow); chartRing.setAttribute("cx", "525"); chartRing.setAttribute("stroke", "#FCD535"); }
     var chartStem = document.getElementById("chartNowStem");
-    if(chartStem) { chartStem.setAttribute("y1", resetOccurredToday ? "32" : yNow); chartStem.setAttribute("x1", "525"); chartStem.setAttribute("x2", "525"); chartStem.setAttribute("stroke", resetOccurredToday ? "#0ecb81" : "#FCD535"); }
+    if(chartStem) { chartStem.setAttribute("y1", yNow); chartStem.setAttribute("x1", "525"); chartStem.setAttribute("x2", "525"); chartStem.setAttribute("stroke", "#FCD535"); }
+
+    var chartEventStem = document.getElementById("chartEventStem");
+    if(chartEventStem) { chartEventStem.setAttribute("x1", eventX); chartEventStem.setAttribute("x2", eventX); }
+    var chartEventDot = document.getElementById("chartEventDot");
+    if(chartEventDot) chartEventDot.setAttribute("cx", eventX);
+    var chartEventRing = document.getElementById("chartEventRing");
+    if(chartEventRing) chartEventRing.setAttribute("cx", eventX);
+    var chartEventBadge = document.getElementById("chartEventBadgeRect");
+    if(chartEventBadge) chartEventBadge.setAttribute("x", eventX - 38);
+    if(chartEventText) chartEventText.setAttribute("x", eventX);
 
     var nextY = yNow;
     var chartNextDot = document.getElementById("chartNextDot");
@@ -3299,13 +3327,13 @@ You can now cache for 12h in the API and for logged in users across Codex &amp;a
     if(chartNextBadge) { chartNextBadge.setAttribute("y", Math.max(11.0, nextY - 20.0)); }
     if(chartNextProbTxt) { chartNextProbTxt.setAttribute("y", Math.max(22.5, nextY - 8.5)); }
     var chartBadgeRect = document.getElementById("chartNowBadgeRect");
-    if(chartBadgeRect) { chartBadgeRect.setAttribute("y", yBadgeRect); chartBadgeRect.setAttribute("x", "498"); }
+    if(chartBadgeRect) { chartBadgeRect.setAttribute("y", yBadgeRect); chartBadgeRect.setAttribute("x", "501"); }
     if(chartProbTxt) { chartProbTxt.setAttribute("y", yBadgeText); chartProbTxt.setAttribute("x", "525"); }
 
     // Dynamic SVG Curve Connection to Live yNow
     var chartHist = document.getElementById("chartHistPath");
     if(chartHist) {
-      chartHist.setAttribute("d", resetOccurredToday ? "M 60 115 Q 100 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 370 70, 445 32 L 445 130 Q 485 105, 525 32" : "M 60 115 Q 100 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 370 70, 445 32 L 445 130 Q 485 105, 525 " + yNow);
+      chartHist.setAttribute("d", resetOccurredToday ? "M 60 115 Q 100 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 370 70, 445 32 L 445 130 Q 485 105, " + eventX + " 32 L 525 " + yNow : "M 60 115 Q 100 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 370 70, 445 32 L 445 130 Q 485 105, 525 " + yNow);
     }
     var chartProj = document.getElementById("chartProjPath");
     if(chartProj) {
@@ -3313,7 +3341,7 @@ You can now cache for 12h in the API and for logged in users across Codex &amp;a
     }
     var chartArea = document.getElementById("chartAreaPath");
     if(chartArea) {
-      chartArea.setAttribute("d", "M 60 135 L 60 115 Q 100 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 370 70, 445 32 L 445 130 Q 485 105, 525 " + yNow + " L 525 135 Z");
+      chartArea.setAttribute("d", resetOccurredToday ? "M 60 135 L 60 115 Q 100 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 370 70, 445 32 L 445 130 Q 485 105, " + eventX + " 32 L 525 " + yNow + " L 525 135 Z" : "M 60 135 L 60 115 Q 100 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 370 70, 445 32 L 445 130 Q 485 105, 525 " + yNow + " L 525 135 Z");
     }
 
     // G. SF Work Window (Pacific Time HQ)
