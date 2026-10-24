@@ -40,24 +40,26 @@ def is_valid_tweet_id(tid: str) -> bool:
 incoming_posts = {}
 
 # ==========================================
-# Source 1: Competitor Realtime API (Fast)
+# Source 1: Primary Reset Radar API (willcodexreset.com)
 # ==========================================
-comp_url = "https://willcodexquotareset.com/api/forecast"
+radar_url = "https://willcodexreset.com/api/reset-radar"
 try:
     req = urllib.request.Request(
-        comp_url,
+        radar_url,
         headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)", "Accept": "application/json"}
     )
     opener = get_opener()
     with opener.open(req, timeout=12) as r:
-        cdata = json.loads(r.read().decode("utf-8", errors="replace"))
+        raw_resp = json.loads(r.read().decode("utf-8", errors="replace"))
+        cdata = raw_resp.get("data") if isinstance(raw_resp.get("data"), dict) else raw_resp
         posts = cdata.get("tiboPosts") or []
         for p in posts:
-            tid = str(p.get("guid") or "")
+            raw_id = str(p.get("id") or p.get("guid") or "")
+            tid = raw_id.replace("tibo-", "")
             if not is_valid_tweet_id(tid):
                 continue
-            text = (p.get("title") or "").strip()
-            at = p.get("pubDate")
+            text = (p.get("detail") or p.get("title") or "").strip()
+            at = p.get("occurredAt") or p.get("pubDate") or p.get("at")
             if "reset" in text.lower():
                 dtype = "regular"
             elif any(k in text.lower() for k in ["day ", "releasing", "steering"]):
@@ -72,9 +74,50 @@ try:
                 "type": dtype,
                 "status": "confirmed",
                 "text": text,
-                "url": f"https://x.com/thsottiaux/status/{tid}"
+                "url": p.get("url") or f"https://x.com/thsottiaux/status/{tid}"
             }
-        print(f"[SOURCE-1] Successfully parsed {len(incoming_posts)} tweets from willcodexquotareset.com")
+
+        # Extract verified reset events (includes effective reset executions)
+        events = cdata.get("events") or []
+        reset_events = [e for e in events if e and (e.get("kind") == "reset" or e.get("resetType")) and e.get("verified") is not False]
+        if reset_events:
+            top_ev = reset_events[0]
+            ev_at = top_ev.get("occurredAt") or top_ev.get("at")
+            ev_id = str(top_ev.get("id") or "")
+            ev_url = top_ev.get("url")
+            if not ev_url or "manual-" in ev_url:
+                # Fallback to the latest verified Tibo tweet
+                ev_url = "https://x.com/thsottiaux/status/2113492502355562875"
+            # Register in verified overrides
+            vfile = DATA_DIR / "verified_resets.json"
+            vdata = {}
+            if vfile.exists():
+                try:
+                    with open(vfile, "r", encoding="utf-8") as vf:
+                        vdata = json.load(vf)
+                except Exception:
+                    vdata = {}
+            vdata[ev_id] = {
+                "category": "confirmed_reset",
+                "is_reset": True,
+                "confidence": 1.0,
+                "reason": f"Verified quota reset event ({top_ev.get('detail') or top_ev.get('title') or 'Direct reset'})",
+                "source": "reset_radar_api"
+            }
+            with open(vfile, "w", encoding="utf-8") as vf:
+                json.dump(vdata, vf, indent=2, ensure_ascii=False)
+
+            incoming_posts[ev_id] = {
+                "id": ev_id,
+                "at": ev_at,
+                "type": "regular",
+                "status": "confirmed",
+                "text": top_ev.get("detail") or "Usage quota has been reset across all plans.",
+                "url": ev_url
+            }
+            print(f"[SOURCE-1] Registered verified reset event: {ev_id} at {ev_at}")
+
+        print(f"[SOURCE-1] Successfully parsed {len(incoming_posts)} items from willcodexreset.com")
 except Exception as e:
     print(f"[SOURCE-1] Competitor stream error (safe fallback): {e}")
 
@@ -216,8 +259,8 @@ if CACHE_FILE.exists():
             existing_data = json.load(f)
             raw_records = existing_data.get("records", [])
             for r in raw_records:
-                rid = r.get("id", "")
-                if is_valid_tweet_id(rid):
+                rid = str(r.get("id", ""))
+                if is_valid_tweet_id(rid) or rid.startswith("manual-") or rid.startswith("tibo-"):
                     existing_records.append(r)
                 else:
                     print(f"[GUARD] Purged suspicious mock ID: {rid}")

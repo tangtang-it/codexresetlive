@@ -12,5 +12,12 @@
     "confidence": 1.0,
     "reason": "Verified Day 18/ reset confirmation by Tibo Sottiaux: 'But yes... that’s a reset!'",
     "source": "tibo_official_tweet"
+  },
+  "manual-f620207f-546a-43ae-be58-31739caba93e": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 1.0,
+    "reason": "Verified quota reset event (Usage has been reset)",
+    "source": "reset_radar_api"
   }
 }

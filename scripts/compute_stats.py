@@ -46,8 +46,8 @@ has_pending = False
 for r in recs[-4:]:
     txt = r.get("text", "").lower()
     if any(k in txt for k in ["landing tomorrow", "incoming reset", "will reset in", "propagating in", "landing by eod"]):
-        # Verify this announcement is later than or equal to the last confirmed reset
-        if r.get("at", "") >= last.get("at", ""):
+        # Verify this announcement is strictly later than the last confirmed reset
+        if r.get("at", "") > last.get("at", ""):
             has_pending = True
             break
 

@@ -1,5 +1,11 @@
 # MEMORY.md - Project State & Architecture Log
 
+## 13. Phase: Upstream Ingestion & 48h Hazard Synchronization (2026-10-24)
+- Root Cause Resolved: Upstream scraper was targeting an unmaintained endpoint and strict regex dropped legitimate verified reset event IDs (manual-*). Updated scripts/scrape_tibo.py to consume willcodexreset.com/api/reset-radar events directly.
+- Resolved Pending Deadlock: In scripts/compute_stats.py, has_pending required strict chronological precedence (>) over last confirmed reset. Because 2026-10-23T17:41:00Z executed after the morning announcement, pending state was released, dropping static probability to 1% cooldown.
+- Data Alignment: Verified resets increased to 42, with latest confirmed reset at 2026-10-23T17:41:00Z (0.8d ago / Oct 24, 01:41 GMT+8), probability_48h at 1%.
+- Verification: Rebuilt and passed scripts/verify_site.py across 44 multilingual pages.
+
 ## 12. Phase: Local-Day Reset Status and Forecast Separation (2026-10-24)
 - Fixed the stale-banner divergence where `/api/radar` could hydrate the chart and latest-reset fields with a new reset while the direct-answer banner retained the static build's “no reset today” conclusion.
 - Direct-answer status is now derived from the visitor's local calendar day after API hydration. It distinguishes the factual public-reset notice from the heuristic probability of a subsequent public reset in the next 48 hours.
