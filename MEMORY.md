@@ -250,3 +250,11 @@ u.
 
 - **生产上线与远端同步**: Commit a5b01ff. Merged remote auto-update cron commits using local authoritative build and successfully pushed all 24 commits to origin/main (github.com:tangtang-it/codexresetlive.git). Cloudflare Pages and GitHub Actions auto-deployment triggered.
 
+
+
+## 12. Search CTR & Codex Reset Accuracy Pass (2026-10-24)
+- Updated homepage and reset-today metadata to foreground the user intent and distinguish public/global reset notices from personal quota recovery.
+- Rewrote English, Chinese, and Japanese FAQ answers to remove unsupported propagation timing and expired-offer claims, and to reflect current OpenAI documentation for eligible paid instant resets.
+- Clarified that the radar percentage is a heuristic indicator, not a statistically calibrated probability or a view of the visitor's account.
+- Added GA4 events for recovery preset selections and calendar-add clicks; these events still need to be marked as key events in GA4 if desired.
+- Rebuilt 40 multilingual pages and passed the integrity/schema/link/section audit across all 44 HTML files. Production deployment and post-recrawl GSC evaluation remain pending.

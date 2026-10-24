@@ -521,7 +521,9 @@ def render_direct_ans_raw(code):
     now_u = datetime.now(timezone.utc)
     h_diff = max(0.1, (now_u - l_dt).total_seconds() / 3600.0)
     # Check if a real verified reset occurred within today (last 18h on same UTC date)
-    is_today_reset = (h_diff < 24.0)
+    latest_category = classify_tweet(l_rec.get("id"), l_rec.get("text")).get("category")
+    # A banked reset grant is not the same as a confirmed public quota reset.
+    is_today_reset = (latest_category == "confirmed_reset" and h_diff < 24.0)
     h_round = int(round(h_diff))
     l_type = l_rec.get("type", "banked").upper()
     badge_cls = l_rec.get("type", "banked")
@@ -550,16 +552,16 @@ def render_direct_ans_raw(code):
           <circle cx="110" cy="110" r="68" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.4"/>
           <text fill="#0ecb81" font-size="9" font-family="'JetBrains Mono', ui-monospace, monospace" font-weight="700" letter-spacing="2.6" opacity="0.85">
             <textPath href="#circleTextPathYes" startOffset="0%">
-              OPENAI CODEX RESET &bull; VERIFIED FLUSH &bull; 
+              PUBLIC CODEX RESET NOTICE &bull; SOURCE VERIFIED &bull;
             </textPath>
           </text>
         </g>
 
         <!-- 超大醒目的 Yes. 与下划虚线 -->
         <g class="stamp-center" filter="url(#glowGreenBig)">
-          <text x="110" y="118" fill="#0ecb81" font-size="54" font-weight="900" text-anchor="middle" font-family="'Inter', system-ui, -apple-system, sans-serif" letter-spacing="-1">Yes.</text>
+          <text x="110" y="118" fill="#0ecb81" font-size="35" font-weight="900" text-anchor="middle" font-family="'Inter', system-ui, -apple-system, sans-serif" letter-spacing="-1">POST</text>
           <line x1="68" y1="132" x2="152" y2="132" stroke="#0ecb81" stroke-width="2" stroke-dasharray="3 3" stroke-opacity="0.85"/>
-          <text x="110" y="148" fill="#0ecb81" font-size="9.5" font-weight="800" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" letter-spacing="2">CONFIRMED</text>
+          <text x="110" y="148" fill="#0ecb81" font-size="9.5" font-weight="800" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" letter-spacing="2">RECORDED</text>
         </g>
       </svg>
     </div>"""
@@ -601,9 +603,9 @@ def render_direct_ans_raw(code):
         if "zh" in code:
             return f'''<div class="direct-ans-banner">
   <div class="dab-left">
-    <span class="dab-badge yes"><span class="dot"></span> 实时状态判定：今日已完成放水 (YES)</span>
-    <div class="dab-h">Codex 今天重置了吗？ <strong>是的，今日已重置！(Yes.)</strong></div>
-    <div class="dab-p">最新一次官方额度注入发生在 <strong data-ago-utc="{l_rec['at']}">{h_round} 小时前</strong>，由 {author_badge} 宣布确认。额度已补充完毕，无需再等待！</div>
+    <span class="dab-badge yes"><span class="dot"></span> 状态：已记录公开重置公告</span>
+    <div class="dab-h">Codex 今天重置了吗？ <strong>今天记录到一条公开重置公告。</strong></div>
+    <div class="dab-p">最近一次公开重置记录在 <strong data-ago-utc="{l_rec['at']}">{h_round} 小时前</strong>由 {author_badge} 发布。公告适用范围可能因账号和额度而异；请在 OpenAI Usage 页面确认个人额度状态。</div>
     <div class="dab-rec-line">
       <span>最近一次记录：</span>
       <span class="dab-rec-dt" data-local-dt="{l_rec['at']}">{l_rec["at"][:10]} {l_rec["at"][11:16]} UTC</span>
@@ -620,9 +622,9 @@ def render_direct_ans_raw(code):
         elif code == "ja":
             return f'''<div class="direct-ans-banner">
   <div class="dab-left">
-    <span class="dab-badge yes"><span class="dot"></span> リアルタイム判定：本日リセット完了 (YES)</span>
-    <div class="dab-h">Codexは今日リセットされましたか？ <strong>はい、本日リセットされました (Yes.)</strong></div>
-    <div class="dab-p">直近の公式リセットは <strong data-ago-utc="{l_rec['at']}">{h_round} 時間前</strong> に {author_badge} により完了しました。利用枠は回復済みです。</div>
+    <span class="dab-badge yes"><span class="dot"></span> 状態：公開リセット告知を記録</span>
+    <div class="dab-h">Codexは今日リセットされましたか？ <strong>本日、公開リセット告知を記録しました。</strong></div>
+    <div class="dab-p">直近の公開リセット記録は <strong data-ago-utc="{l_rec['at']}">{h_round} 時間前</strong>に{author_badge}が投稿しました。対象アカウントや利用枠は異なる場合があります。個人の状態はOpenAI Usage設定で確認してください。</div>
     <div class="dab-rec-line">
       <span>直近の記録：</span>
       <span class="dab-rec-dt" data-local-dt="{l_rec['at']}">{l_rec["at"][:10]} {l_rec["at"][11:16]} UTC</span>
@@ -639,9 +641,9 @@ def render_direct_ans_raw(code):
         else:
             return f'''<div class="direct-ans-banner">
   <div class="dab-left">
-    <span class="dab-badge yes"><span class="dot"></span> LIVE VERDICT: RESET CONFIRMED TODAY (YES)</span>
-    <div class="dab-h">Will Codex reset today? <strong>Yes. The latest reset landed <span data-ago-utc="{l_rec['at']}">{h_round}h ago</span>.</strong></div>
-    <div class="dab-p">Latest recorded reset landed <strong data-ago-utc="{l_rec['at']}">{h_round} hours ago</strong> via {author_badge}. Global quotas have been replenished today — build with confidence.</div>
+    <span class="dab-badge yes"><span class="dot"></span> STATUS: PUBLIC RESET NOTICE RECORDED</span>
+    <div class="dab-h">Was Codex reset today? <strong>A public reset notice was recorded <span data-ago-utc="{l_rec['at']}">{h_round}h ago</span>.</strong></div>
+    <div class="dab-p">The latest public reset record was posted <strong data-ago-utc="{l_rec['at']}">{h_round} hours ago</strong> by {author_badge}. Coverage can vary by account and allowance; check OpenAI Usage for your personal status.</div>
     <div class="dab-rec-line">
       <span>Latest recorded reset:</span>
       <span class="dab-rec-dt" data-local-dt="{l_rec['at']}">{l_rec["at"][:10]} {l_rec["at"][11:16]} UTC</span>
@@ -659,21 +661,21 @@ def render_direct_ans_raw(code):
         # Not reset today yet
         if prob >= 60:
             stamp = soon_stamp
-            badge_str = "HIGH SIGNAL · PROBABLE"
-            zh_title = f"Codex 今天会全网重置吗？ <strong>今日放水概率较高 (<span class='live-prob-val'>{prob}</span>% 预测)</strong>"
-            en_title = f"Will Codex reset today? <strong>High probability (<span class='live-prob-val'>{prob}</span>% chance)</strong>"
+            badge_str = "HIGH SIGNAL · ESTIMATE"
+            zh_title = f"Codex 今天会全网重置吗？ <strong>模型信号值 <span class='live-prob-val'>{prob}</span>%（估算）</strong>"
+            en_title = f"Will Codex reset today? <strong>Signal score: <span class='live-prob-val'>{prob}</span>%</strong>"
         else:
             stamp = soon_stamp
-            badge_str = "LOW SIGNAL · WATCHING"
-            zh_title = f"Codex 今天会全网重置吗？ <strong>今日暂无放水迹象 (<span class='live-prob-val'>{prob}</span>% 概率)</strong>"
-            en_title = f"Will Codex reset today? <strong>Watching window (<span class='live-prob-val'>{prob}</span>% probability)</strong>"
+            badge_str = "LOW SIGNAL · ESTIMATE"
+            zh_title = f"Codex 今天会全网重置吗？ <strong>模型信号值 <span class='live-prob-val'>{prob}</span>%（估算）</strong>"
+            en_title = f"Will Codex reset today? <strong>Signal score: <span class='live-prob-val'>{prob}</span>%</strong>"
 
         if "zh" in code:
             return f'''<div class="direct-ans-banner">
   <div class="dab-left">
     <span class="dab-badge"><span class="dot"></span> 实时状态判定：{badge_str}</span>
     <div class="dab-h">{zh_title}</div>
-    <div class="dab-p">今日尚未监测到官方全量重置记录。最近一次官方放水发生在 <strong data-days-since-utc="{last['at']}">{days_since_str} 前</strong>（<span data-local-date-only="{last['at']}">{last_date}</span>）。建议保持正常开发节奏，下方可测算个人 5 小时解锁倒计时。</div>
+    <div class="dab-p">今日尚未监测到已确认的公开全局重置。模型百分比是基于公开信号的启发式估值，不是官方或校准概率。最近一次公开记录发生在 <strong data-days-since-utc="{last['at']}">{days_since_str} 前</strong>（<span data-local-date-only="{last['at']}">{last_date}</span>）。建议保持正常开发节奏，下方可测算个人 5 小时解锁倒计时。</div>
     <div class="dab-tz-pills">
       <div class="tz-pill"><span class="tz-dot green"></span>旧金山 HQ (Tibo): <strong data-sf-clock>--:-- (PT)</strong></div>
       <div class="tz-pill"><span class="tz-dot yellow"></span>你的本地时间: <strong data-local-clock>--:--</strong></div>
@@ -690,7 +692,7 @@ def render_direct_ans_raw(code):
   <div class="dab-left">
     <span class="dab-badge"><span class="dot"></span> LIVE VERDICT: {badge_str}</span>
     <div class="dab-h">{en_title}</div>
-    <div class="dab-p">No global reset recorded today. The last verified reset was <strong data-days-since-utc="{last['at']}">{days_since_str} ago</strong> (<span data-local-date-only="{last['at']}">{last_date}</span>). Normal building conditions — calculate your personal 5-hour rolling window below.</div>
+    <div class="dab-p">No confirmed public global reset has been recorded today. The model percentage is a heuristic signal score, not an official or calibrated probability. The latest public record was <strong data-days-since-utc="{last['at']}">{days_since_str} ago</strong> (<span data-local-date-only="{last['at']}">{last_date}</span>). Normal building conditions — calculate your personal 5-hour rolling window below.</div>
     <div class="dab-tz-pills">
       <div class="tz-pill"><span class="tz-dot green"></span>San Francisco HQ (Tibo): <strong data-sf-clock>--:-- (PT)</strong></div>
       <div class="tz-pill"><span class="tz-dot yellow"></span>Your Local Time: <strong data-local-clock>--:--</strong></div>
@@ -752,7 +754,7 @@ def render_guides(code):
         g3 = ("トラブル診断", "サーバー障害（Outage）か、利用制限か、スロットルか？", "OpenAI全体のインフラ障害なのか、個人プランの上限到達なのかを3秒で切り分ける実践的診断フロー。", "代替ツールを見る →")
     else:
         g1 = ("ARCHITECTURE", "What actually resets when you hit a Codex limit?", "Understand rolling 5-hour token buckets, context window saturation, reasoning effort depth, and shared agentic pools.", "Explore calculations →")
-        g2 = ("MECHANICS", "Hard Reset vs. Banked Reset: Key differences", "Spontaneous global flushes instantly clear quota for all subscribers, while banked resets store redeemable vouchers for later use.", "View verified history →")
+        g2 = ("MECHANICS", "Hard Reset vs. Banked Reset: Key differences", "Public reset announcements may cover selected accounts and allowances; banked resets are stored for later use under the offer terms.", "View verified history →")
         g3 = ("DIAGNOSIS", "Outage, quota limit, or server throttle?", "A practical 3-step diagnostic to identify whether OpenAI is suffering platform downtime or your account reached personal caps.", "See fallback tools →")
 
     return f'''<div class="guide-card">
@@ -925,31 +927,31 @@ def render_footer_dir(code, base_href):
 
 FAQS_DATA = {
     "en": [
-        ("Will Codex reset today?", "Reset probabilities are dynamically calculated by the radar above based on verified leadership signals from @thsottiaux, release cadences, and platform outages. When official leadership announces an upcoming or active quota flush, probability surges up to 99%. Check the real-time probability gauge at the top of this page for the active 48-hour outlook."),
-        ("Is there an official schedule for Codex resets?", "No. Global resets are irregular and non-guaranteed. They are manually triggered by OpenAI leadership (chiefly Tibo Sottiaux) to celebrate user milestones, deploy major model architecture upgrades, or compensate for prolonged cluster outages."),
-        ("What is the difference between a regular reset and a banked reset?", "A regular (hard) reset immediately clears token usage limits for every paid user on the platform. A banked reset provides a stored daily credit voucher that you can manually activate whenever you hit a quota wall."),
-        ("Do banked resets expire?", "Banked resets generally persist across multiple days during promotional rollout periods, but OpenAI reserves the right to expire unused promotional tokens upon general availability of the relevant feature."),
-        ("Tibo posted a reset on X, but my usage limit hasn't changed. Why?", "Global resets roll out across distributed server clusters over a 30 to 90 minute propagation window. If your account does not reflect the refill immediately, wait for full edge CDN synchronization or log out and back in."),
-        ("Can I purchase extra Codex quota or pay for an instant reset?", "Currently, OpenAI does not sell individual one-off quota refills for Codex. The only official ways to increase capacity are upgrading from Plus to Pro/Enterprise or waiting for your rolling 5-hour window to unlock."),
-        ("How can I keep coding without waiting for quota to recover?", "You can instantly switch to alternative top-tier agentic IDEs such as Cursor IDE, Windsurf, or Claude Code. Each maintains an independent monthly usage pool and provides generous free tier credits.")
+        ("Did Codex reset today?", "This page tracks public reset announcements and links to the source. Its forecast is a heuristic estimate based on public signals and past intervals, not an official prediction or a statistically guaranteed probability. It cannot see whether a reset applies to your account; check your own Usage settings for personal limits."),
+        ("Is there a public schedule for Codex resets?", "OpenAI does not promise a fixed schedule for promotional global or banked resets. Normal usage windows and included limits depend on your plan and account. Check OpenAI Usage settings for your current limits and next refresh."),
+        ("What is the difference between a global reset, a banked reset, and my personal limit?", "A global or automatic reset is an OpenAI offer that may cover selected accounts and limits. A banked reset is stored for later use under the offer terms. Neither guarantees that every account is included. Your normal personal usage windows refresh on their own schedule, shown in Usage settings."),
+        ("Do banked resets expire?", "It depends on the specific offer. Check the expiration and eligible limits shown in your account or the original announcement; receiving a banked reset does not itself refresh your usage."),
+        ("An announcement says Codex reset, but my limit has not changed. What should I check?", "The announcement may cover only selected accounts or limits, and usage can take time to update. Confirm that you are viewing the right account, workspace, and limit in Usage settings, then refresh or reopen the page. Do not redeem or buy another reset just to test the first one."),
+        ("Can I buy an instant Codex reset?", "OpenAI currently offers paid instant resets to some eligible Plus and Pro personal accounts. Check Usage settings to see whether the option is available to you. A purchase applies immediately and can change your next weekly reset date; it is different from usage credits."),
+        ("How can I keep coding while a limit recovers?", "You can use another coding tool or wait for the limit shown in your account to refresh. Other providers have separate plans and usage terms, so check their current limits before relying on them.")
     ],
     "zh": [
-        ("Codex 今天会全网重置吗？", "Codex 重置雷达根据 Tibo Sottiaux 官方推文、发版节奏与系统故障动态计算概率。当官方发布即将放水或确认重置信号时，预测概率将自动提升至 99%。请直接查看本页面顶部的实时概率仪表盘获取最新 48 小时动态。"),
-        ("官方是否有固定的 Codex 重置时间表？", "没有。全网公共重置没有固定排期，完全由 OpenAI 核心团队（主要是 Tibo Sottiaux）视工程与公关节点手动触发，例如重大模型上线、活跃用户突破里程碑或大规模集群故障后的补偿。"),
-        ("常规硬重置（Hard Reset）与存续额度（Banked Reset）有什么区别？", "常规硬重置会瞬间清空全体付费用户的限流状态；而存续额度（Banked Reset）相当于一张存放在账户里的额度抵扣券，在你触发限流时可随时手动点击抵扣。"),
-        ("存续额度（Banked Reset）会过期失效吗？", "在特定功能灰度期内，存续额度通常可以跨天累积；但在新架构全量开放后，官方通常会清空未使用的活动存续额度。"),
-        ("Tibo 在推特宣布了重置，为什么我的额度没有恢复？", "全网重置需要在全球各区域数据中心逐步同步，通常需要 30 到 90 分钟的生效窗口。如果未立刻体现，请耐心等待边缘节点刷新，或尝试重新登录。"),
-        ("我可以单独花钱购买 Codex 额外额度或购买即时重置吗？", "目前 OpenAI 官方不提供单次付费重置功能。要获得更多额度，只能将 Plus 升级为 Pro 或 Enterprise 企业版，或者等待 5 小时滑动窗口自动恢复。"),
-        ("额度打满等不及恢复时，如何继续高效写代码？", "建议无缝切换至 Cursor IDE、Windsurf 或 Claude Code 等顶尖备用 AI 编程工具。这些工具拥有独立的免费调用池与专属额度，无需干等。")
+        ("Codex 今天重置了吗？", "本页追踪公开重置公告并提供来源链接。预测是根据公开信号和历史间隔计算的启发式估计，不是官方预测，也不代表经过统计校准的概率。本页无法读取你的账户是否适用该重置；个人额度请以账号中的 Usage 页面为准。"),
+        ("Codex 全局重置有固定时间表吗？", "OpenAI 未承诺促销性质的全局重置或存续重置按固定时间发生。常规额度窗口和额度上限取决于方案与账户。当前限额和下次刷新时间请查看 OpenAI Usage 页面。"),
+        ("全局重置、存续重置和个人额度有什么区别？", "全局或自动重置是 OpenAI 提供的活动，可能只覆盖指定账户和额度。存续重置会按活动条款保留，供之后使用；两者都不保证所有账户都能获得。个人常规额度按自己的周期刷新，时间显示在 Usage 页面。"),
+        ("存续重置会过期吗？", "取决于具体活动。请查看账号或原始公告中的适用额度和有效期；获得存续重置本身不会立即刷新你的额度。"),
+        ("公告说 Codex 已重置，但我的额度没变，应该检查什么？", "公告可能只覆盖指定账户或额度，使用情况也可能需要一些时间更新。请在 Usage 页面确认账号、工作区和额度无误，再刷新或重新打开页面。不要为了测试而再次兑换或购买重置。"),
+        ("可以购买 Codex 即时重置吗？", "OpenAI 目前向部分符合条件的 Plus 和 Pro 个人账户提供付费即时重置。请在 Usage 页面查看自己的账户是否有该选项。购买会立即生效，并可能改变下次周额度刷新日期；它与按量付费额度不同。"),
+        ("额度恢复前如何继续写代码？", "你可以使用其他编程工具，或等待账号页面显示的额度刷新。其他服务商有各自的方案和用量规则，使用前请查看其当前限额。")
     ],
     "ja": [
-        ("Codexは今日リセットされますか？", "Codexリセットレーダーは、Tibo公式シグナル、リリース周期、サーバー稼働状況に基づいてリアルタイムに確率を算出します。公式からリセット予告や反映が発表されると確率は最大99%まで急上昇します。最新の48時間予測はページ最上部のリアルタイムメーターをご確認ください。"),
-        ("Codexのリセットに決まったスケジュールはありますか？", "ありません。全体リセットは定例ではなく、OpenAIのCodex責任者Tiboの裁量により、新モデル公開やユーザー数達成、大規模障害のお詫びとして不定期に発動されます。"),
-        ("通常リセットとバンク枠（Banked Reset）の違いは何ですか？", "通常リセットは全有料ユーザーの利用枠を即座に満タンに戻します。バンク枠はアカウントに付与される保存型チケットで、制限到達時に任意で使用可能です。"),
-        ("バンク枠に有効期限はありますか？", "特定の機能テスト期間中は保持されますが、正式リリース時に未使用のボーナス枠が失効する場合があります。"),
-        ("TiboがXでリセットを発表したのに枠が戻りません。なぜ？", "世界中のサーバークラスタへの配信には30〜90分程度かかります。反映されない場合は時間をおいて再ログインをお試しください。"),
-        ("Codexの枠を追加購入したりリセットをお金で買えますか？", "現在、都度課金での単発リセット購入はできません。枠を増やすにはPro/Enterpriseへのアップグレードか、5時間の自然回復を待つ必要があります。"),
-        ("制限解除を待たずに開発を続ける最善の方法は？", "Cursor IDE、Windsurf、Claude Codeなどの代替AIエディタへ一時的に切り替えることを推奨します。独立した無料枠ですぐに開発を再開できます。")
+        ("Codexは今日リセットされましたか？", "このページでは公開されたリセット告知を出典付きで追跡します。予測は公開シグナルと過去の間隔に基づく推定であり、公式予告でも統計的に保証された確率でもありません。個人アカウントへの適用状況は確認できないため、Usage設定をご確認ください。"),
+        ("Codexの全体リセットに決まった予定はありますか？", "OpenAIはプロモーションによる全体リセットやバンク枠について、固定スケジュールを保証していません。通常の利用枠と上限はプランやアカウントによって異なります。現在の上限と更新時刻はUsage設定で確認してください。"),
+        ("全体リセット、バンク枠、個人の利用上限はどう違いますか？", "全体または自動リセットは、対象アカウントや利用枠が限定される場合のあるOpenAIのオファーです。バンク枠は条件に従って後で使うために保存されます。どちらも全アカウントへの適用を保証しません。通常の個人枠はUsage設定に表示される周期で更新されます。"),
+        ("バンク枠に有効期限はありますか？", "オファーごとに異なります。アカウントまたは元の告知にある対象枠と期限を確認してください。付与された時点で利用枠が更新されるわけではありません。"),
+        ("告知ではリセット済みなのに、自分の利用枠が変わらない場合は？", "告知の対象が一部のアカウントや利用枠に限られる場合があり、利用状況の反映に時間がかかることもあります。Usage設定で正しいアカウント、ワークスペース、利用枠を確認し、ページを再読み込みしてください。確認のために別のリセットを使ったり購入したりしないでください。"),
+        ("Codexの即時リセットを購入できますか？", "OpenAIは現在、一部の対象となるPlusおよびPro個人アカウントに有料の即時リセットを提供しています。Usage設定で利用可能か確認してください。購入はすぐ適用され、次回の週次リセット日が変わる場合があります。従量制クレジットとは別の仕組みです。"),
+        ("利用枠の回復を待つ間、開発を続けるには？", "別のコーディングツールを使うか、アカウントに表示される更新時刻まで待つ方法があります。他社サービスにはそれぞれ異なるプランと利用条件があるため、最新の上限を確認してください。")
     ]
 }
 
@@ -1071,16 +1073,31 @@ for code, d, name, loc, base_url in LANGS:
     p1_canon = f"https://codexresetlive.com/{d}/" if d else "https://codexresetlive.com/"
     
     if code == "en":
-        p1_title = "Codex Rate Limit Reset: Today's Quota & Recovery Countdown"
-        p1_desc = "Check live OpenAI Codex rate limit reset status and quota lifting signals. Calculate your 5-hour rolling limit recovery countdown and track outage updates."
+        p1_title = "Codex Reset Today? Verified Status & Quota Recovery"
+        p1_desc = "Check sourced Codex reset announcements, distinguish global resets from personal quota refreshes, and estimate your 5-hour recovery window. Independent tracker."
     elif "zh" in code:
-        p1_title = "OpenAI Codex 配额重置监控：今日限流解除状态与5小时恢复倒计时"
-        p1_desc = "实时监控 OpenAI Codex 官方配额重置与限流解除信号。提供个人5小时滚动额度恢复计算器、历史放水日历及服务故障排查，免费在线即时查询。"
+        p1_title = "Codex 今天重置了吗？官方状态与个人额度恢复"
+        p1_desc = "查看有来源的 Codex 全局重置公告，区分全局重置与个人额度刷新，并估算 5 小时恢复时间。独立工具，非 OpenAI 官方产品。"
     elif code == "ja":
-        p1_title = "Codex利用制限リセット速報：本日の枠解除判定と5時間回復計算機"
-        p1_desc = "OpenAI Codexのレート制限・クォータ解除シグナルをリアルタイム監視。個人枠の5時間ローリング回復カウントダウンと障害ステータスを即時判定。"
+        p1_title = "Codexは今日リセットされた？確認済み状況と回復時間"
+        p1_desc = "出典付きのCodex全体リセット情報を確認し、個人の利用枠更新と区別できます。5時間の回復時間も目安として計算する独立ツールです。"
+    elif code == "es":
+        p1_title = "¿Se reinició Codex hoy? Estado verificado y cuotas"
+        p1_desc = "Consulta anuncios públicos verificados, distingue los resets globales de tu cuota personal y estima la recuperación de 5 horas. Rastreador independiente."
+    elif code == "de":
+        p1_title = "Codex-Reset heute? Bestätigter Status und Kontingent"
+        p1_desc = "Prüfe belegte öffentliche Reset-Meldungen, unterscheide globale Resets von deinem persönlichen Limit und schätze die 5-Stunden-Erholung. Unabhängiger Tracker."
+    elif code == "fr":
+        p1_title = "Codex réinitialisé aujourd’hui ? Statut vérifié"
+        p1_desc = "Consultez les annonces publiques sourcées, distinguez les resets globaux de votre quota personnel et estimez la récupération sur 5 heures. Outil indépendant."
+    elif code == "pt-br":
+        p1_title = "Codex resetou hoje? Status verificado e cota pessoal"
+        p1_desc = "Consulte anúncios públicos com fontes, diferencie resets globais da cota pessoal e estime a recuperação de 5 horas. Rastreador independente."
+    elif code == "ru":
+        p1_title = "Сброс Codex сегодня? Проверенный статус и лимит"
+        p1_desc = "Проверяйте публичные сбросы Codex по источникам, отличайте их от личного лимита и оценивайте восстановление за 5 часов. Независимый сервис."
     else:
-        p1_title = f"Codex Rate Limit Reset ({name}): Quota & Recovery Countdown"
+        p1_title = f"Codex Reset Today? Verified Status ({name})"
         p1_desc = t["hero_p"]
     
     p1_schema = {
@@ -1231,8 +1248,8 @@ for code, d, name, loc, base_url in LANGS:
     p2_path = p2_dir / "index.html"
     p2_canon = f"https://codexresetlive.com/{d}/reset-today/" if d else "https://codexresetlive.com/reset-today/"
 
-    p2_title = "Did Codex Reset Today? Live Quota Status & Verdict | Codex Reset Radar" if code=="en" else ("Codex 今天重置了吗？今日配额放水实时判定 | Codex Reset Radar" if "zh" in code else ("Codexは今日リセットされましたか？リアルタイム判定 | Codex Reset Radar" if code=="ja" else "Did Codex Reset Today? | Codex Reset Radar"))
-    p2_desc = f"Did Codex quota reset today? Live verified verdict from Tibo Sottiaux and OpenAI. Probability currently at {prob}%. Track token limits, 48h forecasts, and personal 5-hour recovery." if code=="en" else (f"Codex 今天重置了吗？官方最新放水判定结果已更新。当前 48 小时放水概率为 {prob}%。提供一手推文证据与个人 5 小时解锁计算器。" if "zh" in code else f"Codexの利用枠は本日リセットされたのか？最新の公式確認シグナルを判定。現在のリセット確率は{prob}%。")
+    p2_title = "Did Codex Reset Today? Verified Status" if code=="en" else ("Codex 今天重置了吗？已核验的公开状态" if "zh" in code else ("Codexは今日リセットされた？確認済み状況" if code=="ja" else "Did Codex Reset Today? Verified Status"))
+    p2_desc = "See whether a public Codex reset was recorded today, with source links and timestamps. Personal quota status is available in your OpenAI Usage settings." if code=="en" else ("查看今天是否记录到 Codex 公开重置公告及其来源和时间。个人额度状态请以 OpenAI Usage 页面为准。" if "zh" in code else "Codexの公開リセット告知と出典・時刻を確認できます。個人の利用枠はOpenAI Usage設定をご確認ください。")
 
     p2_schema = {
         "@context":"https://schema.org",
