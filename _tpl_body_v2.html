@@ -589,8 +589,8 @@ __FOOTER_DIR_HTML__
   function syncDirectAnswerStatus(now, lastReset, liveProb) {
     var badge = document.querySelector('[data-direct-answer-badge]');
     var title = document.querySelector('[data-direct-answer-title]');
-    var copy = document.querySelector('[data-direct-answer-copy]');
-    if (!badge || !title || !copy || isNaN(lastReset.getTime())) return;
+    var liveNote = document.querySelector('[data-dab-live-note]');
+    if (!badge || !title || !liveNote || isNaN(lastReset.getTime())) return;
 
     var resetToday = isSameLocalCalendarDay(now, lastReset);
     if (resetToday) {
@@ -598,11 +598,11 @@ __FOOTER_DIR_HTML__
       if (isZh) {
         badge.innerHTML = '<span class="dot"></span> 状态：今天已记录公开重置公告';
         title.innerHTML = 'Codex 今天重置了吗？ <strong>是：今天记录到一条公开重置公告。</strong>';
-        copy.textContent = '今天的公开重置公告已记录。' + liveProb + '% 是未来 48 小时内下一次公开重置的启发式信号，不是对“今天是否已重置”的判断；个人额度请以 OpenAI Usage 页面为准。';
+        liveNote.textContent = '未来 48 小时信号估计下一次公开重置（当前 ' + liveProb + '%），不影响今天已记录的事实。';
       } else {
         badge.innerHTML = '<span class="dot"></span> STATUS: PUBLIC RESET NOTICE RECORDED TODAY';
         title.innerHTML = 'Did Codex reset today? <strong>Yes — a public reset notice was recorded today.</strong>';
-        copy.textContent = 'A public reset notice is on record for today. The ' + liveProb + '% signal estimates another public reset in the next 48 hours; it does not describe whether today\'s reset happened. Coverage can vary by account and allowance; check OpenAI Usage for your personal status.';
+        liveNote.textContent = 'The 48-hour signal estimates another public reset (currently ' + liveProb + '%); today\'s recorded notice is shown above.';
       }
 
       var stamp = document.querySelector('.openthe-stamp-wrap.soon');
@@ -621,11 +621,11 @@ __FOOTER_DIR_HTML__
       if (isZh) {
         badge.innerHTML = '<span class="dot"></span> 状态：今天尚未记录公开重置公告';
         title.innerHTML = 'Codex 今天重置了吗？ <strong>尚未记录到公开重置公告。</strong>';
-        copy.textContent = liveProb + '% 是未来 48 小时内下一次公开重置的启发式信号，不是官方或校准概率；个人额度请以 OpenAI Usage 页面为准。';
+        liveNote.textContent = '今天尚无公开重置记录。' + liveProb + '% 是未来 48 小时内下一次公开重置的启发式信号。';
       } else {
         badge.innerHTML = '<span class="dot"></span> STATUS: NO PUBLIC RESET NOTICE RECORDED TODAY';
         title.innerHTML = 'Did Codex reset today? <strong>No public reset notice has been recorded yet.</strong>';
-        copy.textContent = 'The ' + liveProb + '% signal estimates the next public reset in the next 48 hours. It is not an official or calibrated probability; check OpenAI Usage for your personal status.';
+        liveNote.textContent = 'No public reset notice is recorded for today. The ' + liveProb + '% signal estimates the next public reset in the next 48 hours.';
       }
 
       var forecastStamp = document.querySelector('.openthe-stamp-wrap.yes');
@@ -951,6 +951,11 @@ __FOOTER_DIR_HTML__
           document.querySelectorAll('[data-local-dt]').forEach(function(el){
             el.setAttribute('data-local-dt', data.lastResetAt);
           });
+          if (data.latestReset && data.latestReset.url) {
+            document.querySelectorAll('[data-reset-source-link]').forEach(function(el){
+              el.href = data.latestReset.url;
+            });
+          }
         }
         if (needsLiveRefresh) updateLiveEngine();
 

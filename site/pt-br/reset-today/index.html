@@ -1928,7 +1928,7 @@ Ao vivo
   <div class="dab-left">
     <span class="dab-badge" data-direct-answer-badge><span class="dot"></span> LIVE VERDICT: HIGH SIGNAL · ESTIMATE</span>
     <div class="dab-h" data-direct-answer-title>Will Codex reset today? <strong>Signal score: <span class='live-prob-val'>99</span>%</strong></div>
-    <div class="dab-p" data-direct-answer-copy>No confirmed public reset notice has been recorded today. The model percentage is a heuristic signal for the next public reset in the next 48 hours, not an official or calibrated probability. The latest public record was <strong data-days-since-utc="2026-10-23T04:46:19.000Z">1.3d ago</strong> (<span data-local-date-only="2026-10-23T04:46:19.000Z">2026-10-23</span>). Normal building conditions — calculate your personal 5-hour rolling window below.</div>
+    <div class="dab-p" data-direct-answer-copy><span class="dab-live-note" data-dab-live-note>No confirmed public reset notice has been recorded today. The model percentage is a heuristic signal for the next public reset in the next 48 hours, not an official or calibrated probability.</span> The latest public reset notice was posted <strong data-ago-utc="2026-10-23T04:46:19.000Z">31 hours ago</strong> by <a class="dab-author-badge" data-reset-source-link href="https://x.com/thsottiaux/status/2113492187770175603" target="_blank" rel="noopener nofollow"><img class="dab-inline-avatar" src="/assets/avatars/tibo.jpg" alt="Tibo Sottiaux" width="18" height="18"><span>Tibo Sottiaux (@thsottiaux)</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;vertical-align:-1px"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>. Normal building conditions — calculate your personal 5-hour rolling window below.</div>
     <div class="dab-tz-pills">
       <div class="tz-pill"><span class="tz-dot green"></span>San Francisco HQ (Tibo): <strong data-sf-clock>--:-- (PT)</strong></div>
       <div class="tz-pill"><span class="tz-dot yellow"></span>Your Local Time: <strong data-local-clock>--:--</strong></div>
@@ -3078,8 +3078,8 @@ You can now cache for 12h in the API and for logged in users across Codex &amp;a
   function syncDirectAnswerStatus(now, lastReset, liveProb) {
     var badge = document.querySelector('[data-direct-answer-badge]');
     var title = document.querySelector('[data-direct-answer-title]');
-    var copy = document.querySelector('[data-direct-answer-copy]');
-    if (!badge || !title || !copy || isNaN(lastReset.getTime())) return;
+    var liveNote = document.querySelector('[data-dab-live-note]');
+    if (!badge || !title || !liveNote || isNaN(lastReset.getTime())) return;
 
     var resetToday = isSameLocalCalendarDay(now, lastReset);
     if (resetToday) {
@@ -3087,11 +3087,11 @@ You can now cache for 12h in the API and for logged in users across Codex &amp;a
       if (isZh) {
         badge.innerHTML = '<span class="dot"></span> 状态：今天已记录公开重置公告';
         title.innerHTML = 'Codex 今天重置了吗？ <strong>是：今天记录到一条公开重置公告。</strong>';
-        copy.textContent = '今天的公开重置公告已记录。' + liveProb + '% 是未来 48 小时内下一次公开重置的启发式信号，不是对“今天是否已重置”的判断；个人额度请以 OpenAI Usage 页面为准。';
+        liveNote.textContent = '未来 48 小时信号估计下一次公开重置（当前 ' + liveProb + '%），不影响今天已记录的事实。';
       } else {
         badge.innerHTML = '<span class="dot"></span> STATUS: PUBLIC RESET NOTICE RECORDED TODAY';
         title.innerHTML = 'Did Codex reset today? <strong>Yes — a public reset notice was recorded today.</strong>';
-        copy.textContent = 'A public reset notice is on record for today. The ' + liveProb + '% signal estimates another public reset in the next 48 hours; it does not describe whether today\'s reset happened. Coverage can vary by account and allowance; check OpenAI Usage for your personal status.';
+        liveNote.textContent = 'The 48-hour signal estimates another public reset (currently ' + liveProb + '%); today\'s recorded notice is shown above.';
       }
 
       var stamp = document.querySelector('.openthe-stamp-wrap.soon');
@@ -3110,11 +3110,11 @@ You can now cache for 12h in the API and for logged in users across Codex &amp;a
       if (isZh) {
         badge.innerHTML = '<span class="dot"></span> 状态：今天尚未记录公开重置公告';
         title.innerHTML = 'Codex 今天重置了吗？ <strong>尚未记录到公开重置公告。</strong>';
-        copy.textContent = liveProb + '% 是未来 48 小时内下一次公开重置的启发式信号，不是官方或校准概率；个人额度请以 OpenAI Usage 页面为准。';
+        liveNote.textContent = '今天尚无公开重置记录。' + liveProb + '% 是未来 48 小时内下一次公开重置的启发式信号。';
       } else {
         badge.innerHTML = '<span class="dot"></span> STATUS: NO PUBLIC RESET NOTICE RECORDED TODAY';
         title.innerHTML = 'Did Codex reset today? <strong>No public reset notice has been recorded yet.</strong>';
-        copy.textContent = 'The ' + liveProb + '% signal estimates the next public reset in the next 48 hours. It is not an official or calibrated probability; check OpenAI Usage for your personal status.';
+        liveNote.textContent = 'No public reset notice is recorded for today. The ' + liveProb + '% signal estimates the next public reset in the next 48 hours.';
       }
 
       var forecastStamp = document.querySelector('.openthe-stamp-wrap.yes');
@@ -3440,6 +3440,11 @@ You can now cache for 12h in the API and for logged in users across Codex &amp;a
           document.querySelectorAll('[data-local-dt]').forEach(function(el){
             el.setAttribute('data-local-dt', data.lastResetAt);
           });
+          if (data.latestReset && data.latestReset.url) {
+            document.querySelectorAll('[data-reset-source-link]').forEach(function(el){
+              el.href = data.latestReset.url;
+            });
+          }
         }
         if (needsLiveRefresh) updateLiveEngine();
 

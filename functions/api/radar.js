@@ -55,6 +55,7 @@ export async function onRequest(context) {
             at: r.occurredAt || r.at || '',
             title: r.title || 'Direct quota reset',
             detail: r.detail || '',
+            url: r.url || (r.id ? 'https://x.com/thsottiaux/status/' + String(r.id).replace(/^tibo-/, '') : 'https://x.com/thsottiaux'),
             verified: Boolean(r.verified),
             type: r.resetType || 'usage'
           };

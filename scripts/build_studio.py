@@ -530,7 +530,7 @@ def render_direct_ans_raw(code):
     badge_cls = l_rec.get("type", "banked")
     type_badge = render_banked_badge(code, l_type) if badge_cls == "banked" else f'<span class="badge {badge_cls}">{l_type}</span>'
     ext_ico = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;vertical-align:-1px"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>'
-    author_badge = f'<a class="dab-author-badge" href="{esc(l_rec.get("url", "https://x.com/thsottiaux"))}" target="_blank" rel="noopener nofollow"><img class="dab-inline-avatar" src="/assets/avatars/tibo.jpg" alt="Tibo Sottiaux" width="18" height="18"><span>Tibo Sottiaux (@thsottiaux)</span> {ext_ico}</a>'
+    author_badge = f'<a class="dab-author-badge" data-reset-source-link href="{esc(l_rec.get("url", "https://x.com/thsottiaux"))}" target="_blank" rel="noopener nofollow"><img class="dab-inline-avatar" src="/assets/avatars/tibo.jpg" alt="Tibo Sottiaux" width="18" height="18"><span>Tibo Sottiaux (@thsottiaux)</span> {ext_ico}</a>'
 
     # YES Stamp Badge SVG (Inspired by OpenTheRank)
     yes_stamp = f"""<div class="openthe-stamp-wrap yes">
@@ -606,7 +606,7 @@ def render_direct_ans_raw(code):
   <div class="dab-left">
     <span class="dab-badge yes" data-direct-answer-badge><span class="dot"></span> 状态：今天已记录公开重置公告</span>
     <div class="dab-h" data-direct-answer-title>Codex 今天重置了吗？ <strong>是：今天记录到一条公开重置公告。</strong></div>
-    <div class="dab-p" data-direct-answer-copy>最近一次公开重置记录在 <strong data-ago-utc="{l_rec['at']}">{h_round} 小时前</strong>由 {author_badge} 发布。未来 48 小时信号仅估计下一次公开重置，不改变今天已经记录到的事实。公告适用范围可能因账号和额度而异；请在 OpenAI Usage 页面确认个人额度状态。</div>
+    <div class="dab-p" data-direct-answer-copy>最近一次公开重置记录在 <strong data-ago-utc="{l_rec['at']}">{h_round} 小时前</strong>由 {author_badge} 发布。公告适用范围可能因账号和额度而异；请在 OpenAI Usage 页面确认个人额度状态。<span class="dab-live-note" data-dab-live-note>未来 48 小时信号仅估计下一次公开重置。</span></div>
     <div class="dab-rec-line">
       <span>最近一次记录：</span>
       <span class="dab-rec-dt" data-local-dt="{l_rec['at']}">{l_rec["at"][:10]} {l_rec["at"][11:16]} UTC</span>
@@ -644,7 +644,7 @@ def render_direct_ans_raw(code):
   <div class="dab-left">
     <span class="dab-badge yes" data-direct-answer-badge><span class="dot"></span> STATUS: PUBLIC RESET NOTICE RECORDED TODAY</span>
     <div class="dab-h" data-direct-answer-title>Did Codex reset today? <strong>Yes — a public reset notice was recorded today.</strong></div>
-    <div class="dab-p" data-direct-answer-copy>The latest public reset record was posted <strong data-ago-utc="{l_rec['at']}">{h_round} hours ago</strong> by {author_badge}. The 48-hour signal estimates the next public reset; it does not change the fact recorded for today. Coverage can vary by account and allowance; check OpenAI Usage for your personal status.</div>
+    <div class="dab-p" data-direct-answer-copy>The latest public reset record was posted <strong data-ago-utc="{l_rec['at']}">{h_round} hours ago</strong> by {author_badge}. Coverage can vary by account and allowance; check OpenAI Usage for your personal status. <span class="dab-live-note" data-dab-live-note>The 48-hour signal estimates the next public reset.</span></div>
     <div class="dab-rec-line">
       <span>Latest recorded reset:</span>
       <span class="dab-rec-dt" data-local-dt="{l_rec['at']}">{l_rec["at"][:10]} {l_rec["at"][11:16]} UTC</span>
@@ -676,7 +676,7 @@ def render_direct_ans_raw(code):
   <div class="dab-left">
     <span class="dab-badge" data-direct-answer-badge><span class="dot"></span> 实时状态判定：{badge_str}</span>
     <div class="dab-h" data-direct-answer-title>{zh_title}</div>
-    <div class="dab-p" data-direct-answer-copy>今日尚未监测到已确认的公开全局重置。模型百分比是未来 48 小时内下一次公开重置的启发式信号，不是官方或校准概率。最近一次公开记录发生在 <strong data-days-since-utc="{last['at']}">{days_since_str} 前</strong>（<span data-local-date-only="{last['at']}">{last_date}</span>）。建议保持正常开发节奏，下方可测算个人 5 小时解锁倒计时。</div>
+    <div class="dab-p" data-direct-answer-copy><span class="dab-live-note" data-dab-live-note>今日尚未监测到已确认的公开全局重置。模型百分比是未来 48 小时内下一次公开重置的启发式信号，不是官方或校准概率。</span> 最近一条公开重置记录发布于 <strong data-ago-utc="{last['at']}">{h_round} 小时前</strong>，来源：{author_badge}。建议保持正常开发节奏，下方可测算个人 5 小时解锁倒计时。</div>
     <div class="dab-tz-pills">
       <div class="tz-pill"><span class="tz-dot green"></span>旧金山 HQ (Tibo): <strong data-sf-clock>--:-- (PT)</strong></div>
       <div class="tz-pill"><span class="tz-dot yellow"></span>你的本地时间: <strong data-local-clock>--:--</strong></div>
@@ -693,7 +693,7 @@ def render_direct_ans_raw(code):
   <div class="dab-left">
     <span class="dab-badge" data-direct-answer-badge><span class="dot"></span> LIVE VERDICT: {badge_str}</span>
     <div class="dab-h" data-direct-answer-title>{en_title}</div>
-    <div class="dab-p" data-direct-answer-copy>No confirmed public reset notice has been recorded today. The model percentage is a heuristic signal for the next public reset in the next 48 hours, not an official or calibrated probability. The latest public record was <strong data-days-since-utc="{last['at']}">{days_since_str} ago</strong> (<span data-local-date-only="{last['at']}">{last_date}</span>). Normal building conditions — calculate your personal 5-hour rolling window below.</div>
+    <div class="dab-p" data-direct-answer-copy><span class="dab-live-note" data-dab-live-note>No confirmed public reset notice has been recorded today. The model percentage is a heuristic signal for the next public reset in the next 48 hours, not an official or calibrated probability.</span> The latest public reset notice was posted <strong data-ago-utc="{last['at']}">{h_round} hours ago</strong> by {author_badge}. Normal building conditions — calculate your personal 5-hour rolling window below.</div>
     <div class="dab-tz-pills">
       <div class="tz-pill"><span class="tz-dot green"></span>San Francisco HQ (Tibo): <strong data-sf-clock>--:-- (PT)</strong></div>
       <div class="tz-pill"><span class="tz-dot yellow"></span>Your Local Time: <strong data-local-clock>--:--</strong></div>
