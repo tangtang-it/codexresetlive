@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 115,
+  "total": 116,
   "records": [
     {
       "id": "1968163721034994139",
@@ -926,6 +926,14 @@
       "status": "confirmed",
       "text": "On codex cli updates. We've added reusable prompt presets, inline model and permission settings, and enterprise MCP sign-in. We've also fixed failures when resuming long sessions and added Windows corporate-proxy authentication.\n\nSurprisingly the CLI has grown 2X in usage since devday.",
       "url": "https://x.com/thsottiaux/status/2113770862860222611"
+    },
+    {
+      "id": "2114030784625647855",
+      "at": "2026-10-24T16:26:30.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "Saturday is for fixing bugs while sipping coffee. What are some great places to hangout in SF?",
+      "url": "https://x.com/thsottiaux/status/2114030784625647855"
     }
   ]
 }
