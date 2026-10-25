@@ -845,5 +845,12 @@
     "confidence": 0.85,
     "reason": "General engineering tweet or conversational reply.",
     "source": "heuristic_engine"
+  },
+  "2114200152701575656": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.98,
+    "reason": "Broad affirmative reset action detected.",
+    "source": "heuristic_engine"
   }
 }
