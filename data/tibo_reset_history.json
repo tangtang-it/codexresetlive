@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 117,
+  "total": 120,
   "records": [
     {
       "id": "1968163721034994139",
@@ -942,6 +942,30 @@
       "status": "confirmed",
       "text": "Day 20/ Rest and reset",
       "url": "https://x.com/thsottiaux/status/2114200152701575656"
+    },
+    {
+      "id": "2114228044072403055",
+      "at": "2026-10-25T05:30:20.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "@theo Not a real improvement, put the reset in the bag",
+      "url": "https://x.com/thsottiaux/status/2114228044072403055"
+    },
+    {
+      "id": "2114237083652882932",
+      "at": "2026-10-25T06:06:16.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "It is all propagated. Enjoy some mad codexing tomorrow. Fun week ahead too. https://t.co/qOrzwSeIZZ",
+      "url": "https://x.com/thsottiaux/status/2114237083652882932"
+    },
+    {
+      "id": "approved-tibo-2114237083652882932",
+      "at": "2026-10-25T06:06:16.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "It is all propagated. Enjoy some mad codexing tomorrow. Fun week ahead too. https://t.co/qOrzwSeIZZ",
+      "url": "https://x.com/thsottiaux/status/2114237083652882932"
     }
   ]
 }

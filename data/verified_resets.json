@@ -19,5 +19,12 @@
     "confidence": 1.0,
     "reason": "Verified quota reset event (Usage has been reset)",
     "source": "reset_radar_api"
+  },
+  "approved-tibo-2114237083652882932": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 1.0,
+    "reason": "Verified quota reset event (It is all propagated. Enjoy some mad codexing tomorrow. Fun week ahead too. https://t.co/qOrzwSeIZZ)",
+    "source": "reset_radar_api"
   }
 }

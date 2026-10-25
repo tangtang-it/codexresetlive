@@ -852,5 +852,19 @@
     "confidence": 0.98,
     "reason": "Broad affirmative reset action detected.",
     "source": "heuristic_engine"
+  },
+  "2114228044072403055": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.99,
+    "reason": "Strong transactional reset execution confirmation: put the reset in the bag",
+    "source": "heuristic_engine"
+  },
+  "2114237083652882932": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 0.99,
+    "reason": "Strong transactional reset execution confirmation: all propagated",
+    "source": "heuristic_engine"
   }
 }
