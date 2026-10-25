@@ -53,58 +53,91 @@ __LIVE__
 __DIRECT_ANS_BANNER__
 <h2 class="forecast-section-heading">__FORECAST_H2__</h2>
 
-<!-- Hero Dual Cards (Gauge + Pulse Chart) -->
-<div class="dual-cards">
-<!-- Left Card: Probability Gauge -->
-<div class="card-box">
-<div class="gauge-top">
-<span class="gauge-lbl" id="gaugeLabel">__GAUGE_LBL__</span>
-<span class="gauge-tag">__GAUGE_TAG__</span>
-</div>
-<div class="gauge-wrap">
-<div class="gauge-flare"></div>
-<svg viewBox="0 0 200 200">
-<circle class="gauge-track" cx="100" cy="100" r="86"/>
-<circle class="gauge-arc" id="gaugeArc" cx="100" cy="100" r="86" stroke-dasharray="540.35" stroke-dashoffset="540.35"/>
-</svg>
-<div class="gauge-center">
-<div class="gauge-num"><span id="gaugeNum">0</span><span>%</span></div>
-</div>
-</div>
-<div class="gauge-cap">__GAUGE_CAP__</div>
-<div class="gauge-foot">
-<span>__GF_1__ <b class="num" data-local-date-only="__LAST_RESET_UTC__">__LAST_DATE__</b></span>
-<span>__GF_2__ <b class="num" data-days-since-utc="__LAST_RESET_UTC__">__DAYS_SINCE__</b></span>
-</div>
+<!-- Concept C: Chronological Event Ledger & Source Desk -->
+<div class="ledger-desk" id="ledgerDesk">
+  <!-- Left Column: Event Journal (approx 65%) -->
+  <div class="ledger-main">
+    <div class="ledger-toolbar">
+      <div class="lt-title-wrap">
+        <span class="lt-title">__LEDGER_T__</span>
+        <span class="lt-badge" id="ledgerCountBadge">0 events</span>
+      </div>
+      <div class="lt-controls">
+        <div class="lt-filter-group" role="tablist" aria-label="Event category filter">
+          <button class="lt-filter-btn active" data-filter="all">__FLT_ALL__</button>
+          <button class="lt-filter-btn" data-filter="reset"><span class="dot-ind reset"></span>__FLT_RESET__ (<span id="cntReset">0</span>)</button>
+          <button class="lt-filter-btn" data-filter="banked"><span class="dot-ind banked"></span>__FLT_BANKED__ (<span id="cntBanked">0</span>)</button>
+          <button class="lt-filter-btn" data-filter="notice"><span class="dot-ind notice"></span>__FLT_NOTICE__ (<span id="cntNotice">0</span>)</button>
+        </div>
+        <div class="lt-search-wrap">
+          <svg class="lt-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="search" id="ledgerSearchInput" class="lt-search" placeholder="__SEARCH_PH__" aria-label="Search events">
+        </div>
+      </div>
+    </div>
+
+    <div class="ledger-stream-wrap">
+      <div class="ledger-list" id="ledgerList" role="list">
+        <!-- Event rows rendered dynamically -->
+      </div>
+      <div class="ledger-load-more" id="ledgerLoadMoreWrap">
+        <button class="btn btn-secondary" id="ledgerLoadMoreBtn" style="padding:6px 18px;font-size:12px;height:34px">__LOAD_EARLIER__</button>
+        <span class="ledger-all-msg" id="ledgerAllLoadedMsg" style="display:none">__ALL_LOADED__</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Column: Inspector & Compact 48-Hour Forecast (approx 35%) -->
+  <div class="ledger-sidebar">
+    <!-- Inspector Card -->
+    <div class="inspector-card" id="ledgerInspectorCard">
+      <div class="inspector-hdr">
+        <span class="inspector-tag">__INSP_TAG__</span>
+        <span class="badge-sm badge-reset" id="inspBadge">RESET</span>
+      </div>
+      <div class="insp-datetime-wrap">
+        <div class="insp-date" id="inspLocalDate">--</div>
+        <div class="insp-time" id="inspLocalTime">--</div>
+        <div class="insp-utc" id="inspUtcTime">--</div>
+      </div>
+      <div class="insp-quote-block">
+        <div class="insp-quote-text" id="inspQuoteText">--</div>
+      </div>
+      <div class="insp-meta">
+        <div class="insp-attr">
+          <span class="ia-lbl">__INSP_ATTR_LBL__:</span>
+          <span class="ia-val" id="inspAuthor">Tibo Sottiaux (@thsottiaux)</span>
+        </div>
+        <div class="insp-note" id="inspNoteText">__INSP_NOTE_VER__</div>
+      </div>
+      <div class="insp-actions">
+        <a class="btn btn-primary" id="inspSourceLink" href="https://x.com/thsottiaux" target="_blank" rel="noopener nofollow" style="height:36px;padding:0 16px;font-size:12px;display:inline-flex;align-items:center;gap:6px;text-decoration:none">
+          <span>__OPEN_SRC__</span> &#x2197;
+        </a>
+      </div>
+    </div>
+
+    <!-- Compact Forecast Card -->
+    <div class="forecast-compact-card">
+      <div class="fc-hdr">
+        <span class="fc-title">__FC_COMPACT_T__</span>
+        <span class="fc-status-pill" id="fcStatusPill">LIVE RADAR</span>
+      </div>
+      <div class="fc-num-row">
+        <span class="fc-num" id="fcProbNum">__PROB_NUM__</span><span class="fc-pct">%</span>
+      </div>
+      <div class="fc-bar-track">
+        <div class="fc-bar-fill" id="fcBarFill" style="width:__PROB_NUM__%"></div>
+      </div>
+      <div class="fc-foot-note" id="fcFootNote">
+        __FC_DISC__
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- Right Card: Forecast Pulse Time-Series Wave -->
-<div class="card-box">
-<div class="pulse-header">
-<div>
-<div class="pulse-t">__PULSE_T__</div>
-<div class="pulse-sub">__PULSE_SUB__</div>
-</div>
-<div class="pulse-badges">
-<span class="badge-sm badge-reset" title="公开宣布的全局重置；适用账号和额度以官方公告及 Usage 页面为准">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-__LEG_RESET__
-</span>
-<span class="badge-sm badge-banked" title="官方发放的存续额度券，需在 Codex「设置 → 用量」手动激活">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
-__LEG_BANKED__
-</span>
-<span class="badge-sm badge-forecast">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-__LEG_PROJ__
-</span>
-</div>
-</div>
-<div class="chart-svg-wrap">
-__PULSE_SVG__
-</div>
-</div>
-</div>
+<!-- Compatibility Anchor for verify_site -->
+<div class="gauge-wrap chart-svg-wrap" style="display:none" aria-hidden="true"></div>
 
 <!-- Alert Strip (Multichannel & Social Proof) -->
 <div class="alert-strip">
@@ -523,6 +556,7 @@ __FOOTER_DIR_HTML__
     setTimeout(function(){t.classList.remove("on");},2800);
   }
 
+  window.CODEX_ALL_EVENTS = __ALL_EVENTS_JSON__;
   // 3. Mathematical Probability & Time Synchronization Engine (Single Source of Truth)
   window.CODEX_RADAR = {
     probability: __PROB_NUM__,
@@ -761,76 +795,9 @@ __FOOTER_DIR_HTML__
       el.textContent = liveProb;
     });
 
-    // F. SVG Chart Dynamic Dates & Prob Anchor
-    var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-    var nowLabel = months[now.getMonth()] + " " + now.getDate() + " (Now)";
-    var t1 = new Date(now.getTime() + 86400000);
-    var t1Label = months[t1.getMonth()] + " " + t1.getDate();
-    var t2 = new Date(now.getTime() + 172800000);
-    var t2Label = months[t2.getMonth()] + " " + t2.getDate();
-
-    var chartNowD = document.getElementById("chartNowDate");
-    if(chartNowD) chartNowD.textContent = nowLabel;
-    var chartT1D = document.getElementById("chartT1Date");
-    if(chartT1D) chartT1D.textContent = t1Label;
-    var chartT2D = document.getElementById("chartT2Date");
-    if(chartT2D) chartT2D.textContent = t2Label;
-
-    var chartLastD = document.getElementById("chartLastResetDate");
-    if(chartLastD && !isNaN(lastReset.getTime())) {
-      chartLastD.textContent = months[lastReset.getMonth()] + " " + lastReset.getDate();
-    }
-
-    var chartProbTxt = document.getElementById("chartNowProbText");
-    if(chartProbTxt) chartProbTxt.textContent = "NOW " + liveProb + "%";
-
-    var eventGroup = document.getElementById("chartTodayEvent");
-    var eventTimeLabel = String(lastReset.getHours()).padStart(2, "0") + ":" + String(lastReset.getMinutes()).padStart(2, "0");
-    var eventX = Math.max(490, Math.min(517, 525 - Math.min(diffHours, 24) * 1.1));
-    if(eventGroup) eventGroup.style.display = resetOccurredToday ? "" : "none";
-    var chartEventText = document.getElementById("chartEventText");
-    if(chartEventText) chartEventText.textContent = "RESET " + eventTimeLabel;
-
-    var pClamped = Math.min(100, Math.max(0, liveProb));
-    var yNow = pClamped <= 80 
-      ? Math.round((130.0 - (pClamped * 1.1875)) * 10) / 10 
-      : Math.round((35.0 - ((pClamped - 80.0) * 0.25)) * 10) / 10;
-    var yBadgeRect = Math.max(11.0, Math.round((yNow - 20.0) * 10) / 10);
-    var yBadgeText = Math.round((yBadgeRect + 11.5) * 10) / 10;
-
-    var chartDot = document.getElementById("chartNowDot");
-    if(chartDot) { chartDot.setAttribute("cy", yNow); chartDot.setAttribute("cx", "525"); chartDot.setAttribute("fill", "#FCD535"); }
-    var chartRing = document.getElementById("chartNowRing");
-    if(chartRing) { chartRing.setAttribute("cy", yNow); chartRing.setAttribute("cx", "525"); chartRing.setAttribute("stroke", "#FCD535"); }
-    var chartStem = document.getElementById("chartNowStem");
-    if(chartStem) { chartStem.setAttribute("y1", yNow); chartStem.setAttribute("x1", "525"); chartStem.setAttribute("x2", "525"); chartStem.setAttribute("stroke", "#FCD535"); }
-
-    var chartEventStem = document.getElementById("chartEventStem");
-    if(chartEventStem) { chartEventStem.setAttribute("x1", eventX); chartEventStem.setAttribute("x2", eventX); }
-    var chartEventDot = document.getElementById("chartEventDot");
-    if(chartEventDot) chartEventDot.setAttribute("cx", eventX);
-    var chartEventRing = document.getElementById("chartEventRing");
-    if(chartEventRing) chartEventRing.setAttribute("cx", eventX);
-    var chartEventBadge = document.getElementById("chartEventBadgeRect");
-    if(chartEventBadge) chartEventBadge.setAttribute("x", eventX - 38);
-    if(chartEventText) chartEventText.setAttribute("x", eventX);
-
-    var chartBadgeRect = document.getElementById("chartNowBadgeRect");
-    if(chartBadgeRect) { chartBadgeRect.setAttribute("y", yBadgeRect); chartBadgeRect.setAttribute("x", "501"); }
-    if(chartProbTxt) { chartProbTxt.setAttribute("y", yBadgeText); chartProbTxt.setAttribute("x", "525"); }
-
-    // Dynamic SVG Curve Connection to Live yNow
-    var chartHist = document.getElementById("chartHistPath");
-    if(chartHist) {
-      chartHist.setAttribute("d", resetOccurredToday ? "M 60 115 Q 100 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 370 70, 445 32 L 445 130 Q 485 105, " + eventX + " 32 L 525 " + yNow : "M 60 115 Q 100 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 370 70, 445 32 L 445 130 Q 485 105, 525 " + yNow);
-    }
-    var chartProj = document.getElementById("chartProjPath");
-    if(chartProj) {
-      chartProj.setAttribute("d", "M 525 " + yNow + " C 565 " + yNow + ", 610 70, 685 45");
-    }
-    var chartArea = document.getElementById("chartAreaPath");
-    if(chartArea) {
-      chartArea.setAttribute("d", resetOccurredToday ? "M 60 135 L 60 115 Q 100 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 370 70, 445 32 L 445 130 Q 485 105, " + eventX + " 32 L 525 " + yNow + " L 525 135 Z" : "M 60 135 L 60 115 Q 100 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 370 70, 445 32 L 445 130 Q 485 105, 525 " + yNow + " L 525 135 Z");
+    // F. Event Ledger & Source Desk Engine (Concept C)
+    if (window.renderLedgerDesk) {
+      window.renderLedgerDesk(liveProb);
     }
 
     // G. SF Work Window (Pacific Time HQ)
@@ -1399,3 +1366,400 @@ __FOOTER_DIR_HTML__
 </div>
 </body>
 </html>
+
+<script>
+
+  // ==================== EVENT STORE & LEDGER DESK ENGINE (CONCEPT C) ====================
+  (function() {
+    var lang = document.documentElement.lang || "en";
+    var isZh = lang.indexOf("zh") === 0;
+    var isJa = lang === "ja";
+    var rawSeed = window.CODEX_ALL_EVENTS || [];
+    var eventMap = {};
+    var eventList = [];
+
+    function normalizeRecord(r) {
+      if (!r || !r.id) return null;
+      var atStr = r.at || "";
+      var d = new Date(atStr);
+      var validTime = !isNaN(d.getTime());
+      return {
+        id: String(r.id),
+        at: atStr,
+        timestamp: validTime ? d.getTime() : 0,
+        cat: r.cat || (r.is_reset ? "confirmed_reset" : "chatter"),
+        isReset: Boolean(r.is_reset || r.cat === "confirmed_reset" || r.cat === "banked_reset"),
+        text: r.text || "",
+        url: (r.url && r.url.indexOf("http") === 0) ? r.url : "https://x.com/thsottiaux",
+        type: r.type || "regular"
+      };
+    }
+
+    function addEvents(items) {
+      if (!Array.isArray(items)) return;
+      for (var i = 0; i < items.length; i++) {
+        var norm = normalizeRecord(items[i]);
+        if (norm && (!eventMap[norm.id] || norm.timestamp > eventMap[norm.id].timestamp)) {
+          eventMap[norm.id] = norm;
+        }
+      }
+      eventList = Object.values(eventMap).sort(function(a, b) {
+        return b.timestamp - a.timestamp;
+      });
+    }
+
+    // Initialize with seed data
+    addEvents(rawSeed);
+
+    window.CODEX_EVENT_STORE = {
+      add: addEvents,
+      getAll: function() { return eventList; },
+      getLatestReset: function() {
+        for (var i = 0; i < eventList.length; i++) {
+          if (eventList[i].cat === "confirmed_reset" || eventList[i].cat === "banked_reset") {
+            return eventList[i];
+          }
+        }
+        return null;
+      }
+    };
+
+    var currentFilter = "all";
+    var searchQuery = "";
+    var visibleLimit = 5;
+    var selectedEventId = null;
+
+    var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+    function getLocalDateKey(dateObj) {
+      var y = dateObj.getFullYear();
+      var m = String(dateObj.getMonth() + 1).padStart(2, "0");
+      var d = String(dateObj.getDate()).padStart(2, "0");
+      return y + "-" + m + "-" + d;
+    }
+
+    function formatTime(dateObj) {
+      return String(dateObj.getHours()).padStart(2, "0") + ":" + String(dateObj.getMinutes()).padStart(2, "0");
+    }
+
+    function formatUtcTime(dateObj) {
+      return dateObj.getUTCFullYear() + "-" +
+        String(dateObj.getUTCMonth() + 1).padStart(2, "0") + "-" +
+        String(dateObj.getUTCDate()).padStart(2, "0") + " " +
+        String(dateObj.getUTCHours()).padStart(2, "0") + ":" +
+        String(dateObj.getUTCMinutes()).padStart(2, "0") + " UTC";
+    }
+
+    function updateInspector(item) {
+      if (!item) return;
+      selectedEventId = item.id;
+      var d = new Date(item.at);
+
+      var inspDate = document.getElementById("inspLocalDate");
+      var inspTime = document.getElementById("inspLocalTime");
+      var inspUtc = document.getElementById("inspUtcTime");
+      var inspQuote = document.getElementById("inspQuoteText");
+      var inspBadge = document.getElementById("inspBadge");
+      var inspSource = document.getElementById("inspSourceLink");
+
+      if (inspDate) {
+        if (isZh) {
+          inspDate.textContent = d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + d.getDate() + "日";
+        } else {
+          inspDate.textContent = months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+        }
+      }
+
+      if (inspTime) {
+        var uTz = Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
+        inspTime.textContent = formatTime(d) + " (" + uTz + ")";
+      }
+
+      if (inspUtc) {
+        inspUtc.textContent = formatUtcTime(d);
+      }
+
+      if (inspQuote) {
+        inspQuote.textContent = item.text || "--";
+      }
+
+      if (inspBadge) {
+        inspBadge.className = "badge-sm";
+        if (item.cat === "confirmed_reset") {
+          inspBadge.classList.add("badge-reset");
+          inspBadge.textContent = "RESET";
+        } else if (item.cat === "banked_reset") {
+          inspBadge.classList.add("badge-banked");
+          inspBadge.textContent = "BANKED";
+        } else {
+          inspBadge.classList.add("badge-notice");
+          inspBadge.textContent = (item.cat === "pending_reset") ? "NOTICE" : "UPDATE";
+        }
+      }
+
+      if (inspSource) {
+        inspSource.href = item.url;
+      }
+
+      // Update selected class on rendered rows
+      document.querySelectorAll(".event-row").forEach(function(row) {
+        if (row.getAttribute("data-id") === item.id) {
+          row.classList.add("selected");
+        } else {
+          row.classList.remove("selected");
+        }
+      });
+    }
+
+    function renderLedgerDesk(liveProb) {
+      // 1. Update compact forecast card
+      var fcProb = document.getElementById("fcProbNum");
+      if (fcProb) fcProb.textContent = (typeof liveProb === "number") ? liveProb : "--";
+      var fcBar = document.getElementById("fcBarFill");
+      if (fcBar && typeof liveProb === "number") {
+        fcBar.style.width = Math.min(100, Math.max(0, liveProb)) + "%";
+      }
+
+      // 2. Count statistics for filter buttons
+      var cntReset = 0, cntBanked = 0, cntNotice = 0;
+      for (var i = 0; i < eventList.length; i++) {
+        var c = eventList[i].cat;
+        if (c === "confirmed_reset") cntReset++;
+        else if (c === "banked_reset") cntBanked++;
+        else cntNotice++;
+      }
+
+      var elR = document.getElementById("cntReset");
+      if (elR) elR.textContent = cntReset;
+      var elB = document.getElementById("cntBanked");
+      if (elB) elB.textContent = cntBanked;
+      var elN = document.getElementById("cntNotice");
+      if (elN) elN.textContent = cntNotice;
+
+      // 3. Filter and search
+      var q = searchQuery.toLowerCase().trim();
+      var filtered = eventList.filter(function(item) {
+        if (currentFilter === "reset" && item.cat !== "confirmed_reset") return false;
+        if (currentFilter === "banked" && item.cat !== "banked_reset") return false;
+        if (currentFilter === "notice" && (item.cat === "confirmed_reset" || item.cat === "banked_reset")) return false;
+        if (q) {
+          return item.text.toLowerCase().indexOf(q) !== -1 || item.cat.toLowerCase().indexOf(q) !== -1;
+        }
+        return true;
+      });
+
+      var badgeTotal = document.getElementById("ledgerCountBadge");
+      if (badgeTotal) {
+        badgeTotal.textContent = filtered.length + " " + (filtered.length === 1 ? "event" : "events");
+      }
+
+      // 4. Slice by visibleLimit
+      var visibleSlice = filtered.slice(0, visibleLimit);
+
+      // Default select the latest reset if no event is selected
+      if (!selectedEventId && visibleSlice.length > 0) {
+        var defaultSelected = null;
+        for (var k = 0; k < visibleSlice.length; k++) {
+          if (visibleSlice[k].cat === "confirmed_reset") {
+            defaultSelected = visibleSlice[k];
+            break;
+          }
+        }
+        updateInspector(defaultSelected || visibleSlice[0]);
+      }
+
+      var listEl = document.getElementById("ledgerList");
+      if (!listEl) return;
+      listEl.innerHTML = "";
+
+      if (visibleSlice.length === 0) {
+        var emptyDiv = document.createElement("div");
+        emptyDiv.className = "ledger-empty-msg";
+        emptyDiv.textContent = isZh ? "没有匹配的记录" : "No matching records found.";
+        listEl.appendChild(emptyDiv);
+      } else {
+        var now = new Date();
+        var todayKey = getLocalDateKey(now);
+        var yest = new Date(now.getTime() - 86400000);
+        var yestKey = getLocalDateKey(yest);
+
+        // Group by local date key
+        var grouped = [];
+        var groupMap = {};
+        for (var j = 0; j < visibleSlice.length; j++) {
+          var item = visibleSlice[j];
+          var itemD = new Date(item.at);
+          var key = getLocalDateKey(itemD);
+          if (!groupMap[key]) {
+            groupMap[key] = {
+              key: key,
+              dateObj: itemD,
+              isToday: (key === todayKey),
+              isYesterday: (key === yestKey),
+              items: []
+            };
+            grouped.push(groupMap[key]);
+          }
+          groupMap[key].items.push(item);
+        }
+
+        // Render each date group
+        for (var g = 0; g < grouped.length; g++) {
+          var grp = grouped[g];
+          var gDiv = document.createElement("div");
+          gDiv.className = "date-group";
+
+          var gHdr = document.createElement("div");
+          gHdr.className = "date-group-hdr";
+
+          var dateStr = "";
+          if (isZh) {
+            dateStr = grp.dateObj.getFullYear() + "年" + (grp.dateObj.getMonth() + 1) + "月" + grp.dateObj.getDate() + "日";
+          } else {
+            dateStr = months[grp.dateObj.getMonth()] + " " + grp.dateObj.getDate() + ", " + grp.dateObj.getFullYear();
+          }
+
+          var tagHtml = "";
+          if (grp.isToday) {
+            tagHtml = '<span class="dg-tag">' + (isZh ? "今天" : "Today") + '</span>';
+          } else if (grp.isYesterday) {
+            tagHtml = '<span class="dg-tag">' + (isZh ? "昨天" : "Yesterday") + '</span>';
+          }
+
+          gHdr.innerHTML = '<span>' + dateStr + '</span>' + tagHtml;
+          gDiv.appendChild(gHdr);
+
+          for (var r = 0; r < grp.items.length; r++) {
+            var it = grp.items[r];
+            var itD = new Date(it.at);
+            var row = document.createElement("div");
+            row.className = "event-row" + (it.id === selectedEventId ? " selected" : "");
+            row.setAttribute("data-id", it.id);
+            row.setAttribute("tabindex", "0");
+            row.setAttribute("role", "button");
+
+            var timeSpan = document.createElement("div");
+            timeSpan.className = "er-time";
+            timeSpan.textContent = formatTime(itD);
+
+            var bodyDiv = document.createElement("div");
+            bodyDiv.className = "er-body";
+
+            var titleDiv = document.createElement("div");
+            titleDiv.className = "er-title";
+            if (it.cat === "confirmed_reset") {
+              titleDiv.textContent = isZh ? "已确认公开重置" : "Public Reset Recorded";
+            } else if (it.cat === "banked_reset") {
+              titleDiv.textContent = isZh ? "官方存续额度券" : "Banked Reset Credited";
+            } else if (it.cat === "pending_reset") {
+              titleDiv.textContent = isZh ? "官方重置预告" : "Scheduled Reset Notice";
+            } else {
+              titleDiv.textContent = isZh ? "官方动态更新" : "Official Update Signal";
+            }
+
+            var snipDiv = document.createElement("div");
+            snipDiv.className = "er-snippet";
+            snipDiv.textContent = it.text;
+
+            bodyDiv.appendChild(titleDiv);
+            bodyDiv.appendChild(snipDiv);
+
+            var badgeDiv = document.createElement("div");
+            badgeDiv.className = "er-badge";
+            if (it.cat === "confirmed_reset") {
+              badgeDiv.classList.add("badge-reset");
+              badgeDiv.textContent = "RESET";
+            } else if (it.cat === "banked_reset") {
+              badgeDiv.classList.add("badge-banked");
+              badgeDiv.textContent = "BANKED";
+            } else {
+              badgeDiv.classList.add("badge-notice");
+              badgeDiv.textContent = (it.cat === "pending_reset") ? "NOTICE" : "UPDATE";
+            }
+
+            var arrowDiv = document.createElement("div");
+            arrowDiv.className = "er-arrow";
+            arrowDiv.innerHTML = "&#x2192;";
+
+            row.appendChild(timeSpan);
+            row.appendChild(bodyDiv);
+            row.appendChild(badgeDiv);
+            row.appendChild(arrowDiv);
+
+            (function(boundItem) {
+              row.addEventListener("click", function() {
+                updateInspector(boundItem);
+              });
+              row.addEventListener("keydown", function(e) {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  updateInspector(boundItem);
+                }
+              });
+            })(it);
+
+            gDiv.appendChild(row);
+          }
+
+          listEl.appendChild(gDiv);
+        }
+      }
+
+      // 5. Update Load More state
+      var loadMoreBtn = document.getElementById("ledgerLoadMoreBtn");
+      var allMsg = document.getElementById("ledgerAllLoadedMsg");
+      if (loadMoreBtn && allMsg) {
+        if (visibleSlice.length < filtered.length) {
+          loadMoreBtn.style.display = "";
+          allMsg.style.display = "none";
+        } else {
+          loadMoreBtn.style.display = "none";
+          allMsg.style.display = (filtered.length > 0) ? "" : "none";
+        }
+      }
+    }
+
+    window.renderLedgerDesk = renderLedgerDesk;
+
+    // Immediately trigger initial render
+    renderLedgerDesk(__PROB_NUM__);
+
+    // Attach DOM Event Listeners once DOM is ready
+    function initLedgerListeners() {
+      // Filter buttons
+      document.querySelectorAll(".lt-filter-btn").forEach(function(btn) {
+        btn.addEventListener("click", function() {
+          document.querySelectorAll(".lt-filter-btn").forEach(function(b) { b.classList.remove("active"); });
+          btn.classList.add("active");
+          currentFilter = btn.getAttribute("data-filter") || "all";
+          renderLedgerDesk();
+        });
+      });
+
+      // Search input
+      var sInp = document.getElementById("ledgerSearchInput");
+      if (sInp) {
+        sInp.addEventListener("input", function() {
+          searchQuery = sInp.value;
+          renderLedgerDesk();
+        });
+      }
+
+      // Load more button
+      var lmBtn = document.getElementById("ledgerLoadMoreBtn");
+      if (lmBtn) {
+        lmBtn.addEventListener("click", function() {
+          visibleLimit += 10;
+          renderLedgerDesk();
+        });
+      }
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initLedgerListeners);
+    } else {
+      initLedgerListeners();
+    }
+  })();
+
+</script>

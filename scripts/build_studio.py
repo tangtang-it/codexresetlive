@@ -11,6 +11,7 @@ from classifier import classify_tweet
 from banked_tooltips import render_banked_badge, render_stream_items
 from _i18n_priority import I18N
 from _i18n_rest import I18N2
+from _i18n_ledger import LEDGER_I18N
 
 I18N.update(I18N2)
 
@@ -65,6 +66,16 @@ else:
 y_badge_rect = max(11.0, round(y_now - 20.0, 1))
 y_badge_text = round(y_badge_rect + 11.5, 1)
 
+# Dynamically calculate latest reset pillar position on rolling 14-day timeline
+# x=60 (14d ago) to x=525 (Now). Rate: ~33.2px / day
+x_now = 525
+px_per_day = (x_now - 60.0) / 14.0
+event_x = round(max(380.0, min(508.0, x_now - (days_since * px_per_day))), 1)
+event_x_mid = round((390.0 + event_x) / 2.0, 1)
+event_now_mid = round((event_x + x_now) / 2.0, 1)
+event_now_ymid = round(130.0 - (130.0 - y_now) / 2.0, 1)
+last_event_lbl = last_lbl
+
 # --- Shared UI Components ---
 pulse_svg = f'''<svg viewBox="0 0 740 185" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
@@ -101,22 +112,22 @@ pulse_svg = f'''<svg viewBox="0 0 740 185" fill="none" xmlns="http://www.w3.org/
   <text x="14" y="89" fill="#707a8a" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9.5">40%</text>
   <text x="14" y="139" fill="#707a8a" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9.5">0%</text>
 
-  <!-- Rolling 12-Day X-Axis Labels -->
+  <!-- Rolling 14-Day X-Axis Labels -->
   <text x="60" y="160" fill="#707a8a" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" text-anchor="middle">Oct 11</text>
   <text x="135" y="160" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="bold" text-anchor="middle">Oct 13</text>
   <text x="215" y="160" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="bold" text-anchor="middle">Oct 15</text>
   <text x="295" y="160" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="bold" text-anchor="middle">Oct 17</text>
-  <text x="370" y="160" fill="#707a8a" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" text-anchor="middle">Oct 18</text>
-  <text x="445" y="160" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="bold" text-anchor="middle">Oct 20</text>
+  <text x="390" y="160" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="bold" text-anchor="middle">Oct 20</text>
+  <text id="chartLastResetDate" x="{event_x}" y="160" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="bold" text-anchor="middle">{last_event_lbl}</text>
   <text id="chartNowDate" x="525" y="160" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="bold" text-anchor="middle">{p_now_lbl}</text>
   <text id="chartT1Date" x="610" y="160" fill="#707a8a" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" text-anchor="middle">{p_t1_lbl}</text>
   <text id="chartT2Date" x="685" y="160" fill="#707a8a" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" text-anchor="middle">{p_t2_lbl}</text>
 
   <!-- Area Fill Under Probability Curve -->
-  <path id="chartAreaPath" d="M 60 135 L 60 115 Q 100 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 370 70, 445 32 L 445 130 Q 485 105, 525 {y_now} L 525 135 Z" fill="url(#waveAreaGrad)"/>
+  <path id="chartAreaPath" d="M 60 135 L 60 115 Q 97 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 342 70, 390 32 L 390 130 Q {event_x_mid} 70, {event_x} 32 L {event_x} 130 Q {event_now_mid} {event_now_ymid}, 525 {y_now} L 525 135 Z" fill="url(#waveAreaGrad)"/>
 
   <!-- Smooth Historical Probability Waveform -->
-  <path id="chartHistPath" d="M 60 115 Q 100 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 370 70, 445 32 L 445 130 Q 485 105, 525 {y_now}" stroke="#0ecb81" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.8"/>
+  <path id="chartHistPath" d="M 60 115 Q 97 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 342 70, 390 32 L 390 130 Q {event_x_mid} 70, {event_x} 32 L {event_x} 130 Q {event_now_mid} {event_now_ymid}, 525 {y_now}" stroke="#0ecb81" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.8"/>
 
   <!-- Future 48-Hour Projection Curve (Yellow Dash to edge) -->
   <path id="chartProjPath" d="M 525 {y_now} C 565 {y_now}, 610 70, 685 45" stroke="#FCD535" stroke-width="2.2" stroke-dasharray="5 4" fill="none" stroke-linecap="round"/>
@@ -149,23 +160,24 @@ pulse_svg = f'''<svg viewBox="0 0 740 185" fill="none" xmlns="http://www.w3.org/
   </g>
 
   <!-- ================= SPIKE 4: Oct 20 ================= -->
-  <rect x="443" y="32" width="4" height="103" fill="url(#emeraldSpikeGrad)"/>
-  <line id="chartLastResetStem" x1="445" y1="32" x2="445" y2="135" stroke="#0ecb81" stroke-width="2" filter="url(#neonGlowSpike)"/>
-  <circle id="chartLastResetDot" cx="445" cy="32" r="5" fill="#0ecb81"/>
+  <rect x="388" y="32" width="4" height="103" fill="url(#emeraldSpikeGrad)"/>
+  <line id="chartLastResetStem" x1="390" y1="32" x2="390" y2="135" stroke="#0ecb81" stroke-width="1.8" filter="url(#neonGlowSpike)"/>
+  <circle id="chartLastResetDot" cx="390" cy="32" r="4.5" fill="#0ecb81"/>
   <g filter="url(#badgeShadow)">
-    <rect id="chartLastResetBadge" x="424" y="11" width="42" height="16" rx="3.5" fill="#1e2329" stroke="#0ecb81" stroke-width="1.4"/>
-    <text id="chartLastResetText" x="445" y="22.5" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" font-weight="bold" text-anchor="middle">RESET</text>
+    <rect id="chartLastResetBadge" x="370" y="11" width="40" height="16" rx="3.5" fill="#1e2329" stroke="#0ecb81" stroke-width="1.2"/>
+    <text id="chartLastResetText" x="390" y="22.5" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="8.5" font-weight="bold" text-anchor="middle">RESET</text>
   </g>
 
-  <!-- ================= TODAY'S VERIFIED RESET EVENT ================= -->
+  <!-- ================= LATEST VERIFIED RESET SPIKE (e.g. Oct 24) ================= -->
   <g id="chartTodayEvent">
-  <line id="chartEventStem" x1="500" y1="32" x2="500" y2="135" stroke="#0ecb81" stroke-width="1.8" stroke-opacity="0.9"/>
-  <circle id="chartEventRing" cx="500" cy="32" r="9" stroke="#0ecb81" stroke-width="1.5" stroke-opacity="0.4"/>
-  <circle id="chartEventDot" cx="500" cy="32" r="5" fill="#0ecb81"/>
-  <g filter="url(#badgeShadow)">
-    <rect id="chartEventBadgeRect" x="462" y="11" width="76" height="16" rx="3.5" fill="#1e2329" stroke="#0ecb81" stroke-width="1.4"/>
-    <text id="chartEventText" x="500" y="22.5" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="8.5" font-weight="bold" text-anchor="middle">RESET</text>
-  </g>
+    <rect id="chartEventGrad" x="{event_x - 2}" y="32" width="4" height="103" fill="url(#emeraldSpikeGrad)"/>
+    <line id="chartEventStem" x1="{event_x}" y1="32" x2="{event_x}" y2="135" stroke="#0ecb81" stroke-width="2" filter="url(#neonGlowSpike)"/>
+    <circle id="chartEventRing" cx="{event_x}" cy="32" r="9" stroke="#0ecb81" stroke-width="1.5" stroke-opacity="0.4"/>
+    <circle id="chartEventDot" cx="{event_x}" cy="32" r="5" fill="#0ecb81"/>
+    <g filter="url(#badgeShadow)">
+      <rect id="chartEventBadgeRect" x="{event_x - 21}" y="11" width="42" height="16" rx="3.5" fill="#1e2329" stroke="#0ecb81" stroke-width="1.4"/>
+      <text id="chartEventText" x="{event_x}" y="22.5" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" font-weight="bold" text-anchor="middle">RESET</text>
+    </g>
   </g>
 
   <!-- ================= CURRENT FORECAST ANCHOR: Now ================= -->
@@ -332,6 +344,26 @@ for r in deduped_recs:
     lbl = f"{time_str} Hard Reset".strip() if t == "regular" else "Banked Reset"
     compact_resets.append({"d": d, "t": t, "l": lbl, "at": r["at"]})
 ALL_RESETS_JSON = json.dumps(compact_resets, ensure_ascii=False)
+
+# Export all events for Concept C Ledger
+records_sorted = sorted(HIST.get("records", []), key=lambda x: x["at"], reverse=True)
+all_events_data = []
+for r in records_sorted:
+    c = classify_tweet(r.get("id"), r.get("text"))
+    cat = c.get("category", "chatter")
+    is_res = c.get("is_reset", False)
+    all_events_data.append({
+        "id": str(r.get("id", "")),
+        "at": r.get("at", ""),
+        "cat": cat,
+        "is_reset": is_res,
+        "text": r.get("text", ""),
+        "url": r.get("url", "https://x.com/thsottiaux"),
+        "type": r.get("type", "regular"),
+        "status": r.get("status", "confirmed")
+    })
+ALL_EVENTS_JSON = json.dumps(all_events_data, ensure_ascii=False)
+
 
 def get_cal_js(code):
     is_zh = "true" if "zh" in code else "false"
@@ -1245,7 +1277,25 @@ for code, d, name, loc, base_url in LANGS:
     p1_body = p1_body.replace("__GF_1__", esc(t["gf_1"])).replace("__GF_2__", esc(t["gf_2"])).replace("__LAST_DATE__", esc(last_date)).replace("__DAYS_SINCE__", esc(days_since_str)).replace("__LAST_RESET_UTC__", esc(last["at"]))
     p1_body = p1_body.replace("__PULSE_T__", esc(pulse_title))
     p1_body = p1_body.replace("__PULSE_SUB__", "Realtime probability trajectory & verified event markers" if code=="en" else ("实时概率推演轨迹与已确认事件标记" if "zh" in code else "リアルタイム確率軌跡と確認済みイベント"))
+    p1_body = p1_body.replace("__ALL_EVENTS_JSON__", ALL_EVENTS_JSON)
     p1_body = p1_body.replace("__PULSE_SVG__", pulse_svg)
+    # Concept C Ledger replacements
+    led = LEDGER_I18N.get(code, LEDGER_I18N.get("en", {}))
+    p1_body = p1_body.replace("__LEDGER_T__", esc(led.get("ledger_t", "Reset Event Ledger")))
+    p1_body = p1_body.replace("__INSP_TAG__", esc(led.get("insp_tag", "Selected Record")))
+    p1_body = p1_body.replace("__INSP_ATTR_LBL__", esc(led.get("insp_attr_lbl", "Author")))
+    p1_body = p1_body.replace("__INSP_NOTE_VER__", esc(led.get("insp_note_ver", "Verified signal recorded.")))
+    p1_body = p1_body.replace("__OPEN_SRC__", esc(led.get("open_src", "View Original Post")))
+    p1_body = p1_body.replace("__FC_COMPACT_T__", esc(led.get("fc_compact_t", "48-Hour Reset Outlook")))
+    p1_body = p1_body.replace("__FC_DISC__", esc(led.get("fc_disc", "Heuristic projection from public cadence.")))
+    p1_body = p1_body.replace("__FLT_ALL__", esc(led.get("flt_all", "All")))
+    p1_body = p1_body.replace("__FLT_RESET__", esc(led.get("flt_reset", "Resets")))
+    p1_body = p1_body.replace("__FLT_BANKED__", esc(led.get("flt_banked", "Banked")))
+    p1_body = p1_body.replace("__FLT_NOTICE__", esc(led.get("flt_notice", "Notices")))
+    p1_body = p1_body.replace("__LOAD_EARLIER__", esc(led.get("load_earlier", "Load Earlier Events")))
+    p1_body = p1_body.replace("__ALL_LOADED__", esc(led.get("all_loaded", "All historical events accessible.")))
+    p1_body = p1_body.replace("__SEARCH_PH__", esc(led.get("search_ph", "Filter events...")))
+
     if "zh" in code:
         l_res, l_bnk, l_prj, l_tod = "全网重置 (自动)", "重置卡 (需手动使用)", "未来48h推演", "今天"
     elif code == "ja":

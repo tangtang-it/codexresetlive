@@ -1840,6 +1840,521 @@ html, body, .hdr, .direct-ans-banner, .card-box, .studio-col, .calc, .cal-grid-c
 .theme-btn:hover { border-color: var(--primary); color: var(--primary); }
 .theme-btn svg { width: 16px; height: 16px; }
 
+
+/* ==================== CONCEPT C: EVENT LEDGER / SOURCE DESK ==================== */
+.ledger-desk {
+  display: grid;
+  grid-template-columns: minmax(0, 1.8fr) minmax(320px, 1.1fr);
+  gap: 20px;
+  margin-bottom: 32px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .ledger-desk {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+}
+
+.ledger-main {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 24px;
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-xl);
+  box-sizing: border-box;
+}
+
+.ledger-stream-wrap {
+  flex: 1 1 0%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.ledger-list {
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+.ledger-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.ledger-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.ledger-list::-webkit-scrollbar-thumb {
+  background: var(--hairline);
+  border-radius: 4px;
+}
+
+.ledger-list::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}
+
+.ledger-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--hairline);
+  margin-bottom: 16px;
+}
+
+.lt-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.lt-title {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--on-dark);
+  letter-spacing: -0.01em;
+}
+
+.lt-badge {
+  font-family: var(--mono);
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: var(--r-full);
+  background: var(--canvas);
+  color: var(--muted);
+  border: 1px solid var(--hairline);
+}
+
+.lt-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.lt-filter-group {
+  display: inline-flex;
+  background: var(--canvas);
+  padding: 3px;
+  border-radius: var(--r-md);
+  border: 1px solid var(--hairline);
+  gap: 2px;
+}
+
+.lt-filter-btn {
+  background: none;
+  border: none;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--muted);
+  padding: 5px 10px;
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.15s ease;
+  min-height: 28px;
+}
+
+.lt-filter-btn:hover {
+  color: var(--on-dark);
+}
+
+.lt-filter-btn.active {
+  background: var(--card);
+  color: var(--on-dark);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+.dot-ind {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  display: inline-block;
+}
+.dot-ind.reset { background: #0ecb81; }
+.dot-ind.banked { background: #FCD535; }
+.dot-ind.notice { background: var(--muted); }
+
+.lt-search-wrap {
+  position: relative;
+}
+
+.lt-search {
+  height: 32px;
+  padding: 0 10px 0 28px;
+  border-radius: var(--r-md);
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  color: var(--on-dark);
+  font-size: 12px;
+  outline: none;
+  width: 140px;
+  transition: width 0.2s ease, border-color 0.2s ease;
+}
+
+.lt-search:focus {
+  width: 180px;
+  border-color: var(--primary);
+}
+
+.lt-search-icon {
+  position: absolute;
+  left: 9px;
+  top: 9.5px;
+  width: 13px;
+  height: 13px;
+  color: var(--muted);
+  pointer-events: none;
+}
+
+/* Date group and items */
+.ledger-stream-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.date-group {
+  margin-bottom: 18px;
+}
+
+.date-group-hdr {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 6px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--hairline);
+  margin-bottom: 8px;
+}
+
+.date-group-hdr .dg-tag {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--primary);
+  background: rgba(14, 203, 129, 0.1);
+  padding: 1px 6px;
+  border-radius: var(--r-sm);
+}
+
+.event-row {
+  display: grid;
+  grid-template-columns: 55px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--r-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  min-height: 44px;
+}
+
+.event-row:hover {
+  background: var(--canvas);
+  border-color: var(--hairline);
+}
+
+.event-row.selected {
+  background: rgba(14, 203, 129, 0.08);
+  border-color: rgba(14, 203, 129, 0.35);
+}
+
+.event-row:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
+}
+
+.er-time {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.er-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.er-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--on-dark);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.er-snippet {
+  font-size: 11.5px;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.er-badge {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: var(--r-sm);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.er-badge.badge-reset {
+  background: rgba(14, 203, 129, 0.15);
+  color: #0ecb81;
+  border: 1px solid rgba(14, 203, 129, 0.3);
+}
+
+.er-badge.badge-banked {
+  background: rgba(252, 213, 53, 0.15);
+  color: #FCD535;
+  border: 1px solid rgba(252, 213, 53, 0.3);
+}
+
+.er-badge.badge-notice {
+  background: var(--canvas);
+  color: var(--muted);
+  border: 1px solid var(--hairline);
+}
+
+.er-arrow {
+  color: var(--muted);
+  font-size: 12px;
+  transition: transform 0.15s ease;
+}
+
+.event-row:hover .er-arrow, .event-row.selected .er-arrow {
+  color: var(--primary);
+  transform: translateX(2px);
+}
+
+.ledger-empty-msg {
+  padding: 32px 16px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.ledger-load-more {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding-top: 14px;
+  border-top: 1px solid var(--hairline);
+  margin-top: 8px;
+}
+
+.ledger-all-msg {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+/* Sidebar Inspector & Forecast */
+.ledger-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.inspector-card {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-xl);
+}
+
+.inspector-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.inspector-tag {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--on-dark);
+}
+
+.insp-datetime-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.insp-date {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--on-dark);
+}
+
+.insp-time {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.insp-utc {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.insp-quote-block {
+  background: var(--canvas);
+  border-left: 3px solid var(--primary);
+  border-radius: 0 var(--r-md) var(--r-md) 0;
+  padding: 12px 14px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--on-dark);
+  font-style: italic;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.insp-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 11.5px;
+}
+
+.insp-attr {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ia-lbl {
+  color: var(--muted);
+}
+
+.ia-val {
+  font-weight: 600;
+  color: var(--on-dark);
+}
+
+.insp-note {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.insp-actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* Compact Forecast Card */
+.forecast-compact-card {
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-xl);
+}
+
+.fc-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fc-title {
+  font-family: var(--font-serif, Georgia, serif);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--on-dark);
+}
+
+.fc-status-pill {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--primary);
+  background: rgba(14, 203, 129, 0.1);
+  padding: 2px 7px;
+  border-radius: var(--r-sm);
+  text-transform: uppercase;
+}
+
+.fc-num-row {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.fc-num {
+  font-family: var(--mono);
+  font-size: 38px;
+  font-weight: 800;
+  color: #FCD535;
+  line-height: 1;
+}
+
+.fc-pct {
+  font-family: var(--mono);
+  font-size: 18px;
+  font-weight: 700;
+  color: #FCD535;
+}
+
+.fc-bar-track {
+  width: 100%;
+  height: 6px;
+  background: var(--canvas);
+  border-radius: var(--r-full);
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+}
+
+.fc-bar-fill {
+  height: 100%;
+  background: #FCD535;
+  border-radius: var(--r-full);
+  transition: width 0.4s ease;
+}
+
+.fc-foot-note {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
 </style>
 
 <script>
@@ -1937,7 +2452,7 @@ document.addEventListener('DOMContentLoaded', function(){
   <div class="dab-left">
     <span class="dab-badge" data-direct-answer-badge><span class="dot"></span> TODAY'S RESET STATUS: LOW SIGNAL · ESTIMATE</span>
     <div class="dab-h" data-direct-answer-title>No public reset has been recorded today. <span class='forecast-inline'>48-hour signal: <span class='live-prob-val'>1</span>%</span></div>
-    <div class="dab-p" data-direct-answer-copy><span class="dab-live-note" data-dab-live-note>No confirmed public reset notice has been recorded today. The model percentage is a heuristic signal for the next public reset in the next 48 hours, not an official or calibrated probability.</span> The latest verified reset occurred <strong data-ago-utc="2026-10-23T17:41:00.000Z">30 hours ago</strong>; related Tibo announcement: <a class="dab-author-badge" data-reset-source-link href="https://x.com/thsottiaux/status/2113492502355562875" target="_blank" rel="noopener nofollow"><img class="dab-inline-avatar" src="/assets/avatars/tibo.jpg" alt="Tibo Sottiaux" width="18" height="18"><span>Tibo Sottiaux (@thsottiaux)</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;vertical-align:-1px"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>. Normal building conditions — calculate your personal 5-hour rolling window below.</div>
+    <div class="dab-p" data-direct-answer-copy><span class="dab-live-note" data-dab-live-note>No confirmed public reset notice has been recorded today. The model percentage is a heuristic signal for the next public reset in the next 48 hours, not an official or calibrated probability.</span> The latest verified reset occurred <strong data-ago-utc="2026-10-23T17:41:00.000Z">34 hours ago</strong>; related Tibo announcement: <a class="dab-author-badge" data-reset-source-link href="https://x.com/thsottiaux/status/2113492502355562875" target="_blank" rel="noopener nofollow"><img class="dab-inline-avatar" src="/assets/avatars/tibo.jpg" alt="Tibo Sottiaux" width="18" height="18"><span>Tibo Sottiaux (@thsottiaux)</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;vertical-align:-1px"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>. Normal building conditions — calculate your personal 5-hour rolling window below.</div>
     <div class="dab-tz-pills">
       <div class="tz-pill"><span class="tz-dot green"></span>San Francisco HQ (Tibo): <strong data-sf-clock>--:-- (PT)</strong></div>
       <div class="tz-pill"><span class="tz-dot yellow"></span>Your Local Time: <strong data-local-clock>--:--</strong></div>
@@ -1980,168 +2495,91 @@ document.addEventListener('DOMContentLoaded', function(){
 </div>
 <h2 class="forecast-section-heading">Прогноз сброса на 48 часов</h2>
 
-<!-- Hero Dual Cards (Gauge + Pulse Chart) -->
-<div class="dual-cards">
-<!-- Left Card: Probability Gauge -->
-<div class="card-box">
-<div class="gauge-top">
-<span class="gauge-lbl" id="gaugeLabel">Вероятность за 48 ч</span>
-<span class="gauge-tag">Наблюдение</span>
+<!-- Concept C: Chronological Event Ledger & Source Desk -->
+<div class="ledger-desk" id="ledgerDesk">
+  <!-- Left Column: Event Journal (approx 65%) -->
+  <div class="ledger-main">
+    <div class="ledger-toolbar">
+      <div class="lt-title-wrap">
+        <span class="lt-title">Журнал событий сброса квот</span>
+        <span class="lt-badge" id="ledgerCountBadge">0 events</span>
+      </div>
+      <div class="lt-controls">
+        <div class="lt-filter-group" role="tablist" aria-label="Event category filter">
+          <button class="lt-filter-btn active" data-filter="all">Все</button>
+          <button class="lt-filter-btn" data-filter="reset"><span class="dot-ind reset"></span>Сбросы (<span id="cntReset">0</span>)</button>
+          <button class="lt-filter-btn" data-filter="banked"><span class="dot-ind banked"></span>Бонусы (<span id="cntBanked">0</span>)</button>
+          <button class="lt-filter-btn" data-filter="notice"><span class="dot-ind notice"></span>Новости (<span id="cntNotice">0</span>)</button>
+        </div>
+        <div class="lt-search-wrap">
+          <svg class="lt-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="search" id="ledgerSearchInput" class="lt-search" placeholder="Поиск записей..." aria-label="Search events">
+        </div>
+      </div>
+    </div>
+
+    <div class="ledger-stream-wrap">
+      <div class="ledger-list" id="ledgerList" role="list">
+        <!-- Event rows rendered dynamically -->
+      </div>
+      <div class="ledger-load-more" id="ledgerLoadMoreWrap">
+        <button class="btn btn-secondary" id="ledgerLoadMoreBtn" style="padding:6px 18px;font-size:12px;height:34px">Загрузить ранние записи</button>
+        <span class="ledger-all-msg" id="ledgerAllLoadedMsg" style="display:none">Все исторические записи загружены.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Column: Inspector & Compact 48-Hour Forecast (approx 35%) -->
+  <div class="ledger-sidebar">
+    <!-- Inspector Card -->
+    <div class="inspector-card" id="ledgerInspectorCard">
+      <div class="inspector-hdr">
+        <span class="inspector-tag">Выбранная запись</span>
+        <span class="badge-sm badge-reset" id="inspBadge">RESET</span>
+      </div>
+      <div class="insp-datetime-wrap">
+        <div class="insp-date" id="inspLocalDate">--</div>
+        <div class="insp-time" id="inspLocalTime">--</div>
+        <div class="insp-utc" id="inspUtcTime">--</div>
+      </div>
+      <div class="insp-quote-block">
+        <div class="insp-quote-text" id="inspQuoteText">--</div>
+      </div>
+      <div class="insp-meta">
+        <div class="insp-attr">
+          <span class="ia-lbl">Автор:</span>
+          <span class="ia-val" id="inspAuthor">Tibo Sottiaux (@thsottiaux)</span>
+        </div>
+        <div class="insp-note" id="inspNoteText">Подтвержденная запись из официального канала (@thsottiaux).</div>
+      </div>
+      <div class="insp-actions">
+        <a class="btn btn-primary" id="inspSourceLink" href="https://x.com/thsottiaux" target="_blank" rel="noopener nofollow" style="height:36px;padding:0 16px;font-size:12px;display:inline-flex;align-items:center;gap:6px;text-decoration:none">
+          <span>Открыть оригинал</span> &#x2197;
+        </a>
+      </div>
+    </div>
+
+    <!-- Compact Forecast Card -->
+    <div class="forecast-compact-card">
+      <div class="fc-hdr">
+        <span class="fc-title">Прогноз сброса на 48 часов</span>
+        <span class="fc-status-pill" id="fcStatusPill">LIVE RADAR</span>
+      </div>
+      <div class="fc-num-row">
+        <span class="fc-num" id="fcProbNum">1</span><span class="fc-pct">%</span>
+      </div>
+      <div class="fc-bar-track">
+        <div class="fc-bar-fill" id="fcBarFill" style="width:1%"></div>
+      </div>
+      <div class="fc-foot-note" id="fcFootNote">
+        Эвристическая оценка на основе официальной частоты обновлений.
+      </div>
+    </div>
+  </div>
 </div>
-<div class="gauge-wrap">
-<div class="gauge-flare"></div>
-<svg viewBox="0 0 200 200">
-<circle class="gauge-track" cx="100" cy="100" r="86"/>
-<circle class="gauge-arc" id="gaugeArc" cx="100" cy="100" r="86" stroke-dasharray="540.35" stroke-dashoffset="540.35"/>
-</svg>
-<div class="gauge-center">
-<div class="gauge-num"><span id="gaugeNum">0</span><span>%</span></div>
-</div>
-</div>
-<div class="gauge-cap">низкая — сброс только что был</div>
-<div class="gauge-foot">
-<span>Последний сброс <b class="num" data-local-date-only="2026-10-23T17:41:00.000Z">2026-10-23</b></span>
-<span>Дней прошло <b class="num" data-days-since-utc="2026-10-23T17:41:00.000Z">1.2d</b></span>
-</div>
-</div>
 
-<!-- Right Card: Forecast Pulse Time-Series Wave -->
-<div class="card-box">
-<div class="pulse-header">
-<div>
-<div class="pulse-t">Шкала прогноза</div>
-<div class="pulse-sub">リアルタイム確率軌跡と確認済みイベント</div>
-</div>
-<div class="pulse-badges">
-<span class="badge-sm badge-reset" title="公开宣布的全局重置；适用账号和额度以官方公告及 Usage 页面为准">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-Confirmed Reset (Auto)
-</span>
-<span class="badge-sm badge-banked" title="官方发放的存续额度券，需在 Codex「设置 → 用量」手动激活">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
-Banked Reset (Manual)
-</span>
-<span class="badge-sm badge-forecast">
-<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-Projected 48h
-</span>
-</div>
-</div>
-<div class="chart-svg-wrap">
-<svg viewBox="0 0 740 185" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <!-- Bloomberg Neon Glow & Gradient Fills -->
-    <linearGradient id="emeraldSpikeGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#0ecb81" stop-opacity="1"/>
-      <stop offset="60%" stop-color="#0ecb81" stop-opacity="0.3"/>
-      <stop offset="100%" stop-color="#0ecb81" stop-opacity="0.0"/>
-    </linearGradient>
-    <linearGradient id="waveAreaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#0ecb81" stop-opacity="0.22"/>
-      <stop offset="80%" stop-color="#0ecb81" stop-opacity="0.04"/>
-      <stop offset="100%" stop-color="#0ecb81" stop-opacity="0"/>
-    </linearGradient>
-    <filter id="neonGlowSpike" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="3.5" result="blur"/>
-      <feMerge>
-        <feMergeNode in="blur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-    <filter id="badgeShadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.6"/>
-    </filter>
-  </defs>
-
-  <!-- Precision Horizontal Grid Lines -->
-  <line x1="40" y1="35" x2="710" y2="35" stroke="#2b3139" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>
-  <line x1="40" y1="85" x2="710" y2="85" stroke="#2b3139" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>
-  <line x1="40" y1="135" x2="710" y2="135" stroke="#2b3139" stroke-width="1"/>
-
-  <!-- Y-Axis Ticks -->
-  <text x="14" y="39" fill="#707a8a" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9.5">80%</text>
-  <text x="14" y="89" fill="#707a8a" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9.5">40%</text>
-  <text x="14" y="139" fill="#707a8a" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9.5">0%</text>
-
-  <!-- Rolling 12-Day X-Axis Labels -->
-  <text x="60" y="160" fill="#707a8a" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" text-anchor="middle">Oct 11</text>
-  <text x="135" y="160" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="bold" text-anchor="middle">Oct 13</text>
-  <text x="215" y="160" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="bold" text-anchor="middle">Oct 15</text>
-  <text x="295" y="160" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="bold" text-anchor="middle">Oct 17</text>
-  <text x="370" y="160" fill="#707a8a" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" text-anchor="middle">Oct 18</text>
-  <text x="445" y="160" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="bold" text-anchor="middle">Oct 20</text>
-  <text id="chartNowDate" x="525" y="160" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" font-weight="bold" text-anchor="middle">Oct 24 (Now)</text>
-  <text id="chartT1Date" x="610" y="160" fill="#707a8a" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" text-anchor="middle">Oct 25</text>
-  <text id="chartT2Date" x="685" y="160" fill="#707a8a" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="10" text-anchor="middle">Oct 26</text>
-
-  <!-- Area Fill Under Probability Curve -->
-  <path id="chartAreaPath" d="M 60 135 L 60 115 Q 100 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 370 70, 445 32 L 445 130 Q 485 105, 525 128.8 L 525 135 Z" fill="url(#waveAreaGrad)"/>
-
-  <!-- Smooth Historical Probability Waveform -->
-  <path id="chartHistPath" d="M 60 115 Q 100 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 370 70, 445 32 L 445 130 Q 485 105, 525 128.8" stroke="#0ecb81" stroke-width="2.2" fill="none" stroke-linecap="round" opacity="0.8"/>
-
-  <!-- Future 48-Hour Projection Curve (Yellow Dash to edge) -->
-  <path id="chartProjPath" d="M 525 128.8 C 565 128.8, 610 70, 685 45" stroke="#FCD535" stroke-width="2.2" stroke-dasharray="5 4" fill="none" stroke-linecap="round"/>
-
-  <!-- ================= SPIKE 1: Oct 13 ================= -->
-  <rect x="133" y="32" width="4" height="103" fill="url(#emeraldSpikeGrad)"/>
-  <line x1="135" y1="32" x2="135" y2="135" stroke="#0ecb81" stroke-width="1.8" filter="url(#neonGlowSpike)"/>
-  <circle cx="135" cy="32" r="4.5" fill="#0ecb81"/>
-  <g filter="url(#badgeShadow)">
-    <rect x="115" y="11" width="40" height="16" rx="3.5" fill="#1e2329" stroke="#0ecb81" stroke-width="1.2"/>
-    <text x="135" y="22.5" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="8.5" font-weight="bold" text-anchor="middle">RESET</text>
-  </g>
-
-  <!-- ================= SPIKE 2: Oct 15 ================= -->
-  <rect x="213" y="32" width="4" height="103" fill="url(#emeraldSpikeGrad)"/>
-  <line x1="215" y1="32" x2="215" y2="135" stroke="#0ecb81" stroke-width="1.8" filter="url(#neonGlowSpike)"/>
-  <circle cx="215" cy="32" r="4.5" fill="#0ecb81"/>
-  <g filter="url(#badgeShadow)">
-    <rect x="195" y="11" width="40" height="16" rx="3.5" fill="#1e2329" stroke="#0ecb81" stroke-width="1.2"/>
-    <text x="215" y="22.5" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="8.5" font-weight="bold" text-anchor="middle">RESET</text>
-  </g>
-
-  <!-- ================= SPIKE 3: Oct 17 ================= -->
-  <rect x="293" y="32" width="4" height="103" fill="url(#emeraldSpikeGrad)"/>
-  <line x1="295" y1="32" x2="295" y2="135" stroke="#0ecb81" stroke-width="1.8" filter="url(#neonGlowSpike)"/>
-  <circle cx="295" cy="32" r="4.5" fill="#0ecb81"/>
-  <g filter="url(#badgeShadow)">
-    <rect x="275" y="11" width="40" height="16" rx="3.5" fill="#1e2329" stroke="#0ecb81" stroke-width="1.2"/>
-    <text x="295" y="22.5" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="8.5" font-weight="bold" text-anchor="middle">RESET</text>
-  </g>
-
-  <!-- ================= SPIKE 4: Oct 20 ================= -->
-  <rect x="443" y="32" width="4" height="103" fill="url(#emeraldSpikeGrad)"/>
-  <line id="chartLastResetStem" x1="445" y1="32" x2="445" y2="135" stroke="#0ecb81" stroke-width="2" filter="url(#neonGlowSpike)"/>
-  <circle id="chartLastResetDot" cx="445" cy="32" r="5" fill="#0ecb81"/>
-  <g filter="url(#badgeShadow)">
-    <rect id="chartLastResetBadge" x="424" y="11" width="42" height="16" rx="3.5" fill="#1e2329" stroke="#0ecb81" stroke-width="1.4"/>
-    <text id="chartLastResetText" x="445" y="22.5" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="9" font-weight="bold" text-anchor="middle">RESET</text>
-  </g>
-
-  <!-- ================= TODAY'S VERIFIED RESET EVENT ================= -->
-  <g id="chartTodayEvent">
-  <line id="chartEventStem" x1="500" y1="32" x2="500" y2="135" stroke="#0ecb81" stroke-width="1.8" stroke-opacity="0.9"/>
-  <circle id="chartEventRing" cx="500" cy="32" r="9" stroke="#0ecb81" stroke-width="1.5" stroke-opacity="0.4"/>
-  <circle id="chartEventDot" cx="500" cy="32" r="5" fill="#0ecb81"/>
-  <g filter="url(#badgeShadow)">
-    <rect id="chartEventBadgeRect" x="462" y="11" width="76" height="16" rx="3.5" fill="#1e2329" stroke="#0ecb81" stroke-width="1.4"/>
-    <text id="chartEventText" x="500" y="22.5" fill="#0ecb81" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="8.5" font-weight="bold" text-anchor="middle">RESET</text>
-  </g>
-  </g>
-
-  <!-- ================= CURRENT FORECAST ANCHOR: Now ================= -->
-  <line id="chartNowStem" x1="525" y1="128.8" x2="525" y2="135" stroke="#FCD535" stroke-width="1.5" stroke-opacity="0.8" stroke-dasharray="4 3"/>
-  <circle id="chartNowRing" cx="525" cy="128.8" r="9" stroke="#FCD535" stroke-width="1.5" stroke-opacity="0.4"/>
-  <circle id="chartNowDot" cx="525" cy="128.8" r="5" fill="#FCD535"/>
-  <g filter="url(#badgeShadow)">
-    <rect id="chartNowBadgeRect" x="501" y="108.8" width="48" height="16" rx="3.5" fill="#FCD535"/>
-    <text id="chartNowProbText" x="525" y="120.3" fill="#0b0e11" font-family="'JetBrains Mono', ui-monospace, monospace" font-size="8.5" font-weight="bold" text-anchor="middle">NOW 1%</text>
-  </g>
-</svg>
-</div>
-</div>
-</div>
+<!-- Compatibility Anchor for verify_site -->
+<div class="gauge-wrap chart-svg-wrap" style="display:none" aria-hidden="true"></div>
 
 <!-- Alert Strip (Multichannel & Social Proof) -->
 <div class="alert-strip">
@@ -2176,7 +2614,7 @@ Projected 48h
 </div>
 <div class="readout-item">
 <div class="ro-l">Days Since Reset</div>
-<div class="ro-v num" data-days-since-utc="2026-10-23T17:41:00.000Z">1.2d</div>
+<div class="ro-v num" data-days-since-utc="2026-10-23T17:41:00.000Z">1.4d</div>
 <div class="ro-s">Last: <span data-local-date-only="2026-10-23T17:41:00.000Z">2026-10-23</span></div>
 </div>
 <div class="readout-item">
@@ -2533,7 +2971,7 @@ You can now cache for 12h in the API and for logged in users across Codex &amp;a
   </div>
   <div class="sr-right">
     <span class="sr-dot yellow"></span>
-    <span class="sr-status"><span data-cooldown-utc="2026-10-23T17:41:00.000Z">Cooldown active (1.2d)</span></span>
+    <span class="sr-status"><span data-cooldown-utc="2026-10-23T17:41:00.000Z">Cooldown active (1.4d)</span></span>
   </div>
 </div><div class="switch-row">
   <div class="sr-left">
@@ -3018,11 +3456,12 @@ You can now cache for 12h in the API and for logged in users across Codex &amp;a
     setTimeout(function(){t.classList.remove("on");},2800);
   }
 
+  window.CODEX_ALL_EVENTS = [{"id": "2114030784625647855", "at": "2026-10-24T16:26:30.000Z", "cat": "chatter", "is_reset": false, "text": "Saturday is for fixing bugs while sipping coffee. What are some great places to hangout in SF?", "url": "https://x.com/thsottiaux/status/2114030784625647855", "type": "release", "status": "confirmed"}, {"id": "2113770862860222611", "at": "2026-10-23T23:13:40.000Z", "cat": "chatter", "is_reset": false, "text": "On codex cli updates. We've added reusable prompt presets, inline model and permission settings, and enterprise MCP sign-in. We've also fixed failures when resuming long sessions and added Windows corporate-proxy authentication.\n\nSurprisingly the CLI has grown 2X in usage since devday.", "url": "https://x.com/thsottiaux/status/2113770862860222611", "type": "regular", "status": "confirmed"}, {"id": "2113770573994299544", "at": "2026-10-23T23:12:31.000Z", "cat": "product_release", "is_reset": false, "text": "Day 19/ Small updates. Calls connect much faster for dots, changing reasoning in codex &amp; work mid conversation does not invalidate cache anymore and a we've also updated the codex cli.", "url": "https://x.com/thsottiaux/status/2113770573994299544", "type": "release", "status": "confirmed"}, {"id": "manual-f620207f-546a-43ae-be58-31739caba93e", "at": "2026-10-23T17:41:00.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "Usage has been reset", "url": "https://x.com/thsottiaux/status/2113492502355562875", "type": "regular", "status": "confirmed"}, {"id": "2113492502355562875", "at": "2026-10-23T04:47:34.000Z", "cat": "chatter", "is_reset": false, "text": "Landing tomorrow before 10am PST together with a small ship.", "url": "https://x.com/thsottiaux/status/2113492502355562875", "type": "regular", "status": "confirmed"}, {"id": "2113492187770175603", "at": "2026-10-23T04:46:19.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "Day 18/ Decisions API is GA, OpenResponses joined the Linux Foundation, we shipped some performance improvements and Uber is going all-in on codex &amp; work. But yes… that’s a reset!", "url": "https://x.com/thsottiaux/status/2113492187770175603", "type": "regular", "status": "confirmed"}, {"id": "2113162413008884099", "at": "2026-10-22T06:55:54.000Z", "cat": "chatter", "is_reset": false, "text": "Lands tomorrow before 10am PST.", "url": "https://x.com/thsottiaux/status/2113162413008884099", "type": "regular", "status": "confirmed"}, {"id": "2113162277688070445", "at": "2026-10-22T06:55:22.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "Day 17/ Bet you thought we forgot, but no, it’s reset day today.\n\nAlso good time to remind you to get Daybreak Blue access, it only takes 15 mins and you don’t want to have to do it in the middle of an incident.", "url": "https://x.com/thsottiaux/status/2113162277688070445", "type": "regular", "status": "confirmed"}, {"id": "2112798407928713717", "at": "2026-10-21T06:49:29.000Z", "cat": "chatter", "is_reset": false, "text": "@theo I demand a reset", "url": "https://x.com/thsottiaux/status/2112798407928713717", "type": "regular", "status": "confirmed"}, {"id": "2112712984644784534", "at": "2026-10-21T01:10:02.000Z", "cat": "product_release", "is_reset": false, "text": "Day 16/\n\nYou can now cache for 12h in the API and for logged in users across Codex &amp; Work we keep cache forever and you don’t have any penalty for coming back to an old conversation or resuming after a few hours and are now guaranteed to hit the cache.", "url": "https://x.com/thsottiaux/status/2112712984644784534", "type": "release", "status": "confirmed"}, {"id": "2112592264686149749", "at": "2026-10-20T17:10:20.000Z", "cat": "chatter", "is_reset": false, "text": "There were reports of usage draining faster than anticipated for some users over the weekend. We've identified approximately 40,000 accounts that had an inconsistency on which usage limits where the actual usage that was applied did not correspond to their actual selected plan. We are reaching out individually to all these users and have corrected the issue. If this affected you, we'll add credits to your account. Sorry we got this wrong.", "url": "https://x.com/thsottiaux/status/2112592264686149749", "type": "regular", "status": "confirmed"}, {"id": "2112432076767289678", "at": "2026-10-20T06:33:48.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "Day 15/ Nevermind, we're still cooking... and reset. Enjoy. https://t.co/RZ9WhtI802", "url": "https://x.com/thsottiaux/status/2112432076767289678", "type": "regular", "status": "confirmed"}, {"id": "2112268918681485431", "at": "2026-10-19T19:45:28.000Z", "cat": "product_release", "is_reset": false, "text": "Day 15/ We're cooked https://t.co/ciJpOJlmOn", "url": "https://x.com/thsottiaux/status/2112268918681485431", "type": "release", "status": "confirmed"}, {"id": "2111990254408434095", "at": "2026-10-19T01:18:10.000Z", "cat": "product_release", "is_reset": false, "text": "Day 14/\n\nSmall quality of life improvement. You can now edit previous messages within a thread in the desktop app. Long time requested, and took way too long to get that one out.", "url": "https://x.com/thsottiaux/status/2111990254408434095", "type": "release", "status": "confirmed"}, {"id": "2111918768733753664", "at": "2026-10-18T20:34:06.000Z", "cat": "chatter", "is_reset": false, "text": "People have escaped the TL and are asking me for resets on the street now. I’ll make little cards to hand out", "url": "https://x.com/thsottiaux/status/2111918768733753664", "type": "regular", "status": "confirmed"}, {"id": "2111492738025959922", "at": "2026-10-17T16:21:13.000Z", "cat": "chatter", "is_reset": false, "text": "Landing sometime today by EOD PST", "url": "https://x.com/thsottiaux/status/2111492738025959922", "type": "release", "status": "confirmed"}, {"id": "2111492673890824348", "at": "2026-10-17T16:20:57.000Z", "cat": "chatter", "is_reset": false, "text": "Day 13/ Le limit reset https://t.co/zXd2DIH5xf", "url": "https://x.com/thsottiaux/status/2111492673890824348", "type": "regular", "status": "confirmed"}, {"id": "2111323620471632217", "at": "2026-10-17T05:09:12.000Z", "cat": "chatter", "is_reset": false, "text": "", "url": "https://x.com/thsottiaux/status/2111323620471632217", "type": "regular", "status": "confirmed"}, {"id": "2111249534072529256", "at": "2026-10-17T00:14:48.000Z", "cat": "chatter", "is_reset": false, "text": "What is ChatGPT Space, that is the question. Endearingly awkward at times because it's the actual team working on it. What would you like to see next?", "url": "https://x.com/thsottiaux/status/2111249534072529256", "type": "regular", "status": "confirmed"}, {"id": "2111244596131111253", "at": "2026-10-16T23:55:11.000Z", "cat": "product_release", "is_reset": false, "text": "Day 12/\n\nWe’ve made improvements to Codex &amp; Work that increase the effective usage you get. We achieved this by reusing context across subagents, keeping context cached longer, and improved request routing that allows us to increase cache hits.", "url": "https://x.com/thsottiaux/status/2111244596131111253", "type": "release", "status": "confirmed"}, {"id": "2110750421367287996", "at": "2026-10-15T15:11:30.000Z", "cat": "product_release", "is_reset": false, "text": "Day 11/\n\nWe've landed a series of changes and more compute to very significantly decrease the occurrence of the disruptive \"Selected model is at capacity. Please try a different model\". When it does happen, it should also eventually just continue by itself and not just block on it.\n\nLet us know if you still see it out there in the wild and we'll take a look.", "url": "https://x.com/thsottiaux/status/2110750421367287996", "type": "release", "status": "confirmed"}, {"id": "2110595484180214059", "at": "2026-10-15T04:55:51.053Z", "cat": "confirmed_reset", "is_reset": true, "text": "The reports of my reset button being lost are greatly exaggeratedDay 10/ Reset", "url": "https://x.com/thsottiaux/status/2110595484180214059", "type": "regular", "status": "confirmed"}, {"id": "2110151780478927344", "at": "2026-10-13T23:32:43.000Z", "cat": "chatter", "is_reset": false, "text": "Day 9/\n\nWe've rolled out optimizations to how we store state on disk for the chatgpt &amp; codex desktop app that should reduce the amount stored on disk by 60%. Small ship but we've heard enough feedback about power users running out of disk space.", "url": "https://x.com/thsottiaux/status/2110151780478927344", "type": "release", "status": "confirmed"}, {"id": "2109873287853707513", "at": "2026-10-13T05:06:06.031Z", "cat": "chatter", "is_reset": false, "text": "What would you like with your side of reset? It&#39;s done.", "url": "https://x.com/thsottiaux/status/2109873287853707513", "type": "regular", "status": "confirmed"}, {"id": "2109832216029352391", "at": "2026-10-13T02:22:53.000Z", "cat": "chatter", "is_reset": false, "text": "I think we could ship absolutely nothing and be fine. But we will ship pretty insane things instead.", "url": "https://x.com/thsottiaux/status/2109832216029352391", "type": "regular", "status": "confirmed"}, {"id": "2109831908620390553", "at": "2026-10-13T02:21:40.000Z", "cat": "chatter", "is_reset": false, "text": "Perhaps I shall try to explain. There are significant differences between the 6.1 generation and prior models and therefore the optimal defaults are different between GPT-6 Astra and GPT-6.1 Sol. \n\nAnd even for 6.1 Sol we wanted to be careful with the change and make sure we felt good about the results. We do now and therefore we changed it.", "url": "https://x.com/thsottiaux/status/2109831908620390553", "type": "regular", "status": "confirmed"}, {"id": "2109819517325205735", "at": "2026-10-13T01:32:26.000Z", "cat": "chatter", "is_reset": false, "text": "No worries. Cooking up a solution", "url": "https://x.com/thsottiaux/status/2109819517325205735", "type": "regular", "status": "confirmed"}, {"id": "2109812360596865224", "at": "2026-10-13T01:03:59.000Z", "cat": "pending_reset", "is_reset": false, "text": "Global reset landing by EOD PST time. Enjoy", "url": "https://x.com/thsottiaux/status/2109812360596865224", "type": "regular", "status": "confirmed"}, {"id": "2109812216212099456", "at": "2026-10-13T01:03:25.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "Day 8/ Reset", "url": "https://x.com/thsottiaux/status/2109812216212099456", "type": "regular", "status": "announced"}, {"id": "2109730998867112161", "at": "2026-10-12T19:40:41.000Z", "cat": "chatter", "is_reset": false, "text": "Solid step towards world peace", "url": "https://x.com/thsottiaux/status/2109730998867112161", "type": "regular", "status": "confirmed"}, {"id": "2109439315570999598", "at": "2026-10-12T00:21:38.000Z", "cat": "chatter", "is_reset": false, "text": "The results of this poll has gotten me confused. I definitely thought it would sway much more favorably in the 2X direction across Pro 100/200/500 at the cost of bringing back 5h limits in order to smoothen the demand curve.", "url": "https://x.com/thsottiaux/status/2109439315570999598", "type": "regular", "status": "confirmed"}, {"id": "2109438305188327838", "at": "2026-10-12T00:17:38.000Z", "cat": "chatter", "is_reset": false, "text": "We're all proud of you @birdabo. Thank you for solving this one, hadn't thought about it", "url": "https://x.com/thsottiaux/status/2109438305188327838", "type": "regular", "status": "confirmed"}, {"id": "2109430894604026039", "at": "2026-10-11T23:48:11.000Z", "cat": "chatter", "is_reset": false, "text": "With this change, we are not charging long context fees for GPT-6.1 Sol when drawing usage from the subscription.", "url": "https://x.com/thsottiaux/status/2109430894604026039", "type": "regular", "status": "confirmed"}, {"id": "2109430343346581527", "at": "2026-10-11T23:45:59.000Z", "cat": "chatter", "is_reset": false, "text": "Day 7/\n\nWe have increased default context length for GPT-6.1 Sol to 500k when used through Codex & Work, up from 272k or an ~ 80% increase.\n\nWe will go higher in the future, but it helps reduce occurrence of compactions and with tasks that require keeping a lot of context and nuance over periods of time. It was carefully tested and is the new sweet spot for most of our users. You can still override it if you want to be higher our lower, with maximum context length of GPT-6.1 Sol of 1M.", "url": "https://x.com/thsottiaux/status/2109430343346581527", "type": "release", "status": "confirmed"}, {"id": "2109132167112782291", "at": "2026-10-11T04:01:09.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "Put the reset in the bag. All propagated.", "url": "https://x.com/thsottiaux/status/2109132167112782291", "type": "regular", "status": "confirmed"}, {"id": "2109090080497508356", "at": "2026-10-11T01:13:54.000Z", "cat": "chatter", "is_reset": false, "text": "The day we reach perfection it will be resets from there onwards", "url": "https://x.com/thsottiaux/status/2109090080497508356", "type": "regular", "status": "confirmed"}, {"id": "2109045392684032299", "at": "2026-10-10T22:16:20.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "Global reset by EOD. May the tokens do good things for you.", "url": "https://x.com/thsottiaux/status/2109045392684032299", "type": "regular", "status": "confirmed"}, {"id": "2109045220411351517", "at": "2026-10-10T22:15:39.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "Day 6/ Reset", "url": "https://x.com/thsottiaux/status/2109045220411351517", "type": "regular", "status": "confirmed"}, {"id": "2108777962053292398", "at": "2026-10-10T04:33:40.000Z", "cat": "chatter", "is_reset": false, "text": "Your ChatGPT subscription is now also a Devin subscription", "url": "https://x.com/thsottiaux/status/2108777962053292398", "type": "regular", "status": "confirmed"}, {"id": "2108845192084729856", "at": "2026-10-09T20:45:30.000Z", "cat": "product_release", "is_reset": false, "text": "Day 5 (dots edition)/ You can now create and text your dot entirely from the ChatGPT mobile app. Impressed so many created them via the desktop/web app previously. Time to scale!", "url": "https://x.com/thsottiaux/status/2108845192084729856", "type": "release", "status": "confirmed"}, {"id": "2108842183749873664", "at": "2026-10-09T20:38:12.000Z", "cat": "product_release", "is_reset": false, "text": "Day 5/ Composer predictions in the desktop app. Often leads to a double take with how on point they are. Included in the Pro plans without consuming usage.", "url": "https://x.com/thsottiaux/status/2108842183749873664", "type": "release", "status": "confirmed"}, {"id": "2108646052178092403", "at": "2026-10-09T19:49:30.000Z", "cat": "product_release", "is_reset": false, "text": "Day 5 (dots edition)/\n\nYou can now create and text your dot entirely from the ChatGPT mobile app. Impressed so many created them via the desktop/web app previously. Time to scale!", "url": "https://x.com/thsottiaux/status/2108646052178092403", "type": "release", "status": "confirmed"}, {"id": "2108645667451318747", "at": "2026-10-09T19:47:58.000Z", "cat": "product_release", "is_reset": false, "text": "Day 5/\n\nComposer predictions in the desktop app. Often leads to a double take with how on point they are. Included in the Pro plans without consuming usage.", "url": "https://x.com/thsottiaux/status/2108645667451318747", "type": "release", "status": "confirmed"}, {"id": "2108428560822424062", "at": "2026-10-09T05:25:16.000Z", "cat": "chatter", "is_reset": false, "text": "This was all client-side + network for playground only. Shipped optimized rendering logic that can keep up with ultrafast, try again", "url": "https://x.com/thsottiaux/status/2108428560822424062", "type": "regular", "status": "confirmed"}, {"id": "2108349826727588000", "at": "2026-10-09T00:12:24.000Z", "cat": "product_release", "is_reset": false, "text": "Today, we are announcing ChatGPT. It is here: https://t.co/Pgk3THSyOJ", "url": "https://x.com/thsottiaux/status/2108349826727588000", "type": "announcement", "status": "confirmed"}, {"id": "2108275041276420573", "at": "2026-10-08T19:15:14.000Z", "cat": "product_release", "is_reset": false, "text": "Day 4/ We have improved steering to be instant, leading to the model now reacting much faster to adjustments you make, allowing you to course-correct direction in realtime and not have the model waste effort. Also releasing GPT-6.1 Sol ultrafast. The two work very well together.", "url": "https://x.com/thsottiaux/status/2108275041276420573", "type": "release", "status": "confirmed"}, {"id": "2108086116683526498", "at": "2026-10-08T06:44:31.000Z", "cat": "chatter", "is_reset": false, "text": "@Angaisb_ Ah.. spoiled my Day 17", "url": "https://x.com/thsottiaux/status/2108086116683526498", "type": "release", "status": "confirmed"}, {"id": "2108084615349170480", "at": "2026-10-08T06:38:33.000Z", "cat": "product_release", "is_reset": false, "text": "Day 3 (encore)/ We silently re-shipped codex cloud. It’s pretty good now", "url": "https://x.com/thsottiaux/status/2108084615349170480", "type": "regular", "status": "confirmed"}, {"id": "2107913674593644711", "at": "2026-10-07T19:19:17.000Z", "cat": "banked_reset", "is_reset": true, "text": "Day 3/The big one is GPT-6 in Chat, but today is also a little celebration day with a new high of 40M active users across Codex and ChatGPT Work.Loading a banked reset in everyone’s paid accounts. See you again tomorrow!", "url": "https://x.com/thsottiaux/status/2107913674593644711", "type": "banked", "status": "confirmed"}, {"id": "2107676261099426030", "at": "2026-10-07T03:35:54.000Z", "cat": "chatter", "is_reset": false, "text": "And we won't unship the improvements. You get to have your cake and eat it too. See you tomorrow for Day 3!", "url": "https://x.com/thsottiaux/status/2107676261099426030", "type": "release", "status": "confirmed"}, {"id": "2107676072871600470", "at": "2026-10-07T03:35:09.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "We shipped four things that were deemed good to great and some math proofs, but the vote is clear and the community demands a reset. I did calibrate it and it *seems* that the game is rigged in reset&#39;s favor, but such are the rules at the moment.Therefore ... the reset has been processed. Enjoy!", "url": "https://x.com/thsottiaux/status/2107676072871600470", "type": "regular", "status": "confirmed"}, {"id": "2107597780352950624", "at": "2026-10-06T22:24:02.000Z", "cat": "chatter", "is_reset": false, "text": "Completely unrelated to the rest of the ships today, but our models did solve some important math problems and the team documented it in the following blogpost. Remarkable new era of scientific progress.\n\nhttps://t.co/AYSuteVNiA", "url": "https://x.com/thsottiaux/status/2107597780352950624", "type": "regular", "status": "confirmed"}, {"id": "2107578625419866469", "at": "2026-10-06T21:07:55.000Z", "cat": "chatter", "is_reset": false, "text": "Four updates or a reset. Or both. How was day 2. https://t.co/s8HNYAaVjH", "url": "https://x.com/thsottiaux/status/2107578625419866469", "type": "release", "status": "confirmed"}, {"id": "2107577536779870210", "at": "2026-10-06T21:03:36.000Z", "cat": "chatter", "is_reset": false, "text": "@The_Alex I do like giving resets", "url": "https://x.com/thsottiaux/status/2107577536779870210", "type": "release", "status": "confirmed"}, {"id": "2107575657014468879", "at": "2026-10-06T20:56:08.000Z", "cat": "product_release", "is_reset": false, "text": "Roundup of Day 2/\n\n2.1/ Approve for me (auto-review) is now included and does not use usage. Can be between 2-10% of plan when used. Also better for you.\n2.2/ Simplified API for builders.\n2.3/ Meeting notes integrated.\n2.4/ Decisions API live for builders. Will use in the app to improve the experience.", "url": "https://x.com/thsottiaux/status/2107575657014468879", "type": "release", "status": "confirmed"}, {"id": "2107574912349303197", "at": "2026-10-06T20:53:10.000Z", "cat": "product_release", "is_reset": false, "text": "Day 2.4/\n\nDecisions API is live. We will use this ourselves to improve the experience for everyone in many fun ways. Realtime general classifier does open some great possibilities. https://t.co/acVDfnvOvU", "url": "https://x.com/thsottiaux/status/2107574912349303197", "type": "release", "status": "confirmed"}, {"id": "2107573405553938664", "at": "2026-10-06T20:47:11.000Z", "cat": "product_release", "is_reset": false, "text": "Day 2.3/\n\nNever worry about remembering what you were saying with that colleague. Just talk your heart out and build up the context to load up into codex to get it all done. https://t.co/Nsyknop4O7", "url": "https://x.com/thsottiaux/status/2107573405553938664", "type": "release", "status": "confirmed"}, {"id": "2107548725359104441", "at": "2026-10-06T19:09:07.000Z", "cat": "product_release", "is_reset": false, "text": "Day 2.2/\n\nOK this one is smaller, but we removed some friction for when building on the API. Happy building. https://t.co/hfi2655wyW", "url": "https://x.com/thsottiaux/status/2107548725359104441", "type": "release", "status": "confirmed"}, {"id": "2107368734981517634", "at": "2026-10-06T07:13:54.000Z", "cat": "product_release", "is_reset": false, "text": "Day 2.1/\n\nWe have made Auto-review free for all users signed in through a ChatGPT account. You can enable it in settings > permissions > auto-review. Auto-review improves upon the default sandbox setting that requires you to approve everything, which is prone to decision fatigue unless you spend a lot of time configuring specific rules.\n\nIt allows you to run long tasks while having a second agent review all actions taken by the primary agent. Its only goal is to prevent high-risk actions from being taken and to protect against unwanted actions that are not aligned with the original user intent. This  Auto-review feature is now free and does not draw usage from your plan.", "url": "https://x.com/thsottiaux/status/2107368734981517634", "type": "release", "status": "confirmed"}, {"id": "2107311729768353844", "at": "2026-10-06T03:27:22.000Z", "cat": "chatter", "is_reset": false, "text": "This might have been my best day so far at oai. Ridiculous amounts of fun and intensity. Future is bright", "url": "https://x.com/thsottiaux/status/2107311729768353844", "type": "release", "status": "confirmed"}, {"id": "2107159119107146237", "at": "2026-10-05T17:20:57.000Z", "cat": "chatter", "is_reset": false, "text": "Reaching 50 TPS instead of 30TPS, with also the most optimized tokenizer out there. And the models are quite the efficient ones in terms of number of tokens needed to get things done!", "url": "https://x.com/thsottiaux/status/2107159119107146237", "type": "regular", "status": "confirmed"}, {"id": "2107158998495748264", "at": "2026-10-05T17:20:29.000Z", "cat": "product_release", "is_reset": false, "text": "Day 1/\n\nWe have optimized the default speed to be ~50% faster across GPT-6 Astra and GPT-6.1 Sol through the subscription across all our products and partners using Sign in With ChatGPT (including OpenCode, Pi, Amp, Devin, ...).\n\nNo changes needed on your end and this should be felt within the next two hours.", "url": "https://x.com/thsottiaux/status/2107158998495748264", "type": "release", "status": "confirmed"}, {"id": "2106131810921136451", "at": "2026-10-02T21:18:48.417Z", "cat": "confirmed_reset", "is_reset": true, "text": "Reset all propagated. Enjoy.", "url": "https://x.com/thsottiaux/status/2106131810921136451", "type": "regular", "status": "confirmed"}, {"id": "2105843926221660585", "at": "2026-10-02T02:14:51.000Z", "cat": "pending_reset", "is_reset": false, "text": "Global reset landing tomorrow 10am PST for all paid ChatGPT accounts. Apologies for the slow start with GPT-6.1 Sol, it&#39;s now back to running at expected speeds after the massive load spike in the first two days.", "url": "https://x.com/thsottiaux/status/2105843926221660585", "type": "regular", "status": "announced"}, {"id": "2103911959544610829", "at": "2026-09-26T18:17:54.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "Resets all propagated. That will be all. Have a fantastic weekend.", "url": "https://x.com/thsottiaux/status/2103911959544610829", "type": "regular", "status": "confirmed"}, {"id": "2102463847714247142", "at": "2026-09-22T18:23:37.000Z", "cat": "banked_reset", "is_reset": true, "text": "GPT-6 Sol and Luna are out. Not only are they a very significant improvement across the board, but also in writing and general &quot;you know when you try it&quot; quality.We are also permanently reducing the API price by 50% making both of them viable for a ton of new usecases and making your usage go further too, even on the subscriptions.And one more thing. We are loading a banked reset into all accounts of our Plus, Pro and Business users. Let&#39;s go!", "url": "https://x.com/thsottiaux/status/2102463847714247142", "type": "banked", "status": "confirmed"}, {"id": "2098685367058612394", "at": "2026-09-12T08:09:17.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "Reset all propagated. Sweet dreams.", "url": "https://x.com/thsottiaux/status/2098685367058612394", "type": "regular", "status": "confirmed"}, {"id": "2096035437299237298", "at": "2026-09-05T00:39:25.000Z", "cat": "chatter", "is_reset": false, "text": "Because we are beyond happy to have Astra rolled out today ahead of schedule and you have been super patient with us (not really, but it’s ok!)… we will do the full banked reset today too for all Plus, Pro and Business users. Lands end of day.Happy Astra day and enjoy a phenomenal weekend.PS: If you create the account or upgrade before 8pm PT you will get it too. Still time!", "url": "https://x.com/thsottiaux/status/2096035437299237298", "type": "banked", "status": "confirmed"}, {"id": "2095651088502591861", "at": "2026-09-03T23:12:09.000Z", "cat": "chatter", "is_reset": false, "text": "We will give one banked reset for every day you don&#39;t have access to Astra on your paid ChatGPT plan, starting today. Team is moving mountains to give access as fast as we can.First one will land in ~ 3 hours. There is still time to create your account if you don&#39;t have one.", "url": "https://x.com/thsottiaux/status/2095651088502591861", "type": "banked", "status": "confirmed"}, {"id": "2094251180121854309", "at": "2026-08-31T02:29:25.000Z", "cat": "chatter", "is_reset": false, "text": "What I wanted to say yesterday is that we hit 25M active users and to celebrate we have now reset usage for all paid subscriptions for ChatGPT Work and Codex.See you see for more news from The Reset Company.", "url": "https://x.com/thsottiaux/status/2094251180121854309", "type": "regular", "status": "confirmed"}, {"id": "2093801758665715784", "at": "2026-08-29T20:43:34.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "We are reseting usage for all paid users of Codex and ChatGPT Work.Please continue reading for an update on Codex usage limits. The team has been working around the clock, going through thousands of reports and shipping fixes.Depending on how you use Codex, you should see your usage go between 10% and 50% further than before. …", "url": "https://x.com/thsottiaux/status/2093801758665715784", "type": "regular", "status": "confirmed"}, {"id": "2093014447833116908", "at": "2026-08-27T16:35:05.000Z", "cat": "chatter", "is_reset": false, "text": "Never slept better and feeling reseted. Brand new me and brand new usage for all ChatGPT Work and Codex users. Regaining my youth one button press at a time.Happy Thursday", "url": "https://x.com/thsottiaux/status/2093014447833116908", "type": "regular", "status": "confirmed"}, {"id": "2091688655828246890", "at": "2026-08-24T00:46:51.000Z", "cat": "chatter", "is_reset": false, "text": "Good Sunday. Reset has been propagated to accounts and we landed some fixes to usage for things mentioned yesterday as issues we found. You should feel a positive difference. More to come tomorrow and will keep communicating.", "url": "https://x.com/thsottiaux/status/2091688655828246890", "type": "regular", "status": "confirmed"}, {"id": "2090766694897619318", "at": "2026-08-21T11:43:19.000Z", "cat": "banked_reset", "is_reset": true, "text": "It&#39;s me again. I come bearing great news.First of all, we have hit 20M active users for Codex some time this week. Second of all, this is cause for celebration and during the day we will credit every Codex and ChatGPT Work user with a BANKED reset that you can use at your own …", "url": "https://x.com/thsottiaux/status/2090766694897619318", "type": "banked", "status": "confirmed"}, {"id": "2087706104814023111", "at": "2026-08-13T01:01:37.000Z", "cat": "pending_reset", "is_reset": false, "text": "Old news actually from a bunch of days ago, but crossed that 15M. Enjoy a nice reset everyone. Landing in the next hour or so, go /fast.", "url": "https://x.com/thsottiaux/status/2087706104814023111", "type": "regular", "status": "confirmed"}, {"id": "2086188036493344823", "at": "2026-08-08T20:29:22.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "That&#39;s right, GPT-5.6 Sol is awesome and can be used pretty much anywhere, including in the CC harness.To celebrate this, together with the fact that I&#39;m not going anywhere... I have reset usage limits for all paid users of ChatGPT Work and Codex.Have fun out there!", "url": "https://x.com/thsottiaux/status/2086188036493344823", "type": "regular", "status": "confirmed"}, {"id": "2083395449814229287", "at": "2026-08-01T03:32:37.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "To celebrate a week of efficiency and let you run 100&#39;000 Luna threads this weekend... that&#39;s right... wait for it... I have reset usage limits for Codex and ChatGPT Work.Enjoy.", "url": "https://x.com/thsottiaux/status/2083395449814229287", "type": "regular", "status": "confirmed"}, {"id": "2082317452755751098", "at": "2026-07-29T04:09:02.000Z", "cat": "chatter", "is_reset": false, "text": "Hello people of Sol! I&#39;ve reset usage limits for all ChatGPT Work and Codex users. Together with that, a quick update on GPT-5.6 Sol usage limits.Over the past few weeks, many of you have told us that Sol was using your Codex limits faster than expected. To be clear, we have …", "url": "https://x.com/thsottiaux/status/2082317452755751098", "type": "regular", "status": "confirmed"}, {"id": "2081940052154933696", "at": "2026-07-28T03:09:23.000Z", "cat": "chatter", "is_reset": false, "text": "Back at the laptop. The usage limits have been reset for all paid users of Codex and ChatGPT Work. Weeeeeeeee. It&#39;s a good day!", "url": "https://x.com/thsottiaux/status/2081940052154933696", "type": "regular", "status": "confirmed"}, {"id": "2081096447718723984", "at": "2026-07-25T19:17:12.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "We have reset usage limits for all Codex and ChatGPT Work users.Last night around 2am to 4am we suffered an almost global outage. All well and recovered, but you know what comes next.We learn. We reset. Enjoy.", "url": "https://x.com/thsottiaux/status/2081096447718723984", "type": "regular", "status": "confirmed"}, {"id": "2079609157934886975", "at": "2026-07-21T16:47:15.000Z", "cat": "pending_reset", "is_reset": false, "text": "10M!New day, new usage reset for paid users of Codex and ChatGPT Work. Lands in the next hour. Enjoy.", "url": "https://x.com/thsottiaux/status/2079609157934886975", "type": "regular", "status": "confirmed"}, {"id": "2078320950488297917", "at": "2026-07-18T03:28:22.000Z", "cat": "chatter", "is_reset": false, "text": "Oops... I did it again.Enjoy reset usage limits for all paid users for Codex and ChatGPT Work. Super grateful for an incredible team who is iterating at lightspeed and keeping the infra up as we scale faster than ever.Enjoy the weekend!", "url": "https://x.com/thsottiaux/status/2078320950488297917", "type": "regular", "status": "confirmed"}, {"id": "2077607697487188198", "at": "2026-07-16T04:14:09.000Z", "cat": "chatter", "is_reset": false, "text": "Another reset for our Codex and ChatGPT Work users. Actually hit 9M active users way earlier today, but then got distracted by the approximately millions of things the team is doing to keep the systems up and reliable.Should have that sweet 100% weekly usage limit back in a few …", "url": "https://x.com/thsottiaux/status/2077607697487188198", "type": "regular", "status": "confirmed"}, {"id": "2077114635308986427", "at": "2026-07-14T19:34:54.000Z", "cat": "chatter", "is_reset": false, "text": "Hello. We have reached 8M active users across Codex and ChatGPT Work.We are once again resetting the usage limits for all. And we continue to not have the 5h rate limit as well, allowing everyone to explore the boundaries of GPT-5.6 Sol and discover how ambitious you can be.", "url": "https://x.com/thsottiaux/status/2077114635308986427", "type": "regular", "status": "confirmed"}, {"id": "2076735790567338203", "at": "2026-07-13T18:29:31.000Z", "cat": "banked_reset", "is_reset": true, "text": "Thank you to the 7M active users who are now using Codex and ChatGPT Work.We have added a banked reset to everyone&#39;s account to celebrate the milestone. You can apply the reset in the desktop app or on web and it will replenish the weekly usage for you.Have fun out there.", "url": "https://x.com/thsottiaux/status/2076735790567338203", "type": "banked", "status": "confirmed"}, {"id": "2076418567143408112", "at": "2026-07-12T21:28:59.000Z", "cat": "banked_reset", "is_reset": true, "text": "Added a banked reset to 500k users of ChatGPT Work and Codex.What’s been happening:- Just released the ability to use a banked reset from web and mobile. Before today you could only do it in the desktop app- Had an issue where less than 10% of users who used a banked reset …", "url": "https://x.com/thsottiaux/status/2076418567143408112", "type": "banked", "status": "confirmed"}, {"id": "2075820987833274448", "at": "2026-07-11T05:54:25.000Z", "cat": "pending_reset", "is_reset": false, "text": "Introducing... another usage limit reset for all our ChatGPT Work and Codex users. Should land over next 30 minutes. Hope you have an awesome weekend.Thank you for pushing our systems to the absolute limit, we have never seen traffic increase so quickly. Keep the feedback …", "url": "https://x.com/thsottiaux/status/2075820987833274448", "type": "regular", "status": "confirmed"}, {"id": "2075641131002700120", "at": "2026-07-10T17:59:43.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "Hello beautiful people! We have reset usage limits across Codex and ChatGPT Work. And another one will come later in the day. Rejoice.Now that I have your attention, a quick update on ChatGPT Work, Codex and all the updates we shared yesterday.We’ve spent the last 24 hours …", "url": "https://x.com/thsottiaux/status/2075641131002700120", "type": "regular", "status": "confirmed"}, {"id": "2075330198887940337", "at": "2026-07-09T21:24:11.000Z", "cat": "pending_reset", "is_reset": false, "text": "Enjoy a full reset of your usage limits for ChatGPT Work and Codex. Propagating in the next hour.@_rajanagarwal just joined to work on model research and push on coding capabilities. You can thank him for pressing the button today.", "url": "https://x.com/thsottiaux/status/2075330198887940337", "type": "regular", "status": "confirmed"}, {"id": "2071740419030053227", "at": "2026-06-29T23:39:41.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "Codex usage limits will be fully reset again in the next hour and we will credit one additional reset into your bank for your own usage over the next 24 hours.We investigated reports that Codex usage was being consumed faster than expected. There wasn&#39;t one central issue, but a …", "url": "https://x.com/thsottiaux/status/2071740419030053227", "type": "both", "status": "confirmed"}, {"id": "2071381664853319742", "at": "2026-06-28T23:54:07.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "As we are still investigating, I have reset everyone&#39;s Codex usage limits. This is a hard reset given some users had stacked up to three banked resets already that they can apply on their own schedule.Funnily enough, this week at OpenAI is called the RESET week, which is meant …", "url": "https://x.com/thsottiaux/status/2071381664853319742", "type": "regular", "status": "confirmed"}, {"id": "2070653282440405046", "at": "2026-06-26T23:39:48.000Z", "cat": "pending_reset", "is_reset": false, "text": "We are giving all Codex users a usage reset on the house. Should be showing in your accounts in the next few hours.We have applied some mitigations, but our investigation hasn&#39;t shown users being impacted at large. We are continuing to monitor the situation.", "url": "https://x.com/thsottiaux/status/2070653282440405046", "type": "regular", "status": "confirmed"}, {"id": "2067399435009622521", "at": "2026-06-18T00:10:10.000Z", "cat": "chatter", "is_reset": false, "text": "Dearest gentle codexer.We did a sneaky double reset. Not only do you get a full reset on us. But you are also getting one into the reset bank to use at your own leisure.Enjoy", "url": "https://x.com/thsottiaux/status/2067399435009622521", "type": "both", "status": "confirmed"}, {"id": "2062329981548802523", "at": "2026-06-04T00:25:58.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "Hi. Over the last 24 hours we had three separate small incidents that affected Codex reliability. Those are three too many and we are taking active steps for them to not reproduce.I have reset usage limits for Codex across all paid plans. May the tokens flow again.", "url": "https://x.com/thsottiaux/status/2062329981548802523", "type": "regular", "status": "confirmed"}, {"id": "2061106703446450392", "at": "2026-05-31T15:25:06.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "The Codex usage limits have been reset for all paid ChatGPT subscriptions. You should be back to 100% weekly and 100% hourly limits.Let the tokens do incredible things today and have fun.", "url": "https://x.com/thsottiaux/status/2061106703446450392", "type": "regular", "status": "confirmed"}, {"id": "2058280452851638313", "at": "2026-05-23T20:14:35.000Z", "cat": "chatter", "is_reset": false, "text": "Some of you noticed limits drained faster in Codex, we root caused it to an optimization that we rolled back that had an impact on cache hit rates when compacting across long running sessions.We fixed this and have now reset usage limits for all accounts. Enjoy the weekend.", "url": "https://x.com/thsottiaux/status/2058280452851638313", "type": "regular", "status": "confirmed"}, {"id": "2055707616605835333", "at": "2026-05-16T17:51:03.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "Codex usage limits have now been reset across all paid plans. Enjoy the weekend!", "url": "https://x.com/thsottiaux/status/2055707616605835333", "type": "regular", "status": "confirmed"}, {"id": "2048997818673537399", "at": "2026-04-28T05:28:43.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "Don&#39;t just reset Codex rate limits for fun, it costs money.Don&#39;t just reset Codex rate limits for fun, it costs money.... but the vibes are good ...I have reset Codex rate limits for ALL paid plans to celebrate a good week and allow everyone to build more with GPT-5.5. Enjoy", "url": "https://x.com/thsottiaux/status/2048997818673537399", "type": "regular", "status": "confirmed"}, {"id": "2046367145588916687", "at": "2026-04-20T23:15:21.000Z", "cat": "pending_reset", "is_reset": false, "text": "Codex incident is mitigated, seeing recovery. Lasted about 10 mins, Codex itself helped with the remediation, but ultimately the insight came from a human this time.Apologies for the disruption and rate limit reset incoming.", "url": "https://x.com/thsottiaux/status/2046367145588916687", "type": "regular", "status": "confirmed"}, {"id": "2044943514832871564", "at": "2026-04-17T00:58:21.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "Hi! To celebrate its 1-year anniversary, I have allowed Codex to reset its own rate limits across all plans. Enjoy all the new features.", "url": "https://x.com/thsottiaux/status/2044943514832871564", "type": "regular", "status": "confirmed"}, {"id": "2042299371602264319", "at": "2026-04-09T17:51:28.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "We did it, say hi to the $100 plan!It should be the sweet spot for a ton of you. It comes with a ton of codex usage. And yes we are resetting the limits again too as I mentioned yesterday. Let’s keep building!", "url": "https://x.com/thsottiaux/status/2042299371602264319", "type": "regular", "status": "confirmed"}, {"id": "2041655710346572085", "at": "2026-04-07T23:13:48.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "Three million people are now using Codex weekly - up from two million a little under a month ago. Incredible to see the growth. Thank you to all of you and to the ecosystem we’re part of. To celebrate, we’re resetting rate limits so you can keep building, and we’ll reset them …", "url": "https://x.com/thsottiaux/status/2041655710346572085", "type": "regular", "status": "confirmed"}, {"id": "2039248564967424483", "at": "2026-04-01T07:48:39.000Z", "cat": "chatter", "is_reset": false, "text": "Our Codex dashboards are showing increased rate of users hitting rate limits and since we don&#39;t fully understand why I have made the cautious decision of resetting the usage limits for all plans. Enjoy.I also wanted to celebrate us finding a pocket of fraudulent accounts that …", "url": "https://x.com/thsottiaux/status/2039248564967424483", "type": "regular", "status": "confirmed"}, {"id": "2037346989244096581", "at": "2026-03-27T01:52:28.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "Hello. We have reset Codex usage limits across all plans to let everyone experiment with the magnificent plugins we just launched, and because it had been a while!You can just build unlimited things with Codex. Have fun!", "url": "https://x.com/thsottiaux/status/2037346989244096581", "type": "regular", "status": "confirmed"}, {"id": "2031605592352313567", "at": "2026-03-11T05:38:13.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "OK, Codex is back and stable and we should be good for a while.Reset button pressed, should see it in a bit", "url": "https://x.com/thsottiaux/status/2031605592352313567", "type": "regular", "status": "confirmed"}, {"id": "2031216405266481489", "at": "2026-03-10T03:51:43.000Z", "cat": "pending_reset", "is_reset": false, "text": "This codex issue is now fully resolved and stable for the last couple of hours.You have come to expect it, but yes, that means we will be reseting rate limits in a bit. Enjoy.", "url": "https://x.com/thsottiaux/status/2031216405266481489", "type": "regular", "status": "confirmed"}, {"id": "2030474136024400173", "at": "2026-03-08T02:42:13.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "We don’t have evidence of a widespread issue with codex usage being drained faster than it should but there are enough reports and we have reset rate limits for plus &amp; pro subscriptions while we work towards wrapping up our investigation over the coming 1-3 days.", "url": "https://x.com/thsottiaux/status/2030474136024400173", "type": "regular", "status": "confirmed"}, {"id": "2029308599835738218", "at": "2026-03-04T21:30:47.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "We caught an issue that was causing the 2X promotional increase in limits to not be applied to an estimated 9% of plus and pro users for Codex.We have now fixed this issue and are reseting the rate limit for all plus and pro users to compensate. Apologies and thank you for the …", "url": "https://x.com/thsottiaux/status/2029308599835738218", "type": "regular", "status": "confirmed"}, {"id": "2028649088594436225", "at": "2026-03-03T01:50:07.000Z", "cat": "pending_reset", "is_reset": false, "text": "Codex is back up. We introduced an issue that caused requests to be blocked and rejected as high cyber risk. This was fixed in ~8 mins and we are now back online and fully operational.Team will reset rate limits, that’s been a while. Enjoy one on us.", "url": "https://x.com/thsottiaux/status/2028649088594436225", "type": "regular", "status": "confirmed"}, {"id": "2004100061933064395", "at": "2025-12-25T08:01:03.000Z", "cat": "chatter", "is_reset": false, "text": "For Codex users, to thank you all for the fun we&#39;ve had over the last months, our first gift is that we have **reset rate limits and are lifting the usage limits to 2X the usual limits until the 1st of Jan**. Wish you all a merry holiday and lots of coding!!Spread the word 👀", "url": "https://x.com/thsottiaux/status/2004100061933064395", "type": "regular", "status": "confirmed"}, {"id": "2002137269134819610", "at": "2025-12-19T22:01:37.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "We rewrote the underlying system to track and bill usage in Codex and we have reset usage limits in the process. Backfilling is time consuming and it’s more fun to give free usage. Enjoy!", "url": "https://x.com/thsottiaux/status/2002137269134819610", "type": "regular", "status": "confirmed"}, {"id": "2001114683047317723", "at": "2025-12-17T02:18:14.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "Didn’t need to do this in a while, but you know the drill. We have reset everyone’s usage limits, enjoy more Codex and apologies for the disruption.", "url": "https://x.com/thsottiaux/status/2001114683047317723", "type": "regular", "status": "confirmed"}, {"id": "1995988609896513743", "at": "2025-12-02T22:49:02.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "We have reset the usage limits for everyone in Codex, which helps us mitigate the issue the fastest and the team will continue to work on the underlying cause. This should propagate to all users over the next 10 mins, enjoy and apologies for the confusion!", "url": "https://x.com/thsottiaux/status/1995988609896513743", "type": "regular", "status": "confirmed"}, {"id": "1992370994028388670", "at": "2025-11-22T23:13:56.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "We have reset rate limits for all Codex users to compensate for the unusual high latencies in or near the US in the previous hours. Grateful for the team working hard behind the scenes to keep Codex running 24/7.I do recommend trying out GPT-5.1-Codex-Max too if you haven’t!", "url": "https://x.com/thsottiaux/status/1992370994028388670", "type": "regular", "status": "confirmed"}, {"id": "1986166501435711936", "at": "2025-11-05T20:19:29.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "Codex outage resolved.We suffered a minor outage for last 45 minutes which turned into a global outage for last 30 minutes, this is now resolved and we have reset the rate limits. Please let me know if you still see issues.", "url": "https://x.com/thsottiaux/status/1986166501435711936", "type": "regular", "status": "confirmed"}, {"id": "1968163721034994139", "at": "2025-09-17T04:02:52.000Z", "cat": "confirmed_reset", "is_reset": true, "text": "We have reset everyone&#39;s limits for gpt-5-codex to allow you all to benefit more from it today and as a way to make up for the slowdowns earlier while we were provisioning additional GPUs. We&#39;ll continue to add capacity throughout the week to maintain the speed.Enjoy!", "url": "https://x.com/thsottiaux/status/1968163721034994139", "type": "regular", "status": "confirmed"}];
   // 3. Mathematical Probability & Time Synchronization Engine (Single Source of Truth)
   window.CODEX_RADAR = {
     probability: 1,
     lastResetUtc: "2026-10-23T17:41:00.000Z",
-    daysSinceStr: "1.2d"
+    daysSinceStr: "1.4d"
   };
 
   var LAST_RESET_UTC = "2026-10-23T17:41:00.000Z";
@@ -3256,76 +3695,9 @@ You can now cache for 12h in the API and for logged in users across Codex &amp;a
       el.textContent = liveProb;
     });
 
-    // F. SVG Chart Dynamic Dates & Prob Anchor
-    var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
-    var nowLabel = months[now.getMonth()] + " " + now.getDate() + " (Now)";
-    var t1 = new Date(now.getTime() + 86400000);
-    var t1Label = months[t1.getMonth()] + " " + t1.getDate();
-    var t2 = new Date(now.getTime() + 172800000);
-    var t2Label = months[t2.getMonth()] + " " + t2.getDate();
-
-    var chartNowD = document.getElementById("chartNowDate");
-    if(chartNowD) chartNowD.textContent = nowLabel;
-    var chartT1D = document.getElementById("chartT1Date");
-    if(chartT1D) chartT1D.textContent = t1Label;
-    var chartT2D = document.getElementById("chartT2Date");
-    if(chartT2D) chartT2D.textContent = t2Label;
-
-    var chartLastD = document.getElementById("chartLastResetDate");
-    if(chartLastD && !isNaN(lastReset.getTime())) {
-      chartLastD.textContent = months[lastReset.getMonth()] + " " + lastReset.getDate();
-    }
-
-    var chartProbTxt = document.getElementById("chartNowProbText");
-    if(chartProbTxt) chartProbTxt.textContent = "NOW " + liveProb + "%";
-
-    var eventGroup = document.getElementById("chartTodayEvent");
-    var eventTimeLabel = String(lastReset.getHours()).padStart(2, "0") + ":" + String(lastReset.getMinutes()).padStart(2, "0");
-    var eventX = Math.max(490, Math.min(517, 525 - Math.min(diffHours, 24) * 1.1));
-    if(eventGroup) eventGroup.style.display = resetOccurredToday ? "" : "none";
-    var chartEventText = document.getElementById("chartEventText");
-    if(chartEventText) chartEventText.textContent = "RESET " + eventTimeLabel;
-
-    var pClamped = Math.min(100, Math.max(0, liveProb));
-    var yNow = pClamped <= 80 
-      ? Math.round((130.0 - (pClamped * 1.1875)) * 10) / 10 
-      : Math.round((35.0 - ((pClamped - 80.0) * 0.25)) * 10) / 10;
-    var yBadgeRect = Math.max(11.0, Math.round((yNow - 20.0) * 10) / 10);
-    var yBadgeText = Math.round((yBadgeRect + 11.5) * 10) / 10;
-
-    var chartDot = document.getElementById("chartNowDot");
-    if(chartDot) { chartDot.setAttribute("cy", yNow); chartDot.setAttribute("cx", "525"); chartDot.setAttribute("fill", "#FCD535"); }
-    var chartRing = document.getElementById("chartNowRing");
-    if(chartRing) { chartRing.setAttribute("cy", yNow); chartRing.setAttribute("cx", "525"); chartRing.setAttribute("stroke", "#FCD535"); }
-    var chartStem = document.getElementById("chartNowStem");
-    if(chartStem) { chartStem.setAttribute("y1", yNow); chartStem.setAttribute("x1", "525"); chartStem.setAttribute("x2", "525"); chartStem.setAttribute("stroke", "#FCD535"); }
-
-    var chartEventStem = document.getElementById("chartEventStem");
-    if(chartEventStem) { chartEventStem.setAttribute("x1", eventX); chartEventStem.setAttribute("x2", eventX); }
-    var chartEventDot = document.getElementById("chartEventDot");
-    if(chartEventDot) chartEventDot.setAttribute("cx", eventX);
-    var chartEventRing = document.getElementById("chartEventRing");
-    if(chartEventRing) chartEventRing.setAttribute("cx", eventX);
-    var chartEventBadge = document.getElementById("chartEventBadgeRect");
-    if(chartEventBadge) chartEventBadge.setAttribute("x", eventX - 38);
-    if(chartEventText) chartEventText.setAttribute("x", eventX);
-
-    var chartBadgeRect = document.getElementById("chartNowBadgeRect");
-    if(chartBadgeRect) { chartBadgeRect.setAttribute("y", yBadgeRect); chartBadgeRect.setAttribute("x", "501"); }
-    if(chartProbTxt) { chartProbTxt.setAttribute("y", yBadgeText); chartProbTxt.setAttribute("x", "525"); }
-
-    // Dynamic SVG Curve Connection to Live yNow
-    var chartHist = document.getElementById("chartHistPath");
-    if(chartHist) {
-      chartHist.setAttribute("d", resetOccurredToday ? "M 60 115 Q 100 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 370 70, 445 32 L 445 130 Q 485 105, " + eventX + " 32 L 525 " + yNow : "M 60 115 Q 100 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 370 70, 445 32 L 445 130 Q 485 105, 525 " + yNow);
-    }
-    var chartProj = document.getElementById("chartProjPath");
-    if(chartProj) {
-      chartProj.setAttribute("d", "M 525 " + yNow + " C 565 " + yNow + ", 610 70, 685 45");
-    }
-    var chartArea = document.getElementById("chartAreaPath");
-    if(chartArea) {
-      chartArea.setAttribute("d", resetOccurredToday ? "M 60 135 L 60 115 Q 100 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 370 70, 445 32 L 445 130 Q 485 105, " + eventX + " 32 L 525 " + yNow + " L 525 135 Z" : "M 60 135 L 60 115 Q 100 80, 135 32 L 135 130 Q 175 80, 215 32 L 215 130 Q 255 80, 295 32 L 295 130 Q 370 70, 445 32 L 445 130 Q 485 105, 525 " + yNow + " L 525 135 Z");
+    // F. Event Ledger & Source Desk Engine (Concept C)
+    if (window.renderLedgerDesk) {
+      window.renderLedgerDesk(liveProb);
     }
 
     // G. SF Work Window (Pacific Time HQ)
@@ -4029,3 +4401,400 @@ You can now cache for 12h in the API and for logged in users across Codex &amp;a
 </script>
 </body>
 </html>
+
+<script>
+
+  // ==================== EVENT STORE & LEDGER DESK ENGINE (CONCEPT C) ====================
+  (function() {
+    var lang = document.documentElement.lang || "en";
+    var isZh = lang.indexOf("zh") === 0;
+    var isJa = lang === "ja";
+    var rawSeed = window.CODEX_ALL_EVENTS || [];
+    var eventMap = {};
+    var eventList = [];
+
+    function normalizeRecord(r) {
+      if (!r || !r.id) return null;
+      var atStr = r.at || "";
+      var d = new Date(atStr);
+      var validTime = !isNaN(d.getTime());
+      return {
+        id: String(r.id),
+        at: atStr,
+        timestamp: validTime ? d.getTime() : 0,
+        cat: r.cat || (r.is_reset ? "confirmed_reset" : "chatter"),
+        isReset: Boolean(r.is_reset || r.cat === "confirmed_reset" || r.cat === "banked_reset"),
+        text: r.text || "",
+        url: (r.url && r.url.indexOf("http") === 0) ? r.url : "https://x.com/thsottiaux",
+        type: r.type || "regular"
+      };
+    }
+
+    function addEvents(items) {
+      if (!Array.isArray(items)) return;
+      for (var i = 0; i < items.length; i++) {
+        var norm = normalizeRecord(items[i]);
+        if (norm && (!eventMap[norm.id] || norm.timestamp > eventMap[norm.id].timestamp)) {
+          eventMap[norm.id] = norm;
+        }
+      }
+      eventList = Object.values(eventMap).sort(function(a, b) {
+        return b.timestamp - a.timestamp;
+      });
+    }
+
+    // Initialize with seed data
+    addEvents(rawSeed);
+
+    window.CODEX_EVENT_STORE = {
+      add: addEvents,
+      getAll: function() { return eventList; },
+      getLatestReset: function() {
+        for (var i = 0; i < eventList.length; i++) {
+          if (eventList[i].cat === "confirmed_reset" || eventList[i].cat === "banked_reset") {
+            return eventList[i];
+          }
+        }
+        return null;
+      }
+    };
+
+    var currentFilter = "all";
+    var searchQuery = "";
+    var visibleLimit = 5;
+    var selectedEventId = null;
+
+    var months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+    function getLocalDateKey(dateObj) {
+      var y = dateObj.getFullYear();
+      var m = String(dateObj.getMonth() + 1).padStart(2, "0");
+      var d = String(dateObj.getDate()).padStart(2, "0");
+      return y + "-" + m + "-" + d;
+    }
+
+    function formatTime(dateObj) {
+      return String(dateObj.getHours()).padStart(2, "0") + ":" + String(dateObj.getMinutes()).padStart(2, "0");
+    }
+
+    function formatUtcTime(dateObj) {
+      return dateObj.getUTCFullYear() + "-" +
+        String(dateObj.getUTCMonth() + 1).padStart(2, "0") + "-" +
+        String(dateObj.getUTCDate()).padStart(2, "0") + " " +
+        String(dateObj.getUTCHours()).padStart(2, "0") + ":" +
+        String(dateObj.getUTCMinutes()).padStart(2, "0") + " UTC";
+    }
+
+    function updateInspector(item) {
+      if (!item) return;
+      selectedEventId = item.id;
+      var d = new Date(item.at);
+
+      var inspDate = document.getElementById("inspLocalDate");
+      var inspTime = document.getElementById("inspLocalTime");
+      var inspUtc = document.getElementById("inspUtcTime");
+      var inspQuote = document.getElementById("inspQuoteText");
+      var inspBadge = document.getElementById("inspBadge");
+      var inspSource = document.getElementById("inspSourceLink");
+
+      if (inspDate) {
+        if (isZh) {
+          inspDate.textContent = d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + d.getDate() + "日";
+        } else {
+          inspDate.textContent = months[d.getMonth()] + " " + d.getDate() + ", " + d.getFullYear();
+        }
+      }
+
+      if (inspTime) {
+        var uTz = Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC";
+        inspTime.textContent = formatTime(d) + " (" + uTz + ")";
+      }
+
+      if (inspUtc) {
+        inspUtc.textContent = formatUtcTime(d);
+      }
+
+      if (inspQuote) {
+        inspQuote.textContent = item.text || "--";
+      }
+
+      if (inspBadge) {
+        inspBadge.className = "badge-sm";
+        if (item.cat === "confirmed_reset") {
+          inspBadge.classList.add("badge-reset");
+          inspBadge.textContent = "RESET";
+        } else if (item.cat === "banked_reset") {
+          inspBadge.classList.add("badge-banked");
+          inspBadge.textContent = "BANKED";
+        } else {
+          inspBadge.classList.add("badge-notice");
+          inspBadge.textContent = (item.cat === "pending_reset") ? "NOTICE" : "UPDATE";
+        }
+      }
+
+      if (inspSource) {
+        inspSource.href = item.url;
+      }
+
+      // Update selected class on rendered rows
+      document.querySelectorAll(".event-row").forEach(function(row) {
+        if (row.getAttribute("data-id") === item.id) {
+          row.classList.add("selected");
+        } else {
+          row.classList.remove("selected");
+        }
+      });
+    }
+
+    function renderLedgerDesk(liveProb) {
+      // 1. Update compact forecast card
+      var fcProb = document.getElementById("fcProbNum");
+      if (fcProb) fcProb.textContent = (typeof liveProb === "number") ? liveProb : "--";
+      var fcBar = document.getElementById("fcBarFill");
+      if (fcBar && typeof liveProb === "number") {
+        fcBar.style.width = Math.min(100, Math.max(0, liveProb)) + "%";
+      }
+
+      // 2. Count statistics for filter buttons
+      var cntReset = 0, cntBanked = 0, cntNotice = 0;
+      for (var i = 0; i < eventList.length; i++) {
+        var c = eventList[i].cat;
+        if (c === "confirmed_reset") cntReset++;
+        else if (c === "banked_reset") cntBanked++;
+        else cntNotice++;
+      }
+
+      var elR = document.getElementById("cntReset");
+      if (elR) elR.textContent = cntReset;
+      var elB = document.getElementById("cntBanked");
+      if (elB) elB.textContent = cntBanked;
+      var elN = document.getElementById("cntNotice");
+      if (elN) elN.textContent = cntNotice;
+
+      // 3. Filter and search
+      var q = searchQuery.toLowerCase().trim();
+      var filtered = eventList.filter(function(item) {
+        if (currentFilter === "reset" && item.cat !== "confirmed_reset") return false;
+        if (currentFilter === "banked" && item.cat !== "banked_reset") return false;
+        if (currentFilter === "notice" && (item.cat === "confirmed_reset" || item.cat === "banked_reset")) return false;
+        if (q) {
+          return item.text.toLowerCase().indexOf(q) !== -1 || item.cat.toLowerCase().indexOf(q) !== -1;
+        }
+        return true;
+      });
+
+      var badgeTotal = document.getElementById("ledgerCountBadge");
+      if (badgeTotal) {
+        badgeTotal.textContent = filtered.length + " " + (filtered.length === 1 ? "event" : "events");
+      }
+
+      // 4. Slice by visibleLimit
+      var visibleSlice = filtered.slice(0, visibleLimit);
+
+      // Default select the latest reset if no event is selected
+      if (!selectedEventId && visibleSlice.length > 0) {
+        var defaultSelected = null;
+        for (var k = 0; k < visibleSlice.length; k++) {
+          if (visibleSlice[k].cat === "confirmed_reset") {
+            defaultSelected = visibleSlice[k];
+            break;
+          }
+        }
+        updateInspector(defaultSelected || visibleSlice[0]);
+      }
+
+      var listEl = document.getElementById("ledgerList");
+      if (!listEl) return;
+      listEl.innerHTML = "";
+
+      if (visibleSlice.length === 0) {
+        var emptyDiv = document.createElement("div");
+        emptyDiv.className = "ledger-empty-msg";
+        emptyDiv.textContent = isZh ? "没有匹配的记录" : "No matching records found.";
+        listEl.appendChild(emptyDiv);
+      } else {
+        var now = new Date();
+        var todayKey = getLocalDateKey(now);
+        var yest = new Date(now.getTime() - 86400000);
+        var yestKey = getLocalDateKey(yest);
+
+        // Group by local date key
+        var grouped = [];
+        var groupMap = {};
+        for (var j = 0; j < visibleSlice.length; j++) {
+          var item = visibleSlice[j];
+          var itemD = new Date(item.at);
+          var key = getLocalDateKey(itemD);
+          if (!groupMap[key]) {
+            groupMap[key] = {
+              key: key,
+              dateObj: itemD,
+              isToday: (key === todayKey),
+              isYesterday: (key === yestKey),
+              items: []
+            };
+            grouped.push(groupMap[key]);
+          }
+          groupMap[key].items.push(item);
+        }
+
+        // Render each date group
+        for (var g = 0; g < grouped.length; g++) {
+          var grp = grouped[g];
+          var gDiv = document.createElement("div");
+          gDiv.className = "date-group";
+
+          var gHdr = document.createElement("div");
+          gHdr.className = "date-group-hdr";
+
+          var dateStr = "";
+          if (isZh) {
+            dateStr = grp.dateObj.getFullYear() + "年" + (grp.dateObj.getMonth() + 1) + "月" + grp.dateObj.getDate() + "日";
+          } else {
+            dateStr = months[grp.dateObj.getMonth()] + " " + grp.dateObj.getDate() + ", " + grp.dateObj.getFullYear();
+          }
+
+          var tagHtml = "";
+          if (grp.isToday) {
+            tagHtml = '<span class="dg-tag">' + (isZh ? "今天" : "Today") + '</span>';
+          } else if (grp.isYesterday) {
+            tagHtml = '<span class="dg-tag">' + (isZh ? "昨天" : "Yesterday") + '</span>';
+          }
+
+          gHdr.innerHTML = '<span>' + dateStr + '</span>' + tagHtml;
+          gDiv.appendChild(gHdr);
+
+          for (var r = 0; r < grp.items.length; r++) {
+            var it = grp.items[r];
+            var itD = new Date(it.at);
+            var row = document.createElement("div");
+            row.className = "event-row" + (it.id === selectedEventId ? " selected" : "");
+            row.setAttribute("data-id", it.id);
+            row.setAttribute("tabindex", "0");
+            row.setAttribute("role", "button");
+
+            var timeSpan = document.createElement("div");
+            timeSpan.className = "er-time";
+            timeSpan.textContent = formatTime(itD);
+
+            var bodyDiv = document.createElement("div");
+            bodyDiv.className = "er-body";
+
+            var titleDiv = document.createElement("div");
+            titleDiv.className = "er-title";
+            if (it.cat === "confirmed_reset") {
+              titleDiv.textContent = isZh ? "已确认公开重置" : "Public Reset Recorded";
+            } else if (it.cat === "banked_reset") {
+              titleDiv.textContent = isZh ? "官方存续额度券" : "Banked Reset Credited";
+            } else if (it.cat === "pending_reset") {
+              titleDiv.textContent = isZh ? "官方重置预告" : "Scheduled Reset Notice";
+            } else {
+              titleDiv.textContent = isZh ? "官方动态更新" : "Official Update Signal";
+            }
+
+            var snipDiv = document.createElement("div");
+            snipDiv.className = "er-snippet";
+            snipDiv.textContent = it.text;
+
+            bodyDiv.appendChild(titleDiv);
+            bodyDiv.appendChild(snipDiv);
+
+            var badgeDiv = document.createElement("div");
+            badgeDiv.className = "er-badge";
+            if (it.cat === "confirmed_reset") {
+              badgeDiv.classList.add("badge-reset");
+              badgeDiv.textContent = "RESET";
+            } else if (it.cat === "banked_reset") {
+              badgeDiv.classList.add("badge-banked");
+              badgeDiv.textContent = "BANKED";
+            } else {
+              badgeDiv.classList.add("badge-notice");
+              badgeDiv.textContent = (it.cat === "pending_reset") ? "NOTICE" : "UPDATE";
+            }
+
+            var arrowDiv = document.createElement("div");
+            arrowDiv.className = "er-arrow";
+            arrowDiv.innerHTML = "&#x2192;";
+
+            row.appendChild(timeSpan);
+            row.appendChild(bodyDiv);
+            row.appendChild(badgeDiv);
+            row.appendChild(arrowDiv);
+
+            (function(boundItem) {
+              row.addEventListener("click", function() {
+                updateInspector(boundItem);
+              });
+              row.addEventListener("keydown", function(e) {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  updateInspector(boundItem);
+                }
+              });
+            })(it);
+
+            gDiv.appendChild(row);
+          }
+
+          listEl.appendChild(gDiv);
+        }
+      }
+
+      // 5. Update Load More state
+      var loadMoreBtn = document.getElementById("ledgerLoadMoreBtn");
+      var allMsg = document.getElementById("ledgerAllLoadedMsg");
+      if (loadMoreBtn && allMsg) {
+        if (visibleSlice.length < filtered.length) {
+          loadMoreBtn.style.display = "";
+          allMsg.style.display = "none";
+        } else {
+          loadMoreBtn.style.display = "none";
+          allMsg.style.display = (filtered.length > 0) ? "" : "none";
+        }
+      }
+    }
+
+    window.renderLedgerDesk = renderLedgerDesk;
+
+    // Immediately trigger initial render
+    renderLedgerDesk(1);
+
+    // Attach DOM Event Listeners once DOM is ready
+    function initLedgerListeners() {
+      // Filter buttons
+      document.querySelectorAll(".lt-filter-btn").forEach(function(btn) {
+        btn.addEventListener("click", function() {
+          document.querySelectorAll(".lt-filter-btn").forEach(function(b) { b.classList.remove("active"); });
+          btn.classList.add("active");
+          currentFilter = btn.getAttribute("data-filter") || "all";
+          renderLedgerDesk();
+        });
+      });
+
+      // Search input
+      var sInp = document.getElementById("ledgerSearchInput");
+      if (sInp) {
+        sInp.addEventListener("input", function() {
+          searchQuery = sInp.value;
+          renderLedgerDesk();
+        });
+      }
+
+      // Load more button
+      var lmBtn = document.getElementById("ledgerLoadMoreBtn");
+      if (lmBtn) {
+        lmBtn.addEventListener("click", function() {
+          visibleLimit += 10;
+          renderLedgerDesk();
+        });
+      }
+    }
+
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initLedgerListeners);
+    } else {
+      initLedgerListeners();
+    }
+  })();
+
+</script>

@@ -281,3 +281,27 @@ u.
 - Clarified that the radar percentage is a heuristic indicator, not a statistically calibrated probability or a view of the visitor's account.
 - Added GA4 events for recovery preset selections and calendar-add clicks; these events still need to be marked as key events in GA4 if desired.
 - Rebuilt 40 multilingual pages and passed the integrity/schema/link/section audit across all 44 HTML files. Production deployment and post-recrawl GSC evaluation remain pending.
+
+
+## 13. 预测图表最近重置立柱与时间轴水合修复 (2026-10-25)
+- **问题根因**：原 SVG 静态编译写死了 Oct 11/13/15/17/20 刻度，缺少 23/24 日重置柱；且客户端水合逻辑误用 `resetOccurredToday` 将最近重置作为“仅今天显示的临时事件”，当跨越当地午夜（如 24 日跨到 25 日）时，直接执行 `display = 'none'` 将柱子隐藏，导致文字显示昨天已重置但图表柱子未立起。
+- **架构与渲染修复**：
+  1. **双端时间轴对齐**：在 `scripts/build_studio.py` 中基于 14 天滚动时间轴动态计算最近重置柱位置（x ≈ 480），并在 X 轴输出对齐刻度 `chartLastResetDate`（如 Oct 24）。
+  2. **消除跨天隐藏**：在 `_tpl_body_v2.html` 中将显示条件从 `resetOccurredToday` 放宽为 `diffDays <= 14`，确保只要在图表可视时间窗口内，最近一次已确认重置柱稳稳立起。
+  3. **波形平滑贯通**：波形路径终点段平滑穿越该事件峰值（y=32）、下落至基线谷底并平缓连接至当前 NOW 预测锚点（x=525, y=yNow）。
+- **验证与质检**：
+  - 重新编译全量 40 个多语言页面，44 个 HTML 文件 100% 通过 `scripts/verify_site.py`。
+  - 使用 `ego-browser` (ego-lite) 启动本地 8080 服务进行视觉质检与 DOM 属性取证，证实柱子立起（stemX=480, display=inline, RESET 徽章与 Oct 24 对齐），并输出 QA 截图 `qa_chart_hero_view.png`。
+
+
+## 14. 彻底重构为方案 C：事件流水账与来源检查台 (2026-10-25)
+- **决策与架构演进**：彻底弃用容易引发刻度重叠、挤压、跨天消失与历史波形伪造的旧版 SVG 连续图表与 Gauge 仪表盘，落地执行方案 C「Event Ledger / Source Desk」（事件流水账 + 来源检查台 + 紧凑独立 48 小时展望卡）。
+- **核心工程改造**：
+  1. **全量种子数据与单一大脑**：在 `scripts/build_studio.py` 中导出全量 115 条清洗去重的历史记录 `ALL_EVENTS_JSON`，前端初始化统一的 `window.CODEX_EVENT_STORE`。顶部最新状态、事件流水账列表、右侧来源检查器与日历共享同一事件源，实时 API 水合时按 ID 增量合并并重新计算。
+  2. **根除日期重叠与遗漏**：日期采用标准文档流日期组头（如 `Oct 24, 2026 · Yesterday` / `2026年10月24日 · 昨天`），同日多条事件分别占据独立行展示（时间、标题、分类徽标、摘要剪裁与交互箭头），绝不再发生坐标系压缩碰撞。
+  3. **交互与筛选**：支持 All / Resets / Banked / Notices 分类即时筛选、关键字实时搜索、事件点击切换来源详情检查器（原文引用、UTC 与本地时区对照、官方原帖直达链接）以及分页加载更早记录。
+  4. **多语言与规范审计**：完整支持 10 个语言包的 UI 本地化字典（`scripts/_i18n_ledger.py`），全站 44 个 HTML 静态页面 100% 通过 `scripts/verify_site.py`。
+- **ego-browser 实测质检**：
+  - 本地 8080 服务通过 `ego-browser` (ego lite) 运行测试，成功加载 115 条记录并完成首屏自动水合渲染。
+  - 默认选中 10-24 01:41 (Asia/Shanghai) 最新已确认重置，右侧检查器完整呈现 "Usage has been reset" 原帖链接。
+  - 输出中英文真实运行截图：`qa_ledger_real_desktop.png` (137KB) 与 `qa_ledger_real_zh.png` (157KB)。
