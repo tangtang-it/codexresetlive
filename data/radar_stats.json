@@ -1,5 +1,5 @@
 {
-  "total": 124,
+  "total": 125,
   "reset_count": 46,
   "regular": 40,
   "banked": 5,
@@ -7,7 +7,7 @@
   "last_reset_text": "Usage quota has been reset",
   "last_reset_url": "https://x.com/thsottiaux/status/2113492502355562875",
   "first_reset_at": "2025-09-17T04:02:52.000Z",
-  "days_since_last_reset": 0.4,
+  "days_since_last_reset": 0.6,
   "avg_gap_days_all": 9.0,
   "avg_gap_days_recent": 1.4,
   "probability_48h": 1,
