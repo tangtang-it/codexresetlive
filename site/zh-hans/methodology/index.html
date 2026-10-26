@@ -2,8 +2,8 @@
 <html lang="zh-hans">
 <head>
 <meta charset="UTF-8">
-<!-- Monetag In-Page Push -->
-<script>(function(s){s.dataset.zone='12002461',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+<!-- Monetag In-Page Push: delay until first interaction, with a 3.5s fallback -->
+<script>(function(){var loaded=false;function loadAds(){if(loaded)return;loaded=true;['scroll','touchstart','click'].forEach(function(e){window.removeEventListener(e,loadAds)});var s=document.createElement('script');s.dataset.zone='12002461';s.src='https://nap5k.com/tag.min.js';s.async=true;document.head.appendChild(s)}['scroll','touchstart','click'].forEach(function(e){window.addEventListener(e,loadAds,{once:true,passive:true})});window.setTimeout(loadAds,3500)})()</script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9QX8QY2G1Q"></script>
 <script>

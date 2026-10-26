@@ -2,8 +2,8 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<!-- Monetag In-Page Push -->
-<script>(function(s){s.dataset.zone='12002461',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
+<!-- Monetag In-Page Push: delay until first interaction, with a 3.5s fallback -->
+<script>(function(){var loaded=false;function loadAds(){if(loaded)return;loaded=true;['scroll','touchstart','click'].forEach(function(e){window.removeEventListener(e,loadAds)});var s=document.createElement('script');s.dataset.zone='12002461';s.src='https://nap5k.com/tag.min.js';s.async=true;document.head.appendChild(s)}['scroll','touchstart','click'].forEach(function(e){window.addEventListener(e,loadAds,{once:true,passive:true})});window.setTimeout(loadAds,3500)})()</script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9QX8QY2G1Q"></script>
 <script>
@@ -2492,7 +2492,7 @@ document.addEventListener('DOMContentLoaded', function(){
   <div class="dab-left">
     <span class="dab-badge" data-direct-answer-badge><span class="dot"></span> TODAY'S RESET STATUS: LOW SIGNAL · ESTIMATE</span>
     <div class="dab-h" data-direct-answer-title>No public reset has been recorded today. <span class='forecast-inline'>48-hour signal: <span class='live-prob-val'>1</span>%</span></div>
-    <div class="dab-p" data-direct-answer-copy><span class="dab-live-note" data-dab-live-note>No confirmed public reset notice has been recorded today. The model percentage is a heuristic signal for the next public reset in the next 48 hours, not an official or calibrated probability.</span> The latest verified reset occurred <strong data-ago-utc="2026-10-25T06:06:16.000Z">19 hours ago</strong>; related Tibo announcement: <a class="dab-author-badge" data-reset-source-link href="https://x.com/thsottiaux/status/2114237083652882932" target="_blank" rel="noopener nofollow"><img class="dab-inline-avatar" src="/assets/avatars/tibo.jpg" alt="Tibo Sottiaux" width="18" height="18"><span>Tibo Sottiaux (@thsottiaux)</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;vertical-align:-1px"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>. Normal building conditions — calculate your personal 5-hour rolling window below.</div>
+    <div class="dab-p" data-direct-answer-copy><span class="dab-live-note" data-dab-live-note>No confirmed public reset notice has been recorded today. The model percentage is a heuristic signal for the next public reset in the next 48 hours, not an official or calibrated probability.</span> The latest verified reset occurred <strong data-ago-utc="2026-10-25T06:06:16.000Z">21 hours ago</strong>; related Tibo announcement: <a class="dab-author-badge" data-reset-source-link href="https://x.com/thsottiaux/status/2114237083652882932" target="_blank" rel="noopener nofollow"><img class="dab-inline-avatar" src="/assets/avatars/tibo.jpg" alt="Tibo Sottiaux" width="18" height="18"><span>Tibo Sottiaux (@thsottiaux)</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;vertical-align:-1px"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>. Normal building conditions — calculate your personal 5-hour rolling window below.</div>
     <div class="dab-tz-pills">
       <div class="tz-pill"><span class="tz-dot green"></span>San Francisco HQ (Tibo): <strong data-sf-clock>--:-- (PT)</strong></div>
       <div class="tz-pill"><span class="tz-dot yellow"></span>Your Local Time: <strong data-local-clock>--:--</strong></div>
@@ -2654,7 +2654,7 @@ document.addEventListener('DOMContentLoaded', function(){
 </div>
 <div class="readout-item">
 <div class="ro-l">Days Since Reset</div>
-<div class="ro-v num" data-days-since-utc="2026-10-25T06:06:16.000Z">0.8d</div>
+<div class="ro-v num" data-days-since-utc="2026-10-25T06:06:16.000Z">0.9d</div>
 <div class="ro-s">Last: <span data-local-date-only="2026-10-25T06:06:16.000Z">2026-10-25</span></div>
 </div>
 <div class="readout-item">
@@ -3005,7 +3005,7 @@ Surprisingly the CLI has grown 2X in usage since devday.</div>
   </div>
   <div class="sr-right">
     <span class="sr-dot yellow"></span>
-    <span class="sr-status"><span data-cooldown-utc="2026-10-25T06:06:16.000Z">Cooldown active (0.8d)</span></span>
+    <span class="sr-status"><span data-cooldown-utc="2026-10-25T06:06:16.000Z">Cooldown active (0.9d)</span></span>
   </div>
 </div><div class="switch-row">
   <div class="sr-left">
@@ -3495,7 +3495,7 @@ Surprisingly the CLI has grown 2X in usage since devday.</div>
   window.CODEX_RADAR = {
     probability: 1,
     lastResetUtc: "2026-10-25T06:06:16.000Z",
-    daysSinceStr: "0.8d"
+    daysSinceStr: "0.9d"
   };
 
   var LAST_RESET_UTC = "2026-10-25T06:06:16.000Z";

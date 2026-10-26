@@ -305,3 +305,4 @@ u.
   - 本地 8080 服务通过 `ego-browser` (ego lite) 运行测试，成功加载 115 条记录并完成首屏自动水合渲染。
   - 默认选中 10-24 01:41 (Asia/Shanghai) 最新已确认重置，右侧检查器完整呈现 "Usage has been reset" 原帖链接。
   - 输出中英文真实运行截图：`qa_ledger_real_desktop.png` (137KB) 与 `qa_ledger_real_zh.png` (157KB)。
+- **Monetag Safe Ads Scheduler (2026-10-26)**: Kept the verified In-Page Push Zone `12002461`; updated `_tpl_head_v2.html` and regenerated all 54 static HTML pages so the tag loads on first scroll/touch/click or after a 3.5-second fallback. The separate Direct Link zone remains unused. `scripts/verify_site.py` passes.
