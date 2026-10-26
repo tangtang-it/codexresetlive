@@ -26,5 +26,12 @@
     "confidence": 1.0,
     "reason": "Verified quota reset event (It is all propagated. Enjoy some mad codexing tomorrow. Fun week ahead too. https://t.co/qOrzwSeIZZ)",
     "source": "reset_radar_api"
+  },
+  "manual-b58a4b4b-dfa9-4be2-8f07-a2653ef787cc": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 1.0,
+    "reason": "Verified quota reset event (Usage quota has been reset)",
+    "source": "reset_radar_api"
   }
 }
