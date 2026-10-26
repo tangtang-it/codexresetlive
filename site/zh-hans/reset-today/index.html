@@ -2450,23 +2450,20 @@ document.addEventListener('DOMContentLoaded', function(){
 <div class="direct-ans-banner">
   <button class="dab-share-btn" id="shareForecastBtn" aria-label="分享此预测" title="分享此预测" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="dab-share-ico"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></button>
   <div class="dab-left">
-    <span class="dab-badge yes" data-direct-answer-badge><span class="dot"></span> 今日重置状态已核验</span>
-    <div class="dab-h" data-direct-answer-title><strong>是：今天已记录到一次公开重置。</strong></div>
-    <div class="dab-p" data-direct-answer-copy>已验证重置发生在 <strong data-ago-utc="2026-10-25T06:06:16.000Z">17 小时前</strong>。关联的 Tibo 公告：<a class="dab-author-badge" data-reset-source-link href="https://x.com/thsottiaux/status/2114237083652882932" target="_blank" rel="noopener nofollow"><img class="dab-inline-avatar" src="/assets/avatars/tibo.jpg" alt="Tibo Sottiaux" width="18" height="18"><span>Tibo Sottiaux (@thsottiaux)</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;vertical-align:-1px"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>。公告适用范围可能因账号和额度而异；请在 OpenAI Usage 页面确认个人额度状态。<span class="dab-live-note" data-dab-live-note>未来 48 小时信号仅估计下一次公开重置。</span></div>
-    <div class="dab-rec-line">
-      <span>最近一次记录：</span>
-      <span class="dab-rec-dt" data-local-dt="2026-10-25T06:06:16.000Z">2026-10-25 06:06 UTC</span>
-      <span class="dab-rec-tz">(本地时间)</span>
-      <span class="badge regular">REGULAR</span>
+    <span class="dab-badge" data-direct-answer-badge><span class="dot"></span> 今日重置状态：LOW SIGNAL · ESTIMATE</span>
+    <div class="dab-h" data-direct-answer-title>今天尚未记录到公开重置。<span class='forecast-inline'>48小时信号：<span class='live-prob-val'>1</span>%</span></div>
+    <div class="dab-p" data-direct-answer-copy><span class="dab-live-note" data-dab-live-note>今日尚未监测到已确认的公开全局重置。模型百分比是未来 48 小时内下一次公开重置的启发式信号，不是官方或校准概率。</span> 最近一次已验证重置发生在 <strong data-ago-utc="2026-10-25T06:06:16.000Z">19 小时前</strong>；关联公告：<a class="dab-author-badge" data-reset-source-link href="https://x.com/thsottiaux/status/2114237083652882932" target="_blank" rel="noopener nofollow"><img class="dab-inline-avatar" src="/assets/avatars/tibo.jpg" alt="Tibo Sottiaux" width="18" height="18"><span>Tibo Sottiaux (@thsottiaux)</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;vertical-align:-1px"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg></a>。建议保持正常开发节奏，下方可测算个人 5 小时解锁倒计时。</div>
+    <div class="dab-tz-pills">
+      <div class="tz-pill"><span class="tz-dot green"></span>旧金山 HQ (Tibo): <strong data-sf-clock>--:-- (PT)</strong></div>
+      <div class="tz-pill"><span class="tz-dot yellow"></span>你的本地时间: <strong data-local-clock>--:--</strong></div>
     </div>
-    <div class="tz-indicator"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:12px;height:12px"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg> <span data-tz-display>按你的时区显示</span></div>
   </div>
   <div class="dab-right-wrap">
-    <div class="openthe-stamp-wrap yes">
+    <div class="openthe-stamp-wrap soon">
       <svg class="stamp-svg" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <path id="circleTextPathYes" d="M 110, 110 m -82, 0 a 82,82 0 1,1 164,0 a 82,82 0 1,1 -164,0" />
-          <filter id="glowGreenBig" x="-20%" y="-20%" width="140%" height="140%">
+          <path id="circleTextPathSoon" d="M 110, 110 m -82, 0 a 82,82 0 1,1 164,0 a 82,82 0 1,1 -164,0" />
+          <filter id="glowGoldBig" x="-20%" y="-20%" width="140%" height="140%">
             <feGaussianBlur stdDeviation="5" result="blur" />
             <feMerge>
               <feMergeNode in="blur" />
@@ -2475,23 +2472,21 @@ document.addEventListener('DOMContentLoaded', function(){
           </filter>
         </defs>
         
-        <!-- 环形自转轨道与文字 -->
         <g class="stamp-spin-orbit">
-          <circle cx="110" cy="110" r="98" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.35"/>
-          <circle cx="110" cy="110" r="82" stroke="#0ecb81" stroke-width="1.6" stroke-dasharray="4 3" stroke-opacity="0.75"/>
-          <circle cx="110" cy="110" r="68" stroke="#0ecb81" stroke-width="1.2" stroke-opacity="0.4"/>
-          <text fill="#0ecb81" font-size="9" font-family="'JetBrains Mono', ui-monospace, monospace" font-weight="700" letter-spacing="2.6" opacity="0.85">
-            <textPath href="#circleTextPathYes" startOffset="0%">
-              PUBLIC CODEX RESET NOTICE &bull; SOURCE VERIFIED &bull;
+          <circle cx="110" cy="110" r="98" stroke="#FCD535" stroke-width="1.2" stroke-opacity="0.35"/>
+          <circle cx="110" cy="110" r="82" stroke="#FCD535" stroke-width="1.6" stroke-dasharray="4 3" stroke-opacity="0.75"/>
+          <circle cx="110" cy="110" r="68" stroke="#FCD535" stroke-width="1.2" stroke-opacity="0.4"/>
+          <text fill="#FCD535" font-size="9" font-family="'JetBrains Mono', ui-monospace, monospace" font-weight="700" letter-spacing="2.6" opacity="0.85">
+            <textPath href="#circleTextPathSoon" startOffset="0%">
+              PREDICTION RADAR &bull; PROBABILITY PULSE &bull;
             </textPath>
           </text>
         </g>
 
-        <!-- 超大醒目的 Yes. 与下划虚线 -->
-        <g class="stamp-center" filter="url(#glowGreenBig)">
-          <text x="110" y="118" fill="#0ecb81" font-size="42" font-weight="900" text-anchor="middle" font-family="'Inter', system-ui, -apple-system, sans-serif" letter-spacing="-1">YES</text>
-          <line x1="68" y1="132" x2="152" y2="132" stroke="#0ecb81" stroke-width="2" stroke-dasharray="3 3" stroke-opacity="0.85"/>
-          <text x="110" y="148" fill="#0ecb81" font-size="9.5" font-weight="800" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" letter-spacing="2">RECORDED</text>
+        <g class="stamp-center" filter="url(#glowGoldBig)">
+          <text x="110" y="118" fill="#FCD535" font-size="44" font-weight="900" text-anchor="middle" font-family="'Inter', system-ui, -apple-system, sans-serif" letter-spacing="-1"><tspan id="stampProbNum">1</tspan>%</text>
+          <line x1="68" y1="132" x2="152" y2="132" stroke="#FCD535" stroke-width="2" stroke-dasharray="3 3" stroke-opacity="0.85"/>
+          <text x="110" y="148" fill="#FCD535" font-size="9.5" font-weight="800" text-anchor="middle" font-family="'JetBrains Mono', ui-monospace, monospace" letter-spacing="2">PROBABLE</text>
         </g>
       </svg>
     </div>
@@ -2619,7 +2614,7 @@ document.addEventListener('DOMContentLoaded', function(){
 </div>
 <div class="readout-item">
 <div class="ro-l">Days Since Reset</div>
-<div class="ro-v num" data-days-since-utc="2026-10-25T06:06:16.000Z">0.7d</div>
+<div class="ro-v num" data-days-since-utc="2026-10-25T06:06:16.000Z">0.8d</div>
 <div class="ro-s">Last: <span data-local-date-only="2026-10-25T06:06:16.000Z">2026-10-25</span></div>
 </div>
 <div class="readout-item">
@@ -2970,7 +2965,7 @@ Surprisingly the CLI has grown 2X in usage since devday.</div>
   </div>
   <div class="sr-right">
     <span class="sr-dot yellow"></span>
-    <span class="sr-status"><span data-cooldown-utc="2026-10-25T06:06:16.000Z">Cooldown active (0.7d)</span></span>
+    <span class="sr-status"><span data-cooldown-utc="2026-10-25T06:06:16.000Z">Cooldown active (0.8d)</span></span>
   </div>
 </div><div class="switch-row">
   <div class="sr-left">
@@ -3460,7 +3455,7 @@ Surprisingly the CLI has grown 2X in usage since devday.</div>
   window.CODEX_RADAR = {
     probability: 1,
     lastResetUtc: "2026-10-25T06:06:16.000Z",
-    daysSinceStr: "0.7d"
+    daysSinceStr: "0.8d"
   };
 
   var LAST_RESET_UTC = "2026-10-25T06:06:16.000Z";
