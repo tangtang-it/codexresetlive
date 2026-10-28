@@ -33,5 +33,12 @@
     "confidence": 1.0,
     "reason": "Verified quota reset event (Usage quota has been reset)",
     "source": "reset_radar_api"
+  },
+  "approved-tibo-2115330127886463244": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 1.0,
+    "reason": "Verified quota reset event (And it's done. See you tomorrow for some good news.)",
+    "source": "reset_radar_api"
   }
 }
