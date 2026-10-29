@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 129,
+  "total": 131,
   "records": [
     {
       "id": "1968163721034994139",
@@ -1038,6 +1038,22 @@
       "status": "confirmed",
       "text": "Day 24/ Text your dot just like anyone else. Makes it super easy to share/forward things, leave it voice notes or you can even go creative with \"Hey Siri, text Iggy to &lt;INSERT WILD REQUEST&gt;\" and sit back and relax.",
       "url": "https://x.com/thsottiaux/status/2115622002581188681"
+    },
+    {
+      "id": "2115850175868727621",
+      "at": "2026-10-29T16:56:07.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "Day 25/\n\nWe are doubling all usage limits for all Pro 100/200/500 tiers and Business Premium, effective today.\n\nWe heard your kind feedback and won’t be reducing usage limits for Pro 200, so your Work and Codex usage will stay the same. We’re also going to continue offering extended limits for dots for now, and usage of your dot will still continue to be separate from your default usage.\n\nAnd we'll of course also keep shipping better models and other efficiency improvements that increase your effective usage over time.",
+      "url": "https://x.com/thsottiaux/status/2115850175868727621"
+    },
+    {
+      "id": "2115851621137784832",
+      "at": "2026-10-29T17:01:51.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "Graduating from The Reset Company to The Token Company.",
+      "url": "https://x.com/thsottiaux/status/2115851621137784832"
     }
   ]
 }
