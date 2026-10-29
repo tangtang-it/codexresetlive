@@ -915,5 +915,12 @@
     "confidence": 0.85,
     "reason": "General engineering tweet or conversational reply.",
     "source": "heuristic_engine"
+  },
+  "2115622002581188681": {
+    "category": "product_release",
+    "is_reset": false,
+    "confidence": 0.92,
+    "reason": "Feature shipment or engineering release update.",
+    "source": "heuristic_engine"
   }
 }

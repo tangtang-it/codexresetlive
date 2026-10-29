@@ -1,11 +1,11 @@
 {
   "source": "https://willcodexquotareset.com/ + https://opentherank.com/",
-  "scraped_at_utc": "2026-10-28",
+  "scraped_at_utc": "2026-10-29",
   "author": {
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 128,
+  "total": 129,
   "records": [
     {
       "id": "1968163721034994139",
@@ -1030,6 +1030,14 @@
       "status": "confirmed",
       "text": "And it's done. See you tomorrow for some good news.",
       "url": "https://x.com/thsottiaux/status/2115330127886463244"
+    },
+    {
+      "id": "2115622002581188681",
+      "at": "2026-10-29T01:49:26.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "Day 24/ Text your dot just like anyone else. Makes it super easy to share/forward things, leave it voice notes or you can even go creative with \"Hey Siri, text Iggy to &lt;INSERT WILD REQUEST&gt;\" and sit back and relax.",
+      "url": "https://x.com/thsottiaux/status/2115622002581188681"
     }
   ]
 }
