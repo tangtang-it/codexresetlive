@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 131,
+  "total": 132,
   "records": [
     {
       "id": "1968163721034994139",
@@ -889,17 +889,17 @@
     },
     {
       "id": "2113492187770175603",
-      "at": "2026-10-23T04:46:19.000Z",
+      "at": "2026-10-23T04:46:19.007Z",
       "type": "regular",
-      "status": "confirmed",
+      "status": "announced",
       "text": "Day 18/ Decisions API is GA, OpenResponses joined the Linux Foundation, we shipped some performance improvements and Uber is going all-in on codex &amp; work. But yes… that’s a reset!",
       "url": "https://x.com/thsottiaux/status/2113492187770175603"
     },
     {
       "id": "2113492502355562875",
-      "at": "2026-10-23T04:47:34.000Z",
+      "at": "2026-10-23T04:47:34.010Z",
       "type": "regular",
-      "status": "confirmed",
+      "status": "announced",
       "text": "Landing tomorrow before 10am PST together with a small ship.",
       "url": "https://x.com/thsottiaux/status/2113492502355562875"
     },
@@ -1054,6 +1054,14 @@
       "status": "confirmed",
       "text": "Graduating from The Reset Company to The Token Company.",
       "url": "https://x.com/thsottiaux/status/2115851621137784832"
+    },
+    {
+      "id": "2116072117540417651",
+      "at": "2026-10-30T07:38:02.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "@ajambrosino No hype, just shipping",
+      "url": "https://x.com/thsottiaux/status/2116072117540417651"
     }
   ]
 }
