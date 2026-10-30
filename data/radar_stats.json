@@ -1,5 +1,5 @@
 {
-  "total": 132,
+  "total": 133,
   "reset_count": 47,
   "regular": 41,
   "banked": 5,
@@ -7,10 +7,10 @@
   "last_reset_text": "And it's done. See you tomorrow for some good news.",
   "last_reset_url": "https://x.com/thsottiaux/status/2115330127886463244",
   "first_reset_at": "2025-09-17T04:02:52.000Z",
-  "days_since_last_reset": 2.4,
+  "days_since_last_reset": 2.6,
   "avg_gap_days_all": 8.8,
   "avg_gap_days_recent": 1.5,
-  "probability_48h": 45,
+  "probability_48h": 51,
   "monthly_series": [
     {
       "month": "2025-09",
