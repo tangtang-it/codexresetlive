@@ -1,15 +1,15 @@
 {
-  "total": 134,
-  "reset_count": 47,
-  "regular": 41,
+  "total": 135,
+  "reset_count": 48,
+  "regular": 42,
   "banked": 5,
-  "last_reset_at": "2026-10-31T05:42:26.000Z",
-  "last_reset_text": "Day 26/ You can now easily switch between multiple accounts on mobile, and coming soon to desktop too. Next two days will be resets… banked… do with this what you may 👀.\n\nhttps://t.co/iQxsqbuk0f",
-  "last_reset_url": "https://x.com/thsottiaux/status/2116405414921384099",
+  "last_reset_at": "2026-10-31T20:23:00.000Z",
+  "last_reset_text": "A reset card has been issued.",
+  "last_reset_url": "https://x.com/thsottiaux/status/2113492502355562875",
   "first_reset_at": "2025-09-17T04:02:52.000Z",
-  "days_since_last_reset": 0.6,
-  "avg_gap_days_all": 8.9,
-  "avg_gap_days_recent": 1.7,
+  "days_since_last_reset": 0.1,
+  "avg_gap_days_all": 8.7,
+  "avg_gap_days_recent": 1.5,
   "probability_48h": 1,
   "monthly_series": [
     {
@@ -66,8 +66,8 @@
     },
     {
       "month": "2026-10",
-      "count": 17
+      "count": 18
     }
   ],
-  "monthly_max": 17
+  "monthly_max": 18
 }

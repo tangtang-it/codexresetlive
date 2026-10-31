@@ -47,5 +47,12 @@
     "confidence": 1.0,
     "reason": "Verified quota reset event (Day 26/ You can now easily switch between multiple accounts on mobile, and coming soon to desktop too. Next two days will be resets… banked… do with this what you may 👀.\n\nhttps://t.co/iQxsqbuk0f)",
     "source": "reset_radar_api"
+  },
+  "manual-6795015e-722a-49b5-86dd-e4a3d52dba9c": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 1.0,
+    "reason": "Verified quota reset event (A reset card has been issued.)",
+    "source": "reset_radar_api"
   }
 }
