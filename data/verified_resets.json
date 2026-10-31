@@ -40,5 +40,12 @@
     "confidence": 1.0,
     "reason": "Verified quota reset event (And it's done. See you tomorrow for some good news.)",
     "source": "reset_radar_api"
+  },
+  "tibo-2116405414921384099": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 1.0,
+    "reason": "Verified quota reset event (Day 26/ You can now easily switch between multiple accounts on mobile, and coming soon to desktop too. Next two days will be resets… banked… do with this what you may 👀.\n\nhttps://t.co/iQxsqbuk0f)",
+    "source": "reset_radar_api"
   }
 }

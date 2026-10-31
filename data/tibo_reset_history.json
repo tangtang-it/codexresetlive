@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 133,
+  "total": 134,
   "records": [
     {
       "id": "1968163721034994139",
@@ -1024,14 +1024,6 @@
       "url": "https://x.com/thsottiaux/status/2115330127886463244"
     },
     {
-      "id": "approved-tibo-2115330127886463244",
-      "at": "2026-10-28T06:29:38.000Z",
-      "type": "regular",
-      "status": "confirmed",
-      "text": "And it's done. See you tomorrow for some good news.",
-      "url": "https://x.com/thsottiaux/status/2115330127886463244"
-    },
-    {
       "id": "2115622002581188681",
       "at": "2026-10-29T01:49:26.000Z",
       "type": "release",
@@ -1070,6 +1062,22 @@
       "status": "confirmed",
       "text": "@claudeai Better announce 28 days of reset",
       "url": "https://x.com/thsottiaux/status/2116256600436641887"
+    },
+    {
+      "id": "2116405414921384099",
+      "at": "2026-10-31T05:42:26.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "Day 26/ You can now easily switch between multiple accounts on mobile, and coming soon to desktop too. Next two days will be resets… banked… do with this what you may 👀.\n\nhttps://t.co/iQxsqbuk0f",
+      "url": "https://x.com/thsottiaux/status/2116405414921384099"
+    },
+    {
+      "id": "tibo-2116405414921384099",
+      "at": "2026-10-31T05:42:26.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "Day 26/ You can now easily switch between multiple accounts on mobile, and coming soon to desktop too. Next two days will be resets… banked… do with this what you may 👀.\n\nhttps://t.co/iQxsqbuk0f",
+      "url": "https://x.com/thsottiaux/status/2116405414921384099"
     }
   ]
 }

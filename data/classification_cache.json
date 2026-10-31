@@ -950,5 +950,12 @@
     "confidence": 0.7,
     "reason": "Mentions reset without clear transactional confirmation; treated as chatter.",
     "source": "heuristic_engine"
+  },
+  "2116405414921384099": {
+    "category": "pending_reset",
+    "is_reset": false,
+    "confidence": 0.95,
+    "reason": "Reset announced as pending/scheduled: will be reset",
+    "source": "heuristic_engine"
   }
 }
