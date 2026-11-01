@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 137,
+  "total": 139,
   "records": [
     {
       "id": "1968163721034994139",
@@ -1102,6 +1102,22 @@
       "status": "confirmed",
       "text": "Banked 1/2",
       "url": "https://x.com/thsottiaux/status/2116692529970311254"
+    },
+    {
+      "id": "2116942192497533418",
+      "at": "2026-11-01T17:15:24.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "@TokenGremlin I demand a banked reset",
+      "url": "https://x.com/thsottiaux/status/2116942192497533418"
+    },
+    {
+      "id": "tibo-2116942192497533418",
+      "at": "2026-11-01T17:15:24.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "@TokenGremlin I demand a banked reset",
+      "url": "https://x.com/thsottiaux/status/2116942192497533418"
     }
   ]
 }
