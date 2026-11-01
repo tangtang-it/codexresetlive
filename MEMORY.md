@@ -306,3 +306,10 @@ u.
   - 默认选中 10-24 01:41 (Asia/Shanghai) 最新已确认重置，右侧检查器完整呈现 "Usage has been reset" 原帖链接。
   - 输出中英文真实运行截图：`qa_ledger_real_desktop.png` (137KB) 与 `qa_ledger_real_zh.png` (157KB)。
 - **Monetag Safe Ads Scheduler (2026-10-26)**: Kept the verified In-Page Push Zone `12002461`; updated `_tpl_head_v2.html` and regenerated all 54 static HTML pages so the tag loads on first scroll/touch/click or after a 3.5-second fallback. The separate Direct Link zone remains unused. `scripts/verify_site.py` passes.
+
+## 15. Phase: Data Credibility Pivot (2026-11-01)
+- **Product decision**: Superseded the SEO/multilingual-expansion plan. No new locale, page-family, page-count, or cosmetic forecast work may proceed before factual event integrity is repaired.
+- **Production evidence**: Browser QA on `https://codexresetlive.com/` showed the ledger is not empty (137 seed/store records), but revealed the material P0: the same “Banked 1/2” source was rendered as both update and public reset, and a future-tense reset notice was rendered as a completed reset. Therefore counts cannot yet be described as verified reset facts.
+- **Required contract**: Every claim must carry stable source identity, URL, author, timestamp, claim type, scope, evidence excerpt, verification state, and provenance. Hero/calendar counts consume only `effective_confirmed`; banked credit, personal rolling recovery, notices, unverified claims, and unknown records remain distinct.
+- **P1 constraint**: The displayed 1% stays a heuristic signal unless it gains a versioned method, historical backtest/calibration, sample definition, and scorecard. A future history API/JSON-LD must expose only source-linked facts and correction/freshness data.
+- **Plan**: `ACTION-PLAN.md` is the authoritative acceptance-gated remediation baseline.
