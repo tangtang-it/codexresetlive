@@ -957,5 +957,12 @@
     "confidence": 0.95,
     "reason": "Reset announced as pending/scheduled: will be reset",
     "source": "heuristic_engine"
+  },
+  "2116692529970311254": {
+    "category": "chatter",
+    "is_reset": false,
+    "confidence": 0.85,
+    "reason": "General engineering tweet or conversational reply.",
+    "source": "heuristic_engine"
   }
 }
