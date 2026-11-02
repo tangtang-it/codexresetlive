@@ -260,7 +260,7 @@ if CACHE_FILE.exists():
             raw_records = existing_data.get("records", [])
             for r in raw_records:
                 rid = str(r.get("id", ""))
-                if is_valid_tweet_id(rid) or rid.startswith("manual-") or rid.startswith("tibo-"):
+                if is_valid_tweet_id(rid):
                     existing_records.append(r)
                 else:
                     print(f"[GUARD] Purged suspicious mock ID: {rid}")
@@ -283,6 +283,8 @@ for tid, item in incoming_posts.items():
 valid_records = []
 reset_keywords = ["reset", "quota", "limit", "refill", "banked", "cleared", "propagated", "bonus", "capacity", "day ", "chatgpt", "steering", "release", "announcing", "model", "cloud", "sol", "landing", "tomorrow", "ship"]
 for r in merged.values():
+    if not is_valid_tweet_id(str(r.get("id", ""))):
+        continue
     t = r.get("text", "").lower()
     if t:
         if any(k in t for k in reset_keywords):

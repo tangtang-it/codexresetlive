@@ -32,12 +32,17 @@ def classify_heuristics(text: str) -> dict:
     t = text.lower().strip()
     # Publication-safe ordering matters. A scheduled reset or a banked credit is
     # not evidence that a public/global reset has completed.
-    if "banked" in t:
+    banked_completed_patterns = [
+        r"banked\s+\d+\s*/\s*\d+", r"loading a banked reset",
+        r"banked reset (?:has been )?(?:added|credited|issued|loaded)",
+        r"added a banked reset", r"banked credit (?:has been )?(?:added|credited|issued)"
+    ]
+    if any(re.search(pattern, t) for pattern in banked_completed_patterns):
         return {
             "category": "banked_reset",
             "is_reset": False,
             "confidence": 0.95,
-            "reason": "Banked credit is kept separate from an immediate public reset."
+            "reason": "Explicit banked-credit issuance kept separate from an immediate public reset."
         }
 
     pending_patterns = [

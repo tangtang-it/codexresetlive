@@ -320,3 +320,7 @@ u.
 - Home ledger records now include claim type, verification state, source author, provenance, evidence excerpt, and classifier reason. Calendar consumes only completed public-reset records; the edge endpoint exposes upstream posts as `source_observed` and does not synthesize reset/probability facts.
 - Removed untraceable subscriber/user and platform-health claims; added a visible non-affiliation and account-status disclaimer; rewrote methodology away from fabricated weights/cadence. English and Simplified Chinese remain indexable; other legacy locales emit `noindex,follow` until manually localized.
 - Verified locally with `uv run scripts/build_studio.py` and `uv run scripts/verify_site.py`. `ads.txt` remains intentionally absent until the owner supplies the actual AdSense publisher ID; a Google-certified CMP still requires a chosen CMP/account configuration.
+
+## 17. Reset-benefit alignment repair (2026-11-02)
+- User-facing availability now includes both completed public resets and source-linked banked credits, while retaining separate labels and counts. A banked credit never becomes an automatic/global reset claim.
+- Build inputs deduplicate by canonical source URL with a preference for native X IDs. The scraper excludes manual/mirrored IDs from future cache writes to prevent repeat inflation.

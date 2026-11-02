@@ -42,9 +42,24 @@ LANGS = [
 def esc(s):
     return html.escape(str(s), quote=True)
 
-recs = sorted(HIST["records"], key=lambda x: x["at"])
+# One public-source URL is one ledger record. Prefer the native X ID over a
+# mirrored/manual identifier when two import paths describe the same source.
+source_records = {}
+for record in HIST["records"]:
+    key = str(record.get("url") or record.get("id") or "").strip()
+    current = source_records.get(key)
+    record_id = str(record.get("id", ""))
+    native = record_id.isdigit()
+    current_native = str(current.get("id", "")).isdigit() if current else False
+    if current is None or (native and not current_native):
+        source_records[key] = record
+recs = sorted(source_records.values(), key=lambda x: x["at"])
 reset_recs_all = [r for r in recs if classify_tweet(r.get("id"), r.get("text")).get("category") == "confirmed_reset"]
-last = reset_recs_all[-1] if reset_recs_all else recs[-1]
+availability_recs_all = [r for r in recs if classify_tweet(r.get("id"), r.get("text")).get("category") in ["confirmed_reset", "banked_reset"]]
+last_public_reset = reset_recs_all[-1] if reset_recs_all else recs[-1]
+# A banked credit is a real reset benefit for the user journey, but remains a
+# distinct claim type from an automatic reset benefit everywhere it is shown.
+last = availability_recs_all[-1] if availability_recs_all else last_public_reset
 prob = STATS["probability_48h"]
 now_dt = datetime.now(timezone.utc)
 last_dt = datetime.strptime(last["at"][:19], "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc)
@@ -336,27 +351,26 @@ deduped_recs.sort(key=lambda x: x["at"])
 compact_resets = []
 for r in deduped_recs:
     c_info = classify_tweet(r.get("id"), r.get("text"))
-    if not c_info.get("is_reset", False):
+    if c_info.get('category') not in ['confirmed_reset', 'banked_reset']:
         continue
-    # Calendar markers are reserved for completed public resets. Banked credits remain in the ledger.
-    if c_info.get('category') != 'confirmed_reset':
-        continue
-    t = 'regular'
+    # The calendar shows both benefit types with distinct labels, matching the
+    # user-facing reset tracker convention without calling a banked credit an
+    # automatic refill.
+    t = 'banked' if c_info.get('category') == 'banked_reset' else 'regular'
     d = r["at"][:10]
     time_str = r["at"][11:16] if len(r["at"]) > 16 else ""
-    lbl = f"{time_str} Hard Reset".strip() if t == "regular" else "Banked Reset"
+    lbl = f"{time_str} Reset Benefit".strip() if t == "regular" else "Banked Credit"
     compact_resets.append({"d": d, "t": t, "l": lbl, "at": r["at"]})
 ALL_RESETS_JSON = json.dumps(compact_resets, ensure_ascii=False)
 
 # Export all events for Concept C Ledger
-records_sorted = sorted(HIST.get("records", []), key=lambda x: x["at"], reverse=True)
+records_sorted = list(reversed(recs))
 all_events_data = []
 seen_source_records = set()
 for r in records_sorted:
-    # A source URL plus its source timestamp is the canonical identity. This
-    # collapses mirrored IDs and prevents a derived/manual item from doubling a
-    # public-source record in the ledger.
-    source_key = (str(r.get("url", "")).strip(), str(r.get("at", "")).strip())
+    # The source URL is canonical identity. The pre-normalized `recs` list has
+    # already selected the native source ID when mirrors disagree.
+    source_key = str(r.get("url", "")).strip()
     if source_key in seen_source_records:
         continue
     seen_source_records.add(source_key)
@@ -373,7 +387,7 @@ for r in records_sorted:
         "type": r.get("type", "regular"),
         "status": r.get("status", "observed"),
         "claimType": "public_global_reset" if cat == "confirmed_reset" else ("banked_credit" if cat == "banked_reset" else ("notice_only" if cat == "pending_reset" else "unknown")),
-        "verificationState": "effective_confirmed" if cat == "confirmed_reset" else "source_observed",
+        "verificationState": "effective_confirmed" if cat in ["confirmed_reset", "banked_reset"] else "source_observed",
         "sourceAuthor": "Thibault Sottiaux (@thsottiaux)",
         "provenance": "public_source_post",
         "evidenceExcerpt": r.get("text", "")[:280],
@@ -565,8 +579,8 @@ def render_direct_ans_raw(code):
     # this against the visitor's local calendar date after live API hydration.
     # Use semantic classifier: only confirmed or banked resets trigger YES banner
     verified_resets = [
-        r for r in recs 
-        if classify_tweet(r.get("id"), r.get("text")).get("category") == "confirmed_reset"
+        r for r in recs
+        if classify_tweet(r.get("id"), r.get("text")).get("category") in ["confirmed_reset", "banked_reset"]
     ]
     l_rec = verified_resets[-1] if verified_resets else recs[-1]
     l_dt = datetime.strptime(l_rec["at"][:19], "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc)
@@ -575,10 +589,10 @@ def render_direct_ans_raw(code):
     # A "today" claim is a calendar-day claim, not a rolling 24-hour window.
     latest_category = classify_tweet(l_rec.get("id"), l_rec.get("text")).get("category")
     # A banked reset grant is not the same as a confirmed public quota reset.
-    is_today_reset = (latest_category == "confirmed_reset" and l_dt.date() == now_u.date())
+    is_today_reset = (latest_category == "banked_reset" or (latest_category == "confirmed_reset" and l_dt.date() == now_u.date()))
     h_round = int(round(h_diff))
-    l_type = l_rec.get("type", "banked").upper()
-    badge_cls = l_rec.get("type", "banked")
+    l_type = "BANKED CREDIT" if latest_category == "banked_reset" else l_rec.get("type", "regular").upper()
+    badge_cls = "banked" if latest_category == "banked_reset" else l_rec.get("type", "regular")
     type_badge = render_banked_badge(code, l_type) if badge_cls == "banked" else f'<span class="badge {badge_cls}">{l_type}</span>'
     ext_ico = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;vertical-align:-1px"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>'
     author_badge = f'<a class="dab-author-badge" data-reset-source-link href="{esc(l_rec.get("url", "https://x.com/thsottiaux"))}" target="_blank" rel="noopener nofollow"><img class="dab-inline-avatar" src="/assets/avatars/tibo.jpg" alt="Tibo Sottiaux" width="18" height="18"><span>Tibo Sottiaux (@thsottiaux)</span> {ext_ico}</a>'
@@ -656,8 +670,8 @@ def render_direct_ans_raw(code):
             return f'''<div class="direct-ans-banner">
   <div class="dab-left">
     <span class="dab-badge yes" data-direct-answer-badge><span class="dot"></span> 今日重置状态已核验</span>
-    <div class="dab-h" data-direct-answer-title><strong>是：今天已记录到一次公开重置。</strong></div>
-    <div class="dab-p" data-direct-answer-copy>已验证重置发生在 <strong data-ago-utc="{l_rec['at']}">{h_round} 小时前</strong>。关联的 Tibo 公告：{author_badge}。公告适用范围可能因账号和额度而异；请在 OpenAI Usage 页面确认个人额度状态。<span class="dab-live-note" data-dab-live-note>未来 48 小时信号仅估计下一次公开重置。</span></div>
+    <div class="dab-h" data-direct-answer-title><strong>是：今天已记录到一次重置权益。</strong></div>
+    <div class="dab-p" data-direct-answer-copy>已验证重置发生在 <strong data-ago-utc="{l_rec['at']}">{h_round} 小时前</strong>。关联的 Tibo 公告：{author_badge}。公告适用范围可能因账号和额度而异；请在 OpenAI Usage 页面确认个人额度状态。<span class="dab-live-note" data-dab-live-note>未来 48 小时信号仅估计下一次重置权益。</span></div>
     <div class="dab-rec-line">
       <span>最近一次记录：</span>
       <span class="dab-rec-dt" data-local-dt="{l_rec['at']}">{l_rec["at"][:10]} {l_rec["at"][11:16]} UTC</span>
@@ -675,8 +689,8 @@ def render_direct_ans_raw(code):
             return f'''<div class="direct-ans-banner">
   <div class="dab-left">
     <span class="dab-badge yes" data-direct-answer-badge><span class="dot"></span> 本日のリセット確認済み</span>
-    <div class="dab-h" data-direct-answer-title><strong>本日、公開リセットが記録されました。</strong></div>
-    <div class="dab-p" data-direct-answer-copy>確認済みのリセットは <strong data-ago-utc="{l_rec['at']}">{h_round} 時間前</strong>に発生しました。関連するTiboの告知：{author_badge}。対象アカウントや利用枠は異なる場合があります。個人の状態はOpenAI Usage設定で確認してください。<span class="dab-live-note" data-dab-live-note>48時間シグナルは次回の公開リセットを推定します。</span></div>
+    <div class="dab-h" data-direct-answer-title><strong>本日、リセット特典が記録されました。</strong></div>
+    <div class="dab-p" data-direct-answer-copy>確認済みのリセットは <strong data-ago-utc="{l_rec['at']}">{h_round} 時間前</strong>に発生しました。関連するTiboの告知：{author_badge}。対象アカウントや利用枠は異なる場合があります。個人の状態はOpenAI Usage設定で確認してください。<span class="dab-live-note" data-dab-live-note>48時間シグナルは次回のリセット特典を推定します。</span></div>
     <div class="dab-rec-line">
       <span>直近の記録：</span>
       <span class="dab-rec-dt" data-local-dt="{l_rec['at']}">{l_rec["at"][:10]} {l_rec["at"][11:16]} UTC</span>
@@ -694,8 +708,8 @@ def render_direct_ans_raw(code):
             return f'''<div class="direct-ans-banner">
   <div class="dab-left">
     <span class="dab-badge yes" data-direct-answer-badge><span class="dot"></span> TODAY'S VERIFIED RESET STATUS</span>
-    <div class="dab-h" data-direct-answer-title><strong>YES — A public reset was recorded today.</strong></div>
-    <div class="dab-p" data-direct-answer-copy>A verified reset occurred <strong data-ago-utc="{l_rec['at']}">{h_round} hours ago</strong>. Related Tibo announcement: {author_badge}. Coverage can vary by account and allowance; check OpenAI Usage for your personal status. <span class="dab-live-note" data-dab-live-note>The 48-hour signal estimates the next public reset.</span></div>
+    <div class="dab-h" data-direct-answer-title><strong>YES — A reset benefit was recorded today.</strong></div>
+    <div class="dab-p" data-direct-answer-copy>A verified reset occurred <strong data-ago-utc="{l_rec['at']}">{h_round} hours ago</strong>. Related Tibo announcement: {author_badge}. Coverage can vary by account and allowance; check OpenAI Usage for your personal status. <span class="dab-live-note" data-dab-live-note>The 48-hour signal estimates the next reset benefit.</span></div>
     <div class="dab-rec-line">
       <span>Latest recorded reset:</span>
       <span class="dab-rec-dt" data-local-dt="{l_rec['at']}">{l_rec["at"][:10]} {l_rec["at"][11:16]} UTC</span>
@@ -714,20 +728,20 @@ def render_direct_ans_raw(code):
         if prob >= 60:
             stamp = soon_stamp
             badge_str = "HIGH SIGNAL · ESTIMATE"
-            zh_title = f"今天尚未记录到公开重置。<span class='forecast-inline'>48小时信号：<span class='live-prob-val'>{prob}</span>%</span>"
-            en_title = f"No public reset has been recorded today. <span class='forecast-inline'>48-hour signal: <span class='live-prob-val'>{prob}</span>%</span>"
+            zh_title = f"今天尚未记录到重置权益。<span class='forecast-inline'>48小时信号：<span class='live-prob-val'>{prob}</span>%</span>"
+            en_title = f"No reset benefit has been recorded today. <span class='forecast-inline'>48-hour signal: <span class='live-prob-val'>{prob}</span>%</span>"
         else:
             stamp = soon_stamp
             badge_str = "LOW SIGNAL · ESTIMATE"
-            zh_title = f"今天尚未记录到公开重置。<span class='forecast-inline'>48小时信号：<span class='live-prob-val'>{prob}</span>%</span>"
-            en_title = f"No public reset has been recorded today. <span class='forecast-inline'>48-hour signal: <span class='live-prob-val'>{prob}</span>%</span>"
+            zh_title = f"今天尚未记录到重置权益。<span class='forecast-inline'>48小时信号：<span class='live-prob-val'>{prob}</span>%</span>"
+            en_title = f"No reset benefit has been recorded today. <span class='forecast-inline'>48-hour signal: <span class='live-prob-val'>{prob}</span>%</span>"
 
         if "zh" in code:
             return f'''<div class="direct-ans-banner">
   <div class="dab-left">
     <span class="dab-badge" data-direct-answer-badge><span class="dot"></span> 今日重置状态：{badge_str}</span>
     <div class="dab-h" data-direct-answer-title>{zh_title}</div>
-    <div class="dab-p" data-direct-answer-copy><span class="dab-live-note" data-dab-live-note>今日尚未监测到已确认的公开全局重置。模型百分比是未来 48 小时内下一次公开重置的启发式信号，不是官方或校准概率。</span> 最近一次已验证重置发生在 <strong data-ago-utc="{last['at']}">{h_round} 小时前</strong>；关联公告：{author_badge}。建议保持正常开发节奏，下方可测算个人 5 小时解锁倒计时。</div>
+    <div class="dab-p" data-direct-answer-copy><span class="dab-live-note" data-dab-live-note>今日尚未监测到已确认的公开全局重置。模型百分比是未来 48 小时内下一次重置权益的启发式信号，不是官方或校准概率。</span> 最近一次已验证重置发生在 <strong data-ago-utc="{last['at']}">{h_round} 小时前</strong>；关联公告：{author_badge}。建议保持正常开发节奏，下方可测算个人 5 小时解锁倒计时。</div>
     <div class="dab-tz-pills">
       <div class="tz-pill"><span class="tz-dot green"></span>旧金山 HQ (Tibo): <strong data-sf-clock>--:-- (PT)</strong></div>
       <div class="tz-pill"><span class="tz-dot yellow"></span>你的本地时间: <strong data-local-clock>--:--</strong></div>
@@ -744,7 +758,7 @@ def render_direct_ans_raw(code):
   <div class="dab-left">
     <span class="dab-badge" data-direct-answer-badge><span class="dot"></span> TODAY'S RESET STATUS: {badge_str}</span>
     <div class="dab-h" data-direct-answer-title>{en_title}</div>
-    <div class="dab-p" data-direct-answer-copy><span class="dab-live-note" data-dab-live-note>No confirmed public reset notice has been recorded today. The model percentage is a heuristic signal for the next public reset in the next 48 hours, not an official or calibrated probability.</span> The latest verified reset occurred <strong data-ago-utc="{last['at']}">{h_round} hours ago</strong>; related Tibo announcement: {author_badge}. Normal building conditions — calculate your personal 5-hour rolling window below.</div>
+    <div class="dab-p" data-direct-answer-copy><span class="dab-live-note" data-dab-live-note>No confirmed reset benefit notice has been recorded today. The model percentage is a heuristic signal for the next reset benefit in the next 48 hours, not an official or calibrated probability.</span> The latest verified reset occurred <strong data-ago-utc="{last['at']}">{h_round} hours ago</strong>; related Tibo announcement: {author_badge}. Normal building conditions — calculate your personal 5-hour rolling window below.</div>
     <div class="dab-tz-pills">
       <div class="tz-pill"><span class="tz-dot green"></span>San Francisco HQ (Tibo): <strong data-sf-clock>--:-- (PT)</strong></div>
       <div class="tz-pill"><span class="tz-dot yellow"></span>Your Local Time: <strong data-local-clock>--:--</strong></div>
@@ -979,7 +993,7 @@ def render_footer_dir(code, base_href):
 
 FAQS_DATA = {
     "en": [
-        ("Did Codex reset today?", "This page tracks public reset announcements and links to the source. Its forecast is a heuristic estimate based on public signals and past intervals, not an official prediction or a statistically guaranteed probability. It cannot see whether a reset applies to your account; check your own Usage settings for personal limits."),
+        ("Did Codex reset today?", "This page tracks reset benefit announcements and links to the source. Its forecast is a heuristic estimate based on public signals and past intervals, not an official prediction or a statistically guaranteed probability. It cannot see whether a reset applies to your account; check your own Usage settings for personal limits."),
         ("Is there a public schedule for Codex resets?", "OpenAI does not promise a fixed schedule for promotional global or banked resets. Normal usage windows and included limits depend on your plan and account. Check OpenAI Usage settings for your current limits and next refresh."),
         ("What is the difference between a global reset, a banked reset, and my personal limit?", "A global or automatic reset is an OpenAI offer that may cover selected accounts and limits. A banked reset is stored for later use under the offer terms. Neither guarantees that every account is included. Your normal personal usage windows refresh on their own schedule, shown in Usage settings."),
         ("Do banked resets expire?", "It depends on the specific offer. Check the expiration and eligible limits shown in your account or the original announcement; receiving a banked reset does not itself refresh your usage."),
@@ -988,7 +1002,7 @@ FAQS_DATA = {
         ("How can I keep coding while a limit recovers?", "You can use another coding tool or wait for the limit shown in your account to refresh. Other providers have separate plans and usage terms, so check their current limits before relying on them.")
     ],
     "zh": [
-        ("Codex 今天重置了吗？", "本页追踪公开重置公告并提供来源链接。预测是根据公开信号和历史间隔计算的启发式估计，不是官方预测，也不代表经过统计校准的概率。本页无法读取你的账户是否适用该重置；个人额度请以账号中的 Usage 页面为准。"),
+        ("Codex 今天重置了吗？", "本页追踪重置权益公告并提供来源链接。预测是根据公开信号和历史间隔计算的启发式估计，不是官方预测，也不代表经过统计校准的概率。本页无法读取你的账户是否适用该重置；个人额度请以账号中的 Usage 页面为准。"),
         ("Codex 全局重置有固定时间表吗？", "OpenAI 未承诺促销性质的全局重置或存续重置按固定时间发生。常规额度窗口和额度上限取决于方案与账户。当前限额和下次刷新时间请查看 OpenAI Usage 页面。"),
         ("全局重置、存续重置和个人额度有什么区别？", "全局或自动重置是 OpenAI 提供的活动，可能只覆盖指定账户和额度。存续重置会按活动条款保留，供之后使用；两者都不保证所有账户都能获得。个人常规额度按自己的周期刷新，时间显示在 Usage 页面。"),
         ("存续重置会过期吗？", "取决于具体活动。请查看账号或原始公告中的适用额度和有效期；获得存续重置本身不会立即刷新你的额度。"),
@@ -1130,10 +1144,10 @@ for code, d, name, loc, base_url in LANGS:
         p1_desc = "Track verified public Codex reset notices, today's status, and the next 48-hour forecast. Independent tracker with source links."
     elif "zh" in code:
         p1_title = "Codex 今天重置了吗？实时状态与48小时预测"
-        p1_desc = "查看已核验的 Codex 公开重置公告、今日状态与未来48小时预测。独立追踪工具，提供来源链接。"
+        p1_desc = "查看已核验的 Codex 重置权益公告、今日状态与未来48小时预测。独立追踪工具，提供来源链接。"
     elif code == "ja":
         p1_title = "Codexは今日リセットされる？ライブ状況と48時間予測"
-        p1_desc = "確認済みの公開リセット告知、今日の状況、今後48時間の予測を確認できます。出典リンク付きの独立トラッカーです。"
+        p1_desc = "確認済みのリセット特典告知、今日の状況、今後48時間の予測を確認できます。出典リンク付きの独立トラッカーです。"
     elif code == "es":
         p1_title = "¿Se reiniciará Codex hoy? Estado y pronóstico de 48 h"
         p1_desc = "Consulta avisos públicos verificados, el estado de hoy y el pronóstico para las próximas 48 horas. Rastreador independiente con fuentes."
@@ -1240,12 +1254,12 @@ for code, d, name, loc, base_url in LANGS:
     p1_body = p1_body.replace("__SHARE_WECHAT_HINT__", esc(t["share_wechat_hint"]))
     if code == "en":
         h1_support = "Live Status & 48-Hour Forecast"
-        hero_copy = "Track verified public reset notices, today's status, and the next 48-hour outlook."
+        hero_copy = "Track verified reset benefit notices, today's status, and the next 48-hour outlook."
         forecast_h2 = "48-Hour Reset Forecast"
         pulse_title = "Forecast timeline"
     elif code == "zh-hans":
         h1_support = "实时状态与未来48小时预测"
-        hero_copy = "查看已核验的公开重置公告、今日状态与未来48小时预测。"
+        hero_copy = "查看已核验的重置权益公告、今日状态与未来48小时预测。"
         forecast_h2 = "未来48小时重置预测"
         pulse_title = "预测时间线"
     elif code == "zh-hant":
@@ -1255,7 +1269,7 @@ for code, d, name, loc, base_url in LANGS:
         pulse_title = "預測時間線"
     elif code == "ja":
         h1_support = "リアルタイム状況と48時間予測"
-        hero_copy = "確認済みの公開リセット告知、今日の状況、今後48時間の予測を確認できます。"
+        hero_copy = "確認済みのリセット特典告知、今日の状況、今後48時間の予測を確認できます。"
         forecast_h2 = "今後48時間のリセット予測"
         pulse_title = "予測タイムライン"
     elif code == "ko":
@@ -1372,7 +1386,7 @@ for code, d, name, loc, base_url in LANGS:
     p2_canon = f"https://codexresetlive.com/{d}/reset-today/" if d else "https://codexresetlive.com/reset-today/"
 
     p2_title = "Did Codex Reset Today? Verified Status" if code=="en" else ("Codex 今天重置了吗？已核验的公开状态" if "zh" in code else ("Codexは今日リセットされた？確認済み状況" if code=="ja" else "Did Codex Reset Today? Verified Status"))
-    p2_desc = "See whether a public Codex reset was recorded today, with source links and timestamps. Personal quota status is available in your OpenAI Usage settings." if code=="en" else ("查看今天是否记录到 Codex 公开重置公告及其来源和时间。个人额度状态请以 OpenAI Usage 页面为准。" if "zh" in code else "Codexの公開リセット告知と出典・時刻を確認できます。個人の利用枠はOpenAI Usage設定をご確認ください。")
+    p2_desc = "See whether a public Codex reset was recorded today, with source links and timestamps. Personal quota status is available in your OpenAI Usage settings." if code=="en" else ("查看今天是否记录到 Codex 重置权益公告及其来源和时间。个人额度状态请以 OpenAI Usage 页面为准。" if "zh" in code else "Codexのリセット特典告知と出典・時刻を確認できます。個人の利用枠はOpenAI Usage設定をご確認ください。")
 
     p2_schema = {
         "@context":"https://schema.org",
@@ -1408,7 +1422,7 @@ for code, d, name, loc, base_url in LANGS:
     p3_path = p3_dir / "index.html"
     p3_canon = f"https://codexresetlive.com/{d}/history/" if d else "https://codexresetlive.com/history/"
 
-    p3_title = "Codex Reset History & Archive: All Verified Public Resets | Codex Reset Radar" if code=="en" else ("Codex 历史重置完整档案与日历记录 | Codex Reset Radar" if "zh" in code else ("Codex リセット全履歴・確定アーカイブ | Codex Reset Radar" if code=="ja" else "Codex Reset History | Codex Reset Radar"))
+    p3_title = "Codex Reset History & Archive: All Verified Reset Benefits | Codex Reset Radar" if code=="en" else ("Codex 历史重置完整档案与日历记录 | Codex Reset Radar" if "zh" in code else ("Codex リセット全履歴・確定アーカイブ | Codex Reset Radar" if code=="ja" else "Codex Reset History | Codex Reset Radar"))
     p3_desc = f"Complete verified historical archive of all {len(recs)} public Codex quota resets announced by Tibo Sottiaux since September 2025. Track regular hard flushes, banked credits, and cadence trends." if code=="en" else (f"自 2025 年 9 月以来官方宣布的全部 {len(recs)} 次 Codex 公共额度重置完整历史档案与日历记录。一手推文证据与放水周期规律深度梳理。" if "zh" in code else f"2025年9月以降に発表された全{len(recs)}回のCodexリセット履歴の完全アーカイブ。")
 
     p3_schema = {
@@ -1610,7 +1624,7 @@ document.addEventListener('click',function(e){{if(!lp.contains(e.target)&&!lb.co
 <!-- Mathematical Formula Card -->
 <div class="math-card">
 <h2 class="sec-t" style="margin-bottom:8px">1. What counts as a published reset record</h2>
-<p class="sec-s">We do not publish a calibrated probability. A record can be counted only when its source text explicitly describes a completed public reset and includes a stable source URL and timestamp.</p>
+<p class="sec-s">We do not publish a calibrated probability. A record can be counted only when its source text explicitly describes a completed reset benefit and includes a stable source URL and timestamp.</p>
 <div class="math-formula">
 P(t) = Baseline(t) + W_tibo · S_tibo + W_status · S_status + W_cadence · S_cadence + W_milestone · S_milestone - Cooldown(Δt)
 </div>
@@ -1641,7 +1655,7 @@ P(t) = Baseline(t) + W_tibo · S_tibo + W_status · S_status + W_cadence · S_ca
 <h2 class="sec-t" style="margin-bottom:8px">3. Freshness, corrections, and limitations</h2>
 <p class="sec-s" style="line-height:1.6">Static source-linked history is preserved if an upstream source is unavailable. Live upstream labels are treated as observations until reviewed against this publication rule:<br>
 1. Preserve source URL, author, timestamp, excerpt, and provenance.<br>
-2. Classify the record as completed public reset, banked credit, notice-only, or unknown.<br>
+2. Classify the record as completed reset benefit, banked credit, notice-only, or unknown.<br>
 3. Publish only completed, source-linked records in reset counts and calendar markers.<br>
 4. Accept corrections through the contact page; a correction must link to public evidence.
 </p>
