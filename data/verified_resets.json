@@ -68,5 +68,12 @@
     "confidence": 1.0,
     "reason": "Verified quota reset event (@TokenGremlin I demand a banked reset)",
     "source": "reset_radar_api"
+  },
+  "tibo-2117035794678546764": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 1.0,
+    "reason": "Verified quota reset event (Day 28/ Banked 2/2)",
+    "source": "reset_radar_api"
   }
 }

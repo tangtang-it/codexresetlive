@@ -1,11 +1,11 @@
 {
   "source": "https://willcodexquotareset.com/ + https://opentherank.com/",
-  "scraped_at_utc": "2026-11-01",
+  "scraped_at_utc": "2026-11-02",
   "author": {
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 139,
+  "total": 141,
   "records": [
     {
       "id": "1968163721034994139",
@@ -1118,6 +1118,22 @@
       "status": "confirmed",
       "text": "@TokenGremlin I demand a banked reset",
       "url": "https://x.com/thsottiaux/status/2116942192497533418"
+    },
+    {
+      "id": "2117035794678546764",
+      "at": "2026-11-01T23:27:20.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "Day 28/ Banked 2/2",
+      "url": "https://x.com/thsottiaux/status/2117035794678546764"
+    },
+    {
+      "id": "tibo-2117035794678546764",
+      "at": "2026-11-01T23:27:20.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "Day 28/ Banked 2/2",
+      "url": "https://x.com/thsottiaux/status/2117035794678546764"
     }
   ]
 }
