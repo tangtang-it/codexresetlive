@@ -48,7 +48,7 @@ def build_compliance_page(slug, title, desc, h1, sub_p, content_html, schema_typ
 
     hreflang_tags = f'<link rel="alternate" hreflang="x-default" href="{canon_url}">\n<link rel="alternate" hreflang="en" href="{canon_url}">'
 
-    head = HEAD.replace("__LANG__", "en").replace("__TITLE__", esc(title)).replace("__DESC__", esc(desc))
+    head = HEAD.replace("__LANG__", "en").replace("__TITLE__", esc(title)).replace("__DESC__", esc(desc)).replace("__ROBOTS__", "")
     head = head.replace("__CANONICAL__", canon_url).replace("__LOCALE__", "en_US")
     head = head.replace("__HREFLANG__", hreflang_tags)
     head = head.replace("__SCHEMA__", json.dumps(schema, ensure_ascii=False, indent=2))
@@ -132,11 +132,11 @@ if(tt){{
 # ==============================================================================
 about_content = '''
 <h2 style="font-size:20px;color:var(--on-dark);margin-top:0;margin-bottom:12px">1. Our Mission</h2>
-<p><strong>CodexReset.live</strong> is an open-access, independent observability radar built for developers, AI engineers, and teams building on OpenAI Codex and ChatGPT Work. We monitor public rate limit recovery signals, calculate personal 5-hour rolling limit replenishment countdowns, and maintain a permanent archive of verified global quota resets.</p>
+<p><strong>CodexReset.live</strong> is an open-access, independent observability radar built for developers, AI engineers, and teams building on OpenAI Codex and ChatGPT Work. We monitor public rate limit recovery signals, calculate personal 5-hour rolling limit replenishment countdowns, and maintain a source-linked archive of public quota-reset claims with explicit classification states.</p>
 
 <h2 style="font-size:20px;color:var(--on-dark);margin-top:28px;margin-bottom:12px">2. Why We Built CodexReset.live</h2>
 <p>Hitting a rate limit wall in the middle of a complex coding session can bring productivity to a sudden halt. While OpenAI operates a 5-hour rolling recovery window for ChatGPT Plus and Pro accounts, platform leadership occasionally executes spontaneous global resets or awards promotional banked resets during major feature launches, model updates, or infrastructure recovery events.</p>
-<p>Before CodexReset.live, developers had to scour social media feeds, check obscure incident reports, or constantly restart sessions to discover whether their limits had been lifted. CodexReset.live centralizes these signals into a single, high-fidelity radar updated every 30 seconds.</p>
+<p>Before CodexReset.live, developers had to scour social media feeds, check obscure incident reports, or constantly restart sessions to discover whether their limits had been lifted. CodexReset.live centralizes these signals into a single, source-linked archive; it does not expose a visitor’s OpenAI account status.</p>
 
 <h2 style="font-size:20px;color:var(--on-dark);margin-top:28px;margin-bottom:12px">3. How Our Signals Are Sourced</h2>
 <p>All event data displayed on CodexReset.live is derived from verified, publicly accessible sources:</p>
@@ -145,7 +145,7 @@ about_content = '''
   <li><strong>Official Infrastructure Feeds</strong>: Incident reports, degradation notices, and resolution logs published on <a href="https://status.openai.com" target="_blank" rel="noopener nofollow" style="color:var(--primary)">status.openai.com</a>.</li>
   <li><strong>Ecosystem Validation</strong>: Timestamped reports and corroborating telemetry from cross-verified developer communities.</li>
 </ul>
-<p>For a detailed mathematical explanation of our 48-hour probability formula and signal scoring, inspect our <a href="/methodology/" style="color:var(--primary)">Prediction Methodology Whitepaper</a>.</p>
+<p>For the publication and classification rules used by the archive, inspect our <a href="/methodology/" style="color:var(--primary)">Prediction Methodology Whitepaper</a>.</p>
 
 <h2 style="font-size:20px;color:var(--on-dark);margin-top:28px;margin-bottom:12px">4. Editorial & Legal Independence</h2>
 <p><strong>Strict Non-Affiliation Disclosure</strong>: CodexReset.live is an independent open-source developer project maintained by <code>tangtang-it</code> and community contributors. It is not affiliated with, endorsed by, sponsored by, or operated in partnership with OpenAI, Inc. "OpenAI", "Codex", and "ChatGPT" are registered trademarks of OpenAI, Inc.</p>

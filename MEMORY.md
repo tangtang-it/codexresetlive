@@ -313,3 +313,10 @@ u.
 - **Required contract**: Every claim must carry stable source identity, URL, author, timestamp, claim type, scope, evidence excerpt, verification state, and provenance. Hero/calendar counts consume only `effective_confirmed`; banked credit, personal rolling recovery, notices, unverified claims, and unknown records remain distinct.
 - **P1 constraint**: The displayed 1% stays a heuristic signal unless it gains a versioned method, historical backtest/calibration, sample definition, and scorecard. A future history API/JSON-LD must expose only source-linked facts and correction/freshness data.
 - **Plan**: `ACTION-PLAN.md` is the authoritative acceptance-gated remediation baseline.
+
+
+## 16. AdSense preflight data-credibility remediation (2026-11-02)
+- Replaced permissive reset promotion with `publication_safe_heuristic_v1`: banked credits and future-tense notices are non-countable; only explicit completed-action source text is `effective_confirmed`.
+- Home ledger records now include claim type, verification state, source author, provenance, evidence excerpt, and classifier reason. Calendar consumes only completed public-reset records; the edge endpoint exposes upstream posts as `source_observed` and does not synthesize reset/probability facts.
+- Removed untraceable subscriber/user and platform-health claims; added a visible non-affiliation and account-status disclaimer; rewrote methodology away from fabricated weights/cadence. English and Simplified Chinese remain indexable; other legacy locales emit `noindex,follow` until manually localized.
+- Verified locally with `uv run scripts/build_studio.py` and `uv run scripts/verify_site.py`. `ads.txt` remains intentionally absent until the owner supplies the actual AdSense publisher ID; a Google-certified CMP still requires a chosen CMP/account configuration.

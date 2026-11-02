@@ -43,7 +43,7 @@ def esc(s):
     return html.escape(str(s), quote=True)
 
 recs = sorted(HIST["records"], key=lambda x: x["at"])
-reset_recs_all = [r for r in recs if classify_tweet(r.get("id"), r.get("text")).get("category") in ["confirmed_reset", "banked_reset"]]
+reset_recs_all = [r for r in recs if classify_tweet(r.get("id"), r.get("text")).get("category") == "confirmed_reset"]
 last = reset_recs_all[-1] if reset_recs_all else recs[-1]
 prob = STATS["probability_48h"]
 now_dt = datetime.now(timezone.utc)
@@ -290,9 +290,9 @@ for r in recs[-10:][::-1]:
 STREAM_ITEMS = "".join(stream_items)
 
 switches = [
-    ("OpenAI status", "green", "Operational", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></svg>'),
-    ("Tibo posts", "green", f"{len(recs)} Verified", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'),
-    ("User milestones", "yellow", "43M (Nearing 50M)", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>'),
+    ("OpenAI status", "gray", "Not asserted by this site", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><line x1="6" x2="6.01" y1="6" y2="6"/><line x1="6" x2="6.01" y1="18" y2="18"/></svg>'),
+    ("Source posts", "green", f"{len(recs)} observed", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>'),
+    ("User estimates", "gray", "Not published without a source", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>'),
     ("Release cadence", "green", "Mid-week active", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>'),
     ("Community predictions", "gray", "Consensus low", '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>'),
     ("Reset cooldown", "yellow", f'<span data-cooldown-utc="{last["at"]}">Cooldown active ({days_since_str})</span>', '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>'),
@@ -338,7 +338,10 @@ for r in deduped_recs:
     c_info = classify_tweet(r.get("id"), r.get("text"))
     if not c_info.get("is_reset", False):
         continue
-    t = 'banked' if c_info.get('category') == 'banked_reset' else 'regular'  # Only actual quota reset events belong on the Reset Calendar
+    # Calendar markers are reserved for completed public resets. Banked credits remain in the ledger.
+    if c_info.get('category') != 'confirmed_reset':
+        continue
+    t = 'regular'
     d = r["at"][:10]
     time_str = r["at"][11:16] if len(r["at"]) > 16 else ""
     lbl = f"{time_str} Hard Reset".strip() if t == "regular" else "Banked Reset"
@@ -348,7 +351,15 @@ ALL_RESETS_JSON = json.dumps(compact_resets, ensure_ascii=False)
 # Export all events for Concept C Ledger
 records_sorted = sorted(HIST.get("records", []), key=lambda x: x["at"], reverse=True)
 all_events_data = []
+seen_source_records = set()
 for r in records_sorted:
+    # A source URL plus its source timestamp is the canonical identity. This
+    # collapses mirrored IDs and prevents a derived/manual item from doubling a
+    # public-source record in the ledger.
+    source_key = (str(r.get("url", "")).strip(), str(r.get("at", "")).strip())
+    if source_key in seen_source_records:
+        continue
+    seen_source_records.add(source_key)
     c = classify_tweet(r.get("id"), r.get("text"))
     cat = c.get("category", "chatter")
     is_res = c.get("is_reset", False)
@@ -360,7 +371,13 @@ for r in records_sorted:
         "text": r.get("text", ""),
         "url": r.get("url", "https://x.com/thsottiaux"),
         "type": r.get("type", "regular"),
-        "status": r.get("status", "confirmed")
+        "status": r.get("status", "observed"),
+        "claimType": "public_global_reset" if cat == "confirmed_reset" else ("banked_credit" if cat == "banked_reset" else ("notice_only" if cat == "pending_reset" else "unknown")),
+        "verificationState": "effective_confirmed" if cat == "confirmed_reset" else "source_observed",
+        "sourceAuthor": "Thibault Sottiaux (@thsottiaux)",
+        "provenance": "public_source_post",
+        "evidenceExcerpt": r.get("text", "")[:280],
+        "classifierReason": c.get("reason", "")
     })
 ALL_EVENTS_JSON = json.dumps(all_events_data, ensure_ascii=False)
 
@@ -506,7 +523,7 @@ def get_cal_js(code):
 """
 
 
-CAL_TABLE_HTML = '''<table class="cal-table">
+CAL_TABLE_HTML = '''<table class="cal-table" aria-label="Calendar loads source-linked confirmed resets only">
   <thead>
     <tr>
       <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
@@ -549,7 +566,7 @@ def render_direct_ans_raw(code):
     # Use semantic classifier: only confirmed or banked resets trigger YES banner
     verified_resets = [
         r for r in recs 
-        if classify_tweet(r.get("id"), r.get("text")).get("category") in ["confirmed_reset", "banked_reset"]
+        if classify_tweet(r.get("id"), r.get("text")).get("category") == "confirmed_reset"
     ]
     l_rec = verified_resets[-1] if verified_resets else recs[-1]
     l_dt = datetime.strptime(l_rec["at"][:19], "%Y-%m-%dT%H:%M:%S").replace(tzinfo=timezone.utc)
@@ -1078,6 +1095,7 @@ def render_full_hist_table(code):
 
 for code, d, name, loc, base_url in LANGS:
     t = I18N[code]
+    robots_meta = "" if code in ("en", "zh-hans") else '<meta name="robots" content="noindex,follow">'
     out_dir = (SITE_DIR / d) if d else SITE_DIR
     out_dir.mkdir(parents=True, exist_ok=True)
     
@@ -1085,7 +1103,7 @@ for code, d, name, loc, base_url in LANGS:
     alert_t = "Get Realtime Reset Prediction Alerts" if code=="en" else ("获取实时重置预警广播" if "zh" in code else ("リセット予測通知を受け取る" if code=="ja" else "Recibe Alertas en Tiempo Real"))
     alert_d = "Alerts sent when the next 48h reset chance exceeds 80% or when verified by Tibo." if code=="en" else ("当未来48小时重置概率超过80%或Tibo发布确认推文时立即通知。" if "zh" in code else ("48時間以内のリセット確率が80%を超えるか、公式確認された際に通知。" if code=="ja" else "Alertas cuando la probabilidad supere el 80% o se confirme."))
     notify_me = "Notify Me" if code=="en" else ("立即订阅" if "zh" in code else ("通知登録" if code=="ja" else "Avisarme"))
-    sub_count = "70,760+ Subscribed" if code=="en" else ("已订阅 70,760+" if "zh" in code else ("購読者 70,760人+" if code=="ja" else "70,760+ Suscriptores"))
+    sub_count = "Source-linked archive" if code=="en" else ("可溯源公开档案" if "zh" in code else ("出典リンク付きアーカイブ" if code=="ja" else "Archivo con fuentes"))
 
     studio_t = "Live Signals & Verdict Breakdown" if code=="en" else ("实时信号源与模型判定明细" if "zh" in code else ("リアルタイムシグナルと判定詳細" if code=="ja" else "Señales en Vivo y Veredicto"))
     studio_s = "Transparent factor weighting updated continuously from public developer signals." if code=="en" else ("持续同步 OpenAI 核心团队与开发社区一手信号，算法权重完全透明。" if "zh" in code else ("公式開発者の投稿とコミュニティシグナルをリアルタイム集計。" if code=="ja" else "Ponderación transparente basada en señales oficiales."))
@@ -1197,7 +1215,7 @@ for code, d, name, loc, base_url in LANGS:
     }
 
     # Header replacement
-    p1_head = HEAD.replace("__LANG__", code).replace("__TITLE__", esc(p1_title)).replace("__DESC__", esc(p1_desc))
+    p1_head = HEAD.replace("__LANG__", code).replace("__TITLE__", esc(p1_title)).replace("__DESC__", esc(p1_desc)).replace("__ROBOTS__", robots_meta)
     p1_head = p1_head.replace("__CANONICAL__", p1_canon).replace("__LOCALE__", loc)
     p1_head = p1_head.replace("__HREFLANG__", build_hreflang(""))
     p1_head = p1_head.replace("__SCHEMA__", json.dumps(p1_schema, ensure_ascii=False, indent=2))
@@ -1307,10 +1325,10 @@ for code, d, name, loc, base_url in LANGS:
     p1_body = p1_body.replace("__LEG_RESET__", l_res).replace("__LEG_BANKED__", l_bnk).replace("__LEG_PROJ__", l_prj).replace("__LEG_TODAY__", l_tod)
 
     p1_body = p1_body.replace("__ALERT_T__", esc(alert_t)).replace("__ALERT_D__", esc(alert_d)).replace("__NOTIFY_ME__", esc(notify_me)).replace("__SUBSCRIBER_COUNT__", esc(sub_count))
-    p1_body = p1_body.replace("__RO_1_L__", "OpenAI Status").replace("__RO_1_S__", "API & Platform healthy")
-    p1_body = p1_body.replace("__RO_2_L__", "Tibo Watch").replace("__RO_2_S__", f"{len(recs)} Verified posts monitored").replace("__TIBO_POSTS_COUNT__", str(len(recs)))
-    p1_body = p1_body.replace("__RO_3_L__", "Days Since Reset").replace("__RO_3_S__", f"Last: {last_date}")
-    p1_body = p1_body.replace("__RO_4_L__", "Active Developers").replace("__RO_4_S__", "43M+ Estimated users")
+    p1_body = p1_body.replace("__RO_1_L__", "Source policy").replace("__RO_1_S__", "Only source-linked completed claims are counted")
+    p1_body = p1_body.replace("__RO_2_L__", "Observed source posts").replace("__RO_2_S__", "Observed posts; classification is shown per record").replace("__TIBO_POSTS_COUNT__", str(len(recs)))
+    p1_body = p1_body.replace("__RO_3_L__", "Last source-linked reset").replace("__RO_3_S__", f"Last: {last_date}")
+    p1_body = p1_body.replace("__RO_4_L__", "Archive scope").replace("__RO_4_S__", "Public posts only; no user or subscriber estimate")
 
     p1_body = p1_body.replace("__STUDIO_T__", esc(studio_t)).replace("__STUDIO_S__", esc(studio_s)).replace("__COL1_T__", esc(col1_t))
     p1_body = p1_body.replace("__MOVE_ITEMS__", render_move_items(code)).replace("__STREAM_ITEMS__", render_stream_items(recs, code, esc))
@@ -1368,7 +1386,7 @@ for code, d, name, loc, base_url in LANGS:
         ]
     }
 
-    p2_head = HEAD.replace("__LANG__", code).replace("__TITLE__", esc(p2_title)).replace("__DESC__", esc(p2_desc))
+    p2_head = HEAD.replace("__LANG__", code).replace("__TITLE__", esc(p2_title)).replace("__DESC__", esc(p2_desc)).replace("__ROBOTS__", robots_meta)
     p2_head = p2_head.replace("__CANONICAL__", p2_canon).replace("__LOCALE__", loc)
     p2_head = p2_head.replace("__HREFLANG__", build_hreflang("reset-today"))
     p2_head = p2_head.replace("__SCHEMA__", json.dumps(p2_schema, ensure_ascii=False, indent=2))
@@ -1404,7 +1422,7 @@ for code, d, name, loc, base_url in LANGS:
         ]
     }
 
-    p3_head = HEAD.replace("__LANG__", code).replace("__TITLE__", esc(p3_title)).replace("__DESC__", esc(p3_desc))
+    p3_head = HEAD.replace("__LANG__", code).replace("__TITLE__", esc(p3_title)).replace("__DESC__", esc(p3_desc)).replace("__ROBOTS__", robots_meta)
     p3_head = p3_head.replace("__CANONICAL__", p3_canon).replace("__LOCALE__", loc)
     p3_head = p3_head.replace("__HREFLANG__", build_hreflang("history"))
     p3_head = p3_head.replace("__SCHEMA__", json.dumps(p3_schema, ensure_ascii=False, indent=2))
@@ -1543,8 +1561,8 @@ document.addEventListener('click',function(e){{if(!lp.contains(e.target)&&!lb.co
     p4_path = p4_dir / "index.html"
     p4_canon = f"https://codexresetlive.com/{d}/methodology/" if d else "https://codexresetlive.com/methodology/"
 
-    p4_title = "Codex Reset Radar Methodology: Prediction Algorithm & Factors | Codex Reset Radar" if code=="en" else ("Codex 重置雷达算法白皮书与信源权重说明 | Codex Reset Radar" if "zh" in code else ("Codex リセット予測モデル・評価手法解説 | Codex Reset Radar" if code=="ja" else "Codex Reset Radar Methodology | Codex Reset Radar"))
-    p4_desc = "Mathematical scoring formula, factor weightings, and real-time Twitter/API ingestion pipeline behind the Codex Reset Radar 48-hour probability forecast." if code=="en" else "详细解析 Codex 重置雷达的 48 小时概率预测数学模型、8 维信号开关权重分配、核心监控人物权力矩阵与实时数据抓取机制。" if "zh" in code else "Codexリセット予測モデルの計算式、8つの評価指標、重み付けアルゴリズムの技術解説。"
+    p4_title = "Codex Reset Radar: Source & Classification Method | CodexReset.live" if code=="en" else ("Codex 重置雷达算法白皮书与信源权重说明 | Codex Reset Radar" if "zh" in code else ("Codex リセット予測モデル・評価手法解説 | Codex Reset Radar" if code=="ja" else "Codex Reset Radar Methodology | Codex Reset Radar"))
+    p4_desc = "How CodexReset.live preserves public-source records, classifies their claim state, and separates public notices from personal quota recovery." if code=="en" else "详细解析 Codex 重置雷达的 48 小时概率预测数学模型、8 维信号开关权重分配、核心监控人物权力矩阵与实时数据抓取机制。" if "zh" in code else "Codexリセット予測モデルの計算式、8つの評価指標、重み付けアルゴリズムの技術解説。"
 
     p4_schema = {
         "@context":"https://schema.org",
@@ -1557,13 +1575,13 @@ document.addEventListener('click',function(e){{if(!lp.contains(e.target)&&!lb.co
         ]
     }
 
-    p4_head = HEAD.replace("__LANG__", code).replace("__TITLE__", esc(p4_title)).replace("__DESC__", esc(p4_desc))
+    p4_head = HEAD.replace("__LANG__", code).replace("__TITLE__", esc(p4_title)).replace("__DESC__", esc(p4_desc)).replace("__ROBOTS__", robots_meta)
     p4_head = p4_head.replace("__CANONICAL__", p4_canon).replace("__LOCALE__", loc)
     p4_head = p4_head.replace("__HREFLANG__", build_hreflang("methodology"))
     p4_head = p4_head.replace("__SCHEMA__", json.dumps(p4_schema, ensure_ascii=False, indent=2))
 
-    meth_h1 = "Prediction Methodology & Architecture" if code=="en" else ("预测模型算法白皮书与架构" if "zh" in code else "予測アルゴリズム手法とアーキテクチャ")
-    meth_sub = "Transparent, inspectable factor weighting. Decisions behind actual resets are not guesswork — here is how the model scores each signal." if code=="en" else ("算法完全可审计。背后的概率不是凭空猜测 —— 本文完整公开我们的 8 维打分公式、权重分配与数据抓取链路。" if "zh" in code else "ブラックボックスを排除した透明な予測アルゴリズムの全貌。")
+    meth_h1 = "Source & Classification Method" if code=="en" else ("预测模型算法白皮书与架构" if "zh" in code else "予測アルゴリズム手法とアーキテクチャ")
+    meth_sub = "This page documents what the archive can verify from a public source and what it cannot claim about any visitor account." if code=="en" else ("算法完全可审计。背后的概率不是凭空猜测 —— 本文完整公开我们的 8 维打分公式、权重分配与数据抓取链路。" if "zh" in code else "ブラックボックスを排除した透明な予測アルゴリズムの全貌。")
 
     p4_body_custom = f'''<body>
 <header class="hdr">
@@ -1591,25 +1609,25 @@ document.addEventListener('click',function(e){{if(!lp.contains(e.target)&&!lb.co
 
 <!-- Mathematical Formula Card -->
 <div class="math-card">
-<h2 class="sec-t" style="margin-bottom:8px">1. Mathematical Scoring Formula</h2>
-<p class="sec-s">The 48-hour probability P(t) is computed as an inspectable weighted sum bounded between [5%, 98%]:</p>
+<h2 class="sec-t" style="margin-bottom:8px">1. What counts as a published reset record</h2>
+<p class="sec-s">We do not publish a calibrated probability. A record can be counted only when its source text explicitly describes a completed public reset and includes a stable source URL and timestamp.</p>
 <div class="math-formula">
 P(t) = Baseline(t) + W_tibo · S_tibo + W_status · S_status + W_cadence · S_cadence + W_milestone · S_milestone - Cooldown(Δt)
 </div>
-<p style="font-size:12px;color:var(--muted-strong);line-height:1.6">Where <strong>Baseline(t)</strong> is the Poisson arrival baseline (typically 12%), <strong>S_tibo</strong> represents verified announcement semantic strength, and <strong>Cooldown(Δt)</strong> exponentially suppresses the likelihood immediately following a confirmed flush.</p>
+<p style="font-size:12px;color:var(--muted-strong);line-height:1.6">Banked credits, future promises, ordinary product posts, and personal rolling-window estimates are distinct claim types. They remain visible as observed records but never increment the public-reset count or calendar.</p>
 </div>
 
 <!-- 8 Switches Grid -->
-<div class="sec-h" style="margin-top:36px"><span class="sec-kick">WEIGHT BREAKDOWN</span><h2 class="sec-t">2. The 8 Signal Switches & Weight Distribution</h2></div>
+<div class="sec-h" style="margin-top:36px"><span class="sec-kick">WEIGHT BREAKDOWN</span><h2 class="sec-t">2. Classification and correction rules</h2></div>
 <div class="math-grid">
-<div class="math-item"><div class="math-item-t"><span>Tibo Posts Semantic Hint</span><span class="num" style="color:var(--up)">Weight: 35%</span></div><div class="math-item-d">Natural language extraction via LLM from @thsottiaux tweets. Mentions of "ship", "refresh", "bonus", or "sol limits" heavily boost this factor.</div></div>
-<div class="math-item"><div class="math-item-t"><span>Reset Cooldown Decay</span><span class="num" style="color:var(--down)">Weight: 20%</span></div><div class="math-item-d">Historical median gap between resets is 3.2 days. A reset in the last 48 hours strongly reduces near-term refill odds.</div></div>
-<div class="math-item"><div class="math-item-t"><span>OpenAI Incident Status</span><span class="num" style="color:var(--primary)">Weight: 15%</span></div><div class="math-item-d">Monitored directly via status.openai.com. Extended degraded performance on Codex models frequently triggers compensatory flushes.</div></div>
-<div class="math-item"><div class="math-item-t"><span>Major Model Launch Cadence</span><span class="num" style="color:var(--info)">Weight: 10%</span></div><div class="math-item-d">Historical releases (e.g. GPT-6 Sol, Astra) correlate with account-wide resets to encourage developer testing.</div></div>
-<div class="math-item"><div class="math-item-t"><span>User Milestone Achievements</span><span class="num" style="color:var(--primary)">Weight: 8%</span></div><div class="math-item-d">Crossing round-number active subscriber counts (e.g. 25M, 50M) triggers celebratory marketing resets.</div></div>
-<div class="math-item"><div class="math-item-t"><span>San Francisco Working Window</span><span class="num" style="color:var(--muted)">Weight: 5%</span></div><div class="math-item-d">OpenAI engineering team flushes cluster limits predominantly between 09:00 and 17:00 US Pacific time on weekdays.</div></div>
-<div class="math-item"><div class="math-item-t"><span>Community Consensus Index</span><span class="num" style="color:var(--muted)">Weight: 4%</span></div><div class="math-item-d">Aggregated developer chatter on GitHub discussions, Reddit, and Discord regarding server congestion.</div></div>
-<div class="math-item"><div class="math-item-t"><span>Edge Buffer Headroom</span><span class="num" style="color:var(--muted)">Weight: 3%</span></div><div class="math-item-d">Cluster-level latency benchmarks indicating available inference compute headroom across global data centers.</div></div>
+<div class="math-item"><div class="math-item-t"><span>Tibo Posts Semantic Hint</span><span class="num" style="color:var(--up)">Rule: completed evidence</span></div><div class="math-item-d">A source mentioning “reset” alone is insufficient. The publication classifier requires explicit completed-action wording; ambiguous items remain observed updates.</div></div>
+<div class="math-item"><div class="math-item-t"><span>Reset Cooldown Decay</span><span class="num" style="color:var(--down)">Rule: future notice</span></div><div class="math-item-d">Future-tense statements such as “landing tomorrow” are notice-only, even if a later reset is expected.</div></div>
+<div class="math-item"><div class="math-item-t"><span>OpenAI Incident Status</span><span class="num" style="color:var(--primary)">Rule: context only</span></div><div class="math-item-d">An OpenAI status page is linked as context only. This site does not assert platform health or infer compensatory actions from incidents.</div></div>
+<div class="math-item"><div class="math-item-t"><span>Major Model Launch Cadence</span><span class="num" style="color:var(--info)">Rule: no inference</span></div><div class="math-item-d">Product releases are archived as context and never treated as reset evidence without an explicit completed-reset source statement.</div></div>
+<div class="math-item"><div class="math-item-t"><span>User Milestone Achievements</span><span class="num" style="color:var(--primary)">Rule: cited only</span></div><div class="math-item-d">The site does not publish subscriber or active-user estimates unless a specific public source is displayed next to the claim.</div></div>
+<div class="math-item"><div class="math-item-t"><span>San Francisco Working Window</span><span class="num" style="color:var(--muted)">Rule: display only</span></div><div class="math-item-d">Timezones change display only. They do not establish whether a reset applies to an account, plan, or region.</div></div>
+<div class="math-item"><div class="math-item-t"><span>Community Consensus Index</span><span class="num" style="color:var(--muted)">Rule: non-evidence</span></div><div class="math-item-d">Community chatter is not confirmation evidence and is not used to publish a public-reset fact.</div></div>
+<div class="math-item"><div class="math-item-t"><span>Edge Buffer Headroom</span><span class="num" style="color:var(--muted)">Rule: unavailable</span></div><div class="math-item-d">This site has no access to OpenAI capacity telemetry and does not infer capacity or account eligibility.</div></div>
 </div>
 
 <!-- Authority Matrix -->
@@ -1620,12 +1638,12 @@ P(t) = Baseline(t) + W_tibo · S_tibo + W_status · S_status + W_cadence · S_ca
 
 <!-- Data Ingestion Pipeline -->
 <div class="math-card" style="margin-top:36px">
-<h2 class="sec-t" style="margin-bottom:8px">4. Realtime Ingestion & Pipeline Architecture</h2>
-<p class="sec-s" style="line-height:1.6">Our server runs automated polling tasks every 30 minutes:<br>
-1. <strong>X/Twitter Stream</strong>: Ingests real-time posts from monitored accounts via verified scraping proxies.<br>
-2. <strong>LLM Semantic Classifier</strong>: Runs zero-shot analysis on candidate tweets to distinguish banter from actual hard quota commitments.<br>
-3. <strong>Status Poller</strong>: Checks OpenAI status feeds and API response latency.<br>
-4. <strong>Static Compilation</strong>: Re-computes probability and updates all 10 language builds automatically with zero downtime.
+<h2 class="sec-t" style="margin-bottom:8px">3. Freshness, corrections, and limitations</h2>
+<p class="sec-s" style="line-height:1.6">Static source-linked history is preserved if an upstream source is unavailable. Live upstream labels are treated as observations until reviewed against this publication rule:<br>
+1. Preserve source URL, author, timestamp, excerpt, and provenance.<br>
+2. Classify the record as completed public reset, banked credit, notice-only, or unknown.<br>
+3. Publish only completed, source-linked records in reset counts and calendar markers.<br>
+4. Accept corrections through the contact page; a correction must link to public evidence.
 </p>
 </div>
 

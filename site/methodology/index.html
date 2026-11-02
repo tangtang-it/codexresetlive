@@ -15,8 +15,9 @@
 </script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Codex Reset Radar Methodology: Prediction Algorithm &amp; Factors | Codex Reset Radar</title>
-<meta name="description" content="Mathematical scoring formula, factor weightings, and real-time Twitter/API ingestion pipeline behind the Codex Reset Radar 48-hour probability forecast.">
+
+<title>Codex Reset Radar: Source &amp; Classification Method | CodexReset.live</title>
+<meta name="description" content="How CodexReset.live preserves public-source records, classifies their claim state, and separates public notices from personal quota recovery.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -37,8 +38,8 @@
 <meta property="og:site_name" content="Codex Reset Radar">
 <meta property="og:url" content="https://codexresetlive.com/methodology/">
 <meta property="og:locale" content="en_US">
-<meta property="og:title" content="Codex Reset Radar Methodology: Prediction Algorithm &amp; Factors | Codex Reset Radar">
-<meta property="og:description" content="Mathematical scoring formula, factor weightings, and real-time Twitter/API ingestion pipeline behind the Codex Reset Radar 48-hour probability forecast.">
+<meta property="og:title" content="Codex Reset Radar: Source &amp; Classification Method | CodexReset.live">
+<meta property="og:description" content="How CodexReset.live preserves public-source records, classifies their claim state, and separates public notices from personal quota recovery.">
 <meta property="og:image" content="https://codexresetlive.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -49,8 +50,8 @@
 <meta property="og:updated_time" content="2026-10-23T12:00:00Z">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:creator" content="@thsottiaux">
-<meta name="twitter:title" content="Codex Reset Radar Methodology: Prediction Algorithm &amp; Factors | Codex Reset Radar">
-<meta name="twitter:description" content="Mathematical scoring formula, factor weightings, and real-time Twitter/API ingestion pipeline behind the Codex Reset Radar 48-hour probability forecast.">
+<meta name="twitter:title" content="Codex Reset Radar: Source &amp; Classification Method | CodexReset.live">
+<meta name="twitter:description" content="How CodexReset.live preserves public-source records, classifies their claim state, and separates public notices from personal quota recovery.">
 <meta name="twitter:image" content="https://codexresetlive.com/og-image.png">
 <meta name="twitter:image:alt" content="Codex Reset Radar">
 <script type="application/ld+json">
@@ -59,10 +60,10 @@
   "@graph": [
     {
       "@type": "TechArticle",
-      "headline": "Codex Reset Radar Methodology: Prediction Algorithm & Factors | Codex Reset Radar",
+      "headline": "Codex Reset Radar: Source & Classification Method | CodexReset.live",
       "url": "https://codexresetlive.com/methodology/",
       "inLanguage": "en_US",
-      "description": "Mathematical scoring formula, factor weightings, and real-time Twitter/API ingestion pipeline behind the Codex Reset Radar 48-hour probability forecast."
+      "description": "How CodexReset.live preserves public-source records, classifies their claim state, and separates public notices from personal quota recovery."
     },
     {
       "@type": "BreadcrumbList",
@@ -2353,31 +2354,31 @@ document.addEventListener('DOMContentLoaded', function(){
 <div class="wrap">
 <div class="sub-hero">
 <span class="sub-badge">● TRANSPARENT ALGORITHM WHITEPAPER</span>
-<h1 class="sub-h1">Prediction Methodology & Architecture</h1>
-<p class="sub-p">Transparent, inspectable factor weighting. Decisions behind actual resets are not guesswork — here is how the model scores each signal.</p>
+<h1 class="sub-h1">Source & Classification Method</h1>
+<p class="sub-p">This page documents what the archive can verify from a public source and what it cannot claim about any visitor account.</p>
 </div>
 
 <!-- Mathematical Formula Card -->
 <div class="math-card">
-<h2 class="sec-t" style="margin-bottom:8px">1. Mathematical Scoring Formula</h2>
-<p class="sec-s">The 48-hour probability P(t) is computed as an inspectable weighted sum bounded between [5%, 98%]:</p>
+<h2 class="sec-t" style="margin-bottom:8px">1. What counts as a published reset record</h2>
+<p class="sec-s">We do not publish a calibrated probability. A record can be counted only when its source text explicitly describes a completed public reset and includes a stable source URL and timestamp.</p>
 <div class="math-formula">
 P(t) = Baseline(t) + W_tibo · S_tibo + W_status · S_status + W_cadence · S_cadence + W_milestone · S_milestone - Cooldown(Δt)
 </div>
-<p style="font-size:12px;color:var(--muted-strong);line-height:1.6">Where <strong>Baseline(t)</strong> is the Poisson arrival baseline (typically 12%), <strong>S_tibo</strong> represents verified announcement semantic strength, and <strong>Cooldown(Δt)</strong> exponentially suppresses the likelihood immediately following a confirmed flush.</p>
+<p style="font-size:12px;color:var(--muted-strong);line-height:1.6">Banked credits, future promises, ordinary product posts, and personal rolling-window estimates are distinct claim types. They remain visible as observed records but never increment the public-reset count or calendar.</p>
 </div>
 
 <!-- 8 Switches Grid -->
-<div class="sec-h" style="margin-top:36px"><span class="sec-kick">WEIGHT BREAKDOWN</span><h2 class="sec-t">2. The 8 Signal Switches & Weight Distribution</h2></div>
+<div class="sec-h" style="margin-top:36px"><span class="sec-kick">WEIGHT BREAKDOWN</span><h2 class="sec-t">2. Classification and correction rules</h2></div>
 <div class="math-grid">
-<div class="math-item"><div class="math-item-t"><span>Tibo Posts Semantic Hint</span><span class="num" style="color:var(--up)">Weight: 35%</span></div><div class="math-item-d">Natural language extraction via LLM from @thsottiaux tweets. Mentions of "ship", "refresh", "bonus", or "sol limits" heavily boost this factor.</div></div>
-<div class="math-item"><div class="math-item-t"><span>Reset Cooldown Decay</span><span class="num" style="color:var(--down)">Weight: 20%</span></div><div class="math-item-d">Historical median gap between resets is 3.2 days. A reset in the last 48 hours strongly reduces near-term refill odds.</div></div>
-<div class="math-item"><div class="math-item-t"><span>OpenAI Incident Status</span><span class="num" style="color:var(--primary)">Weight: 15%</span></div><div class="math-item-d">Monitored directly via status.openai.com. Extended degraded performance on Codex models frequently triggers compensatory flushes.</div></div>
-<div class="math-item"><div class="math-item-t"><span>Major Model Launch Cadence</span><span class="num" style="color:var(--info)">Weight: 10%</span></div><div class="math-item-d">Historical releases (e.g. GPT-6 Sol, Astra) correlate with account-wide resets to encourage developer testing.</div></div>
-<div class="math-item"><div class="math-item-t"><span>User Milestone Achievements</span><span class="num" style="color:var(--primary)">Weight: 8%</span></div><div class="math-item-d">Crossing round-number active subscriber counts (e.g. 25M, 50M) triggers celebratory marketing resets.</div></div>
-<div class="math-item"><div class="math-item-t"><span>San Francisco Working Window</span><span class="num" style="color:var(--muted)">Weight: 5%</span></div><div class="math-item-d">OpenAI engineering team flushes cluster limits predominantly between 09:00 and 17:00 US Pacific time on weekdays.</div></div>
-<div class="math-item"><div class="math-item-t"><span>Community Consensus Index</span><span class="num" style="color:var(--muted)">Weight: 4%</span></div><div class="math-item-d">Aggregated developer chatter on GitHub discussions, Reddit, and Discord regarding server congestion.</div></div>
-<div class="math-item"><div class="math-item-t"><span>Edge Buffer Headroom</span><span class="num" style="color:var(--muted)">Weight: 3%</span></div><div class="math-item-d">Cluster-level latency benchmarks indicating available inference compute headroom across global data centers.</div></div>
+<div class="math-item"><div class="math-item-t"><span>Tibo Posts Semantic Hint</span><span class="num" style="color:var(--up)">Rule: completed evidence</span></div><div class="math-item-d">A source mentioning “reset” alone is insufficient. The publication classifier requires explicit completed-action wording; ambiguous items remain observed updates.</div></div>
+<div class="math-item"><div class="math-item-t"><span>Reset Cooldown Decay</span><span class="num" style="color:var(--down)">Rule: future notice</span></div><div class="math-item-d">Future-tense statements such as “landing tomorrow” are notice-only, even if a later reset is expected.</div></div>
+<div class="math-item"><div class="math-item-t"><span>OpenAI Incident Status</span><span class="num" style="color:var(--primary)">Rule: context only</span></div><div class="math-item-d">An OpenAI status page is linked as context only. This site does not assert platform health or infer compensatory actions from incidents.</div></div>
+<div class="math-item"><div class="math-item-t"><span>Major Model Launch Cadence</span><span class="num" style="color:var(--info)">Rule: no inference</span></div><div class="math-item-d">Product releases are archived as context and never treated as reset evidence without an explicit completed-reset source statement.</div></div>
+<div class="math-item"><div class="math-item-t"><span>User Milestone Achievements</span><span class="num" style="color:var(--primary)">Rule: cited only</span></div><div class="math-item-d">The site does not publish subscriber or active-user estimates unless a specific public source is displayed next to the claim.</div></div>
+<div class="math-item"><div class="math-item-t"><span>San Francisco Working Window</span><span class="num" style="color:var(--muted)">Rule: display only</span></div><div class="math-item-d">Timezones change display only. They do not establish whether a reset applies to an account, plan, or region.</div></div>
+<div class="math-item"><div class="math-item-t"><span>Community Consensus Index</span><span class="num" style="color:var(--muted)">Rule: non-evidence</span></div><div class="math-item-d">Community chatter is not confirmation evidence and is not used to publish a public-reset fact.</div></div>
+<div class="math-item"><div class="math-item-t"><span>Edge Buffer Headroom</span><span class="num" style="color:var(--muted)">Rule: unavailable</span></div><div class="math-item-d">This site has no access to OpenAI capacity telemetry and does not infer capacity or account eligibility.</div></div>
 </div>
 
 <!-- Authority Matrix -->
@@ -2437,12 +2438,12 @@ P(t) = Baseline(t) + W_tibo · S_tibo + W_status · S_status + W_cadence · S_ca
 
 <!-- Data Ingestion Pipeline -->
 <div class="math-card" style="margin-top:36px">
-<h2 class="sec-t" style="margin-bottom:8px">4. Realtime Ingestion & Pipeline Architecture</h2>
-<p class="sec-s" style="line-height:1.6">Our server runs automated polling tasks every 30 minutes:<br>
-1. <strong>X/Twitter Stream</strong>: Ingests real-time posts from monitored accounts via verified scraping proxies.<br>
-2. <strong>LLM Semantic Classifier</strong>: Runs zero-shot analysis on candidate tweets to distinguish banter from actual hard quota commitments.<br>
-3. <strong>Status Poller</strong>: Checks OpenAI status feeds and API response latency.<br>
-4. <strong>Static Compilation</strong>: Re-computes probability and updates all 10 language builds automatically with zero downtime.
+<h2 class="sec-t" style="margin-bottom:8px">3. Freshness, corrections, and limitations</h2>
+<p class="sec-s" style="line-height:1.6">Static source-linked history is preserved if an upstream source is unavailable. Live upstream labels are treated as observations until reviewed against this publication rule:<br>
+1. Preserve source URL, author, timestamp, excerpt, and provenance.<br>
+2. Classify the record as completed public reset, banked credit, notice-only, or unknown.<br>
+3. Publish only completed, source-linked records in reset counts and calendar markers.<br>
+4. Accept corrections through the contact page; a correction must link to public evidence.
 </p>
 </div>
 

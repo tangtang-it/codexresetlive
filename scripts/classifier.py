@@ -30,17 +30,46 @@ def get_overrides():
 
 def classify_heuristics(text: str) -> dict:
     t = text.lower().strip()
-    # 0. High-Recall Action Signatures
-    if "reset" in t:
-        affirmative = any(w in t for w in ["and reset", "enjoy", "propagated", "lifted", "refilled", "done", "cooking", "live", "pressed", "granted", "gave"])
-        negative = any(w in t for w in ["no reset", "didn't reset", "did not reset", "without reset", "fake reset", "nightmare"])
-        if affirmative and not negative:
-            return {
-                "category": "confirmed_reset",
-                "is_reset": True,
-                "confidence": 0.98,
-                "reason": "Broad affirmative reset action detected."
-            }
+    # Publication-safe ordering matters. A scheduled reset or a banked credit is
+    # not evidence that a public/global reset has completed.
+    if "banked" in t:
+        return {
+            "category": "banked_reset",
+            "is_reset": False,
+            "confidence": 0.95,
+            "reason": "Banked credit is kept separate from an immediate public reset."
+        }
+
+    pending_patterns = [
+        r"by eod", r"landing tomorrow", r"lands tomorrow", r"will be reset",
+        r"will reset", r"next two days", r"next few hours", r"in the next hour",
+        r"scheduled", r"incoming"
+    ]
+    if "reset" in t and any(re.search(pat, t) for pat in pending_patterns):
+        return {
+            "category": "pending_reset",
+            "is_reset": False,
+            "confidence": 0.95,
+            "reason": "Future-tense reset statement retained as notice only."
+        }
+
+    # A countable public reset needs an explicit completed-action statement.
+    completed_patterns = [
+        r"reset all propagated", r"all propagated", r"usage has been reset",
+        r"usage quota has been reset", r"it is all propagated", r"and it'?s done",
+        r"resetting the limits again", r"have reset everyone'?s (usage )?limits",
+        r"have reset everyone’s (usage )?limits", r"that'?s a reset.*enjoy",
+        r"and reset\. enjoy"
+    ]
+    if any(re.search(pat, t) for pat in completed_patterns):
+        return {
+            "category": "confirmed_reset",
+            "is_reset": True,
+            "confidence": 0.90,
+            "reason": "Explicit completed reset action in the source text."
+        }
+
+    # No high-recall promotion: ambiguous mentions remain non-countable.
 
     # (rest of heuristics)
     # 1. High-Priority Confirmed Reset Signatures (Overrides conversational tone)
@@ -64,8 +93,6 @@ def classify_heuristics(text: str) -> dict:
         r"resetting rate limits so you can keep building",
         r"resetting the limits again",
         r"allowed codex to reset its own rate limits",
-        r"day \d+\s*[/:]\s*reset",
-        r"day 6/ reset",
         r"put the reset in the bag",
         r"that[’']s a reset",
         r"that is a reset",
@@ -74,7 +101,6 @@ def classify_heuristics(text: str) -> dict:
         r"day \d+[/:\s].*?that[’']s a reset",
         r"day \d+[/:\s].*?reset day",
         r"all propagated",
-        r"global reset by eod",
     ]
     for pat in confirmed_strong:
         if re.search(pat, t):
@@ -280,24 +306,12 @@ def save_cache():
             json.dump(_cache, f, ensure_ascii=False, indent=2)
 
 def classify_tweet(tweet_id: str, text: str) -> dict:
-    # 0. Manual / Competitor Sidecar Overrides (Highest Authority)
-    overrides = get_overrides()
-    if tweet_id and str(tweet_id) in overrides:
-        return overrides[str(tweet_id)]
-
-    cache = load_cache()
-    if tweet_id and tweet_id in cache:
-        return cache[tweet_id]
-
-    res = call_open_source_llm(text)
-    if not res:
-        res = classify_heuristics(text)
-        res["source"] = "heuristic_engine"
-
-    if tweet_id:
-        cache[tweet_id] = res
-        save_cache()
-
+    # Do not let stale LLM/cache/third-party overrides promote a source post.
+    # Editorial confirmation must be represented in the canonical data, not
+    # inferred from a competitor response. This deterministic classification is
+    # intentionally conservative for publication surfaces.
+    res = classify_heuristics(text)
+    res["source"] = "publication_safe_heuristic_v1"
     return res
 
 if __name__ == "__main__":
