@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 136,
+  "total": 137,
   "records": [
     {
       "id": "1968163721034994139",
@@ -1094,6 +1094,14 @@
       "status": "confirmed",
       "text": "Your dot will choose the best model for the task, drawing on different models for different parts of the work.",
       "url": "https://x.com/thsottiaux/status/2117283355427495983"
+    },
+    {
+      "id": "2117746467058405665",
+      "at": "2026-11-03T22:31:18.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "Things will change again and again and again. We’re still very early and agents today are incredible, and yet so frustrating still. Can’t wait to crack things to get that flow state back. Long journey ahead.",
+      "url": "https://x.com/thsottiaux/status/2117746467058405665"
     }
   ]
 }
