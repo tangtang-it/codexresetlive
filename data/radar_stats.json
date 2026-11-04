@@ -1,16 +1,16 @@
 {
-  "total": 137,
-  "reset_count": 41,
-  "regular": 35,
+  "total": 138,
+  "reset_count": 40,
+  "regular": 34,
   "banked": 5,
   "last_reset_at": "2026-11-01T23:27:20.000Z",
   "last_reset_text": "Day 28/ Banked 2/2",
   "last_reset_url": "https://x.com/thsottiaux/status/2117035794678546764",
   "first_reset_at": "2025-09-17T04:02:52.000Z",
-  "days_since_last_reset": 2.2,
-  "avg_gap_days_all": 10.3,
-  "avg_gap_days_recent": 3.6,
-  "probability_48h": 38,
+  "days_since_last_reset": 2.5,
+  "avg_gap_days_all": 10.5,
+  "avg_gap_days_recent": 4.6,
+  "probability_48h": 48,
   "monthly_series": [
     {
       "month": "2025-09",
@@ -66,8 +66,8 @@
     },
     {
       "month": "2026-10",
-      "count": 10
+      "count": 9
     }
   ],
-  "monthly_max": 10
+  "monthly_max": 9
 }
