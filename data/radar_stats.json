@@ -1,5 +1,5 @@
 {
-  "total": 138,
+  "total": 139,
   "reset_count": 40,
   "regular": 34,
   "banked": 5,
@@ -7,10 +7,10 @@
   "last_reset_text": "Day 28/ Banked 2/2",
   "last_reset_url": "https://x.com/thsottiaux/status/2117035794678546764",
   "first_reset_at": "2025-09-17T04:02:52.000Z",
-  "days_since_last_reset": 3.7,
+  "days_since_last_reset": 3.9,
   "avg_gap_days_all": 10.5,
   "avg_gap_days_recent": 4.6,
-  "probability_48h": 77,
+  "probability_48h": 79,
   "monthly_series": [
     {
       "month": "2025-09",
