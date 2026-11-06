@@ -1,11 +1,11 @@
 {
   "source": "https://willcodexquotareset.com/ + https://opentherank.com/",
-  "scraped_at_utc": "2026-11-05",
+  "scraped_at_utc": "2026-11-06",
   "author": {
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 139,
+  "total": 141,
   "records": [
     {
       "id": "1968163721034994139",
@@ -1118,6 +1118,22 @@
       "status": "confirmed",
       "text": "Our latest cyber-specialized model is out. It's in its own league on many cyber-specific use cases. Available through Daybreak Red access.",
       "url": "https://x.com/thsottiaux/status/2118402103907655903"
+    },
+    {
+      "id": "2118469621011677521",
+      "at": "2026-11-05T22:24:51.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "Wild stat. We are now generate more than 4B images per week across ChatGPT and the API, up from the more than 3B per week only 8 weeks ago.",
+      "url": "https://x.com/thsottiaux/status/2118469621011677521"
+    },
+    {
+      "id": "2118469869423526046",
+      "at": "2026-11-05T22:25:50.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "@JustinBleuel @ChatGPT 👀",
+      "url": "https://x.com/thsottiaux/status/2118469869423526046"
     }
   ]
 }
