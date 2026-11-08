@@ -2,8 +2,6 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<!-- Monetag In-Page Push: delay until first interaction, with a 3.5s fallback -->
-<script>(function(){var loaded=false;function loadAds(){if(loaded)return;loaded=true;['scroll','touchstart','click'].forEach(function(e){window.removeEventListener(e,loadAds)});var s=document.createElement('script');s.dataset.zone='304267';s.src='https://quge5.com/88/tag.min.js';s.async=true;s.setAttribute('data-cfasync','false');document.head.appendChild(s)}['scroll','touchstart','click'].forEach(function(e){window.addEventListener(e,loadAds,{once:true,passive:true})});window.setTimeout(loadAds,3500)})()</script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9QX8QY2G1Q"></script>
 <script>
@@ -410,15 +408,6 @@ font-size:9px;font-family:var(--mono)}
 border:1px solid var(--hairline);color:var(--on-dark);transition:.15s}
 .tool-a:hover{background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
 
-/* ---------- Sponsor Banner ---------- */
-.sponsor-banner{margin:20px 0;padding:20px 24px;border-radius:var(--r-xl);
-background:linear-gradient(135deg,rgba(43,49,57,.5),rgba(20,24,28,.8));
-border:1px solid rgba(252,213,53,.25);display:flex;align-items:center;justify-content:space-between;gap:20px}
-.sp-left{display:flex;flex-direction:column;gap:4px}
-.sp-kicker{font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--primary);font-weight:700}
-.sp-title{font-size:16px;font-weight:700;color:var(--on-dark)}
-.sp-desc{font-size:12px;color:var(--muted-strong)}
-
 /* ---------- FAQ ---------- */
 .faq{display:flex;flex-direction:column;gap:1px;background:var(--hairline);border:1px solid var(--hairline);
 border-radius:var(--r-xl);overflow:hidden}
@@ -460,7 +449,6 @@ h1{font-size:36px}
 .presets{grid-template-columns:repeat(2,1fr)}
 .clock-v{font-size:36px}
 .calc-actions{grid-template-columns:1fr}
-.sponsor-banner{flex-direction:column;align-items:flex-start}
 .cal-table th{font-size:9px}
 .cal-table td{height:60px;padding:3px}
 }
@@ -1620,7 +1608,7 @@ body { letter-spacing: 0; }
 }
 body { background: var(--canvas) !important; color: var(--body) !important; }
 .hdr { background: var(--hdr-bg) !important; border-bottom-color: var(--hairline) !important; }
-html, body, .hdr, .direct-ans-banner, .card-box, .studio-col, .calc, .cal-grid-card, .alert-strip, .readout, .signal-evidence-card, .sponsor-banner, .theme-btn, .nav-item {
+html, body, .hdr, .direct-ans-banner, .card-box, .studio-col, .calc, .cal-grid-card, .alert-strip, .readout, .signal-evidence-card, .theme-btn, .nav-item {
   transition: background-color 0.22s ease, border-color 0.22s ease, color 0.22s ease !important;
 }
 .brand-name, .hdr-nav .nav-item, .sec-t, .sub-h1, h1, h2, h3 { color: var(--on-dark); }
@@ -1733,13 +1721,6 @@ html, body, .hdr, .direct-ans-banner, .card-box, .studio-col, .calc, .cal-grid-c
 .switch-user-card .suc-title { color: var(--muted-strong) !important; }
 .switch-user-card .suc-num { color: var(--primary) !important; }
 .switch-user-card .suc-sub { color: var(--muted-strong) !important; }
-.sponsor-banner {
-  background: var(--card) !important;
-  border: 1px solid var(--hairline) !important;
-  border-left: 3px solid var(--primary) !important;
-  border-radius: 10px !important;
-  box-shadow: 0 1px 0 rgba(71,54,35,.04) !important;
-}
 .signal-evidence-card{margin:0 0 28px;padding:18px 20px;background:var(--card);border:1px solid var(--hairline);border-left:3px solid var(--primary);border-radius:10px;box-shadow:0 1px 0 rgba(71,54,35,.04)}
 .signal-evidence-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
 .signal-evidence-kicker{font-family:var(--mono);font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--primary);font-weight:700}

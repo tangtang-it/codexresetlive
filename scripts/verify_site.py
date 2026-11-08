@@ -66,6 +66,10 @@ for hf in sorted(html_files):
                 if "ContactPage" not in types:
                     print(f"FAILED: {hf} contact schema missing ContactPage: {types}")
                     all_ok = False
+            elif "tibo-codex-successor" in rel_path:
+                if "Article" not in types:
+                    print(f"FAILED: {hf} editorial schema missing Article: {types}")
+                    all_ok = False
             elif any(c in rel_path for c in ["privacy", "terms"]):
                 if "WebPage" not in types:
                     print(f"FAILED: {hf} compliance schema missing WebPage: {types}")
@@ -86,7 +90,7 @@ for hf in sorted(html_files):
             all_ok = False
 
     # 5. Check key sections for main landing pages
-    if not any(sub in rel_path for sub in ["history", "methodology", "reset-today", "about", "privacy", "terms", "contact"]):
+    if not any(sub in rel_path for sub in ["history", "methodology", "reset-today", "about", "privacy", "terms", "contact", "tibo-codex-successor"]):
         has_banner = "direct-ans-banner" in content
         has_gauge = "gauge-wrap" in content
         has_pulse = "chart-svg-wrap" in content

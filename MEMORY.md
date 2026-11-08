@@ -324,3 +324,14 @@ u.
 ## 17. Reset-benefit alignment repair (2026-11-02)
 - User-facing availability now includes both completed public resets and source-linked banked credits, while retaining separate labels and counts. A banked credit never becomes an automatic/global reset claim.
 - Build inputs deduplicate by canonical source URL with a preference for native X IDs. The scraper excludes manual/mirrored IDs from future cache writes to prevent repeat inflation.
+
+## 18. Tibo role-watch evidence page (2026-11-08)
+- Added `/zh-hans/tibo-codex-successor/` as a standalone Chinese editorial evidence-review page. It reports the Reuters/OpenAI security initiative evidence without claiming that Tibo left Codex or that Andrew Ambrosino fully replaced him.
+- The page uses `Article` JSON-LD, Chinese language/canonical metadata, source links, explicit review date, and a `partially supported / successor unconfirmed` conclusion. It is included in `site/sitemap.xml` and the compliance-page build path.
+- Role-watch content remains separate from `confirmed_reset`, `banked_reset`, calendar events, reset counts, and forecast calculations.
+- `uv run python scripts/build_studio.py` and `uv run python scripts/verify_site.py` passed after the change; the build can refresh time-relative generated HTML, so unrelated generated diffs should be reviewed before committing.
+
+## 19. Monetag removal (2026-11-08)
+- Removed the delayed Monetag In-Page Push tag, the Monetag Direct Link sponsor banner, and the footer partner link from the source templates and static output.
+- Google Analytics remains enabled; this change removes advertising integrations only.
+- Rebuilt all multilingual/static pages and verified that no Monetag domains, ad scripts, sponsor-banner markup, or ad placeholders remain in the generated site.

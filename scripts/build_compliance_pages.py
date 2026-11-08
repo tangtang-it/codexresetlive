@@ -269,10 +269,78 @@ contact_content = '''
 <p>We typically review public GitHub issues within 12–24 hours, and respond to direct email correspondence within 24–48 business hours.</p>
 '''
 
+# ==============================================================================
+# 5. EDITORIAL EVIDENCE REVIEW: TIBO / CODEX SUCCESSOR
+# ==============================================================================
+tibo_successor_content = '''
+<p style="font-size:12px;color:var(--muted);margin-bottom:20px">Last reviewed: November 8, 2026 · Evidence status: Partially supported</p>
+
+<div style="padding:16px 18px;margin-bottom:24px;background:rgba(252,213,53,.08);border:1px solid rgba(252,213,53,.35);border-left:3px solid var(--primary);border-radius:10px">
+  <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--primary);font-weight:700;margin-bottom:7px">Current conclusion</div>
+  <p style="margin:0;color:var(--on-dark);font-size:16px;line-height:1.6"><strong>Tibo has taken on an internal security initiative, but there is no public confirmation that he has left Codex or that Andrew Ambrosino has replaced him across the whole Codex organization.</strong></p>
+</div>
+
+<h2 style="font-size:20px;color:var(--on-dark);margin-top:0;margin-bottom:12px">What is supported by public evidence?</h2>
+<p>Reuters reported on November 3, 2026 that Thibault “Tibo” Sottiaux had recently taken charge of an internal OpenAI initiative to secure company systems. The report also said that a quarter of OpenAI’s production engineers had been reassigned to improve security infrastructure.</p>
+<p>OpenAI’s own November 2 security post confirms a security sprint and says that 25% of product engineers were dedicated to finding and fixing weaknesses. The official post does not name Tibo as the project lead and does not announce a change to Codex leadership.</p>
+
+<h2 style="font-size:20px;color:var(--on-dark);margin-top:28px;margin-bottom:12px">Tibo and Andrew: what should not be inferred</h2>
+<div style="overflow-x:auto;margin:16px 0 20px">
+<table style="width:100%;border-collapse:collapse;font-size:13px;min-width:620px">
+  <thead><tr style="text-align:left;border-bottom:1px solid var(--hairline)"><th style="padding:10px 8px;color:var(--on-dark)">Person</th><th style="padding:10px 8px;color:var(--on-dark)">Publicly described scope</th><th style="padding:10px 8px;color:var(--on-dark)">Current site status</th></tr></thead>
+  <tbody>
+    <tr style="border-bottom:1px solid var(--hairline)"><td style="padding:10px 8px;color:var(--on-dark);font-weight:700">Thibault “Tibo” Sottiaux</td><td style="padding:10px 8px">OpenAI product leadership and a reported internal security initiative</td><td style="padding:10px 8px">Codex departure: not confirmed</td></tr>
+    <tr style="border-bottom:1px solid var(--hairline)"><td style="padding:10px 8px;color:var(--on-dark);font-weight:700">Andrew Ambrosino</td><td style="padding:10px 8px">Codex desktop product and engineering responsibilities</td><td style="padding:10px 8px">Full Codex successor: not confirmed</td></tr>
+    <tr><td style="padding:10px 8px;color:var(--on-dark);font-weight:700">OpenAI</td><td style="padding:10px 8px">Officially announced a security sprint</td><td style="padding:10px 8px">No successor announcement found</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2 style="font-size:20px;color:var(--on-dark);margin-top:28px;margin-bottom:12px">Timeline</h2>
+<ul style="padding-left:20px;margin-bottom:16px">
+  <li><strong>August 2026:</strong> Reuters source says product engineers were reassigned to security work.</li>
+  <li><strong>October 29, 2026:</strong> Tibo publicly announced a Codex and ChatGPT usage-limit change.</li>
+  <li><strong>November 2, 2026:</strong> OpenAI published its next internal security sprint announcement.</li>
+  <li><strong>November 3, 2026:</strong> Reuters published the report that triggered the “Tibo was moved” interpretation.</li>
+  <li><strong>November 8, 2026:</strong> No official public successor announcement has been identified.</li>
+</ul>
+
+<h2 style="font-size:20px;color:var(--on-dark);margin-top:28px;margin-bottom:12px">Does this change Codex quota resets?</h2>
+<p>Not based on the available evidence. A change in an executive’s responsibilities does not prove that Codex quota rules, reset operations, or account-level limits have changed. CodexReset.live therefore keeps this role-watch record separate from public reset, banked reset, and personal rolling-recovery data.</p>
+
+<h2 style="font-size:20px;color:var(--on-dark);margin-top:28px;margin-bottom:12px">Sources and editorial rule</h2>
+<ul style="padding-left:20px;margin-bottom:16px">
+  <li><a href="https://www.reuters.com/business/openai-employees-warned-about-operational-security-lapses-years-sources-say-2026-11-03/" target="_blank" rel="noopener nofollow" style="color:var(--primary)">Reuters report · November 3, 2026 ↗</a></li>
+  <li><a href="https://openai.com/index/preparing-our-next-security-sprint-to-harden-openai/" target="_blank" rel="noopener nofollow" style="color:var(--primary)">OpenAI: Preparing our next security sprint ↗</a></li>
+</ul>
+<p style="font-size:12px;color:var(--muted);margin-bottom:0">We separate reported facts, official statements, and editorial inference. A successor will be marked as confirmed only after an OpenAI announcement, an updated official role description, or equivalent primary evidence.</p>
+'''
+
+def build_editorial_page(slug, title, desc, h1, sub_p, content_html):
+    canon_url = f"https://codexresetlive.com/{slug}/"
+    schema = {
+        "@context": "https://schema.org",
+        "@graph": [
+            {"@type": "Organization", "@id": "https://codexresetlive.com/#organization", "name": "CodexReset Radar Team", "url": "https://codexresetlive.com/", "logo": "https://codexresetlive.com/favicon-32x32.png"},
+            {"@type": "Article", "@id": f"{canon_url}#article", "url": canon_url, "headline": title, "description": desc, "datePublished": "2026-11-08", "dateModified": "2026-11-08", "author": {"@type": "Organization", "name": "CodexReset Radar Team", "url": "https://codexresetlive.com/about/"}, "publisher": {"@id": "https://codexresetlive.com/#organization"}, "isPartOf": {"@type": "WebSite", "@id": "https://codexresetlive.com/#website", "url": "https://codexresetlive.com/", "name": "CodexReset.live"}, "breadcrumb": {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://codexresetlive.com/"}, {"@type": "ListItem", "position": 2, "name": h1, "item": canon_url}]}}
+        ]
+    }
+    hreflang_tags = f'<link rel="alternate" hreflang="x-default" href="{canon_url}">\n<link rel="alternate" hreflang="zh-Hans" href="{canon_url}">'
+    head = HEAD.replace("__LANG__", "zh-hans").replace("__TITLE__", esc(title)).replace("__DESC__", esc(desc)).replace("__ROBOTS__", "")
+    head = head.replace("__CANONICAL__", canon_url).replace("__LOCALE__", "zh_CN").replace("__HREFLANG__", hreflang_tags).replace("__SCHEMA__", json.dumps(schema, ensure_ascii=False, indent=2))
+    body = f'''<header class="hdr"><div class="wrap hdr-in"><a class="brand" href="/"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.75C6.89 2.75 2.75 6.89 2.75 12C2.75 14.54 3.78 16.84 5.45 18.5" stroke="#FCD535" stroke-width="2"/><path d="M21.25 12C21.25 17.11 17.11 21.25 12 21.25" stroke="#FCD535" stroke-width="2"/><circle cx="12" cy="12" r="5.2" stroke="#FCD535" stroke-width="1.6"/><circle cx="12" cy="2.2" fill="#FCD535"/></svg></span><span class="brand-txt"><span class="brand-name">CodexReset<span style="color:var(--primary)">.live</span></span><span class="brand-sub">Independent Quota Radar</span></span></a><nav class="hdr-nav" aria-label="Main Navigation"><a class="nav-item" href="/">Radar</a><a class="nav-item" href="/reset-today/">Reset Today</a><a class="nav-item" href="/history/">History</a><a class="nav-item" href="/methodology/">Methodology</a></nav><div class="hdr-r"><div class="theme-toggle" role="button" aria-label="Toggle theme" id="themeToggle" tabindex="0"><span class="theme-sun">☼</span><span class="theme-moon">◐</span></div></div></div></header>
+<main class="main" style="padding-top:24px;padding-bottom:56px"><div class="wrap"><div class="sub-header" style="margin-bottom:28px"><div class="sub-badge">Evidence Review · Role Watch</div><h1 class="sub-h1">{esc(h1)}</h1><p class="sub-p">{esc(sub_p)}</p></div><div class="card-box" style="padding:28px;background:var(--card);border:1px solid var(--hairline);border-radius:var(--r-xl);line-height:1.75;font-size:14px;color:var(--muted-strong)">{content_html}</div></div></main>
+<footer><div class="wrap foot-in"><div class="foot-links"><a href="/about/">About</a><a href="/privacy/">Privacy Policy</a><a href="/terms/">Terms of Service</a><a href="/contact/">Contact</a><a href="https://github.com/tangtang-it/codexresetlive" target="_blank" rel="noopener nofollow">GitHub ↗</a><a href="/sitemap.xml">sitemap.xml</a></div><p class="foot-c">© 2026 CodexReset.live — Independent tracker for OpenAI Codex quota resets. Not affiliated with OpenAI.</p></div></footer><script>var savedTheme=localStorage.getItem('codex_theme')||'dark';document.documentElement.setAttribute('data-theme',savedTheme);var tt=document.getElementById('themeToggle');if(tt)tt.addEventListener('click',function(){{var next=(document.documentElement.getAttribute('data-theme')||'dark')==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',next);localStorage.setItem('codex_theme',next);}});</script></body>'''
+    out_dir = SITE_DIR / slug
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / "index.html").write_text(head + "\n" + body, encoding="utf-8")
+    print(f"Generated editorial page: /{slug}/")
+
 urls = []
 urls.append(build_compliance_page("about", "About CodexReset.live: Independent Radar for OpenAI Codex Quota Resets", "Learn about CodexReset.live, our mission to provide source-verified Codex rate limit observability, and our independent developer team.", "About CodexReset.live", "Transparent developer observability, source-verified reset tracking, and independent research.", about_content, "AboutPage"))
 urls.append(build_compliance_page("privacy", "Privacy Policy | CodexReset.live", "Read our complete Privacy Policy, covering our zero-PII architecture, Google AdSense cookies, edge server logs, and user rights.", "Privacy Policy", "Transparent privacy standards, zero PII collection, and advertising cookie disclosures.", privacy_content, "WebPage"))
 urls.append(build_compliance_page("terms", "Terms of Service | CodexReset.live", "Terms of Service governing the use of CodexReset.live rate limit radar, prediction estimates, and developer utilities.", "Terms of Service", "Informational radar terms, non-affiliation disclosures, and acceptable use policies.", terms_content, "WebPage"))
 urls.append(build_compliance_page("contact", "Contact & Support | CodexReset.live", "Contact the CodexReset.live maintainers for data corrections, verified reset submissions, bug reports, and editorial inquiries.", "Contact & Support", "Direct channels for verified evidence submissions, bug reports, and editorial inquiries.", contact_content, "ContactPage"))
+build_editorial_page("zh-hans/tibo-codex-successor", "Tibo 被调岗了吗？Codex 接替者与公开证据核查 | CodexReset.live", "Evidence review of the Reuters report, OpenAI security announcement, and public information about Tibo and Andrew Ambrosino.", "Tibo 被调岗了吗？Codex 接替者与公开证据核查", "Reuters 报道、OpenAI 官方公告与公开职位信息的证据核查。", tibo_successor_content)
 
-print("All 4 compliance pages built successfully!")
+print("All compliance and editorial pages built successfully!")

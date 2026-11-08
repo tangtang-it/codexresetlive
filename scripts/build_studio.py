@@ -894,63 +894,6 @@ def render_monitors(code):
   </div>
 </div>"""
 
-def render_sponsor_banner(code):
-    DIRECT_LINK = "https://uplcm.com/4/12002462"
-    if "zh" in code:
-        kicker = "特约赞助伙伴" if code == "zh-hans" else "特約贊助夥伴"
-        title = "精选开发者云资源与 AI 算力特惠" if code == "zh-hans" else "精選開發者雲端資源與 AI 算力特惠"
-        desc = "高性能开发者云服务、低延迟算力通道与限时特惠方案。" if code == "zh-hans" else "高性能開發者雲端服務、低延遲算力通道與限時特惠方案。"
-        cta = "立即查看特惠 →" if code == "zh-hans" else "立即查看特惠 →"
-    elif code == "ja":
-        kicker = "スポンサー提携"
-        title = "厳選開発者向けクラウド＆AIリソース"
-        desc = "高速クラウドインフラ、低遅延エンドポイント、特別提携オファー。"
-        cta = "特典を見る →"
-    elif code == "ko":
-        kicker = "파트너 제휴"
-        title = "개발자 전용 클라우드 & AI 리소스"
-        desc = "고성능 클라우드 인프라, 초저지연 엔드포인트 및 특별 제휴 혜택."
-        cta = "혜택 확인하기 →"
-    elif code == "de":
-        kicker = "SPONSOR-PARTNER"
-        title = "Entwickler-Cloud & KI-Ressourcen"
-        desc = "Hochleistungs-Infrastruktur, latenzarme Endpunkte und exklusive Angebote."
-        cta = "Angebote ansehen →"
-    elif code == "fr":
-        kicker = "PARTENAIRE SPONSOR"
-        title = "Ressources Cloud & IA pour Développeurs"
-        desc = "Infrastructure haute performance, points de terminaison à faible latence et offres exclusives."
-        cta = "Voir les offres →"
-    elif code == "es":
-        kicker = "SOCIO PATROCINADOR"
-        title = "Recursos de Nube e IA para Desarrolladores"
-        desc = "Infraestructura de alto rendimiento, endpoints de baja latencia y ofertas exclusivas."
-        cta = "Ver ofertas →"
-    elif code == "pt-br":
-        kicker = "PARCEIRO PATROCINADOR"
-        title = "Recursos de Nuvem e IA para Desenvolvedores"
-        desc = "Infraestrutura de alta performance, endpoints de baixa latência e ofertas exclusivas."
-        cta = "Ver ofertas →"
-    elif code == "ru":
-        kicker = "СПОНСОРСКИЙ ПАРТНЕР"
-        title = "Облачные и ИИ-ресурсы для разработчиков"
-        desc = "Высокопроизводительная инфраструктура, низкая задержка и эксклюзивные предложения."
-        cta = "Узнать больше →"
-    else:
-        kicker = "SPONSORED PARTNER"
-        title = "Featured Developer Cloud & AI Resources"
-        desc = "High-speed developer infrastructure, low-latency endpoints, and exclusive partner offers."
-        cta = "Explore Offers →"
-
-    return f'''<div class="sponsor-banner">
-<div class="sp-left">
-<span class="sp-kicker">{kicker}</span>
-<div class="sp-title">{title}</div>
-<div class="sp-desc">{desc}</div>
-</div>
-<a class="btn btn-primary" href="{DIRECT_LINK}" target="_blank" rel="noopener nofollow sponsored" style="height:36px;padding:0 20px;font-size:12px;white-space:nowrap">{cta}</a>
-</div>'''
-
 def render_footer_dir(code, base_href):
     if "zh" in code:
         t1, t2, t3 = "AI 订阅与配额指南", "开发者效率工具箱", "机器可读与官方信源"
@@ -1365,7 +1308,6 @@ for code, d, name, loc, base_url in LANGS:
     p1_body = p1_body.replace("__TOOL3_D__", esc(t["tool3_d"])).replace("__TOOL3_A__", esc(t["tool3_a"]))
 
     p1_body = p1_body.replace("__FAQ_T__", esc(t["faq_t"])).replace("__FAQ_ITEMS__", render_faq_items(code))
-    p1_body = p1_body.replace("__SPONSOR_BANNER__", render_sponsor_banner(code))
     p1_body = p1_body.replace("__FOOTER_DIR_HTML__", render_footer_dir(code, f"/{d}/" if d else "/"))
     p1_body = p1_body.replace("__FOOT__", esc(t["foot"])).replace("__FOOT_SRC__", esc(t["foot_src"]))
 
@@ -1695,7 +1637,7 @@ document.addEventListener('click',function(e){{if(!lp.contains(e.target)&&!lb.co
 import subprocess
 try:
     subprocess.run(["python", str(ROOT_DIR / "scripts/build_compliance_pages.py")], check=True)
-    for c_slug in ["about", "privacy", "terms", "contact"]:
+    for c_slug in ["about", "privacy", "terms", "contact", "zh-hans/tibo-codex-successor"]:
         SITEMAP_URLS.append((f"https://codexresetlive.com/{c_slug}/", "0.6"))
 except Exception as e:
     print(f"Compliance build error: {e}")
