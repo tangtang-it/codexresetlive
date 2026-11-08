@@ -1,11 +1,11 @@
 {
   "source": "https://willcodexquotareset.com/ + https://opentherank.com/",
-  "scraped_at_utc": "2026-11-07",
+  "scraped_at_utc": "2026-11-08",
   "author": {
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 141,
+  "total": 142,
   "records": [
     {
       "id": "1968163721034994139",
@@ -1057,8 +1057,8 @@
     },
     {
       "id": "2116692529970311254",
-      "at": "2026-11-01T00:43:20.000Z",
-      "type": "regular",
+      "at": "2026-11-01T00:43:20.047Z",
+      "type": "banked",
       "status": "confirmed",
       "text": "Banked 1/2",
       "url": "https://x.com/thsottiaux/status/2116692529970311254"
@@ -1134,6 +1134,14 @@
       "status": "confirmed",
       "text": "@JustinBleuel @ChatGPT 👀",
       "url": "https://x.com/thsottiaux/status/2118469869423526046"
+    },
+    {
+      "id": "2119296267545419987",
+      "at": "2026-11-08T05:09:39.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "Saw some confusions, but all Pro plans have no 5-hour limits, and give the following usage compared to Plus.\n\n✅ Pro 100 = 10X\n✅ Pro 200 = 20X\n✅ Pro 500 = 50X, access to ultrafast",
+      "url": "https://x.com/thsottiaux/status/2119296267545419987"
     }
   ]
 }
