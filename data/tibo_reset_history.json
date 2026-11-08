@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 142,
+  "total": 144,
   "records": [
     {
       "id": "1968163721034994139",
@@ -1142,6 +1142,22 @@
       "status": "confirmed",
       "text": "Saw some confusions, but all Pro plans have no 5-hour limits, and give the following usage compared to Plus.\n\n✅ Pro 100 = 10X\n✅ Pro 200 = 20X\n✅ Pro 500 = 50X, access to ultrafast",
       "url": "https://x.com/thsottiaux/status/2119296267545419987"
+    },
+    {
+      "id": "2119304055126425939",
+      "at": "2026-11-08T05:40:36.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "@JamesMalsawm Pretty wild to me that GPT 6.1 Terra gets compared to Opus 5.5. No doubt that it's a great model, but it's not meant to compete in the big leagues. We've got other models for that.",
+      "url": "https://x.com/thsottiaux/status/2119304055126425939"
+    },
+    {
+      "id": "2119308687676432672",
+      "at": "2026-11-08T05:59:00.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "@ForwardEditor We hesitated to embed https://t.co/TnRNoyTR5X into the codex app to make sense of the resets, but decided against it.",
+      "url": "https://x.com/thsottiaux/status/2119308687676432672"
     }
   ]
 }
