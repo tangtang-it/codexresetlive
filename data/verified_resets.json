@@ -82,5 +82,12 @@
     "confidence": 1.0,
     "reason": "Auto-verified via OpenTheRank data-last probe (2026-11-01T23:27:20.731Z)",
     "source": "sidecar_probe"
+  },
+  "tibo-2120410480204525936": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 1.0,
+    "reason": "Verified quota reset event (Thursday is feeling codexy to me. Perhaps also a good time for a banked reset.)",
+    "source": "reset_radar_api"
   }
 }

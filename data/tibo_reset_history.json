@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 145,
+  "total": 147,
   "records": [
     {
       "id": "1968163721034994139",
@@ -1166,6 +1166,22 @@
       "status": "confirmed",
       "text": "Dots can now control many machines in addition to its own little cloud computer that we provide by default.",
       "url": "https://x.com/thsottiaux/status/2120021043876106429"
+    },
+    {
+      "id": "2120410006273380750",
+      "at": "2026-11-11T06:55:15.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "It’s been a while without resets. Maybe I should come back out of the basement",
+      "url": "https://x.com/thsottiaux/status/2120410006273380750"
+    },
+    {
+      "id": "2120410480204525936",
+      "at": "2026-11-11T06:57:08.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "Thursday is feeling codexy to me. Perhaps also a good time for a banked reset.",
+      "url": "https://x.com/thsottiaux/status/2120410480204525936"
     }
   ]
 }
