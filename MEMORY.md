@@ -1,5 +1,9 @@
 # MEMORY.md - Project State & Architecture Log
 
+## Adsterra integration draft (2026-11-12)
+- Registered codexresetlive.com with Native Banner and 320x50 / 728x90 Banner units; Adult ads disabled. The domain is Approved and all three units show Active.
+- Draft adds native ads after the calculator and a viewport-selected top banner iframe. Local iframe returned 200, but the native and desktop banner scripts returned 403 in the browser and no creatives appeared. Direct CLI GET returned 200. Delivery, mobile layout, impression growth, consent handling and production behavior remain unverified; do not deploy until resolved.
+
 ## 13. Phase: Upstream Ingestion & 48h Hazard Synchronization (2026-10-24)
 - Root Cause Resolved: Upstream scraper was targeting an unmaintained endpoint and strict regex dropped legitimate verified reset event IDs (manual-*). Updated scripts/scrape_tibo.py to consume willcodexreset.com/api/reset-radar events directly.
 - Resolved Pending Deadlock: In scripts/compute_stats.py, has_pending required strict chronological precedence (>) over last confirmed reset. Because 2026-10-23T17:41:00Z executed after the morning announcement, pending state was released, dropping static probability to 1% cooldown.
