@@ -3,7 +3,7 @@
 ## Adsterra integration draft (2026-11-13)
 - Domain approved and Native Banner, 320x50 and 728x90 units active; current dashboard tags match the draft. Adult ads were disabled at creation.
 - Draft based on current main places a top banner and native unit after the calculator. On the production origin, temporary browser-only tests for native and desktop banner returned HTTP 403 and no native creative; CLI GET returned 200. The reason is unconfirmed.
-- Do not deploy until consent handling, real delivery, mobile visual QA, console checks and placement impression growth have been verified. The live site remains unchanged.
+- The owner authorized production deployment without waiting for ad delivery and impression verification. Real delivery, mobile visual QA, console checks and placement impression growth remain unverified.
 - The draft now gates Adsterra requests behind an allow/decline choice, offers withdrawal from the footer, and updates the privacy page. Local desktop checks verified allow, deny and withdrawal; this custom control is not a certified CMP and does not establish regional compliance.
 - Production-origin browser fetches returned 403 both with and without credentials; a CLI GET returned 200 with an empty response. Delivery is still unverified.
 
