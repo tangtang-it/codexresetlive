@@ -1,11 +1,11 @@
 {
   "source": "https://willcodexquotareset.com/ + https://opentherank.com/",
-  "scraped_at_utc": "2026-11-12",
+  "scraped_at_utc": "2026-11-13",
   "author": {
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 147,
+  "total": 149,
   "records": [
     {
       "id": "1968163721034994139",
@@ -1182,6 +1182,22 @@
       "status": "confirmed",
       "text": "Thursday is feeling codexy to me. Perhaps also a good time for a banked reset.",
       "url": "https://x.com/thsottiaux/status/2120410480204525936"
+    },
+    {
+      "id": "2120999993079451919",
+      "at": "2026-11-12T21:59:39.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "We shipped some good updates to dots today and the banked reset has been activated and should land in everyones accounts sometime soon!",
+      "url": "https://x.com/thsottiaux/status/2120999993079451919"
+    },
+    {
+      "id": "2121036562058400200",
+      "at": "2026-11-13T00:24:58.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "We announced new tools we're developing for cybersecurity today across automated patching and automated red teaming. Watch the recording here https://t.co/fW371aFjB5",
+      "url": "https://x.com/thsottiaux/status/2121036562058400200"
     }
   ]
 }

@@ -89,5 +89,12 @@
     "confidence": 1.0,
     "reason": "Verified quota reset event (Thursday is feeling codexy to me. Perhaps also a good time for a banked reset.)",
     "source": "reset_radar_api"
+  },
+  "approved-tibo-2120999993079451919": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 1.0,
+    "reason": "Verified quota reset event (We shipped some good updates to dots today and the banked reset has been activated and should land in everyones accounts sometime soon!)",
+    "source": "reset_radar_api"
   }
 }
