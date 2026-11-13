@@ -1,5 +1,10 @@
 # MEMORY.md - Project State & Architecture Log
 
+## Adsterra integration draft (2026-11-13)
+- Domain approved and Native Banner, 320x50 and 728x90 units active; current dashboard tags match the draft. Adult ads were disabled at creation.
+- Draft based on current main places a top banner and native unit after the calculator. On the production origin, temporary browser-only tests for native and desktop banner returned HTTP 403 and no native creative; CLI GET returned 200. The reason is unconfirmed.
+- Do not deploy until consent handling, real delivery, mobile visual QA, console checks and placement impression growth have been verified. The live site remains unchanged.
+
 ## 13. Phase: Upstream Ingestion & 48h Hazard Synchronization (2026-10-24)
 - Root Cause Resolved: Upstream scraper was targeting an unmaintained endpoint and strict regex dropped legitimate verified reset event IDs (manual-*). Updated scripts/scrape_tibo.py to consume willcodexreset.com/api/reset-radar events directly.
 - Resolved Pending Deadlock: In scripts/compute_stats.py, has_pending required strict chronological precedence (>) over last confirmed reset. Because 2026-10-23T17:41:00Z executed after the morning announcement, pending state was released, dropping static probability to 1% cooldown.

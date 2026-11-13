@@ -3,7 +3,7 @@ import re, json, sys
 from pathlib import Path
 
 site_dir = Path("site")
-html_files = [f for f in site_dir.rglob("*.html") if "reset-history" not in str(f)]
+html_files = [f for f in site_dir.rglob("*.html") if "reset-history" not in str(f) and "ads" not in f.relative_to(site_dir).parts]
 
 print(f"Total HTML files verified: {len(html_files)}")
 all_ok = True

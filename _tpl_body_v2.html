@@ -41,6 +41,23 @@ __LIVE__
 </header>
 
 <main>
+<div class="ad-top" aria-label="Advertisement">
+  <span>Advertisement</span>
+  <iframe id="ad-top-frame" title="Advertisement" loading="lazy"></iframe>
+</div>
+<script>
+  (function () {
+    var frame = document.getElementById('ad-top-frame');
+    var width = document.documentElement.clientWidth;
+    if (width >= 760) {
+      frame.width = 728; frame.height = 90; frame.src = '/ads/banner-728.html';
+    } else if (width >= 320) {
+      frame.width = 320; frame.height = 50; frame.src = '/ads/banner-320.html';
+    } else {
+      frame.parentElement.hidden = true;
+    }
+  }());
+</script>
 <div class="wrap">
 
 <!-- Hero Head -->
@@ -339,6 +356,12 @@ __CAL_TABLE_HTML__
 </div>
 </div>
 </section>
+
+<div class="ad-native" aria-label="Advertisement">
+  <span>Advertisement</span>
+  <script async="async" data-cfasync="false" src="https://bauval.org/21/fd0bd56d31420dae4da137bb5170d8ec"></script>
+  <div id="container-fd0bd56d31420dae4da137bb5170d8ec"></div>
+</div>
 
 <!-- 04 — Understand Codex Limits -->
 <section id="guides">
