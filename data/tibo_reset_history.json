@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 149,
+  "total": 150,
   "records": [
     {
       "id": "1968163721034994139",
@@ -1198,6 +1198,14 @@
       "status": "confirmed",
       "text": "We announced new tools we're developing for cybersecurity today across automated patching and automated red teaming. Watch the recording here https://t.co/fW371aFjB5",
       "url": "https://x.com/thsottiaux/status/2121036562058400200"
+    },
+    {
+      "id": "2121062974161092792",
+      "at": "2026-11-13T02:09:55.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "How can codex be improved? Try not to say model.",
+      "url": "https://x.com/thsottiaux/status/2121062974161092792"
     }
   ]
 }
