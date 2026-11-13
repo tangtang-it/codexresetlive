@@ -176,10 +176,12 @@ privacy_content = '''
   <li><strong>Server & CDN Logs</strong>: Our website is deployed across Cloudflare edge infrastructure. Standard HTTP access logs temporarily record non-personally identifiable technical information, including your masked IP address, browser type, operating system version, referring page URL, and request timestamps. These logs are used solely for DDoS mitigation, edge caching, and service reliability.</li>
   <li><strong>Local Browser Storage (HTML5 localStorage)</strong>: We use local storage strictly on your client device for UI preferences:
     <br><code>codex_theme</code>: Saves your preferred theme ('dark' or 'light').
+    <br><code>codex_adsterra_consent</code>: Saves your choice about loading Adsterra advertising.
     <br>This information remains exclusively within your local browser and is never transmitted to our servers.</li>
 </ul>
 
 <h2 style="font-size:20px;color:var(--on-dark);margin-top:28px;margin-bottom:12px">4. Advertising & Google AdSense / DoubleClick Cookie Disclosure</h2>
+<p>On supported pages, Adsterra advertising is loaded only after you choose to allow it. Adsterra and its partners may use cookies and similar technologies and receive technical information such as your IP address and browser details to deliver and measure advertising. You can change or withdraw your choice using Advertising preferences in the page footer. See <a href="https://adsterra.com/privacy-policy/" target="_blank" rel="noopener noreferrer" style="color:var(--primary)">Adsterra's privacy policy</a> for its practices.</p>
 <p>We may display advertisements served by Google AdSense and third-party advertising networks to help cover high-concurrency edge hosting costs and ongoing server maintenance. In connection with these services:</p>
 <ul style="padding-left:20px;margin-bottom:16px">
   <li>Third-party vendors, including Google, use cookies (such as the DoubleClick cookie) to serve ads based on a user's prior visits to this website or other websites on the Internet.</li>
@@ -192,7 +194,7 @@ privacy_content = '''
 <p>Our website contains links to external developer tools, official documentation, and partner services (such as Cursor, Windsurf, status.openai.com, and x.com). These external sites have separate and independent privacy policies. We encourage you to review their policies upon visiting.</p>
 
 <h2 style="font-size:20px;color:var(--on-dark);margin-top:28px;margin-bottom:12px">6. Data Rights (GDPR & CCPA/CPRA)</h2>
-<p>Depending on your jurisdiction (such as the European Economic Area, United Kingdom, or California), you may hold statutory rights regarding data transparency and access. Because CodexReset.live does not maintain user databases, personal profiles, or individual browsing dossiers, we do not sell or share personal information.</p>
+<p>Depending on your jurisdiction (such as the European Economic Area, United Kingdom, or California), you may hold statutory rights regarding data transparency and access. Advertising partners may receive information as described above when advertising is enabled. You may change your advertising choice using Advertising preferences on supported pages.</p>
 <p>If you have any questions or data requests, you can contact our privacy point of contact at <a href="mailto:privacy@codexresetlive.com" style="color:var(--primary)">privacy@codexresetlive.com</a>.</p>
 
 <h2 style="font-size:20px;color:var(--on-dark);margin-top:28px;margin-bottom:12px">7. Changes to This Policy</h2>

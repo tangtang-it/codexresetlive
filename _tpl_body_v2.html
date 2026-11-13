@@ -41,23 +41,15 @@ __LIVE__
 </header>
 
 <main>
-<div class="ad-top" aria-label="Advertisement">
+<div class="ad-consent" id="ad-consent" hidden>
+  <p>Allow Adsterra to use cookies and similar technologies to show ads? You can change this choice in Advertising preferences. <a href="/privacy/">Privacy policy</a></p>
+  <button type="button" id="ads-accept">Allow ads</button>
+  <button type="button" id="ads-reject">No thanks</button>
+</div>
+<div class="ad-top" id="ad-top" aria-label="Advertisement" hidden>
   <span>Advertisement</span>
   <iframe id="ad-top-frame" title="Advertisement" loading="lazy"></iframe>
 </div>
-<script>
-  (function () {
-    var frame = document.getElementById('ad-top-frame');
-    var width = document.documentElement.clientWidth;
-    if (width >= 760) {
-      frame.width = 728; frame.height = 90; frame.src = '/ads/banner-728.html';
-    } else if (width >= 320) {
-      frame.width = 320; frame.height = 50; frame.src = '/ads/banner-320.html';
-    } else {
-      frame.parentElement.hidden = true;
-    }
-  }());
-</script>
 <div class="wrap">
 
 <!-- Hero Head -->
@@ -357,10 +349,12 @@ __CAL_TABLE_HTML__
 </div>
 </section>
 
-<div class="ad-native" aria-label="Advertisement">
+<div class="ad-native" id="ad-native" aria-label="Advertisement" hidden>
   <span>Advertisement</span>
+  <template id="ad-native-template">
   <script async="async" data-cfasync="false" src="https://bauval.org/21/fd0bd56d31420dae4da137bb5170d8ec"></script>
   <div id="container-fd0bd56d31420dae4da137bb5170d8ec"></div>
+  </template>
 </div>
 
 <!-- 04 — Understand Codex Limits -->
@@ -432,6 +426,7 @@ __FOOTER_DIR_HTML__
 <div class="foot-links">
 <a href="/about/">About</a>
 <a href="/privacy/">Privacy Policy</a>
+<button type="button" id="ads-settings" class="ads-settings">Advertising preferences</button>
 <a href="/terms/">Terms of Service</a>
 <a href="/contact/">Contact</a>
 <a href="https://github.com/tangtang-it/codexresetlive" target="_blank" rel="noopener nofollow">GitHub ↗</a>
@@ -443,6 +438,45 @@ __FOOTER_DIR_HTML__
 <p class="foot-c" style="font-size:10px">__FOOT_SRC__</p>
 </div>
 </footer>
+<script>
+(function () {
+  var key = 'codex_adsterra_consent';
+  var prompt = document.getElementById('ad-consent');
+  var top = document.getElementById('ad-top');
+  var nativeSlot = document.getElementById('ad-native');
+  var loaded = false;
+  function getChoice() { try { return localStorage.getItem(key); } catch (_) { return null; } }
+  function saveChoice(value) { try { localStorage.setItem(key, value); return true; } catch (_) { return false; } }
+  function loadAds() {
+    if (loaded) return;
+    loaded = true;
+    var frame = document.getElementById('ad-top-frame');
+    var width = document.documentElement.clientWidth;
+    if (width >= 760) { frame.width = 728; frame.height = 90; frame.src = '/ads/banner-728.html'; top.hidden = false; }
+    else if (width >= 320) { frame.width = 320; frame.height = 50; frame.src = '/ads/banner-320.html'; top.hidden = false; }
+    var template = document.getElementById('ad-native-template');
+    var content = template.content.cloneNode(true);
+    var inert = content.querySelector('script');
+    var script = document.createElement('script');
+    Array.prototype.forEach.call(inert.attributes, function (attribute) { script.setAttribute(attribute.name, attribute.value); });
+    inert.remove();
+    nativeSlot.appendChild(content);
+    nativeSlot.insertBefore(script, nativeSlot.querySelector('div'));
+    nativeSlot.hidden = false;
+  }
+  document.getElementById('ads-accept').addEventListener('click', function () {
+    if (saveChoice('allow')) { prompt.hidden = true; loadAds(); }
+    else { prompt.querySelector('p').textContent = 'Your choice could not be saved. Ads will remain disabled.'; }
+  });
+  document.getElementById('ads-reject').addEventListener('click', function () {
+    if (saveChoice('deny')) { if (loaded) location.reload(); else prompt.hidden = true; }
+    else { prompt.querySelector('p').textContent = 'Your choice could not be saved. Ads will remain disabled.'; }
+  });
+  document.getElementById('ads-settings').addEventListener('click', function () { prompt.hidden = false; prompt.scrollIntoView({behavior:'smooth', block:'center'}); });
+  if (getChoice() === 'allow') loadAds();
+  else if (getChoice() !== 'deny') prompt.hidden = false;
+}());
+</script>
 
 
 <!-- Viral Forecast Share Modal -->
