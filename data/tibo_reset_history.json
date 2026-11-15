@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 150,
+  "total": 151,
   "records": [
     {
       "id": "1968163721034994139",
@@ -1206,6 +1206,14 @@
       "status": "confirmed",
       "text": "How can codex be improved? Try not to say model.",
       "url": "https://x.com/thsottiaux/status/2121062974161092792"
+    },
+    {
+      "id": "2121845965997101118",
+      "at": "2026-11-15T06:01:14.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "Cyber team wants your feedback on Daybreak. Models, codex plugins, blue/red access, documentation, red teaming &amp; defense factory... What can we do better or improve?",
+      "url": "https://x.com/thsottiaux/status/2121845965997101118"
     }
   ]
 }
