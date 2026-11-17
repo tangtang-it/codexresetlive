@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 153,
+  "total": 155,
   "records": [
     {
       "id": "1968163721034994139",
@@ -1230,6 +1230,22 @@
       "status": "confirmed",
       "text": "@AdamHoltererer 6.1 Sol forever https://t.co/1aDFb686jX",
       "url": "https://x.com/thsottiaux/status/2122534533216268747"
+    },
+    {
+      "id": "2122753991000133943",
+      "at": "2026-11-17T18:09:24.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "GPT-6.2 Sol &amp; Astra are *finally* here. We've also expanded ultrafast to Pro 200 plans for GPT-6.2 Sol, it's my go-to model for most day to day things.",
+      "url": "https://x.com/thsottiaux/status/2122753991000133943"
+    },
+    {
+      "id": "2122754551187132438",
+      "at": "2026-11-17T18:11:38.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "These models are extremely efficient, which you feel in speed to complete tasks, cost and how much further your usage goes https://t.co/HIFob2j9Ag",
+      "url": "https://x.com/thsottiaux/status/2122754551187132438"
     }
   ]
 }
