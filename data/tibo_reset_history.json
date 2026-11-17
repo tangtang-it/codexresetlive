@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 152,
+  "total": 153,
   "records": [
     {
       "id": "1968163721034994139",
@@ -1222,6 +1222,14 @@
       "status": "confirmed",
       "text": "Codex team might have actually fixed the \"model at capacity\" errors that have been pestering you. https://t.co/EgS0HkOATY",
       "url": "https://x.com/thsottiaux/status/2122206990101536852"
+    },
+    {
+      "id": "2122534533216268747",
+      "at": "2026-11-17T03:37:22.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "@AdamHoltererer 6.1 Sol forever https://t.co/1aDFb686jX",
+      "url": "https://x.com/thsottiaux/status/2122534533216268747"
     }
   ]
 }
