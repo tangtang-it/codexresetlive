@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 158,
+  "total": 159,
   "records": [
     {
       "id": "1968163721034994139",
@@ -1270,6 +1270,14 @@
       "status": "confirmed",
       "text": "If you have Pro 200/500, I do recommend trying out 6.2 Sol ultrafast, it's quite the blast to use and a completely different feel. I'm excited to keep pushing in bringing these speeds to more users over time.",
       "url": "https://x.com/thsottiaux/status/2122929829863735594"
+    },
+    {
+      "id": "2123113107048501273",
+      "at": "2026-11-18T17:56:24.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "How is 6.2 Sol treating you today?",
+      "url": "https://x.com/thsottiaux/status/2123113107048501273"
     }
   ]
 }
