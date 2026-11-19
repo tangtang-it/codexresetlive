@@ -1185,9 +1185,9 @@
     },
     {
       "id": "2120999993079451919",
-      "at": "2026-11-12T21:59:39.000Z",
-      "type": "regular",
-      "status": "confirmed",
+      "at": "2026-11-12T21:59:39.281Z",
+      "type": "banked",
+      "status": "announced",
       "text": "We shipped some good updates to dots today and the banked reset has been activated and should land in everyones accounts sometime soon!",
       "url": "https://x.com/thsottiaux/status/2120999993079451919"
     },
