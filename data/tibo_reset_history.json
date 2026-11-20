@@ -1,11 +1,11 @@
 {
   "source": "https://willcodexquotareset.com/ + https://opentherank.com/",
-  "scraped_at_utc": "2026-11-19",
+  "scraped_at_utc": "2026-11-20",
   "author": {
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 159,
+  "total": 161,
   "records": [
     {
       "id": "1968163721034994139",
@@ -1278,6 +1278,22 @@
       "status": "confirmed",
       "text": "How is 6.2 Sol treating you today?",
       "url": "https://x.com/thsottiaux/status/2123113107048501273"
+    },
+    {
+      "id": "2123556256392847657",
+      "at": "2026-11-19T23:17:19.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "Heads up, we’re starting to test dots with a small number of ChatGPT Plus users. Looking forward to the continued feedback as we expand and I’m recently seeing a lot more positives around how good the proactivity has been after many improvements. \n\nWe’re also bringing dots to all ChatGPT Business Standard users. Rollout will start today.",
+      "url": "https://x.com/thsottiaux/status/2123556256392847657"
+    },
+    {
+      "id": "2123557171321561133",
+      "at": "2026-11-19T23:20:58.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "We’re also working on a new mobile experience for ChatGPT! \n\nIt’s easier to get to your favorite features and discover what you can do in ChatGPT. We’re starting with Pro users who have a dot or are eligible to create one. Your dot gets its own tab, and you can pin Codex, Projects, Images, and more to the tab bar. Some of you will see the new experience by default. \n\nYou can turn it on or off anytime in Settings > New ChatGPT Design. \n\nSuper excited to hear your feedback before we roll it out more widely!",
+      "url": "https://x.com/thsottiaux/status/2123557171321561133"
     }
   ]
 }
