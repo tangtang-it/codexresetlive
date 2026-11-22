@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 164,
+  "total": 165,
   "records": [
     {
       "id": "1968163721034994139",
@@ -1318,6 +1318,14 @@
       "status": "confirmed",
       "text": "Team is already preparing another big update, but how are things since yesterday’s update to the ChatGPT/Codex desktop app? What still requires attention and is not quite there?",
       "url": "https://x.com/thsottiaux/status/2124322968499282388"
+    },
+    {
+      "id": "2124614364535922870",
+      "at": "2026-11-22T21:21:52.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "RT @feedthejim: If you've upgraded your ChatGPT app in the past few days, you may have noticed that it is noticeably faster!\n\nWe basically…",
+      "url": "https://x.com/thsottiaux/status/2124614364535922870"
     }
   ]
 }
