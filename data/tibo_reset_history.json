@@ -1,11 +1,11 @@
 {
   "source": "https://willcodexquotareset.com/ + https://opentherank.com/",
-  "scraped_at_utc": "2026-11-23",
+  "scraped_at_utc": "2026-11-24",
   "author": {
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 165,
+  "total": 168,
   "records": [
     {
       "id": "1968163721034994139",
@@ -1326,6 +1326,30 @@
       "status": "confirmed",
       "text": "RT @feedthejim: If you've upgraded your ChatGPT app in the past few days, you may have noticed that it is noticeably faster!\n\nWe basically…",
       "url": "https://x.com/thsottiaux/status/2124614364535922870"
+    },
+    {
+      "id": "2124922313019953319",
+      "at": "2026-11-23T17:45:33.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "New ChatGPT Business workspaces created by Nov 30 get double the included usage for every seat type through Dec 31. \n\nAlready on Business? We will have a gift for you, too. Stay tuned 👀 https://t.co/Lw8q9Qw00r",
+      "url": "https://x.com/thsottiaux/status/2124922313019953319"
+    },
+    {
+      "id": "2124922412219486443",
+      "at": "2026-11-23T17:45:56.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "Sign up for ChatGPT Business: https://t.co/2WH7P7Yx7L",
+      "url": "https://x.com/thsottiaux/status/2124922412219486443"
+    },
+    {
+      "id": "2124998553856844186",
+      "at": "2026-11-23T22:48:30.000Z",
+      "type": "release",
+      "status": "confirmed",
+      "text": "You should feel a significant jump in quality of answers on ChatGPT once rolled out to you.\n\nTogether with all the investments we are making across simplifying the app, making it faster and merging chat & work, it's going to be quite the improvement in day to day experience by the end of the year.",
+      "url": "https://x.com/thsottiaux/status/2124998553856844186"
     }
   ]
 }
