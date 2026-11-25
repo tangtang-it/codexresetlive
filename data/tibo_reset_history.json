@@ -1,11 +1,11 @@
 {
   "source": "https://willcodexquotareset.com/ + https://opentherank.com/",
-  "scraped_at_utc": "2026-11-24",
+  "scraped_at_utc": "2026-11-25",
   "author": {
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 171,
+  "total": 172,
   "records": [
     {
       "id": "1968163721034994139",
@@ -1374,6 +1374,14 @@
       "status": "confirmed",
       "text": "@AzianMike Team is shipping",
       "url": "https://x.com/thsottiaux/status/2125353693474365742"
+    },
+    {
+      "id": "2125387147633189101",
+      "at": "2026-11-25T00:32:38.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "@danshipper @every 👀",
+      "url": "https://x.com/thsottiaux/status/2125387147633189101"
     }
   ]
 }
