@@ -103,5 +103,12 @@
     "confidence": 1.0,
     "reason": "Verified quota reset event (Sign up for ChatGPT Business: https://t.co/2WH7P7Yx7L)",
     "source": "reset_radar_api"
+  },
+  "tibo-2125853628250599730": {
+    "category": "confirmed_reset",
+    "is_reset": true,
+    "confidence": 1.0,
+    "reason": "Verified quota reset event (Banked reset is online)",
+    "source": "reset_radar_api"
   }
 }

@@ -5,7 +5,7 @@
     "name": "Thibault \"Tibo\" Sottiaux",
     "handle": "@thsottiaux"
   },
-  "total": 172,
+  "total": 174,
   "records": [
     {
       "id": "1968163721034994139",
@@ -1382,6 +1382,22 @@
       "status": "confirmed",
       "text": "@danshipper @every 👀",
       "url": "https://x.com/thsottiaux/status/2125387147633189101"
+    },
+    {
+      "id": "2125784147889393806",
+      "at": "2026-11-26T02:50:10.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "We made a billing mistake at launch of GPT-6.2 that incorrectly discounted GPT-6.2 Astra and Sol usage for most users. \n\nWe’ve fixed this now, so the same work will use more of your plan’s usage allowance. Comparing to last week, you will reach your limits 40% faster on GPT-6.2 Astra and 25% faster on Sol. You should still see these go further in usage compared to 6 Astra and 6.1 Sol. Other models weren’t affected, and we won’t charge you for the difference on past usage.\n\nAs a small token to apologize for the mistake, we’ll be adding one banked reset for everyone on Go, Plus, Pro, and Business.",
+      "url": "https://x.com/thsottiaux/status/2125784147889393806"
+    },
+    {
+      "id": "2125853628250599730",
+      "at": "2026-11-26T07:26:16.000Z",
+      "type": "regular",
+      "status": "confirmed",
+      "text": "Banked reset is online",
+      "url": "https://x.com/thsottiaux/status/2125853628250599730"
     }
   ]
 }
